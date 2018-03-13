@@ -6,7 +6,7 @@
 package bapers;
 
 /**
- *
+ * Main class for running BAPERS software.
  * @author Elmar Talibzade
  */
 public class Bapers {

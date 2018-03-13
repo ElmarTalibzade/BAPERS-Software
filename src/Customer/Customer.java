@@ -6,7 +6,7 @@
 package Customer;
 
 /**
- *
+ * Represents a Customer's information.
  * @author Elmar Talibzade
  */
 public class Customer {

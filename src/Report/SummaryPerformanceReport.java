@@ -6,9 +6,9 @@
 package Report;
 
 /**
- *
+ * Used to generate Summary Performance Report
  * @author Elmar Talibzade
  */
-public class SummaryPerformanceReport {
+public class SummaryPerformanceReport extends Report {
     
 }

@@ -6,7 +6,7 @@
 package Customer;
 
 /**
- *
+ * Used to obtain information about a Customer.
  * @author Elmar Talibzade
  */
 public class CustomerProfile {

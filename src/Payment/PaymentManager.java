@@ -6,7 +6,7 @@
 package Payment;
 
 /**
- *
+ * Manages payments as well as keeps track on late payments.
  * @author Elmar Talibzade
  */
 public class PaymentManager {

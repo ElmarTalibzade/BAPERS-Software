@@ -6,7 +6,7 @@
 package Report;
 
 /**
- *
+ * Used to generate reports at a specific frequency.
  * @author Elmar Talibzade
  */
 public class ReportManager {

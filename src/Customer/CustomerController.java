@@ -6,7 +6,7 @@
 package Customer;
 
 /**
- *
+ * A boundary class for communicating with other packages.
  * @author Elmar Talibzade
  */
 public class CustomerController {

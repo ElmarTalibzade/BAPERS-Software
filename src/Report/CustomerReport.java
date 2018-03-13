@@ -6,9 +6,9 @@
 package Report;
 
 /**
- *
+ * Represents customer's report.
  * @author Elmar Talibzade
  */
-public class CustomerReport {
+public class CustomerReport extends Report {
     
 }

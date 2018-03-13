@@ -6,7 +6,7 @@
 package Payment;
 
 /**
- *
+ * Represents a payment which was done by a customer, the amount and card details used.
  * @author Elmar Talibzade
  */
 public class Payment {

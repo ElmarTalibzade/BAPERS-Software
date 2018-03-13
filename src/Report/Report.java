@@ -6,9 +6,9 @@
 package Report;
 
 /**
- *
+ * A superclass for all type of reports.
  * @author Elmar Talibzade
  */
-public class Report {
+public abstract class Report {
     
 }

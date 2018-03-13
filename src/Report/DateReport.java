@@ -6,7 +6,7 @@
 package Report;
 
 /**
- *
+ * Stores department data for a specific date.
  * @author Elmar Talibzade
  */
 public class DateReport {

@@ -6,7 +6,7 @@
 package bapers;
 
 /**
- *
+ * A static class for calling common functions such as ID generation.
  * @author Elmar Talibzade
  */
 public class Utils {

@@ -6,7 +6,7 @@
 package Customer;
 
 /**
- *
+ * Task which is a part of a Job.
  * @author Elmar Talibzade
  */
 public class Task {

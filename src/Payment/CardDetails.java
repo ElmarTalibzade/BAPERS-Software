@@ -6,7 +6,7 @@
 package Payment;
 
 /**
- *
+ * Stores Customer's card details.
  * @author Elmar Talibzade
  */
 public class CardDetails {

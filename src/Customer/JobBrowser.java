@@ -6,7 +6,7 @@
 package Customer;
 
 /**
- *
+ * Used to browse jobs.
  * @author Elmar Talibzade
  */
 public class JobBrowser {

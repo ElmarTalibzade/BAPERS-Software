@@ -6,7 +6,7 @@
 package Report;
 
 /**
- *
+ * Report generated for an individual customer.
  * @author Elmar Talibzade
  */
 public class IndividualPerformanceReport {

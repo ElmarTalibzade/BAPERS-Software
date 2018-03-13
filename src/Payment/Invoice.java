@@ -6,7 +6,7 @@
 package Payment;
 
 /**
- *
+ * Stores customer's invoice.
  * @author Elmar Talibzade
  */
 public class Invoice {

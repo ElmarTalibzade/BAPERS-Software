@@ -6,7 +6,7 @@
 package Report;
 
 /**
- *
+ * Stores tasks done by a specific department.
  * @author Elmar Talibzade
  */
 public class DepartmentReport {

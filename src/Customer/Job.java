@@ -6,7 +6,7 @@
 package Customer;
 
 /**
- *
+ * A job which customer that must be fulfilled by the company. Contains tasks that must be done.
  * @author Elmar Talibzade
  */
 public class Job {
