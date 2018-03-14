@@ -11,4 +11,13 @@ package bapers;
  */
 public class Utils {
     
+    /**
+     * Generates a unique string of letters
+     * @param length Length of a randomly generated string
+     * @return Randomly generated string
+     */
+    public String genCodeId(int length)
+    {
+        throw new UnsupportedOperationException();
+    }
 }
