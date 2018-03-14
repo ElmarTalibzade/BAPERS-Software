@@ -10,5 +10,21 @@ package Customer;
  * @author Elmar Talibzade
  */
 public class JobBrowser {
-    
+    private Customer customer;
+
+    /**
+     * Returns a customer to whom this browser is associated with
+     * @return
+     */
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    /**
+     * Changes customer to browse different jobs
+     * @param customer new Customer
+     */
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }

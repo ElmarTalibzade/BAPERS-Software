@@ -10,5 +10,7 @@ package Customer;
  * @author Elmar Talibzade
  */
 public class CustomerBrowser {
-    
+    private int accountId;
+    private String name;
+    private String emailAddress;
 }

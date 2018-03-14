@@ -10,5 +10,5 @@ package Customer;
  * @author Elmar Talibzade
  */
 public class CustomerProfile {
-    
+    //TODO: think whether or not this should be implemented
 }
