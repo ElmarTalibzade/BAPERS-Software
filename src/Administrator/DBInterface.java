@@ -1,4 +1,9 @@
 package Administrator;
 
-public class DBInterface {
+/**
+ * Here is the interface for our connection.
+ * @author Mihai
+ */
+public interface DBInterface {
+
 }
