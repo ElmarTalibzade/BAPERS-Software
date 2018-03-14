@@ -10,5 +10,7 @@ package Payment;
  * @author Elmar Talibzade
  */
 public class Payment {
-    
+    private double amount;
+    private String paymentType;
+    private CardDetails cardDetails;
 }

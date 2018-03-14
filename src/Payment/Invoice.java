@@ -10,5 +10,15 @@ package Payment;
  * @author Elmar Talibzade
  */
 public class Invoice {
-    
+    private int invoiceNo;
+    private String letter;
+    private boolean sent;
+
+    /**
+     * Constructor for Invoice
+     * @param letter Letter contents
+     */
+    public Invoice(String letter) {
+        this.letter = letter;
+    }
 }
