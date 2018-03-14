@@ -5,20 +5,27 @@ package Administrator;
  * @author Mihai
  */
 public interface DBInterface {
-    private void connect(String SQL){
-
-    }
-
-    private void storeData(String SQL/*, mysql connection*/){
-
-    }
-
-    private void retrieveData(String SQL/*, mysql connection*/){
-
-    }
-
-    private void closeConnection(/*mysql connection*/){
-
-    }
-
+    
+    /**
+     * Connects to SQL database using given credentials
+     * @param SQL MySQL connection
+     */
+    public void connect(String SQL);
+    
+    /**
+     * Stores data
+     * @param SQL MySQL connection
+     */
+    public void storeData(String SQL);
+    
+    /**
+     * Retrieves data
+     * @param SQL MySQL connection
+     */
+    public void retrieveData(String SQL);
+    
+    /**
+     * Closes SQL connection
+     */
+    public void closeConnection();
 }
