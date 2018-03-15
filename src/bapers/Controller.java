@@ -10,21 +10,21 @@ public class Controller {
      * Through this function we will manage the payments.
      */
     private void makePayments(){
-
+            throw new UnsupportedOperationException();
     }
 
     /**
      * Through this function we will process a job when it's sent to the Lab.
      */
     private void processJobToLab(){
-
+            throw new UnsupportedOperationException();
     }
 
     /**
      * Through this function we will retrieve job details.
      */
     private void inspectJob(){
-
+            throw new UnsupportedOperationException();
     }
 
     /**
@@ -36,7 +36,7 @@ public class Controller {
      * @param shelfSlot A string that represents shelf identification number.
      */
     private void addTask(String jobID, String description, String location, double price, String shelfSlot){
-
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -44,14 +44,14 @@ public class Controller {
      * @param jobID A string that represents job identification number.
      */
     private void addSpecialInstruction(String jobID){
-
+        throw new UnsupportedOperationException();
     }
 
     /**
      * Through this function we will generate various reports.
      */
     private void generateReport(){
-
+        throw new UnsupportedOperationException();
     }
 
     /**
