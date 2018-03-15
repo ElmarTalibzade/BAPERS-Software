@@ -3,26 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Customer/Customer.java</file>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Report/SummaryPerformanceReport.java</file>
             <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Payment/Payment.java</file>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Report/CustomerReport.java</file>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Report/DepartmentReport.java</file>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Customer/Task.java</file>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Customer/CustomerController.java</file>
+            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Payment/PaymentManager.java</file>
             <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Payment/Invoice.java</file>
             <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/bapers/Utils.java</file>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Report/Report.java</file>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Report/IndividualPerformanceReport.java</file>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Customer/JobBrowser.java</file>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Customer/CustomerBrowser.java</file>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Customer/CustomerProfile.java</file>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Report/ReportManager.java</file>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Payment/PaymentManager.java</file>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Report/DateReport.java</file>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Customer/Job.java</file>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/bapers/Bapers.java</file>
-            <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Payment/CardDetails.java</file>
         </group>
     </open-files>
 </project-private>
