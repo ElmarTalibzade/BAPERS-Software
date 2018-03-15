@@ -13,59 +13,75 @@ public class DBConnectivity implements DBInterface {
 
     static final String DB_URL = "jdbc:mysql://localhost:3306/bloomsday?autoReconnect=true&useSSL=false";
 
-    //  Database credentials
     static final String USER = "root";
     static final String PASS = "root";
     
-    Connection connection;
-    Statement stmt;
+    private Connection connection;
+    private Statement stmt;
+    private ResultSet result;
     
     /**
-     * Connects to SQL database using given credentials
-     * @param SQL MySQL connection
+     * Connects to a MySQL database
+     * @return Returns true if connection was successful
      */
     @Override
-    public void connect(String SQL) {
+    public boolean connect() {
         
         try {
-            System.out.println("Connecting to database...");
-
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
             
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = connection.createStatement();
             
-            ResultSet result = stmt.executeQuery(SQL);
-            
-            while(result.next()) {
-                int userId = result.getInt("userID");
-                String role = result.getString("role");
-                String firstName = result.getString("firstName");
-                String lastName = result.getString("lastName");
-                
-                System.out.println("ID: " + userId + " | Role: " + role + " | First Name: " + firstName + " | Last Name: " + lastName);
-            }
+            return true;
             
         } catch (SQLException ex) {
+            
             Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+            
         }
     }
 
     /**
-     * Stores data
-     * @param SQL MySQL connection
+     * Sends a query for updating MySQL database
+     * @param query Query which will be submitted
+     * @return Returns true if the query was successful
      */
     @Override
-    public void storeData(String SQL) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean storeData(String query) {
+        
+        try {
+            
+            result = stmt.executeQuery(query);
+            return true;
+            
+        } catch (SQLException ex) {
+            
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+            
+        }
     }
 
     /**
-     * Retrieves data
-     * @param SQL MySQL connection
+     * Sends a query for retrieving data from MySQL database
+     * @param query Query which will be submitted
+     * @return Returns the data obtained from the query submitted. If the query failed, null is returned
      */
     @Override
-    public void retrieveData(String SQL) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ResultSet retrieveData(String query) {
+        
+        try {
+            
+            result = stmt.executeQuery(query);
+            return result;
+            
+        } catch (SQLException ex) {
+            
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+            
+        }
     }
 
     /**
@@ -73,6 +89,16 @@ public class DBConnectivity implements DBInterface {
      */
     @Override
     public void closeConnection() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        try {
+            
+            connection.close();
+            
+        } catch (SQLException ex) {
+            
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        
     }
 }

@@ -13,13 +13,19 @@ import Administrator.*;
  */
 public class Bapers {
 
+    private static  DBConnectivity dbConn;
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
-        DBConnectivity dbConn = new DBConnectivity();
-        dbConn.connect("SELECT * FROM Staff");
+        dbConn = new DBConnectivity();
+        
+        if (dbConn.connect())
+        {
+            //do the queries here
+        }
     }
     
 }
