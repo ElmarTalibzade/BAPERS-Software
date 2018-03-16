@@ -9,12 +9,12 @@ package GUI;
  *
  * @author uzmav
  */
-public class JobBrowerUI extends javax.swing.JFrame {
+public class JobBrowserUI extends javax.swing.JFrame {
 
     /**
      * Creates new form JobBrowerUI
      */
-    public JobBrowerUI() {
+    public JobBrowserUI() {
         initComponents();
     }
 
@@ -37,6 +37,9 @@ public class JobBrowerUI extends javax.swing.JFrame {
         FindJobBtn = new javax.swing.JButton();
         ContactAdminBtn = new javax.swing.JButton();
         LogoutBtn = new javax.swing.JButton();
+        label_loggedUser = new javax.swing.JLabel();
+        btn_contactAdmin = new javax.swing.JButton();
+        btn_Logout = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -74,6 +77,22 @@ public class JobBrowerUI extends javax.swing.JFrame {
 
         LogoutBtn.setText("Logout");
 
+        label_loggedUser.setText("Logged in as: {staff-name}");
+
+        btn_contactAdmin.setText("Contact Admin");
+        btn_contactAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_contactAdminActionPerformed(evt);
+            }
+        });
+
+        btn_Logout.setText("Logout");
+        btn_Logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,6 +116,15 @@ public class JobBrowerUI extends javax.swing.JFrame {
                             .addGap(68, 68, 68)
                             .addComponent(ComboBoxRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(19, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(26, 26, 26)
+                    .addComponent(label_loggedUser)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_contactAdmin)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(btn_Logout)
+                    .addGap(26, 26, 26)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,7 +133,7 @@ public class JobBrowerUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ContactAdminBtn)
                     .addComponent(LogoutBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -116,6 +144,14 @@ public class JobBrowerUI extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(310, 310, 310)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(label_loggedUser)
+                        .addComponent(btn_Logout)
+                        .addComponent(btn_contactAdmin))
+                    .addContainerGap(311, Short.MAX_VALUE)))
         );
 
         pack();
@@ -124,6 +160,14 @@ public class JobBrowerUI extends javax.swing.JFrame {
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void btn_contactAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_contactAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_contactAdminActionPerformed
+
+    private void btn_LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LogoutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_LogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,20 +186,21 @@ public class JobBrowerUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JobBrowerUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JobBrowserUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JobBrowerUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JobBrowserUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JobBrowerUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JobBrowserUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JobBrowerUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JobBrowserUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JobBrowerUI().setVisible(true);
+                new JobBrowserUI().setVisible(true);
             }
         });
     }
@@ -165,11 +210,14 @@ public class JobBrowerUI extends javax.swing.JFrame {
     private javax.swing.JButton ContactAdminBtn;
     private javax.swing.JButton FindJobBtn;
     private javax.swing.JButton LogoutBtn;
+    private javax.swing.JButton btn_Logout;
+    private javax.swing.JButton btn_contactAdmin;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel label_loggedUser;
     // End of variables declaration//GEN-END:variables
 }
