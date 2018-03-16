@@ -1,5 +1,7 @@
 package Administrator;
 
+import java.sql.ResultSet;
+
 /**
  * Here is the interface for our connection.
  * @author Mihai
@@ -7,22 +9,24 @@ package Administrator;
 public interface DBInterface {
     
     /**
-     * Connects to SQL database using given credentials
-     * @param SQL MySQL connection
+     * Connects to a MySQL database
+     * @return Returns true if connection was successful
      */
-    public void connect(String SQL);
+    public boolean connect();
     
     /**
-     * Stores data
-     * @param SQL MySQL connection
+     * Sends a query for updating MySQL database
+     * @param query Query which will be submitted
+     * @return Returns true if the query was successful
      */
-    public void storeData(String SQL);
+    public boolean storeData(String query);
     
     /**
-     * Retrieves data
-     * @param SQL MySQL connection
+     * Sends a query for retrieving data from MySQL database
+     * @param query Query which will be submitted
+     * @return Returns the data obtained from the query submitted
      */
-    public void retrieveData(String SQL);
+    public ResultSet retrieveData(String query);
     
     /**
      * Closes SQL connection

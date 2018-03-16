@@ -5,17 +5,27 @@
  */
 package bapers;
 
+import Administrator.*;
+
 /**
  * Main class for running BAPERS software.
  * @author Elmar Talibzade
  */
 public class Bapers {
 
+    private static  DBConnectivity dbConn;
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        dbConn = new DBConnectivity();
+        
+        if (dbConn.connect())
+        {
+            //do the queries here
+        }
     }
     
 }
