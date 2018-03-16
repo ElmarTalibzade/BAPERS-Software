@@ -99,6 +99,9 @@ public class DBConnectivity implements DBInterface {
             Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
             
         }
-        
     }
+    
+    // To-do:
+    // I/O Customers, Job, Tasks, Payment for existing entries
+    // Create Job, Tasks, Customers, Staff
 }
