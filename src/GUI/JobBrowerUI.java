@@ -35,7 +35,6 @@ public class JobBrowerUI extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         ComboBoxRoom = new javax.swing.JComboBox<>();
         FindJobBtn = new javax.swing.JButton();
-        ContactAdminBtn = new javax.swing.JButton();
         LogoutBtn = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
@@ -70,8 +69,6 @@ public class JobBrowerUI extends javax.swing.JFrame {
 
         FindJobBtn.setText("Find Job");
 
-        ContactAdminBtn.setText("Contact Admin");
-
         LogoutBtn.setText("Logout");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -81,10 +78,7 @@ public class JobBrowerUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(ContactAdminBtn)
-                        .addGap(46, 46, 46)
-                        .addComponent(LogoutBtn))
+                    .addComponent(LogoutBtn)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(FindJobBtn)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -102,9 +96,7 @@ public class JobBrowerUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ContactAdminBtn)
-                    .addComponent(LogoutBtn))
+                .addComponent(LogoutBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,7 +154,6 @@ public class JobBrowerUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxRoom;
-    private javax.swing.JButton ContactAdminBtn;
     private javax.swing.JButton FindJobBtn;
     private javax.swing.JButton LogoutBtn;
     private javax.swing.JScrollPane jScrollPane1;
