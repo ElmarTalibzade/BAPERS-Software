@@ -6,26 +6,49 @@
 package bapers;
 
 import Administrator.*;
+import Customer.Task;
+import java.util.ArrayList;
 
 /**
  * Main class for running BAPERS software.
+ *
  * @author Elmar Talibzade
  */
 public class Bapers {
 
-    private static  DBConnectivity dbConn;
-    
+    private static DBConnectivity dbConn;
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         dbConn = new DBConnectivity();
-        
-        if (dbConn.connect())
+
+        if (dbConn.connect()) {
+            ArrayList<Task> tasks = dbConn.getTasks("BC001");
+
+            if (tasks != null) {
+                for (Task task : tasks) {
+                    if (task != null)
+                    {                    
+                        System.out.println(task.getDescription());
+                    }
+                    else
+                    {
+                        System.out.println("NOPE");
+                    }
+                }
+            }
+            else
+            {
+                System.out.println("Array empty");
+            }
+                    
+        }
+        else
         {
-            //do the queries here
+            System.out.println("No SQL connection");
         }
     }
-    
 }

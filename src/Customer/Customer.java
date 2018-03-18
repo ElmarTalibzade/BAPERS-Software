@@ -10,42 +10,37 @@ package Customer;
  * @author Elmar Talibzade
  */
 public class Customer {
+    private int accountNo;
     private String holderName;
-    private String accountNo;
-    private String contactName;
-    private String address;
-    private String phone;
-    private String emailAddress;
-    
-    private float discountRate;
-    private Job[] jobs;
+    private String firstName;
+    private String lastName;
+    private boolean isValued;
     private boolean isSuspended;
     private boolean isDefault;
+    private String address;
+    private String phoneNumber;
+    private DiscountType agreedDiscount;
+    private String emailAddress;
     private int debtReminded;
+    
+    private Job[] jobs;
     
     /**
      * Constructor for Customer 
-     * @param holderName Holder's name
+     * @param holderName Account holder name
      * @param accountNo Account number
-     * @param contactName Customer's full name
+     * @param firstName Customer's first name
+     * @param lastName Customer's last name
      * @param address Customer's physical address
      * @param phone Customer's phone number
      */
-    public Customer(String holderName, String accountNo, String contactName, String address, String phone) {
+    public Customer(String holderName, int accountNo, String firstName, String lastName, String address, String phone) {
         this.holderName = holderName;
         this.accountNo = accountNo;
-        this.contactName = contactName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.address = address;
-        this.phone = phone;
-    }
-    
-    /**
-     * Returns discount
-     * @return discount rate
-     */
-    public float getDiscount()
-    {
-        return discountRate;
+        this.phoneNumber = phone;
     }
     
     /**
@@ -80,6 +75,30 @@ public class Customer {
     public String getEmailAddress() {
         return emailAddress;
     }
+
+    /**
+     * Gets the first name of the customer
+     * @return string
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * Gets the last name of the customer
+     * @return string
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * Gets the phone number of the customer
+     * @return string
+     */
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
     
     /**
      * Generates customer's invoice
@@ -88,6 +107,14 @@ public class Customer {
     public String getInvoice()
     {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    /**
+     * Gets account number of the customer
+     * @return string
+     */
+    public int getAccountNo() {
+        return accountNo;
     }
     
     /**

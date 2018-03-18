@@ -5,7 +5,8 @@
  */
 package Customer;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import org.apache.derby.client.am.DateTime;
 
 /**
  * Task which is a part of a Job.
@@ -13,37 +14,36 @@ import java.sql.Date;
  */
 public class Task {
     private int id;
+    private Status status;
+    private double price;
     private String description;
     private String shelfSlot;
-    private double price;
-    private String department;
+    private DepartmentType department;
     private float discountRate;
     
-    private Date startTime;
-    private Date endTime;
+    private Timestamp startTime;
+    private Timestamp endTime;
 
-    /**
-     * Constructor for Task
-     * @param description Task description
-     * @param shelfSlot Shelf slot for task
-     * @param price Price of the task
-     * @param startTime Time when this task has been started
-     */
-    public Task(String description, String shelfSlot, double price, Date startTime) {
+    public Task(int id, Status status, double price, String description, String shelfSlot, DepartmentType department, float discountRate, Timestamp startTime, Timestamp endTime) {
+        this.id = id;
+        this.status = status;
+        this.price = price;
         this.description = description;
         this.shelfSlot = shelfSlot;
-        this.price = price;
+        this.department = department;
+        this.discountRate = discountRate;
         this.startTime = startTime;
+        this.endTime = endTime;
     }
-    
+
     /**
      * Marks this task as done
      */
     public void MarkAsDone()
     {
-        throw new UnsupportedOperationException();
+        status = Status.Completed;
     }
-
+    
     /**
      * Returns Id of this Task
      * @return task id
@@ -84,19 +84,11 @@ public class Task {
         return price;
     }
 
-    /**
-     * Returns department that this task is associated with
-     * @return
-     */
-    public String getDepartment() {
+    public DepartmentType getDepartment() {
         return department;
     }
 
-    /**
-     * Changes department of this Task
-     * @param department name of a new department
-     */
-    public void setDepartment(String department) {
+    public void setDepartment(DepartmentType department) {
         this.department = department;
     }
 
@@ -114,21 +106,5 @@ public class Task {
      */
     public void setDiscountRate(float discountRate) {
         this.discountRate = discountRate;
-    }
-
-    /**
-     * Gets the start time of this Task
-     * @return start time of this task
-     */
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    /**
-     * Gets the end time of this Task
-     * @return end time of this Task
-     */
-    public Date getEndTime() {
-        return endTime;
     }
 }
