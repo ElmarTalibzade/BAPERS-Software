@@ -5,8 +5,11 @@
  */
 package GUI;
 
+import Administrator.DBConnectivity;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
- *
  * @author uzmav
  */
 public class LoginUI extends javax.swing.JFrame {
@@ -28,16 +31,27 @@ public class LoginUI extends javax.swing.JFrame {
     private void initComponents() {
 
         BtLogin = new javax.swing.JButton();
-        TxEmail = new javax.swing.JTextField();
-        Password = new javax.swing.JPasswordField();
+        input_email = new javax.swing.JTextField();
+        input_password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         BtLogin.setText("Login");
+        BtLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtLoginActionPerformed(evt);
+            }
+        });
 
-        TxEmail.setText("Email");
+        input_email.setText("Email");
+        input_email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                input_emailActionPerformed(evt);
+            }
+        });
 
-        Password.setText("jPasswordField1");
+        input_password.setText("qwaszx");
+        input_password.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -46,18 +60,18 @@ public class LoginUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(111, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(input_password, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtLogin)
-                    .addComponent(TxEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(input_email, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(112, 112, 112))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(141, Short.MAX_VALUE)
-                .addComponent(TxEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(input_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(input_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(BtLogin)
                 .addGap(36, 36, 36))
@@ -66,6 +80,46 @@ public class LoginUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void input_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_input_emailActionPerformed
+
+    private void BtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtLoginActionPerformed
+        if(input_email.getText().length() == 0)  // We are checking if the e-mail field is completed
+            JOptionPane.showMessageDialog(null, "Empty fields detected ! Please fill up all fields");
+        else if(input_password.getPassword().length == 0)  // We are checking if the password is completed
+            JOptionPane.showMessageDialog(null, "Empty fields detected ! Please fill up all fields");
+        else {
+            String email = input_email.getText();   // Collect and store the email
+            char[] pass = input_password.getPassword(); // Collect and store the passwords
+            String pwd = String.copyValueOf(pass);  // converting from array to string
+            if(validate_login(email,pwd))
+                JOptionPane.showMessageDialog(null, "WELCOME!!!\nCorrect Login Credentials");        
+            else
+            JOptionPane.showMessageDialog(null, "Incorrect Login Credentials");
+        } 
+    }//GEN-LAST:event_BtLoginActionPerformed
+
+private boolean validate_login(String username,String password){
+    try {           
+       Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
+       DBConnectivity conn = new DBConnectivity();
+       conn.connect();
+       
+       String query = "SELECT * FROM Staff WHERE emailAddress = '"+username+"' AND password = '"+password+"'";
+       System.out.println(query);//print on console
+       ResultSet rs = conn.retrieveData(query);
+       if(rs.next())            
+           return true;    
+       else
+           return false;            
+    }
+    catch(Exception e){
+        e.printStackTrace();
+        return false;
+    }       
+}
+    
     /**
      * @param args the command line arguments
      */
@@ -73,7 +127,7 @@ public class LoginUI extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -103,7 +157,7 @@ public class LoginUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtLogin;
-    private javax.swing.JPasswordField Password;
-    private javax.swing.JTextField TxEmail;
+    private javax.swing.JTextField input_email;
+    private javax.swing.JPasswordField input_password;
     // End of variables declaration//GEN-END:variables
 }

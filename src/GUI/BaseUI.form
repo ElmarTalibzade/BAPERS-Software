@@ -28,8 +28,6 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="label_loggedUser" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="btn_contactAdmin" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
               <Component id="btn_Logout" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -42,7 +40,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="label_loggedUser" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_Logout" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btn_contactAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="panel_UI" max="32767" attributes="0"/>
@@ -77,14 +74,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_LogoutActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btn_contactAdmin">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Contact Admin"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_contactAdminActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

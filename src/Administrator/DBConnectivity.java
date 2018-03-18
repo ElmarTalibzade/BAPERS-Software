@@ -143,9 +143,7 @@ public class DBConnectivity implements DBInterface {
             
             while (result.next()) {
                 
-                jobs.add(
-                        new Job();
-                );
+                    
                 
             }
             

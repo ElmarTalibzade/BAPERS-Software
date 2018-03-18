@@ -30,7 +30,6 @@ public class BaseUI extends javax.swing.JFrame {
         panel_UI = new javax.swing.JPanel();
         label_loggedUser = new javax.swing.JLabel();
         btn_Logout = new javax.swing.JButton();
-        btn_contactAdmin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,13 +53,6 @@ public class BaseUI extends javax.swing.JFrame {
             }
         });
 
-        btn_contactAdmin.setText("Contact Admin");
-        btn_contactAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_contactAdminActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,8 +62,6 @@ public class BaseUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(label_loggedUser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_contactAdmin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_Logout)
                 .addContainerGap())
         );
@@ -81,8 +71,7 @@ public class BaseUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_loggedUser)
-                    .addComponent(btn_Logout)
-                    .addComponent(btn_contactAdmin))
+                    .addComponent(btn_Logout))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panel_UI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -93,10 +82,6 @@ public class BaseUI extends javax.swing.JFrame {
     private void btn_LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LogoutActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_LogoutActionPerformed
-
-    private void btn_contactAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_contactAdminActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_contactAdminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,7 +120,6 @@ public class BaseUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Logout;
-    private javax.swing.JButton btn_contactAdmin;
     private javax.swing.JLabel label_loggedUser;
     private javax.swing.JPanel panel_UI;
     // End of variables declaration//GEN-END:variables

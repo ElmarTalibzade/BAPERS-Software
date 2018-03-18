@@ -29,7 +29,7 @@ public class JobBrowserUI extends javax.swing.JFrame {
 
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JBTable = new javax.swing.JTable();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
@@ -45,18 +45,18 @@ public class JobBrowserUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JBTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "JobCode", "Task ID", "Department", "Shelf NO", "Date Created", "Status"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(JBTable);
 
         jTextField2.setText("Job Code");
 
@@ -209,11 +209,11 @@ public class JobBrowserUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ComboBoxRoom;
     private javax.swing.JButton ContactAdminBtn;
     private javax.swing.JButton FindJobBtn;
+    private javax.swing.JTable JBTable;
     private javax.swing.JButton LogoutBtn;
     private javax.swing.JButton btn_Logout;
     private javax.swing.JButton btn_contactAdmin;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
