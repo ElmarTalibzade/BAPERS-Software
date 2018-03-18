@@ -6,7 +6,6 @@
 package Customer;
 
 import java.sql.Timestamp;
-import org.apache.derby.client.am.DateTime;
 
 /**
  * Task which is a part of a Job.
