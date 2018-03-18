@@ -29,7 +29,6 @@ public class paymentScreenUI extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        contactAdmin = new javax.swing.JButton();
         logout = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -48,13 +47,6 @@ public class paymentScreenUI extends javax.swing.JFrame {
         jLabel1.setText("Logged in as: ");
 
         jLabel2.setText("Customer Name: {customer-name} - {account-number}");
-
-        contactAdmin.setText("Contact Admin");
-        contactAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contactAdminActionPerformed(evt);
-            }
-        });
 
         logout.setText("Log Out");
 
@@ -92,8 +84,6 @@ public class paymentScreenUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(contactAdmin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -134,9 +124,7 @@ public class paymentScreenUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(contactAdmin)
-                        .addComponent(logout)))
+                    .addComponent(logout))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(73, 73, 73)
@@ -164,10 +152,6 @@ public class paymentScreenUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void contactAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactAdminActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_contactAdminActionPerformed
 
     private void cardTypeListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardTypeListActionPerformed
         // TODO add your handling code here:
@@ -216,7 +200,6 @@ public class paymentScreenUI extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JTextField cardNumber;
     private javax.swing.JComboBox<String> cardTypeList;
-    private javax.swing.JButton contactAdmin;
     private javax.swing.JTextField csv;
     private javax.swing.JTextField expirationDate;
     private javax.swing.JLabel jLabel1;
