@@ -6,6 +6,7 @@
 package bapers;
 
 import Administrator.*;
+import Customer.Job;
 import Customer.Task;
 import java.util.ArrayList;
 
@@ -26,29 +27,13 @@ public class Bapers {
         dbConn = new DBConnectivity();
 
         if (dbConn.connect()) {
-            ArrayList<Task> tasks = dbConn.getTasks("BC001");
-
-            if (tasks != null) {
-                for (Task task : tasks) {
-                    if (task != null)
-                    {                    
-                        System.out.println(task.getDescription());
-                    }
-                    else
-                    {
-                        System.out.println("NOPE");
-                    }
-                }
-            }
-            else
+            
+            ArrayList<Job> jobs = dbConn.getJobs(3);
+            
+            for (Job job : jobs)
             {
-                System.out.println("Array empty");
+                System.out.println(job.getCode());
             }
-                    
-        }
-        else
-        {
-            System.out.println("No SQL connection");
         }
     }
 }

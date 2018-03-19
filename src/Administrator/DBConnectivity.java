@@ -24,8 +24,6 @@ public class DBConnectivity implements DBInterface {
     static final String PASS = "root";
 
     private Connection connection;
-    private Statement stmt;
-    private ResultSet result;
 
     /**
      * Connects to a MySQL database
@@ -38,13 +36,13 @@ public class DBConnectivity implements DBInterface {
         try {
 
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = connection.createStatement();
 
             return true;
 
         } catch (SQLException ex) {
 
             Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+            
             return false;
 
         }
@@ -52,7 +50,6 @@ public class DBConnectivity implements DBInterface {
 
     /**
      * Sends a query for updating MySQL database
-     *
      * @param query Query which will be submitted
      * @return Returns true if the query was successful
      */
@@ -61,7 +58,8 @@ public class DBConnectivity implements DBInterface {
 
         try {
 
-            result = stmt.executeQuery(query);
+            Statement st = connection.createStatement();
+            ResultSet res = st.executeQuery(query);
             return true;
 
         } catch (SQLException ex) {
@@ -84,8 +82,9 @@ public class DBConnectivity implements DBInterface {
 
         try {
 
-            result = stmt.executeQuery(query);
-            return result;
+            Statement st = connection.createStatement();
+            ResultSet res = st.executeQuery(query);
+            return res;
 
         } catch (SQLException ex) {
 
@@ -133,7 +132,7 @@ public class DBConnectivity implements DBInterface {
         return storeData(query);
     }
 
-    private ArrayList<Job> getJobs(int customerNo) {
+    public ArrayList<Job> getJobs(int customerNo) {
         
         ArrayList<Job> jobs = new ArrayList<Job>();
         
@@ -143,9 +142,17 @@ public class DBConnectivity implements DBInterface {
             
             while (result.next()) {
                 
-                    
+                jobs.add(new Job(
+                        result.getString("code"),
+                        getTasks(result.getString("code")),
+                        result.getDouble("price"),
+                        result.getFloat("discountRate"),
+                        result.getString("ownerNo"),
+                        result.getString("specialInstructions"),
+                        result.getString("shelf")
+                ));
                 
-            }
+            }   
             
         }
         catch (SQLException ex) {

@@ -5,7 +5,8 @@
  */
 package Customer;
 
-import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  * A job which customer that must be fulfilled by the company. Contains tasks that must be done.
@@ -13,36 +14,28 @@ import java.sql.Time;
  */
 public class Job {
     private String code;
-    private Task[] task;
+    private ArrayList<Task> task;
     
     private double price;
     private float discountRate;
     
-    private Time collectionTime;
-    private Time estCollectionTime;
+    private Timestamp collectionTime;
+    private Timestamp estCollectionTime;
     
     private String customerId;
     private String specialInstructions;
-    private String shelfOnCompletion;
+    private String shelf;
 
-    /**
-     * Constructor for a Job
-     * @param code Job code
-     * @param price Job price
-     * @param collectionTime Job's collection time
-     * @param customerId Id of a customer to whom this Job belongs to
-     * @param specialInstructions Job's special instructions
-     * @param shelfOnCompletion Shelf in which Job will be placed
-     */
-    public Job(String code, double price, Time collectionTime, String customerId, String specialInstructions, String shelfOnCompletion) {
+    public Job(String code, ArrayList<Task> task, double price, float discountRate, String customerId, String specialInstructions, String shelf) {
         this.code = code;
+        this.task = task;
         this.price = price;
-        this.collectionTime = collectionTime;
+        this.discountRate = discountRate;
         this.customerId = customerId;
         this.specialInstructions = specialInstructions;
-        this.shelfOnCompletion = shelfOnCompletion;
+        this.shelf = shelf;
     }
-    
+
     /**
      * Gets job code
      * @return job code
@@ -55,7 +48,7 @@ public class Job {
      * Gets tasks that are associated with this Job
      * @return array of tasks
      */
-    public Task[] getTask() {
+    public ArrayList<Task> getTasks() {
         return task;
     }
 
@@ -87,7 +80,7 @@ public class Job {
      * Gest the collection time for this Job
      * @return
      */
-    public Time getCollectionTime() {
+    public Timestamp getCollectionTime() {
         return collectionTime;
     }
 
@@ -95,7 +88,7 @@ public class Job {
      * Estimates the collection time based on when the job has been assigned
      * @return
      */
-    public Time getEstCollectionTime() {
+    public Timestamp getEstCollectionTime() {
         return estCollectionTime;
     }
     
@@ -127,16 +120,16 @@ public class Job {
      * Gets a shelf
      * @return shelf number
      */
-    public String getShelfOnCompletion() {
-        return shelfOnCompletion;
+    public String getShelf() {
+        return shelf;
     }
 
     /**
      * Sets a shelf
      * @param shelfOnCompletion new shelf number
      */
-    public void setShelfOnCompletion(String shelfOnCompletion) {
-        this.shelfOnCompletion = shelfOnCompletion;
+    public void setShelf(String shelf) {
+        this.shelf = shelf;
     }
 
     
