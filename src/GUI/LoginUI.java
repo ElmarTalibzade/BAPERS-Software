@@ -102,7 +102,6 @@ public class LoginUI extends javax.swing.JFrame {
 
 private boolean validate_login(String username,String password){
     try {           
-       Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
        DBConnectivity conn = new DBConnectivity();
        conn.connect();
        

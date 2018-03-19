@@ -3,12 +3,30 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Customer/Task.java</file>
             <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/GUI/JobBrowserUI.java</file>
             <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/GUI/shiftManagerUI.java</file>
             <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Customer/Job.java</file>
             <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/Administrator/DBConnectivity.java</file>
             <file>file:/D:/elmar/Documents/NetBeansProjects/BAPERS-Software/src/bapers/Bapers.java</file>
+=======
+            <file>file:/Users/eliasthiebaut/NetBeansProjects/BAPERS-Software/src/GUI/LoginUI.java</file>
+            <file>file:/Users/eliasthiebaut/NetBeansProjects/BAPERS-Software/src/GUI/BackupUI.java</file>
+            <file>file:/Users/eliasthiebaut/NetBeansProjects/BAPERS-Software/src/GUI/ReceptionistUI.java</file>
+            <file>file:/Users/eliasthiebaut/NetBeansProjects/BAPERS-Software/src/GUI/BaseUI.java</file>
+            <file>file:/Users/eliasthiebaut/NetBeansProjects/BAPERS-Software/src/Administrator/DBConnectivity.java</file>
+            <file>file:/Users/eliasthiebaut/NetBeansProjects/BAPERS-Software/src/Customer/Task.java</file>
+            <file>file:/Users/eliasthiebaut/NetBeansProjects/BAPERS-Software/src/GUI/technicianUI.java</file>
+            <file>file:/Users/eliasthiebaut/NetBeansProjects/BAPERS-Software/src/GUI/TaskOverviewUI.java</file>
+            <file>file:/Users/eliasthiebaut/NetBeansProjects/BAPERS-Software/src/GUI/SearchStaffUI.java</file>
+            <file>file:/Users/eliasthiebaut/NetBeansProjects/BAPERS-Software/src/GUI/JobBrowserUI.java</file>
+            <file>file:/Users/eliasthiebaut/NetBeansProjects/BAPERS-Software/src/Administrator/DBInterface.java</file>
+            <file>file:/Users/eliasthiebaut/NetBeansProjects/BAPERS-Software/src/GUI/paymentScreenUI.java</file>
+            <file>file:/Users/eliasthiebaut/NetBeansProjects/BAPERS-Software/src/GUI/CreateJobUI.java</file>
+            <file>file:/Users/eliasthiebaut/NetBeansProjects/BAPERS-Software/src/GUI/CustomerProfile.java</file>
+            <file>file:/Users/eliasthiebaut/NetBeansProjects/BAPERS-Software/src/GUI/GUI.java</file>
+>>>>>>> c7e16e5f6fcac7cb956bbe581636a6353e07f7a5
         </group>
     </open-files>
 </project-private>
