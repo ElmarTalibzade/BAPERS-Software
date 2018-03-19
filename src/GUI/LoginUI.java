@@ -6,6 +6,7 @@
 package GUI;
 
 import Administrator.DBConnectivity;
+import bapers.Bapers;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
@@ -93,31 +94,12 @@ public class LoginUI extends javax.swing.JFrame {
             String email = input_email.getText();   // Collect and store the email
             char[] pass = input_password.getPassword(); // Collect and store the passwords
             String pwd = String.copyValueOf(pass);  // converting from array to string
-            if(validate_login(email,pwd))
+            if((Bapers.DB.validateLogin(email, pwd)))
                 JOptionPane.showMessageDialog(null, "WELCOME!!!\nCorrect Login Credentials");        
             else
             JOptionPane.showMessageDialog(null, "Incorrect Login Credentials");
         } 
     }//GEN-LAST:event_BtLoginActionPerformed
-
-private boolean validate_login(String username,String password){
-    try {           
-       DBConnectivity conn = new DBConnectivity();
-       conn.connect();
-       
-       String query = "SELECT * FROM Staff WHERE emailAddress = '"+username+"' AND password = '"+password+"'";
-       System.out.println(query);//print on console
-       ResultSet rs = conn.retrieveData(query);
-       if(rs.next())            
-           return true;    
-       else
-           return false;            
-    }
-    catch(Exception e){
-        e.printStackTrace();
-        return false;
-    }       
-}
     
     /**
      * @param args the command line arguments

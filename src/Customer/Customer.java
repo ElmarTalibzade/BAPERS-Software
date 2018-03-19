@@ -5,6 +5,8 @@
  */
 package Customer;
 
+import java.util.ArrayList;
+
 /**
  * Represents a Customer's information.
  * @author Elmar Talibzade
@@ -23,24 +25,22 @@ public class Customer {
     private String emailAddress;
     private int debtReminded;
     
-    private Job[] jobs;
-    
-    /**
-     * Constructor for Customer 
-     * @param holderName Account holder name
-     * @param accountNo Account number
-     * @param firstName Customer's first name
-     * @param lastName Customer's last name
-     * @param address Customer's physical address
-     * @param phone Customer's phone number
-     */
-    public Customer(String holderName, int accountNo, String firstName, String lastName, String address, String phone) {
-        this.holderName = holderName;
+    private ArrayList<Job> jobs;
+
+    public Customer(int accountNo, String holderName, String firstName, String lastName, boolean isValued, boolean isSuspended, boolean isDefault, String address, String phoneNumber, DiscountType agreedDiscount, String emailAddress, int debtReminded, ArrayList<Job> jobs) {
         this.accountNo = accountNo;
+        this.holderName = holderName;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.isValued = isValued;
+        this.isSuspended = isSuspended;
+        this.isDefault = isDefault;
         this.address = address;
-        this.phoneNumber = phone;
+        this.phoneNumber = phoneNumber;
+        this.agreedDiscount = agreedDiscount;
+        this.emailAddress = emailAddress;
+        this.debtReminded = debtReminded;
+        this.jobs = jobs;
     }
     
     /**
@@ -64,7 +64,7 @@ public class Customer {
      * Gets jobs associated with this customer
      * @return An array of jobs
      */
-    public Job[] getJobs() {
+    public ArrayList<Job> getJobs() {
         return jobs;
     }
 

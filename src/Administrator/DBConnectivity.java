@@ -2,6 +2,7 @@ package Administrator;
 
 import Customer.Customer;
 import Customer.DepartmentType;
+import Customer.DiscountType;
 import Customer.Job;
 import Customer.Status;
 import Customer.Task;
@@ -131,8 +132,70 @@ public class DBConnectivity implements DBInterface {
 
         return storeData(query);
     }
-
-    public ArrayList<Job> getJobs(int customerNo) {
+    
+    public boolean validateLogin(String email, String password) {
+        
+        ResultSet result = retrieveData(String.format("SELECT * FROM `staff` WHERE emailAddress = '%s' AND password = '%s'", email, password));
+        
+        try {
+            
+            return result.next();
+            
+        } catch (SQLException ex) {
+            
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Returns the list of all customers from the database
+     * @return Array list of customers
+     */
+    public ArrayList<Customer> getCustomers()
+    {
+        ArrayList<Customer> customers = new ArrayList<Customer>();
+        
+        try {
+            
+            ResultSet result = retrieveData("SELECT * FROM `customers`");
+            
+            while (result.next()) {
+                
+                customers.add(new Customer(
+                        result.getInt("accountNo"),
+                        result.getString("holderName"),
+                        result.getString("firstName"),
+                        result.getString("lastName"),
+                        result.getBoolean("isValued"),
+                        result.getBoolean("isSuspended"),
+                        result.getBoolean("isDefault"),
+                        result.getString("address"),
+                        result.getString("phoneNo"),
+                        DiscountType.values()[result.getInt("discountType")],
+                        result.getString("emailAddress"),
+                        result.getInt("debtRemindedAmount"),
+                        getJobs(result.getInt("accountNo"))
+                ));
+            }
+            
+        }
+        catch (SQLException ex) {
+            
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        
+        return customers;
+    }
+    
+    /**
+     * Retrieves jobs of a customer
+     * @param customerNo Customer's number whose jobs will be retrieved
+     * @return Array list of jobs
+     */
+    private ArrayList<Job> getJobs(int customerNo) {
         
         ArrayList<Job> jobs = new ArrayList<Job>();
         
@@ -152,7 +215,7 @@ public class DBConnectivity implements DBInterface {
                         result.getString("shelf")
                 ));
                 
-            }   
+            }
             
         }
         catch (SQLException ex) {
@@ -169,7 +232,7 @@ public class DBConnectivity implements DBInterface {
      * @param jobCode All tasks that belong to the job of this code will be retrieved.
      * @return An array list of Task objects.
      */
-    public ArrayList<Task> getTasks(String jobCode) {
+    private ArrayList<Task> getTasks(String jobCode) {
         
         ArrayList<Task> tasks = new ArrayList<Task>();
         

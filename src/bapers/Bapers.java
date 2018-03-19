@@ -6,8 +6,10 @@
 package bapers;
 
 import Administrator.*;
+import Customer.Customer;
 import Customer.Job;
 import Customer.Task;
+import GUI.LoginUI;
 import java.util.ArrayList;
 
 /**
@@ -17,23 +19,19 @@ import java.util.ArrayList;
  */
 public class Bapers {
 
-    private static DBConnectivity dbConn;
+    public static DBConnectivity DB;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
 
-        dbConn = new DBConnectivity();
+        DB = new DBConnectivity();
 
-        if (dbConn.connect()) {
+        if (DB.connect()) {
             
-            ArrayList<Job> jobs = dbConn.getJobs(3);
-            
-            for (Job job : jobs)
-            {
-                System.out.println(job.getCode());
-            }
+            LoginUI homepage = new LoginUI();
+            homepage.setVisible(true);
         }
     }
 }
