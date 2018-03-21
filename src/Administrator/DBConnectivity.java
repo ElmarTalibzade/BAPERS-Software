@@ -18,11 +18,11 @@ import java.util.logging.Logger;
  * @author Mihai
  */
 public class DBConnectivity implements DBInterface {
-
+    
     static final String DB_URL = "jdbc:mysql://localhost:3306/bloomsday?autoReconnect=true&useSSL=false";
 
     static final String USER = "root";
-    static final String PASS = "root";
+    static final String PASS = "";
 
     private Connection connection;
 
@@ -117,6 +117,26 @@ public class DBConnectivity implements DBInterface {
     // I/O Customers, Job, Tasks, Payment for existing entries
     // Create Job, Tasks, Customers, Staff
     // Updates customer. If such customer does not exist, a new one is created
+    
+    /**
+     * Creates a new job
+     * 
+     * @param job Job object that will be inserted
+     * @return Returns true if the job data has been successfully inserted.
+     */
+    public boolean createJob(Job job) {
+        String query = String.format("INSERT INTO `jobs` "
+                + "(ownerNo, staffNo, invoiceNo, shelf, status, "
+                + "priority, discountRate, price, specialInstructions) VALUES(" 
+                + "'%d', '%d', '%d', '%s', '%b', '%d', '%f', '%f', '%s')", 
+                job.getCustomerId(), job.getStaffCode(), job.getInvoiceNo(), job.getShelf(), 
+                job.getStatus(), job.getPriority(), job.getDiscountRate(), job.getPrice(), 
+                job.getSpecialInstructions());
+        System.out.println(query);
+        return true;
+        //return storeData(query);
+    }
+    
     /**
      * Updates a customer
      *
@@ -220,13 +240,15 @@ public class DBConnectivity implements DBInterface {
             while (result.next()) {
 
                 jobs.add(new Job(
+                        result.getInt("invoiceNo"),
                         result.getString("code"),
                         getTasks(result.getString("code")),
                         result.getDouble("price"),
                         result.getFloat("discountRate"),
-                        result.getString("ownerNo"),
+                        result.getInt("ownerNo"),
                         result.getString("specialInstructions"),
-                        result.getString("shelf")
+                        result.getString("shelf"),
+                        result.getInt("priority")
                 ));
 
             }

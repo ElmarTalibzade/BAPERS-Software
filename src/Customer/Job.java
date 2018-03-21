@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * @author Elmar Talibzade
  */
 public class Job {
+    private int staffCode;
     private String code;
     private ArrayList<Task> task;
     
@@ -22,7 +23,11 @@ public class Job {
     private Timestamp collectionTime;
     private Timestamp estCollectionTime;
     
-    private String customerId;
+    private int customerId;
+    private int invoiceNo;
+    private int priority;
+    private int status;
+    
     private String specialInstructions;
     private String shelf;
 
@@ -36,7 +41,9 @@ public class Job {
      * @param specialInstructions
      * @param shelf
      */
-    public Job(String code, ArrayList<Task> task, double price, float discountRate, String customerId, String specialInstructions, String shelf) {
+    public Job(int invoiceNo, String code, ArrayList<Task> task, double price, float discountRate, int customerId, String specialInstructions, String shelf, int priority) {
+        this.invoiceNo = invoiceNo;           
+        this.staffCode = staffCode;
         this.code = code;
         this.task = task;
         this.price = price;
@@ -44,8 +51,30 @@ public class Job {
         this.customerId = customerId;
         this.specialInstructions = specialInstructions;
         this.shelf = shelf;
+        this.status = 0;
+        this.priority = priority;
     }
 
+    public int getPriority(){
+        return priority;
+    }
+    
+    public void setStatus(int status) {       
+        this.status = status;
+    }
+    
+    public int getStatus(){
+        return status;
+    }          
+    
+    public int getInvoiceNo(){
+        return invoiceNo;
+    }
+    
+    public int getStaffCode(){
+        return staffCode;
+    }
+    
     /**
      * Gets job code
      * @return job code
@@ -106,7 +135,7 @@ public class Job {
      * Gets the customer id to whom this Job has been assigned to
      * @return customer id
      */
-    public String getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
@@ -140,7 +169,5 @@ public class Job {
      */
     public void setShelf(String shelf) {
         this.shelf = shelf;
-    }
-
-    
+    }    
 }

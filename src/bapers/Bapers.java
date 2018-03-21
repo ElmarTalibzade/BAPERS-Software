@@ -32,7 +32,8 @@ public class Bapers {
         DB = new DBConnectivity();
 
         if (DB.connect()) {
-            
+            Job job = new Job(12, "abc", null, 12.0, (float) 2.0, 1, "instructions", "H2O", 1);
+            DB.createJob(job);
             LoginUI homepage = new LoginUI();
             homepage.setVisible(true);
         }
