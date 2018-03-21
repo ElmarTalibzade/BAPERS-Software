@@ -11,8 +11,19 @@ package Customer;
  */
 public enum Status {
     
+    /**
+     *
+     */
     Inactive,
+
+    /**
+     *
+     */
     InProgress,
+
+    /**
+     *
+     */
     Completed
     
 }

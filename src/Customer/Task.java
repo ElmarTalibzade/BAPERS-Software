@@ -23,6 +23,18 @@ public class Task {
     private Timestamp startTime;
     private Timestamp endTime;
 
+    /**
+     *
+     * @param id
+     * @param status
+     * @param price
+     * @param description
+     * @param shelfSlot
+     * @param department
+     * @param discountRate
+     * @param startTime
+     * @param endTime
+     */
     public Task(int id, Status status, double price, String description, String shelfSlot, DepartmentType department, float discountRate, Timestamp startTime, Timestamp endTime) {
         this.id = id;
         this.status = status;
@@ -83,10 +95,18 @@ public class Task {
         return price;
     }
 
+    /**
+     *
+     * @return
+     */
     public DepartmentType getDepartment() {
         return department;
     }
 
+    /**
+     *
+     * @param department
+     */
     public void setDepartment(DepartmentType department) {
         this.department = department;
     }

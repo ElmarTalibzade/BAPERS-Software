@@ -19,6 +19,9 @@ import java.util.ArrayList;
  */
 public class Bapers {
 
+    /**
+     * Sole connection to the database, which processes all statements and queries.
+     */
     public static DBConnectivity DB;
 
     /**

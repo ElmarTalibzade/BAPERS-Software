@@ -11,8 +11,19 @@ package Customer;
  */
 public enum DiscountType {
     
+    /**
+     *
+     */
     None,
+
+    /**
+     *
+     */
     Flexible,
+
+    /**
+     *
+     */
     Fixed
     
 }

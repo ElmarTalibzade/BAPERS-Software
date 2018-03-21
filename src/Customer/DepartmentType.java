@@ -11,10 +11,29 @@ package Customer;
  */
 public enum DepartmentType {
     
+    /**
+     *
+     */
     Unspecified,
+
+    /**
+     *
+     */
     CopyRoom,
+
+    /**
+     *
+     */
     Development,
+
+    /**
+     *
+     */
     FinishingRoom,
+
+    /**
+     *
+     */
     Packing,
     
 }

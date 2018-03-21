@@ -5,11 +5,35 @@ package Staff;
  * @author Mihai
  */
 public abstract class Staff {
+
+    /**
+     *
+     */
     protected int accountNo;
+
+    /**
+     *
+     */
     protected String firstName;
+
+    /**
+     *
+     */
     protected String lastName;
+
+    /**
+     *
+     */
     protected String address;
+
+    /**
+     *
+     */
     protected String phone;
+
+    /**
+     *
+     */
     protected boolean isActive;
 
     /**

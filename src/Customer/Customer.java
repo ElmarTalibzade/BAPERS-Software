@@ -27,6 +27,22 @@ public class Customer {
     
     private ArrayList<Job> jobs;
 
+    /**
+     *
+     * @param accountNo
+     * @param holderName
+     * @param firstName
+     * @param lastName
+     * @param isValued
+     * @param isSuspended
+     * @param isDefault
+     * @param address
+     * @param phoneNumber
+     * @param agreedDiscount
+     * @param emailAddress
+     * @param debtReminded
+     * @param jobs
+     */
     public Customer(int accountNo, String holderName, String firstName, String lastName, boolean isValued, boolean isSuspended, boolean isDefault, String address, String phoneNumber, DiscountType agreedDiscount, String emailAddress, int debtReminded, ArrayList<Job> jobs) {
         this.accountNo = accountNo;
         this.holderName = holderName;
@@ -42,6 +58,40 @@ public class Customer {
         this.debtReminded = debtReminded;
         this.jobs = jobs;
     }
+
+    public String getHolderName() {
+        return holderName;
+    }
+
+    public void setHolderName(String holderName) {
+        this.holderName = holderName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public DiscountType getAgreedDiscount() {
+        return agreedDiscount;
+    }
+
+    public void setAgreedDiscount(DiscountType agreedDiscount) {
+        this.agreedDiscount = agreedDiscount;
+    }
+
+    public int getDebtReminded() {
+        return debtReminded;
+    }
+
+    public void setDebtReminded(int debtReminded) {
+        this.debtReminded = debtReminded;
+    }
+    
+    
     
     /**
      * Gets whether this customer is suspended or not
@@ -140,6 +190,14 @@ public class Customer {
      */
     public boolean makePyament(String jobId)
     {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public boolean isValued() {
+        return isValued;
+    }
+    
+    public boolean isDefault() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

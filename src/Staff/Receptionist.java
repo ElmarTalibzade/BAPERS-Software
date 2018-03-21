@@ -1,6 +1,9 @@
 package Staff;
 
-
+/**
+ *
+ * @author elmar
+ */
 public class Receptionist extends Staff {
 
     /**

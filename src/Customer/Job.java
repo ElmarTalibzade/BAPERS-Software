@@ -26,6 +26,16 @@ public class Job {
     private String specialInstructions;
     private String shelf;
 
+    /**
+     *
+     * @param code
+     * @param task
+     * @param price
+     * @param discountRate
+     * @param customerId
+     * @param specialInstructions
+     * @param shelf
+     */
     public Job(String code, ArrayList<Task> task, double price, float discountRate, String customerId, String specialInstructions, String shelf) {
         this.code = code;
         this.task = task;
@@ -126,7 +136,7 @@ public class Job {
 
     /**
      * Sets a shelf
-     * @param shelfOnCompletion new shelf number
+     * @param shelf
      */
     public void setShelf(String shelf) {
         this.shelf = shelf;
