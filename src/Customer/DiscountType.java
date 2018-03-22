@@ -12,12 +12,12 @@ package Customer;
 public enum DiscountType {
     
     /**
-     *
+     * No discount is provided
      */
     None,
 
     /**
-     *
+     * 
      */
     Flexible,
 
