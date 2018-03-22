@@ -61,7 +61,7 @@ public class DBConnectivity implements DBInterface {
         try {
 
             Statement st = connection.createStatement();
-            st.executeQuery(query);
+            st.execute(query);
             return true;
 
         } catch (SQLException ex) {
@@ -119,6 +119,7 @@ public class DBConnectivity implements DBInterface {
     // Updates customer. If such customer does not exist, a new one is created
     
     /**
+     * UNDER CONSTRUCTION!
      * Creates a new job
      * 
      * @param job Job object that will be inserted
@@ -126,12 +127,12 @@ public class DBConnectivity implements DBInterface {
      */
     public boolean createJob(Job job) {
         String query = String.format("INSERT INTO `jobs` "
-                + "(ownerNo, staffNo, invoiceNo, shelf, status, "
+                + "(code, ownerNo, staffNo, invoiceNo, shelf, status, "
                 + "priority, discountRate, price, specialInstructions) VALUES(" 
-                + "'%d', '%d', '%d', '%s', '%b', '%d', '%f', '%f', '%s')", 
-                job.getCustomerId(), job.getStaffCode(), job.getInvoiceNo(), job.getShelf(), 
-                job.getStatus(), job.getPriority(), job.getDiscountRate(), job.getPrice(), 
-                job.getSpecialInstructions());
+                + "'%s','%d', '%d', '%d', '%s', '%d', '%d', '%f', '%f', '%s')", 
+                job.getCode(), job.getCustomerId(), job.getStaffCode(), job.getInvoiceNo(), 
+                job.getShelf(), job.getStatus(), job.getPriority(), job.getDiscountRate(), 
+                job.getPrice(), job.getSpecialInstructions());
         System.out.println(query);
         return true;
     }
@@ -143,6 +144,26 @@ public class DBConnectivity implements DBInterface {
                 jobCode, task.getStatus().ordinal(), task.getPrice(), task.getDescription(), 
                 task.getShelfSlot(), task.getDepartment().ordinal(), task.getDiscountRate());
         
+        return storeData(query);
+    }
+    
+    /**
+     * Creates a new customer
+     * @param customer Customer object that will be inserted
+     * @return Returns true if the job data has been successfully inserted and false otherwise.
+     */
+    public boolean createCustomer(Customer customer){
+        String query = String.format("INSERT INTO `customers` "
+                + "(holderName, firstName, lastName, isValued, isSuspended, "
+                + "isDefault, address, phoneNo, discountType, emailAddress, debtRemindedAmount) VALUES(" 
+                + "'%s', '%s', '%s', '%d', '%d', "
+                + "'%d', '%s', '%s', '%d', '%s', '%d')", 
+                customer.getHolderName(), customer.getFirstName(), customer.getLastName(), 
+                customer.isValued() ? 1 : 0,
+                customer.isSuspended() ? 1 : 0,
+                customer.isDefault() ? 1 : 0,
+                customer.getAddress(), customer.getPhoneNumber(), 0, customer.getEmailAddress(), customer.getDebtReminded());
+        System.out.println(query);
         return storeData(query);
     }
     
@@ -251,6 +272,7 @@ public class DBConnectivity implements DBInterface {
                 jobs.add(new Job(
                         result.getInt("invoiceNo"),
                         result.getString("code"),
+                        result.getInt("staffNo"),
                         getTasks(result.getString("code")),
                         result.getDouble("price"),
                         result.getFloat("discountRate"),
