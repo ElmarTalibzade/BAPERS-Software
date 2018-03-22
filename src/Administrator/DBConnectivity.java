@@ -134,7 +134,16 @@ public class DBConnectivity implements DBInterface {
                 job.getSpecialInstructions());
         System.out.println(query);
         return true;
-        //return storeData(query);
+    }
+    
+    public boolean addTask(String jobCode, Task task) {
+        String query = String.format("INSERT INTO `tasks` "
+                + "(jobCode, status, price, description, shelfSlot, department, discountRate) "
+                + "VALUES('%s, '%i', '%d', '%s', '%s', '%i', '%f')",
+                jobCode, task.getStatus().ordinal(), task.getPrice(), task.getDescription(), 
+                task.getShelfSlot(), task.getDepartment().ordinal(), task.getDiscountRate());
+        
+        return storeData(query);
     }
     
     /**

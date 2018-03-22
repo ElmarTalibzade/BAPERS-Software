@@ -63,6 +63,10 @@ public class Task {
         return id;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     /**
      * Gets the description of this Task
      * @return task description
