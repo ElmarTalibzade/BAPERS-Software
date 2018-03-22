@@ -133,11 +133,16 @@ public class DBConnectivity implements DBInterface {
                 job.getCode(), job.getCustomerId(), job.getStaffCode(), job.getInvoiceNo(), 
                 job.getShelf(), job.getStatus(), job.getPriority(), job.getDiscountRate(), 
                 job.getPrice(), job.getSpecialInstructions());
-
+        
+        for(Task task : job.getTasks())
+        {
+            addTask(job.getCode(), task);
+        }
+        
         return storeData(query);
     }
     
-    public boolean addTask(String jobCode, Task task) {
+    private boolean addTask(String jobCode, Task task) {
         String query = String.format("INSERT INTO `tasks` "
                 + "(jobCode, status, price, description, shelfSlot, department, discountRate) "
                 + "VALUES('%s, '%i', '%d', '%s', '%s', '%i', '%f')",
