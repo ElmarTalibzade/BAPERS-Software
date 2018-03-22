@@ -133,8 +133,8 @@ public class DBConnectivity implements DBInterface {
                 job.getCode(), job.getCustomerId(), job.getStaffCode(), job.getInvoiceNo(), 
                 job.getShelf(), job.getStatus(), job.getPriority(), job.getDiscountRate(), 
                 job.getPrice(), job.getSpecialInstructions());
-        System.out.println(query);
-        return true;
+
+        return storeData(query);
     }
     
     public boolean addTask(String jobCode, Task task) {
@@ -163,7 +163,7 @@ public class DBConnectivity implements DBInterface {
                 customer.isSuspended() ? 1 : 0,
                 customer.isDefault() ? 1 : 0,
                 customer.getAddress(), customer.getPhoneNumber(), 0, customer.getEmailAddress(), customer.getDebtReminded());
-        System.out.println(query);
+        
         return storeData(query);
     }
     
@@ -186,6 +186,7 @@ public class DBConnectivity implements DBInterface {
             customer.isDefault() ? 1 : 0,
             customer.getDebtReminded(),
             customer.getAccountNo());
+        
         return storeData(query);
     }
 

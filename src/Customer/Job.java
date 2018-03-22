@@ -33,15 +33,18 @@ public class Job {
 
     /**
      *
+     * @param invoiceNo
      * @param code
+     * @param staffCode
      * @param task
      * @param price
      * @param discountRate
      * @param customerId
      * @param specialInstructions
      * @param shelf
+     * @param priority
      */
-    public Job(int invoiceNo, String code, ArrayList<Task> task, double price, float discountRate, int customerId, String specialInstructions, String shelf, int priority) {
+    public Job(int invoiceNo, String code, int staffCode, ArrayList<Task> task, double price, float discountRate, int customerId, String specialInstructions, String shelf, int priority) {
         this.invoiceNo = invoiceNo;           
         this.staffCode = staffCode;
         this.code = code;
