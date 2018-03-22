@@ -198,6 +198,6 @@ public class Customer {
     }
     
     public boolean isDefault() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return isDefault;
     }
 }
