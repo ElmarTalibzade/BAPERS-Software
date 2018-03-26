@@ -6,6 +6,8 @@ package Staff;
  */
 public abstract class Staff {
 
+    protected int role;
+    
     /**
      *
      */
@@ -36,22 +38,29 @@ public abstract class Staff {
      */
     protected boolean isActive;
 
+    protected String password;
     /**
      * Constructor for Staff
      * @param accountNo Account number
+     * @param role Staff's access level
      * @param firstName Staff's first name
      * @param lastName Staff's last name
      * @param address Staff's physical address
      * @param phone Staff's phone number
      */
-    public Staff(int accountNo, String firstName, String lastName, String address, String phone) {
+    public Staff(int accountNo, int role, String firstName, String lastName, String address, String phone) {
         this.accountNo = accountNo;
+        this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.phone = phone;
     }
 
+    public String getPassword(){
+        return password;
+    }
+    
     /**
      * Returns if the staff is logged in or not
      * @return true - if it's logged in | false - otherwise
@@ -118,6 +127,10 @@ public abstract class Staff {
         return phone;
     }
 
+    public int getRole(){
+        return role;       
+    }
+    
     /**
      * Sets Staff account number
      * @param accountNo Represents the value that will be set
@@ -140,5 +153,9 @@ public abstract class Staff {
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+    
+    public void setRole(int role){
+        this.role = role;
     }
 }

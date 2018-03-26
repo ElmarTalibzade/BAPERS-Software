@@ -15,7 +15,7 @@ public class OfficeManager extends Staff {
      * @param phone Staff's phone number
      */
     public OfficeManager(int accountNo, String firstName, String lastName, String address, String phone) {
-        super(accountNo, firstName, lastName, address, phone);
+        super(accountNo, 2, firstName, lastName, address, phone);
     }
 
     /**
