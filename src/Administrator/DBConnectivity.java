@@ -6,6 +6,7 @@ import Customer.DiscountType;
 import Customer.Job;
 import Customer.Status;
 import Customer.Task;
+import Staff.Staff;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -117,6 +118,20 @@ public class DBConnectivity implements DBInterface {
     // I/O Customers, Job, Tasks, Payment for existing entries
     // Create Job, Tasks, Customers, Staff
     // Updates customer. If such customer does not exist, a new one is created
+    
+    /**
+     * Creates a new staff member
+     * @param staff Staff object that will be inserted
+     * @return Returns true if the staff data has been successfully inserted and false otherwise.
+     */
+    public boolean createStaff(Staff staff)
+    {
+        String query = String.format("INSERT INTO `staff` "
+                + "(role, firstName, lastName, emailAddress, phonenumber, password) VALUES(" 
+                + "'%d', '%s', '%s', '%s', '%s', '%s')", 
+                staff.getRole(), staff.getFirstName(), staff.getLastName(), staff.getAddress(), staff.getPhone(), staff.getPassword());
+        return storeData(query);
+    }
     
     /**
      * UNDER CONSTRUCTION!
