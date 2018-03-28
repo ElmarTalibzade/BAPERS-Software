@@ -38,7 +38,7 @@
                   <Component id="tabbedContent" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="label_loggedUser" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="484" max="32767" attributes="0"/>
+                      <EmptySpace pref="478" max="32767" attributes="0"/>
                       <Component id="btn_logout" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -54,8 +54,9 @@
                   <Component id="btn_logout" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="label_loggedUser" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-              <Component id="tabbedContent" pref="424" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="tabbedContent" pref="418" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

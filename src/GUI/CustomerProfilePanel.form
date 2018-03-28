@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <NonVisualComponents>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -94,7 +94,7 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btn_createJob" max="32767" attributes="0"/>
                           <Component id="btn_print_reminder" alignment="1" max="32767" attributes="0"/>
-                          <Component id="btn_showPayment" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btn_setPayment" alignment="1" max="32767" attributes="0"/>
                           <Component id="btn_print_receipt" max="32767" attributes="0"/>
                           <Component id="btn_save" max="32767" attributes="0"/>
                       </Group>
@@ -138,7 +138,7 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btn_showPayment" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_setPayment" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Component id="btn_save" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -264,19 +264,13 @@
         <Property name="text" type="java.lang.String" value="Print Reminder"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btn_showPayment">
+    <Component class="javax.swing.JButton" name="btn_setPayment">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Show Payment"/>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[115, 32]"/>
-        </Property>
-        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[115, 32]"/>
-        </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[115, 32]"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="Set Payment"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_setPaymentActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_save">
       <Properties>

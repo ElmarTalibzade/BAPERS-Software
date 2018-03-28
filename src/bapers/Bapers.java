@@ -5,6 +5,8 @@
  */
 package bapers;
 
+import GUI.LoginView;
+import GUI.StaffView;
 import Administrator.*;
 import GUI.*;
 import javax.swing.UIManager;
@@ -39,9 +41,14 @@ public class Bapers {
         
         
         StaffView staffView = new StaffView();
+        staffView.tabbedContent.addTab("Create Staff", new CreateStaffPanel());
+        staffView.tabbedContent.addTab("Backups", new BackupsPanel());
+        staffView.tabbedContent.addTab("Staff Browser", new StaffBrowserPanel());
         staffView.tabbedContent.addTab("Job Browser", new JobBrowserPanel());
         staffView.tabbedContent.addTab("Customer Browser", new CustomerBrowserPanel());
         staffView.tabbedContent.addTab("Customer Profile", new CustomerProfilePanel());
+        staffView.tabbedContent.addTab("Receptionists", new ReceptionistBrowserPanel());
+        staffView.tabbedContent.addTab("Create Customer", new CreateCustomerPanel());
         staffView.setVisible(true);
     }
     

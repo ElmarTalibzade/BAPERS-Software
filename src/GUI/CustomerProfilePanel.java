@@ -43,7 +43,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         field_discountRate = new javax.swing.JTextField();
         btn_print_receipt = new javax.swing.JButton();
         btn_print_reminder = new javax.swing.JButton();
-        btn_showPayment = new javax.swing.JButton();
+        btn_setPayment = new javax.swing.JButton();
         btn_save = new javax.swing.JButton();
         btn_createJob = new javax.swing.JButton();
         table_jobs = new javax.swing.JScrollPane();
@@ -100,10 +100,12 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
 
         btn_print_reminder.setText("Print Reminder");
 
-        btn_showPayment.setText("Show Payment");
-        btn_showPayment.setMaximumSize(new java.awt.Dimension(115, 32));
-        btn_showPayment.setMinimumSize(new java.awt.Dimension(115, 32));
-        btn_showPayment.setPreferredSize(new java.awt.Dimension(115, 32));
+        btn_setPayment.setText("Set Payment");
+        btn_setPayment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_setPaymentActionPerformed(evt);
+            }
+        });
 
         btn_save.setText("Save Changes");
         btn_save.addActionListener(new java.awt.event.ActionListener() {
@@ -184,7 +186,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btn_createJob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_print_reminder, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_showPayment, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_setPayment, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_print_receipt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
@@ -217,7 +219,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_showPayment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_setPayment)
                         .addGap(15, 15, 15)
                         .addComponent(btn_save)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -245,6 +247,10 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_saveActionPerformed
 
+    private void btn_setPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_setPaymentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_setPaymentActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_applyFilters;
@@ -252,7 +258,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
     private javax.swing.JButton btn_print_receipt;
     private javax.swing.JButton btn_print_reminder;
     private javax.swing.JButton btn_save;
-    private javax.swing.JButton btn_showPayment;
+    private javax.swing.JButton btn_setPayment;
     private javax.swing.JComboBox<String> dropdown_department;
     private javax.swing.JComboBox<String> dropdown_discountType;
     private javax.swing.JTextField field_discountRate;
