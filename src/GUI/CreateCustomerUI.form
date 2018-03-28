@@ -60,16 +60,16 @@
                                   <Component id="input_email" pref="230" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                       <Component id="label_phone" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="label_address" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jScrollPane2" max="32767" attributes="0"/>
                                   <Component id="input_phone" max="32767" attributes="0"/>
@@ -116,26 +116,23 @@
                           <Component id="label_firstName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="input_firstName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="input_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="label_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="label_phone" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="input_phone" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="input_email" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="label_email" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="111" max="32767" attributes="0"/>
-                      <Component id="bttn_createCustomer" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane2" min="-2" pref="117" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="input_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="label_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="label_phone" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="input_phone" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="input_email" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="label_email" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="108" max="32767" attributes="0"/>
+              <Component id="bttn_createCustomer" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -168,9 +165,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="input_accNo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="00"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="input_accNoActionPerformed"/>
       </Events>
@@ -182,7 +176,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="input_holderName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Name"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Events>
@@ -195,9 +188,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="input_firstName">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="John"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="label_lastName">
       <Properties>
@@ -205,13 +195,10 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="input_lastName">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Wood"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="label_phone">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Phone Number:"/>
+        <Property name="text" type="java.lang.String" value="Phone:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="label_email">
@@ -228,9 +215,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="input_email">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="email@mail.com"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="input_phone">
     </Component>

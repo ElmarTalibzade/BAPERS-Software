@@ -28,7 +28,6 @@ public class ReceptionistUI extends javax.swing.JFrame {
     private void initComponents() {
 
         LogOutBtn = new javax.swing.JButton();
-        ContactAdminBtn = new javax.swing.JButton();
         CreateCustomerBtn = new javax.swing.JButton();
         CustomerBrowser1 = new javax.swing.JButton();
         JobBrowserBtn = new javax.swing.JButton();
@@ -43,14 +42,13 @@ public class ReceptionistUI extends javax.swing.JFrame {
         FindCustomerBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         ReceptionistBtn = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(720, 480));
         setSize(new java.awt.Dimension(720, 480));
 
         LogOutBtn.setText("Log Out");
-
-        ContactAdminBtn.setText("Contact Admin");
 
         CreateCustomerBtn.setText("Create Customer");
 
@@ -99,6 +97,8 @@ public class ReceptionistUI extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(ReceptionistBtn);
 
+        jLabel1.setText("Logged in as: {name}");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,9 +108,8 @@ public class ReceptionistUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(ContactAdminBtn)
-                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(LogOutBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,7 +146,7 @@ public class ReceptionistUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LogOutBtn)
-                    .addComponent(ContactAdminBtn))
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CreateJobBtn2)
@@ -218,7 +217,6 @@ public class ReceptionistUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ContactAdminBtn;
     private javax.swing.JButton CreateCustomerBtn;
     private javax.swing.JButton CreateJobBtn;
     private javax.swing.JButton CreateJobBtn2;
@@ -227,6 +225,7 @@ public class ReceptionistUI extends javax.swing.JFrame {
     private javax.swing.JButton JobBrowserBtn;
     private javax.swing.JButton LogOutBtn;
     private javax.swing.JTable ReceptionistBtn;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
