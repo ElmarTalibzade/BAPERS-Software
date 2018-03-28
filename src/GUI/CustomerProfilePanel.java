@@ -29,29 +29,29 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        label_fullName = new javax.swing.JLabel();
+        label_stat_valued = new javax.swing.JLabel();
+        label_stat_suspended = new javax.swing.JLabel();
+        label_stat_inDefault = new javax.swing.JLabel();
+        label_accountNo = new javax.swing.JLabel();
+        label_holderName = new javax.swing.JLabel();
+        label_email = new javax.swing.JLabel();
+        label_phone = new javax.swing.JLabel();
+        dropdown_discountType = new javax.swing.JComboBox<>();
+        label_discountType = new javax.swing.JLabel();
+        label_discountRate = new javax.swing.JLabel();
+        field_discountRate = new javax.swing.JTextField();
+        btn_print_receipt = new javax.swing.JButton();
+        btn_print_reminder = new javax.swing.JButton();
+        btn_showPayment = new javax.swing.JButton();
+        btn_save = new javax.swing.JButton();
+        btn_createJob = new javax.swing.JButton();
+        table_jobs = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jLabel11 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton6 = new javax.swing.JButton();
+        label_jobCode = new javax.swing.JLabel();
+        field_jobCode = new javax.swing.JTextField();
+        dropdown_department = new javax.swing.JComboBox<>();
+        btn_applyFilters = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -68,51 +68,51 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(706, 398));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel1.setText("{Customer-Full-Name}");
+        label_fullName.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        label_fullName.setText("{Customer-Full-Name}");
 
-        jLabel2.setForeground(new java.awt.Color(0, 153, 204));
-        jLabel2.setText("Valued");
+        label_stat_valued.setForeground(new java.awt.Color(0, 153, 204));
+        label_stat_valued.setText("Valued");
 
-        jLabel3.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel3.setText("Suspended");
+        label_stat_suspended.setForeground(new java.awt.Color(255, 51, 51));
+        label_stat_suspended.setText("Suspended");
 
-        jLabel4.setText("In Default");
+        label_stat_inDefault.setText("In Default");
 
-        jLabel5.setText("{account-number}");
+        label_accountNo.setText("{account-number}");
 
-        jLabel6.setText("Holder Name: {holder-name}");
+        label_holderName.setText("Holder Name: {holder-name}");
 
-        jLabel7.setText("Email: {email}");
+        label_email.setText("Email: {email}");
 
-        jLabel8.setText("Phone Number: {phone-number}");
+        label_phone.setText("Phone Number: {phone-number}");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None (Default)", "Flexible", "Fixed", "Variable" }));
+        dropdown_discountType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None (Default)", "Flexible", "Fixed", "Variable" }));
 
-        jLabel9.setText("Discount Type");
+        label_discountType.setText("Discount Type");
 
-        jLabel10.setText("Discount Rate");
+        label_discountRate.setText("Discount Rate");
 
-        jButton1.setText("Print Receipt");
-        jButton1.setMaximumSize(new java.awt.Dimension(115, 32));
-        jButton1.setMinimumSize(new java.awt.Dimension(115, 32));
-        jButton1.setPreferredSize(new java.awt.Dimension(115, 32));
+        btn_print_receipt.setText("Print Receipt");
+        btn_print_receipt.setMaximumSize(new java.awt.Dimension(115, 32));
+        btn_print_receipt.setMinimumSize(new java.awt.Dimension(115, 32));
+        btn_print_receipt.setPreferredSize(new java.awt.Dimension(115, 32));
 
-        jButton3.setText("Print Reminder");
+        btn_print_reminder.setText("Print Reminder");
 
-        jButton2.setText("Show Payment");
-        jButton2.setMaximumSize(new java.awt.Dimension(115, 32));
-        jButton2.setMinimumSize(new java.awt.Dimension(115, 32));
-        jButton2.setPreferredSize(new java.awt.Dimension(115, 32));
+        btn_showPayment.setText("Show Payment");
+        btn_showPayment.setMaximumSize(new java.awt.Dimension(115, 32));
+        btn_showPayment.setMinimumSize(new java.awt.Dimension(115, 32));
+        btn_showPayment.setPreferredSize(new java.awt.Dimension(115, 32));
 
-        jButton4.setText("Save Changes");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btn_save.setText("Save Changes");
+        btn_save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btn_saveActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Create Job");
+        btn_createJob.setText("Create Job");
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -130,13 +130,13 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        table_jobs.setViewportView(jTable2);
 
-        jLabel11.setText("Job Code");
+        label_jobCode.setText("Job Code");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any", "Copy Room", "Development", "Finishing", "Packing" }));
+        dropdown_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any", "Copy Room", "Development", "Finishing", "Packing" }));
 
-        jButton6.setText("Apply Filters");
+        btn_applyFilters.setText("Apply Filters");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -146,50 +146,50 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(label_fullName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
+                        .addComponent(label_stat_valued)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)
+                        .addComponent(label_stat_suspended)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
+                        .addComponent(label_stat_inDefault)
                         .addGap(12, 12, 12))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
+                                    .addComponent(label_holderName)
+                                    .addComponent(label_email))
                                 .addGap(80, 80, 80)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
+                                        .addComponent(label_discountRate)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(field_discountRate, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
+                                        .addComponent(label_discountType)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel5)
+                                        .addComponent(dropdown_discountType, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(label_phone)
+                            .addComponent(label_accountNo)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel11)
+                                .addComponent(label_jobCode)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(field_jobCode, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dropdown_department, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6)))
+                                .addComponent(btn_applyFilters)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btn_createJob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_print_reminder, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_showPayment, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_print_receipt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
+                        .addComponent(table_jobs)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -197,80 +197,80 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(label_fullName)
+                    .addComponent(label_stat_valued)
+                    .addComponent(label_stat_suspended)
+                    .addComponent(label_stat_inDefault))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addComponent(label_accountNo)
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)))
+                            .addComponent(label_holderName)
+                            .addComponent(dropdown_discountType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label_discountType)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_print_receipt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)))
+                        .addComponent(btn_print_reminder)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_showPayment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
-                        .addComponent(jButton4)
+                        .addComponent(btn_save)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5))
+                        .addComponent(btn_createJob))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel7))
+                            .addComponent(field_discountRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label_discountRate)
+                            .addComponent(label_email))
                         .addGap(12, 12, 12)
-                        .addComponent(jLabel8)
+                        .addComponent(label_phone)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6))))
+                            .addComponent(label_jobCode)
+                            .addComponent(field_jobCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dropdown_department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_applyFilters))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                .addComponent(table_jobs, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btn_saveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton btn_applyFilters;
+    private javax.swing.JButton btn_createJob;
+    private javax.swing.JButton btn_print_receipt;
+    private javax.swing.JButton btn_print_reminder;
+    private javax.swing.JButton btn_save;
+    private javax.swing.JButton btn_showPayment;
+    private javax.swing.JComboBox<String> dropdown_department;
+    private javax.swing.JComboBox<String> dropdown_discountType;
+    private javax.swing.JTextField field_discountRate;
+    private javax.swing.JTextField field_jobCode;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel label_accountNo;
+    private javax.swing.JLabel label_discountRate;
+    private javax.swing.JLabel label_discountType;
+    private javax.swing.JLabel label_email;
+    private javax.swing.JLabel label_fullName;
+    private javax.swing.JLabel label_holderName;
+    private javax.swing.JLabel label_jobCode;
+    private javax.swing.JLabel label_phone;
+    private javax.swing.JLabel label_stat_inDefault;
+    private javax.swing.JLabel label_stat_suspended;
+    private javax.swing.JLabel label_stat_valued;
+    private javax.swing.JScrollPane table_jobs;
     // End of variables declaration//GEN-END:variables
 }

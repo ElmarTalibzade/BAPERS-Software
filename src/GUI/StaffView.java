@@ -32,6 +32,7 @@ public class StaffView extends javax.swing.JFrame {
         tabbedContent = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("BAPERS");
         setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(720, 480));
         setName("Staff View"); // NOI18N

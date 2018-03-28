@@ -47,6 +47,7 @@ public class LoginView extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
         setAlwaysOnTop(true);
         setName("Login"); // NOI18N
         setResizable(false);
