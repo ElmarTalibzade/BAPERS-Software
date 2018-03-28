@@ -41,6 +41,7 @@ public class Bapers {
         
         
         StaffView staffView = new StaffView();
+        staffView.tabbedContent.addTab("Task Profile", new TaskProfilePanel());
         staffView.tabbedContent.addTab("Create Staff", new CreateStaffPanel());
         staffView.tabbedContent.addTab("Backups", new BackupsPanel());
         staffView.tabbedContent.addTab("Staff Browser", new StaffBrowserPanel());
