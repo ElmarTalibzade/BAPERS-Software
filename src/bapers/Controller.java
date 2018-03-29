@@ -5,7 +5,7 @@ package bapers;
  * @author Mihai
  */
 public class Controller {
-
+    
     /**
      * Through this function we will manage the payments.
      */

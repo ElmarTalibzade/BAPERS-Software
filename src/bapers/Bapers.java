@@ -22,6 +22,8 @@ public class Bapers {
      */
     public static DBConnectivity DB;
     
+    public static LoginView loginView;
+    
     /**
      * @param args the command line arguments
      */
@@ -32,7 +34,7 @@ public class Bapers {
         DB = new DBConnectivity();
         
         if (DB.connect() ){
-            LoginView loginView = new LoginView();
+            loginView = new LoginView();
             loginView.setVisible(true);       
         }
     }
