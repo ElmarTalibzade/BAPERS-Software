@@ -5,6 +5,14 @@
  */
 package GUI;
 
+import Administrator.DBConnectivity;
+import Customer.Customer;
+import Customer.DiscountType;
+import Staff.Role;
+import Staff.Staff;
+import static bapers.Bapers.DB;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Elmar Talibzade
@@ -55,9 +63,14 @@ public class CreateStaffPanel extends javax.swing.JPanel {
 
         label_role.setText("Role");
 
-        dropdown_role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Receptionist", "Technician", "Office Manager", "Shift Manager" }));
+        dropdown_role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Office Manager", "Shift Manager", "Technician", "Receptionist" }));
 
         btn_create.setText("Create Account");
+        btn_create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_createActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -67,30 +80,31 @@ public class CreateStaffPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(label_lastName)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label_lastName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(dropdown_role, 0, 256, Short.MAX_VALUE)
+                                    .addComponent(field_lastName)))
+                            .addComponent(label_role)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label_firstName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(field_firstName)))
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(label_phone)
+                            .addComponent(label_email)
+                            .addComponent(label_password))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dropdown_role, 0, 256, Short.MAX_VALUE)
-                            .addComponent(field_lastName)))
-                    .addComponent(label_role)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(label_firstName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(field_firstName)))
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(label_phone)
-                    .addComponent(label_email)
-                    .addComponent(label_password))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(field_phone, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                    .addComponent(field_email)
-                    .addComponent(field_password))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_create)
+                            .addComponent(field_phone, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                            .addComponent(field_email)
+                            .addComponent(field_password)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_create)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -103,22 +117,44 @@ public class CreateStaffPanel extends javax.swing.JPanel {
                     .addComponent(label_email)
                     .addComponent(field_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_lastName)
-                    .addComponent(field_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label_phone)
-                    .addComponent(field_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label_phone, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(label_lastName)
+                        .addComponent(field_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(field_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(field_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label_password)
-                    .addComponent(label_role)
-                    .addComponent(dropdown_role, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(label_password)
+                        .addComponent(label_role)
+                        .addComponent(dropdown_role, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_create)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createActionPerformed
+        int accNo = 1;
+        String firstName = field_firstName.getText();
+        String lastName = field_lastName.getText();
+        String email = field_email.getText();
+        String phoneNumber = field_phone.getText();
+        String password = field_password.getPassword().toString();
+        int roleNo = dropdown_role.getSelectedIndex();
+        Role role = Role.values()[roleNo];
+
+        DB = new DBConnectivity();
+        Staff newStaff = new Staff(accNo, role, firstName, lastName, email, phoneNumber) {};
+        if(DB.connect()) {
+            if(DB.createStaff(newStaff, password))
+                JOptionPane.showMessageDialog(this, "Staff member created succesfully!",  "SUCCESS", JOptionPane.WARNING_MESSAGE);
+            else
+                JOptionPane.showMessageDialog(this, "An error has occurred while creating a new staff member!",  "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_createActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

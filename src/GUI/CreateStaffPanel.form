@@ -22,40 +22,43 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="label_lastName" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="dropdown_role" pref="256" max="32767" attributes="0"/>
-                          <Component id="field_lastName" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="label_lastName" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="dropdown_role" pref="256" max="32767" attributes="0"/>
+                                  <Component id="field_lastName" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="label_role" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="label_firstName" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Component id="field_firstName" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="label_phone" min="-2" max="-2" attributes="0"/>
+                          <Component id="label_email" min="-2" max="-2" attributes="0"/>
+                          <Component id="label_password" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="field_phone" pref="257" max="32767" attributes="0"/>
+                          <Component id="field_email" max="32767" attributes="0"/>
+                          <Component id="field_password" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="label_role" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="label_firstName" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="field_firstName" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btn_create" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="label_phone" min="-2" max="-2" attributes="0"/>
-                  <Component id="label_email" min="-2" max="-2" attributes="0"/>
-                  <Component id="label_password" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="field_phone" pref="257" max="32767" attributes="0"/>
-                  <Component id="field_email" max="32767" attributes="0"/>
-                  <Component id="field_password" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="btn_create" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -71,18 +74,22 @@
                   <Component id="field_email" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="label_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="field_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="label_phone" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="field_phone" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="label_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="field_lastName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="field_phone" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="field_password" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="label_password" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="label_role" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="dropdown_role" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="label_password" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="label_role" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dropdown_role" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="btn_create" min="-2" max="-2" attributes="0"/>
@@ -136,10 +143,10 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
-            <StringItem index="0" value="Receptionist"/>
-            <StringItem index="1" value="Technician"/>
-            <StringItem index="2" value="Office Manager"/>
-            <StringItem index="3" value="Shift Manager"/>
+            <StringItem index="0" value="Office Manager"/>
+            <StringItem index="1" value="Shift Manager"/>
+            <StringItem index="2" value="Technician"/>
+            <StringItem index="3" value="Receptionist"/>
           </StringArray>
         </Property>
       </Properties>
@@ -151,6 +158,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Create Account"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_createActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
