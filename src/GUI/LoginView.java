@@ -112,7 +112,7 @@ public class LoginView extends javax.swing.JFrame {
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         String email = field_email.getText();
-        String password = field_password.getText();
+        String password = String.valueOf(field_password.getPassword());
        
         DB = new DBConnectivity();
         if (DB.connect()) {
