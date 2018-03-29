@@ -40,10 +40,8 @@ public class Bapers {
         }
         
         
-        StaffView staffView = new StaffView();
-        staffView.tabbedContent.addTab("Backups", new BackupsPanel());
-        staffView.tabbedContent.addTab("Reports", new ReportsManagerPanel());
-        staffView.setVisible(true);
+        LoginView loginView = new LoginView();
+        loginView.setVisible(true);
     }
     
     private static void SetWindowsLook()

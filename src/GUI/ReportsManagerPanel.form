@@ -29,12 +29,12 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="label_accountNO" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                              <Component id="field_accountNO" max="32767" attributes="0"/>
+                              <Component id="field_accountNO" pref="149" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="label_reportType" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                              <Component id="dropdown_reportType" pref="231" max="32767" attributes="0"/>
+                              <Component id="dropdown_reportType" pref="229" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -45,12 +45,9 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                               <Component id="label_dateStart" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="datePicker_dateStart" pref="106" max="32767" attributes="0"/>
-                              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="181" max="-2" attributes="0"/>
                               <Component id="label_dateEnd" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                              <Component id="datePicker_dateEnd" pref="106" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="115" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -87,9 +84,7 @@
                   <Component id="label_reportType" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="dropdown_reportType" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="label_dateStart" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="datePicker_dateStart" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="label_dateEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="datePicker_dateEnd" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -108,7 +103,7 @@
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="label_frequencyTiming" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
               <Component id="btn_saveSettings" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -159,10 +154,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Start"/>
       </Properties>
-    </Component>
-    <Component class="org.jdesktop.swingx.JXDatePicker" name="datePicker_dateStart">
-    </Component>
-    <Component class="org.jdesktop.swingx.JXDatePicker" name="datePicker_dateEnd">
     </Component>
     <Component class="javax.swing.JLabel" name="label_dateEnd">
       <Properties>

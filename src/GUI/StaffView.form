@@ -38,7 +38,7 @@
                   <Component id="tabbedContent" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="label_loggedUser" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="484" max="32767" attributes="0"/>
+                      <EmptySpace pref="567" max="32767" attributes="0"/>
                       <Component id="btn_logout" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -64,7 +64,9 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="label_loggedUser">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Logged in as: {staff-name}"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="&quot;Logged in as: &quot; + staff.getFirstName()" type="code"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn_logout">

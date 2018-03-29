@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Staff.Staff;
+
 /**
  *
  * @author Elmar Talibzade
@@ -14,7 +16,14 @@ public class StaffView extends javax.swing.JFrame {
     /**
      * Creates new form StaffUI
      */
-    public StaffView() {
+    Staff staff;
+    
+    public StaffView(){
+        initComponents();
+    }
+    
+    public StaffView(Staff staff) {
+        this.staff = staff;
         initComponents();
     }
 
@@ -38,7 +47,7 @@ public class StaffView extends javax.swing.JFrame {
         setName("Staff View"); // NOI18N
         setPreferredSize(new java.awt.Dimension(720, 480));
 
-        label_loggedUser.setText("Logged in as: {staff-name}");
+        label_loggedUser.setText("Logged in as: " + staff.getFirstName());
 
         btn_logout.setText("Log Out");
 
@@ -52,7 +61,7 @@ public class StaffView extends javax.swing.JFrame {
                     .addComponent(tabbedContent)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label_loggedUser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 484, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 567, Short.MAX_VALUE)
                         .addComponent(btn_logout)))
                 .addContainerGap())
         );

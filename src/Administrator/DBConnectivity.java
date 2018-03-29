@@ -6,7 +6,7 @@ import Customer.DiscountType;
 import Customer.Job;
 import Customer.Status;
 import Customer.Task;
-import Staff.Staff;
+import Staff.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -23,7 +23,7 @@ public class DBConnectivity implements DBInterface {
     static final String DB_URL = "jdbc:mysql://localhost:3306/bloomsday?autoReconnect=true&useSSL=false";
 
     static final String USER = "root";
-    static final String PASS = "root";
+    static final String PASS = "";
 
     private Connection connection;
 
@@ -218,20 +218,51 @@ public class DBConnectivity implements DBInterface {
      * @return Returns true if credentials are valid. Returns false if either
      * credentials are invalid or there is an issue with the database.
      */
-    public boolean validateLogin(String email, String password) {
+    public Staff validateLogin(String email, String password) {
 
         ResultSet result = retrieveData(String.format("SELECT * FROM `staff` WHERE emailAddress = '%s' AND password = '%s'", email, password));
 
         try {
-
-            return result.next();
-
+            if(result.next()){
+                int staffID = result.getInt("staffNo");
+                int role = result.getInt("role");
+                String firstName = result.getString("firstName");
+                String lastName = result.getString("lastName");
+                String emailAddress = result.getString("emailAddress");
+                String phoneNumber = result.getString("phoneNumber");
+                Staff user = null;
+                switch (role) {
+                    case 1:
+                    {
+                        user = new OfficeManager(staffID, firstName, lastName, emailAddress, phoneNumber);
+                        break;
+                    }
+                    case 2:
+                    {
+                        user = new ShiftManager(staffID, firstName, lastName, emailAddress, phoneNumber);
+                        break;                    
+                    }
+                    case 3:
+                    {
+                        user = new Technician(staffID, firstName, lastName, emailAddress, phoneNumber);
+                        break;                    
+                    }
+                    case 4:
+                    {
+                        user = new Receptionist(staffID, firstName, lastName, emailAddress, phoneNumber);
+                        break;                    
+                    }
+                    default:
+                        break;
+                }
+                return user;
+            }
         } catch (SQLException ex) {
 
             Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return false;
+        return null;
     }
 
     /**

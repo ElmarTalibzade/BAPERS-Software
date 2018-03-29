@@ -119,7 +119,11 @@ public class LoginView extends javax.swing.JFrame {
             Staff user = DB.validateLogin(email, password);
             if(user != null){
                 System.out.println(user.getAccountNo());
-                StaffView staffView = new StaffView();
+                
+                //To be discussed at the next meeting
+                StaffView staffView = new StaffView(user);
+                staffView.tabbedContent.addTab("Backups", new BackupsPanel());
+                staffView.tabbedContent.addTab("Reports", new ReportsManagerPanel());
                 staffView.setVisible(true);
                 this.setVisible(false);
             }
