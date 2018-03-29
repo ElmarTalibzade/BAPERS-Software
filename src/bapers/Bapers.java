@@ -32,16 +32,9 @@ public class Bapers {
         DB = new DBConnectivity();
         
         if (DB.connect() ){
-            /* Mihai testing
-            -- DB createCustomer()
-            Customer customer = new Customer(1, "Holder Name", "Simon", "Peterson", false, false, false, "1st Avenue of New York", "0711 112 1124", null, "simon.peterson@yahoo.com", 0, null);
-            DB.createCustomer(customer);
-            */          
+            LoginView loginView = new LoginView();
+            loginView.setVisible(true);       
         }
-        
-        
-        LoginView loginView = new LoginView();
-        loginView.setVisible(true);
     }
     
     private static void SetWindowsLook()
