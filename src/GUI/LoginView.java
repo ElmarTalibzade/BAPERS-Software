@@ -35,11 +35,11 @@ public class LoginView extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         field_email = new javax.swing.JTextField();
-        field_password = new javax.swing.JTextField();
         label_email = new javax.swing.JLabel();
         label_password = new javax.swing.JLabel();
         btn_login = new javax.swing.JButton();
         label_bapers = new javax.swing.JLabel();
+        field_password = new javax.swing.JPasswordField();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -81,12 +81,12 @@ public class LoginView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(114, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(label_bapers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label_bapers, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                     .addComponent(btn_login)
                     .addComponent(label_password, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(field_email)
-                    .addComponent(field_password, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                    .addComponent(label_email, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(label_email, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(field_password))
                 .addContainerGap(114, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -102,7 +102,7 @@ public class LoginView extends javax.swing.JFrame {
                 .addComponent(label_password)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(field_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(35, 35, 35)
                 .addComponent(btn_login)
                 .addContainerGap(16, Short.MAX_VALUE))
         );
@@ -172,7 +172,7 @@ public class LoginView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_login;
     private javax.swing.JTextField field_email;
-    private javax.swing.JTextField field_password;
+    private javax.swing.JPasswordField field_password;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel label_bapers;
     private javax.swing.JLabel label_email;
