@@ -9,6 +9,7 @@ import Administrator.DBConnectivity;
 import Customer.Customer;
 import Customer.DiscountType;
 import static bapers.Bapers.DB;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -145,10 +146,14 @@ public class CreateCustomerPanel extends javax.swing.JPanel {
         String phoneNumber = field_phone.getText();
         String address = jTextArea1.getText();
         
+        //TO BE EDITED AFTER ADDING JOBS
         DB = new DBConnectivity();
+        Customer newCustomer = new Customer(accNo, holderName, firstName, lastName, false, false, false, address, phoneNumber, DiscountType.values()[0], email, 0, null);
         if (DB.connect()) {
-            Customer newCustomer = new Customer(accNo, holderName, firstName, lastName, false, false, false, address, phoneNumber, DiscountType.values()[0], email, 0, DB.getJobs(accNo));
-            System.out.println(DB.createCustomer(newCustomer));
+            if(DB.createCustomer(newCustomer)) 
+                JOptionPane.showMessageDialog(this, "Customer created succesfully!",  "SUCCESS", JOptionPane.WARNING_MESSAGE);
+            else
+                JOptionPane.showMessageDialog(this, "An error has occurred while creating a new customer.!",  "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_createCustomerActionPerformed
 
