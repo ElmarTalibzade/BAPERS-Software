@@ -310,7 +310,55 @@ public class DBConnectivity implements DBInterface {
 
         return customers;
     }
+    
+    public ArrayList<Customer> getCustomers(String accountNo, String holderName, String firstName, String lastName, String phoneNumber, String email) {
+        
+        ArrayList<Customer> customers = new ArrayList<Customer>();
+        
+        try {
+            
+            ResultSet result = retrieveData(String.format("SELECT * FROM `customers` "
+                    + "WHERE `accountNo`='%s' "
+                    + "OR `holderName`='%s' "
+                    + "OR `firstName`='%s' "
+                    + "OR `lastName`='%s' "
+                    + "OR `phoneNo`='%s' "
+                    + "OR `emailAddress`='%s'",
+                    accountNo,
+                    holderName,
+                    firstName,
+                    lastName,
+                    phoneNumber,
+                    email));
+            
+            while (result.next()) {
 
+                customers.add(new Customer(
+                        result.getInt("accountNo"),
+                        result.getString("holderName"),
+                        result.getString("firstName"),
+                        result.getString("lastName"),
+                        result.getBoolean("isValued"),
+                        result.getBoolean("isSuspended"),
+                        result.getBoolean("isDefault"),
+                        result.getString("address"),
+                        result.getString("phoneNo"),
+                        DiscountType.values()[result.getInt("discountType")],
+                        result.getString("emailAddress"),
+                        result.getInt("debtRemindedAmount"),
+                        getJobs(result.getInt("accountNo"))
+                ));
+            }
+            
+        } catch (SQLException ex) {
+            
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        
+        return customers;
+    }
+    
     /**
      * Retrieves jobs of a customer
      *

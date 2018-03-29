@@ -5,17 +5,24 @@
  */
 package GUI;
 
+import Customer.Customer;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Elmar Talibzade
  */
 public class CustomerBrowserPanel extends javax.swing.JPanel {
 
+    ArrayList<Customer> customers;
+    
     /**
      * Creates new form CustomerBrowserPanel
      */
     public CustomerBrowserPanel() {
         initComponents();
+        getAllCustomers();
     }
 
     /**
@@ -27,8 +34,8 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        label_jobCode = new javax.swing.JLabel();
-        field_jobCode = new javax.swing.JTextField();
+        label_accountNo = new javax.swing.JLabel();
+        field_accountNo = new javax.swing.JTextField();
         label_holderName = new javax.swing.JLabel();
         field_holderName = new javax.swing.JTextField();
         label_firstName = new javax.swing.JLabel();
@@ -41,14 +48,19 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
         field_email = new javax.swing.JTextField();
         box_showDefault = new javax.swing.JCheckBox();
         btn_findCustomer = new javax.swing.JButton();
-        table_customers = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        scroll_customers = new javax.swing.JScrollPane();
+        table_customers = new javax.swing.JTable();
 
         setPreferredSize(new java.awt.Dimension(706, 398));
 
-        label_jobCode.setText("Job Code");
+        label_accountNo.setText("Account NO");
 
-        field_jobCode.setMinimumSize(new java.awt.Dimension(96, 24));
+        field_accountNo.setMinimumSize(new java.awt.Dimension(96, 24));
+        field_accountNo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                field_accountNoKeyTyped(evt);
+            }
+        });
 
         label_holderName.setText("Holder Name");
 
@@ -63,8 +75,13 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
         box_showDefault.setText("Show Default Accounts Only");
 
         btn_findCustomer.setText("Find Customer");
+        btn_findCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_findCustomerActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table_customers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -72,15 +89,22 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
                 "Account", "Holder Name", "First Name", "Last Name", "Email", "Phone Number"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, true, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        table_customers.setViewportView(jTable1);
+        scroll_customers.setViewportView(table_customers);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -90,15 +114,15 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(table_customers)
+                        .addComponent(scroll_customers)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(field_phoneNumber)
-                                    .addComponent(label_jobCode, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(field_jobCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(label_accountNo, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(field_accountNo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(35, 35, 35))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(label_phoneNumber)
@@ -109,7 +133,7 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(label_holderName, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(field_holderName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
+                                            .addComponent(field_holderName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
                                         .addGap(35, 35, 35))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(field_email)
@@ -125,27 +149,25 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
                                             .addComponent(field_lastName)
                                             .addComponent(label_lastName)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(40, 40, 40)
+                                        .addGap(8, 8, 8)
                                         .addComponent(box_showDefault)
-                                        .addGap(44, 44, 44)
+                                        .addGap(76, 76, 76)
                                         .addComponent(btn_findCustomer)))
                                 .addContainerGap())
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(label_email)
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                            .addComponent(label_email)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_jobCode)
+                    .addComponent(label_accountNo)
                     .addComponent(label_holderName)
                     .addComponent(label_firstName)
                     .addComponent(label_lastName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(field_jobCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(field_accountNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(field_holderName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(field_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(field_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -160,28 +182,61 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
                     .addComponent(field_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(box_showDefault, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(table_customers, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                .addComponent(scroll_customers, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void field_accountNoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_accountNoKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_field_accountNoKeyTyped
 
+    private void btn_findCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_findCustomerActionPerformed
+        getCustomers();
+    }//GEN-LAST:event_btn_findCustomerActionPerformed
+
+    private void getAllCustomers() {
+        customers = bapers.Bapers.DB.getCustomers();
+        updateTable();
+    }
+
+    private void getCustomers() {
+        customers = bapers.Bapers.DB.getCustomers(field_accountNo.getText(), field_holderName.getText(), field_firstName.getText(), field_lastName.getText(), field_phoneNumber.getText(), field_email.getText());
+        updateTable();
+    }
+    
+    private void updateTable() {
+        DefaultTableModel model = (DefaultTableModel)table_customers.getModel();
+        
+        while (model.getRowCount() > 0)
+        {
+            model.removeRow(0);
+        }
+        
+        for (Customer customer : customers) {
+            model.addRow(new Object[]{customer.getAccountNo(), customer.getHolderName(), customer.getFirstName(), customer.getLastName(), customer.getEmailAddress(), customer.getPhoneNumber()});
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox box_showDefault;
     private javax.swing.JButton btn_findCustomer;
+    private javax.swing.JTextField field_accountNo;
     private javax.swing.JTextField field_email;
     private javax.swing.JTextField field_firstName;
     private javax.swing.JTextField field_holderName;
-    private javax.swing.JTextField field_jobCode;
     private javax.swing.JTextField field_lastName;
     private javax.swing.JTextField field_phoneNumber;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel label_accountNo;
     private javax.swing.JLabel label_email;
     private javax.swing.JLabel label_firstName;
     private javax.swing.JLabel label_holderName;
-    private javax.swing.JLabel label_jobCode;
     private javax.swing.JLabel label_lastName;
     private javax.swing.JLabel label_phoneNumber;
-    private javax.swing.JScrollPane table_customers;
+    private javax.swing.JScrollPane scroll_customers;
+    private javax.swing.JTable table_customers;
     // End of variables declaration//GEN-END:variables
 }
