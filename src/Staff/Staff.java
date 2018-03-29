@@ -9,36 +9,35 @@ public abstract class Staff {
     protected int role;
     
     /**
-     *
+     * Account Number of this staff member
      */
     protected int accountNo;
 
     /**
-     *
+     * First Name of this staff member
      */
     protected String firstName;
 
     /**
-     *
+     * Last Name of this staff member
      */
     protected String lastName;
 
     /**
-     *
+     * Address of this staff member
      */
     protected String address;
 
     /**
-     *
+     * Phone number of this staff member
      */
     protected String phone;
 
     /**
-     *
+     * Determines whether or not this staff member is currently interacting with BAPERS
      */
     protected boolean isActive;
 
-    protected String password;
     /**
      * Constructor for Staff
      * @param accountNo Account number
@@ -57,10 +56,6 @@ public abstract class Staff {
         this.phone = phone;
     }
 
-    public String getPassword(){
-        return password;
-    }
-    
     /**
      * Returns if the staff is logged in or not
      * @return true - if it's logged in | false - otherwise
