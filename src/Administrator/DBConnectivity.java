@@ -129,7 +129,7 @@ public class DBConnectivity implements DBInterface {
         String query = String.format("INSERT INTO `staff` "
                 + "(role, firstName, lastName, emailAddress, phonenumber, password) VALUES(" 
                 + "'%d', '%s', '%s', '%s', '%s', '%s')", 
-                staff.getRole(), staff.getFirstName(), staff.getLastName(), staff.getAddress(), staff.getPhone(), password);
+                staff.getRole().ordinal(), staff.getFirstName(), staff.getLastName(), staff.getAddress(), staff.getPhone(), password);
         return storeData(query);
     }
     

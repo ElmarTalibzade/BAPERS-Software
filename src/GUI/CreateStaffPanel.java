@@ -5,6 +5,14 @@
  */
 package GUI;
 
+import Administrator.DBConnectivity;
+import Customer.Customer;
+import Customer.DiscountType;
+import Staff.Role;
+import Staff.Staff;
+import static bapers.Bapers.DB;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Elmar Talibzade
@@ -55,7 +63,7 @@ public class CreateStaffPanel extends javax.swing.JPanel {
 
         label_role.setText("Role");
 
-        dropdown_role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Receptionist", "Technician", "Office Manager", "Shift Manager" }));
+        dropdown_role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Office Manager", "Shift Manager", "Technician", "Receptionist" }));
 
         btn_create.setText("Create Account");
         btn_create.addActionListener(new java.awt.event.ActionListener() {
@@ -129,10 +137,26 @@ public class CreateStaffPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createActionPerformed
-        
+        int accNo = 1;
+        String firstName = field_firstName.getText();
+        String lastName = field_lastName.getText();
+        String email = field_email.getText();
+        String phoneNumber = field_phone.getText();
+        String password = String.valueOf(field_password.getPassword());
+        int roleNo = dropdown_role.getSelectedIndex();
+        Role role = Role.values()[roleNo];
+
+        DB = new DBConnectivity();
+        Staff newStaff = new Staff(accNo, role, firstName, lastName, email, phoneNumber) {};
+        if(DB.connect()) {
+            if(DB.createStaff(newStaff, password))
+                JOptionPane.showMessageDialog(this, "Staff member created succesfully!",  "SUCCESS", JOptionPane.WARNING_MESSAGE);
+            else
+                JOptionPane.showMessageDialog(this, "An error has occurred while creating a new staff member!",  "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btn_createActionPerformed
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_create;
     private javax.swing.JComboBox<String> dropdown_role;
