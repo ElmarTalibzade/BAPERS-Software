@@ -47,6 +47,11 @@ public class StaffView extends javax.swing.JFrame {
         label_loggedUser.setText("Logged in as: staff-name (staff-role)");
 
         btn_logout.setText("Log Out");
+        btn_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,6 +81,13 @@ public class StaffView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
+        this.setVisible(false);
+        bapers.Bapers.loginView.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_btn_logoutActionPerformed
     
     private void initMenuItems() {
         
