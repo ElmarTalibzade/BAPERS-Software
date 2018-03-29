@@ -124,6 +124,7 @@ public class LoginView extends javax.swing.JFrame {
                 StaffView staffView = new StaffView(user);
                 staffView.tabbedContent.addTab("Backups", new BackupsPanel());
                 staffView.tabbedContent.addTab("Reports", new ReportsManagerPanel());
+                staffView.tabbedContent.addTab("[testing] Create Customer", new CreateCustomerPanel());
                 staffView.setVisible(true);
                 this.setVisible(false);
             }

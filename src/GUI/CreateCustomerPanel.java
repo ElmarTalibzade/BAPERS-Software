@@ -5,6 +5,11 @@
  */
 package GUI;
 
+import Administrator.DBConnectivity;
+import Customer.Customer;
+import Customer.DiscountType;
+import static bapers.Bapers.DB;
+
 /**
  *
  * @author Elmar Talibzade
@@ -61,6 +66,11 @@ public class CreateCustomerPanel extends javax.swing.JPanel {
         label_address.setText("Address");
 
         btn_createCustomer.setText("Create Customer");
+        btn_createCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_createCustomerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -82,7 +92,7 @@ public class CreateCustomerPanel extends javax.swing.JPanel {
                                 .addComponent(label_address))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(field_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(label_phone))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(field_holderName, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,6 +136,23 @@ public class CreateCustomerPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_createCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createCustomerActionPerformed
+        int accNo = 1;
+        String holderName = field_holderName.getText();
+        String firstName = field_firstName.getText();
+        String lastName = field_lastName.getText();
+        String email = field_email.getText();
+        String phoneNumber = field_phone.getText();
+        String address = jTextArea1.getText();
+        
+        DB = new DBConnectivity();
+        if (DB.connect()) {
+            Customer newCustomer = new Customer(accNo, holderName, firstName, lastName, false, false, false, address, phoneNumber, DiscountType.values()[0], email, 0, DB.getJobs(accNo));
+            System.out.println(DB.createCustomer(newCustomer));
+        }
+    }//GEN-LAST:event_btn_createCustomerActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_createCustomer;

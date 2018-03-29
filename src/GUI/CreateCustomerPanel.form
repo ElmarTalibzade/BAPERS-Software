@@ -39,7 +39,7 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="field_firstName" min="-2" pref="169" max="-2" attributes="0"/>
-                              <EmptySpace pref="16" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="label_phone" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
@@ -157,6 +157,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Create Customer"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_createCustomerActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

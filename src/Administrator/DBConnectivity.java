@@ -311,7 +311,7 @@ public class DBConnectivity implements DBInterface {
      * @param customerNo Customer's number whose jobs will be retrieved
      * @return Array list of jobs
      */
-    private ArrayList<Job> getJobs(int customerNo) {
+    public ArrayList<Job> getJobs(int customerNo) {
 
         ArrayList<Job> jobs = new ArrayList<Job>();
 
