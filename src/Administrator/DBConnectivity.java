@@ -23,7 +23,7 @@ public class DBConnectivity implements DBInterface {
     static final String DB_URL = "jdbc:mysql://localhost:3306/bloomsday?autoReconnect=true&useSSL=false";
 
     static final String USER = "root";
-    static final String PASS = "root";
+    static final String PASS = "";
 
     private Connection connection;
 
