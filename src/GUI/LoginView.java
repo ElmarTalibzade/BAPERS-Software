@@ -5,6 +5,12 @@
  */
 package GUI;
 
+import Administrator.DBConnectivity;
+import Staff.Staff;
+import static bapers.Bapers.DB;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Elmar Talibzade
@@ -58,6 +64,11 @@ public class LoginView extends javax.swing.JFrame {
         label_password.setText("Password");
 
         btn_login.setText("Login");
+        btn_login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_loginActionPerformed(evt);
+            }
+        });
 
         label_bapers.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         label_bapers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -98,6 +109,24 @@ public class LoginView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
+        String email = field_email.getText();
+        String password = field_password.getText();
+       
+        DB = new DBConnectivity();
+        if (DB.connect()) {
+            Staff user = DB.validateLogin(email, password);
+            if(user != null){
+                System.out.println(user.getAccountNo());
+                StaffView staffView = new StaffView();
+                staffView.setVisible(true);
+                this.setVisible(false);
+            }
+            else
+                JOptionPane.showMessageDialog(this, "Invalid e-mail address or password",  "Could not log in", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_loginActionPerformed
     
     /**
      * @param args the command line arguments
