@@ -6,7 +6,7 @@ package Staff;
  */
 public abstract class Staff {
 
-    protected int role;
+    protected Role role;
     
     /**
      * Account Number of this staff member
@@ -37,7 +37,7 @@ public abstract class Staff {
      * Determines whether or not this staff member is currently interacting with BAPERS
      */
     protected boolean isActive;
-
+    
     /**
      * Constructor for Staff
      * @param accountNo Account number
@@ -47,7 +47,7 @@ public abstract class Staff {
      * @param address Staff's physical address
      * @param phone Staff's phone number
      */
-    public Staff(int accountNo, int role, String firstName, String lastName, String address, String phone) {
+    public Staff(int accountNo, Role role, String firstName, String lastName, String address, String phone) {
         this.accountNo = accountNo;
         this.role = role;
         this.firstName = firstName;
@@ -70,16 +70,6 @@ public abstract class Staff {
      */
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
-    }
-
-    /**
-     * Through login function, the staff will get access to the GUI
-     * @param email staff's user email
-     * @param password staff's password
-     * @return true - if the credentials are correct | false - otherwise
-     */
-    private boolean login(String email, String password) {
-        return true;
     }
 
     /**
@@ -116,13 +106,13 @@ public abstract class Staff {
 
     /**
      * Gets Staff phone
-     * @return An int that represents the phone number of the Staff
+     * @return A string that represents the phone number of the Staff
      */
     public String getPhone() {
         return phone;
     }
 
-    public int getRole(){
+    public Role getRole(){
         return role;       
     }
     
@@ -150,7 +140,7 @@ public abstract class Staff {
         this.lastName = lastName;
     }
     
-    public void setRole(int role){
+    public void setRole(Role role){
         this.role = role;
     }
 }

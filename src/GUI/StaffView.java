@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import Staff.Staff;
+import Staff.*;
 
 /**
  *
@@ -16,15 +16,12 @@ public class StaffView extends javax.swing.JFrame {
     /**
      * Creates new form StaffUI
      */
-    Staff staff;
+    private Staff staff;
     
-    public StaffView(){
+    public StaffView(Staff user){
+        this.staff = user;
         initComponents();
-    }
-    
-    public StaffView(Staff staff) {
-        this.staff = staff;
-        initComponents();
+        initMenuItems();
     }
 
     /**
@@ -47,7 +44,7 @@ public class StaffView extends javax.swing.JFrame {
         setName("Staff View"); // NOI18N
         setPreferredSize(new java.awt.Dimension(720, 480));
 
-        label_loggedUser.setText("Logged in as: " + staff.getFirstName());
+        label_loggedUser.setText("Logged in as: staff-name (staff-role)");
 
         btn_logout.setText("Log Out");
 
@@ -61,7 +58,7 @@ public class StaffView extends javax.swing.JFrame {
                     .addComponent(tabbedContent)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label_loggedUser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 567, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 437, Short.MAX_VALUE)
                         .addComponent(btn_logout)))
                 .addContainerGap())
         );
@@ -79,43 +76,51 @@ public class StaffView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Windows look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StaffView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StaffView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StaffView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StaffView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    
+    private void initMenuItems() {
+        
+        label_loggedUser.setText(String.format("Logged in as: %s %s (%s)", staff.getFirstName(), staff.getLastName(), staff.getRole().name()));
+        
+        switch (staff.getRole())
+        {
+            case OfficeManager:
+                
+                tabbedContent.addTab("Receptionists", new ReceptionistBrowserPanel());
+                tabbedContent.addTab("Reports", new ReportsManagerPanel());
+                tabbedContent.addTab("New Customer", new CreateCustomerPanel());
+                tabbedContent.addTab("Customer Browser", new CustomerBrowserPanel());
+                tabbedContent.addTab("Job Browser", new JobBrowserPanel());
+                tabbedContent.addTab("Staff Browser", new StaffBrowserPanel());
+                tabbedContent.addTab("Create Staff", new CreateStaffPanel());
+                tabbedContent.addTab("Backups", new BackupsPanel());
+                
+                break;
+            case Receptionist:
+                
+                tabbedContent.addTab("Customer Browser", new CustomerBrowserPanel());
+                tabbedContent.addTab("New Customer", new CreateCustomerPanel());
+                tabbedContent.addTab("Job Browser", new JobBrowserPanel());
+                
+                break;
+            case ShiftManager:
+                
+                tabbedContent.addTab("Receptionists", new ReceptionistBrowserPanel());
+                tabbedContent.addTab("Reports", new ReportsManagerPanel());
+                tabbedContent.addTab("New Customer", new CreateCustomerPanel());
+                tabbedContent.addTab("Customer Browser", new CustomerBrowserPanel());
+                tabbedContent.addTab("Job Browser", new JobBrowserPanel());
+                
+                break;
+                
+            case Technician:
+                
+                tabbedContent.addTab("Job Browser", new JobBrowserPanel());
+                
+                break;
         }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StaffView().setVisible(true);
-            }
-        });
+        
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_logout;
     private javax.swing.JLabel label_loggedUser;

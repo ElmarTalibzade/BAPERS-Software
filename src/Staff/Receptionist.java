@@ -15,7 +15,7 @@ public class Receptionist extends Staff {
      * @param phone Staff's phone number
      */
     public Receptionist(int accountNo, String firstName, String lastName, String address, String phone) {
-        super(accountNo, 4, firstName, lastName, address, phone);
+        super(accountNo, Role.Receptionist, firstName, lastName, address, phone);
     }
 
     /**
