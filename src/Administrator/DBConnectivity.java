@@ -124,12 +124,12 @@ public class DBConnectivity implements DBInterface {
      * @param staff Staff object that will be inserted
      * @return Returns true if the staff data has been successfully inserted and false otherwise.
      */
-    public boolean createStaff(Staff staff)
+    public boolean createStaff(Staff staff, String password)
     {
         String query = String.format("INSERT INTO `staff` "
                 + "(role, firstName, lastName, emailAddress, phonenumber, password) VALUES(" 
                 + "'%d', '%s', '%s', '%s', '%s', '%s')", 
-                staff.getRole(), staff.getFirstName(), staff.getLastName(), staff.getAddress(), staff.getPhone(), staff.getPassword());
+                staff.getRole(), staff.getFirstName(), staff.getLastName(), staff.getAddress(), staff.getPhone(), password);
         return storeData(query);
     }
     
@@ -225,31 +225,37 @@ public class DBConnectivity implements DBInterface {
         try {
             if(result.next()){
                 int staffID = result.getInt("staffNo");
-                int role = result.getInt("role");
+                Role role = Role.values()[result.getInt("role")];
                 String firstName = result.getString("firstName");
                 String lastName = result.getString("lastName");
                 String emailAddress = result.getString("emailAddress");
                 String phoneNumber = result.getString("phoneNumber");
                 Staff user = null;
+                
                 switch (role) {
-                    case 1:
+                    case OfficeManager:
                     {
                         user = new OfficeManager(staffID, firstName, lastName, emailAddress, phoneNumber);
+                        System.out.println("Office Manager");
+                        
                         break;
                     }
-                    case 2:
+                    case ShiftManager:
                     {
                         user = new ShiftManager(staffID, firstName, lastName, emailAddress, phoneNumber);
+                        System.out.println("Shift Manager");
                         break;                    
                     }
-                    case 3:
+                    case Technician:
                     {
                         user = new Technician(staffID, firstName, lastName, emailAddress, phoneNumber);
+                        System.out.println("Technician");
                         break;                    
                     }
-                    case 4:
+                    case Receptionist:
                     {
                         user = new Receptionist(staffID, firstName, lastName, emailAddress, phoneNumber);
+                        System.out.println("Receptionist");
                         break;                    
                     }
                     default:
