@@ -5,19 +5,56 @@
  */
 package GUI;
 
+import Customer.*;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Elmar Talibzade
  */
 public class CustomerProfilePanel extends javax.swing.JPanel {
 
+    private Customer customer;
+    
     /**
      * Creates new form CustomerProfilePanel
+     * @param customer Customer whose profile is based on
      */
-    public CustomerProfilePanel() {
+    public CustomerProfilePanel(Customer customer) {
+        this.customer = customer;
         initComponents();
+        assignValues();
     }
-
+    
+    private void assignValues()
+    {
+        label_accountNo.setText("" + customer.getAccountNo());
+        label_holderName.setText("Holder Name: " + customer.getHolderName());
+        label_email.setText("Email: " + customer.getEmailAddress());
+        label_phone.setText("Phone Number: " + customer.getPhoneNumber());
+        
+        label_stat_inDefault.setVisible(customer.isDefault());
+        label_stat_suspended.setVisible(customer.isSuspended());
+        label_stat_valued.setVisible(customer.isValued());
+        
+        // set discount type
+        DefaultTableModel model = (DefaultTableModel)table_tasks.getModel();
+        
+        while (model.getRowCount() > 0)
+        {
+            model.removeRow(0);
+        }
+        
+        for (Job job : customer.getJobs())
+        {
+            for (Task task : job.getTasks())
+            {
+                model.addRow(new Object[] {job.getCode(), task.getId(), task.getDepartment(), "NULL", task.getDescription()});
+            }
+        }
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,7 +84,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         btn_save = new javax.swing.JButton();
         btn_createJob = new javax.swing.JButton();
         table_jobs = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        table_tasks = new javax.swing.JTable();
         label_jobCode = new javax.swing.JLabel();
         field_jobCode = new javax.swing.JTextField();
         dropdown_department = new javax.swing.JComboBox<>();
@@ -116,7 +153,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
 
         btn_createJob.setText("Create Job");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        table_tasks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -124,15 +161,22 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
                 "Job Code", "Task ID", "Department", "Time Started", "Special Instructions"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        table_jobs.setViewportView(jTable2);
+        table_jobs.setViewportView(table_tasks);
 
         label_jobCode.setText("Job Code");
 
@@ -265,7 +309,6 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
     private javax.swing.JTextField field_jobCode;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel label_accountNo;
     private javax.swing.JLabel label_discountRate;
     private javax.swing.JLabel label_discountType;
@@ -278,5 +321,6 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
     private javax.swing.JLabel label_stat_suspended;
     private javax.swing.JLabel label_stat_valued;
     private javax.swing.JScrollPane table_jobs;
+    private javax.swing.JTable table_tasks;
     // End of variables declaration//GEN-END:variables
 }
