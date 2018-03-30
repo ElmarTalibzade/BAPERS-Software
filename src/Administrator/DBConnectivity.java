@@ -317,13 +317,13 @@ public class DBConnectivity implements DBInterface {
         
         try {
             
-            String query = String.format("SELECT * FROM `customers` WHERE 1=1 "
-                    + "OR (`accountNo`='%0$s' or '%0$s'='') "
-                    + "OR (`holderName`='%1$s' or '%1$s'='') "
-                    + "OR (`firstName`='%2$s' or '%2$s'='') "
-                    + "OR (`lastName`='%3$s' or '%3$s'='') "
-                    + "OR (`phoneNo`='%4$s' or '%4$s'='') "
-                    + "OR (`emailAddress`='%5$s' or '%5$s'='')",
+            String query = String.format("SELECT * FROM `customers` "
+                    + "WHERE ('%1$s'='' or `accountNo`='%1$s') "
+                    + "AND ('%2$s'='' or `holderName`='%2$s') "
+                    + "AND ('%3$s'='' or `firstName`='%3$s') "
+                    + "AND ('%4$s'='' or `lastName`='%4$s') "
+                    + "AND ('%5$s'='' or `phoneNo`='%5$s') "
+                    + "AND ('%6$s'='' or `emailAddress`='%6$s')",
                     accountNo.trim(),
                     holderName.trim(),
                     firstName.trim(),

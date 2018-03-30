@@ -56,6 +56,11 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
         label_accountNo.setText("Account NO");
 
         field_accountNo.setMinimumSize(new java.awt.Dimension(96, 24));
+        field_accountNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_accountNoActionPerformed(evt);
+            }
+        });
         field_accountNo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 field_accountNoKeyTyped(evt);
@@ -64,13 +69,43 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
 
         label_holderName.setText("Holder Name");
 
+        field_holderName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_holderNameActionPerformed(evt);
+            }
+        });
+
         label_firstName.setText("First Name");
+
+        field_firstName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_firstNameActionPerformed(evt);
+            }
+        });
 
         label_lastName.setText("Last Name");
 
+        field_lastName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_lastNameActionPerformed(evt);
+            }
+        });
+
         label_phoneNumber.setText("Phone Number");
 
+        field_phoneNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_phoneNumberActionPerformed(evt);
+            }
+        });
+
         label_email.setText("Email");
+
+        field_email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_emailActionPerformed(evt);
+            }
+        });
 
         box_showDefault.setText("Show Default Accounts Only");
 
@@ -197,6 +232,30 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
     private void btn_findCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_findCustomerActionPerformed
         getCustomers();
     }//GEN-LAST:event_btn_findCustomerActionPerformed
+
+    private void field_holderNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_holderNameActionPerformed
+        getCustomers();
+    }//GEN-LAST:event_field_holderNameActionPerformed
+
+    private void field_lastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_lastNameActionPerformed
+        getCustomers();
+    }//GEN-LAST:event_field_lastNameActionPerformed
+
+    private void field_firstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_firstNameActionPerformed
+        getCustomers();
+    }//GEN-LAST:event_field_firstNameActionPerformed
+
+    private void field_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_emailActionPerformed
+        getCustomers();
+    }//GEN-LAST:event_field_emailActionPerformed
+
+    private void field_phoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_phoneNumberActionPerformed
+        getCustomers();
+    }//GEN-LAST:event_field_phoneNumberActionPerformed
+
+    private void field_accountNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_accountNoActionPerformed
+        getCustomers();
+    }//GEN-LAST:event_field_accountNoActionPerformed
 
     private void getAllCustomers() {
         customers = bapers.Bapers.DB.getCustomers();
