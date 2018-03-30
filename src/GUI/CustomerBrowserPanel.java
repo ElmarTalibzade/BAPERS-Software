@@ -121,14 +121,14 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Account", "Holder Name", "First Name", "Last Name", "Email", "Phone Number"
+                "Account", "Holder Name", "First Name", "Last Name", "Email", "Phone Number", "In Default"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -263,7 +263,15 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
     }
 
     private void getCustomers() {
-        customers = bapers.Bapers.DB.getCustomers(field_accountNo.getText(), field_holderName.getText(), field_firstName.getText(), field_lastName.getText(), field_phoneNumber.getText(), field_email.getText());
+        customers = bapers.Bapers.DB.getCustomers(
+                field_accountNo.getText(), 
+                field_holderName.getText(), 
+                field_firstName.getText(), 
+                field_lastName.getText(), 
+                field_phoneNumber.getText(), 
+                field_email.getText(), 
+                box_showDefault.isSelected());
+        
         updateTable();
     }
     
@@ -276,7 +284,14 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
         }
         
         for (Customer customer : customers) {
-            model.addRow(new Object[]{customer.getAccountNo(), customer.getHolderName(), customer.getFirstName(), customer.getLastName(), customer.getEmailAddress(), customer.getPhoneNumber()});
+            model.addRow(new Object[]{
+                customer.getAccountNo(), 
+                customer.getHolderName(), 
+                customer.getFirstName(), 
+                customer.getLastName(), 
+                customer.getEmailAddress(), 
+                customer.getPhoneNumber(),
+                customer.isDefault()});
         }
     }
     

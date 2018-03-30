@@ -311,7 +311,7 @@ public class DBConnectivity implements DBInterface {
         return customers;
     }
     
-    public ArrayList<Customer> getCustomers(String accountNo, String holderName, String firstName, String lastName, String phoneNumber, String email) {
+    public ArrayList<Customer> getCustomers(String accountNo, String holderName, String firstName, String lastName, String phoneNumber, String email, boolean showDefaultOnly) {
         
         ArrayList<Customer> customers = new ArrayList<Customer>();
         
@@ -323,13 +323,15 @@ public class DBConnectivity implements DBInterface {
                     + "AND ('%3$s'='' or `firstName`='%3$s') "
                     + "AND ('%4$s'='' or `lastName`='%4$s') "
                     + "AND ('%5$s'='' or `phoneNo`='%5$s') "
-                    + "AND ('%6$s'='' or `emailAddress`='%6$s')",
+                    + "AND ('%6$s'='' or `emailAddress`='%6$s')"
+                    + "AND ('%7$x'='9' or `isDefault`='%7$x')",
                     accountNo.trim(),
                     holderName.trim(),
                     firstName.trim(),
                     lastName.trim(),
                     phoneNumber.trim(),
-                    email.trim());
+                    email.trim(),
+                    (showDefaultOnly) ? 1 : 9);
             
             ResultSet result = retrieveData(query);
            
