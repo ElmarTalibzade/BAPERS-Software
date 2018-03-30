@@ -59,6 +59,12 @@ public class LoginView extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(0, 0));
 
+        field_email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_emailActionPerformed(evt);
+            }
+        });
+
         label_email.setText("Email");
 
         label_password.setText("Password");
@@ -73,6 +79,12 @@ public class LoginView extends javax.swing.JFrame {
         label_bapers.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         label_bapers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_bapers.setText("B.A.P.E.R.S");
+
+        field_password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_passwordActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,6 +141,14 @@ public class LoginView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Invalid e-mail address or password",  "Could not log in", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btn_loginActionPerformed
+
+    private void field_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_passwordActionPerformed
+        btn_loginActionPerformed(evt);
+    }//GEN-LAST:event_field_passwordActionPerformed
+
+    private void field_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_emailActionPerformed
+        btn_loginActionPerformed(evt);
+    }//GEN-LAST:event_field_emailActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_login;
