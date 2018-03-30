@@ -11,6 +11,8 @@ package Customer;
  */
 public enum Status {
     
+    Unspecified,
+    
     /**
      *
      */

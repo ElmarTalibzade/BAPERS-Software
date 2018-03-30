@@ -418,7 +418,7 @@ public class DBConnectivity implements DBInterface {
 
         try {
 
-            ResultSet result = retrieveData(String.format("SELECT * FROM `tasks` WHERE jobCode = \"%s\"", jobCode));
+            ResultSet result = retrieveData(String.format("SELECT * FROM `tasks` WHERE jobCode = \"%s\"", jobCode)); 
 
             while (result.next()) {
                 tasks.add(new Task(
@@ -444,4 +444,81 @@ public class DBConnectivity implements DBInterface {
         return tasks;
     }
     
+    private ArrayList<Task> getTasks(String jobCode, int departmentIndex) {
+
+        ArrayList<Task> tasks = new ArrayList<Task>();
+
+        try {
+
+            String query = String.format("SELECT * FROM `tasks` "
+                    + "WHERE ('%1$s'='' or `jobCode`='%1$s') "
+                    + "AND ('%2$x'='9' or `department`='%2$x')",
+                    jobCode.trim(), departmentIndex);
+            
+            ResultSet result = retrieveData(query);
+
+            while (result.next()) {
+                tasks.add(new Task(
+                        result.getInt("taskID"),
+                        Status.values()[result.getInt("status")],
+                        result.getDouble("price"),
+                        result.getString("description"),
+                        result.getString("shelfSlot"),
+                        DepartmentType.values()[result.getInt("department")],
+                        result.getFloat("discountRate"),
+                        result.getTimestamp("startTime"),
+                        result.getTimestamp("endTime")
+                ));
+
+            }
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        return tasks;
+    }
+    
+    public ArrayList<Job> getJobs(String jobCode, int status, String shelfNo, int departmentIndex)
+    {
+        ArrayList<Job> jobs = new ArrayList<Job>();
+        
+        try {
+            
+            String query = String.format("SELECT * FROM `jobs` "
+                    + "WHERE ('%1$s'='' or `code`='%1$s') "
+                    + "AND ('%2$x'='9' or `status`='%2$x') "
+                    + "AND ('%3$s'='' or `shelf`='%3$s')",
+                    jobCode.trim(), status, shelfNo.trim()
+                    );
+            
+            ResultSet result = retrieveData(query);
+
+            while (result.next()) {
+
+                jobs.add(new Job(
+                        result.getInt("invoiceNo"),
+                        result.getString("code"),
+                        result.getInt("staffNo"),
+                        getTasks(result.getString("code"), departmentIndex),
+                        result.getDouble("price"),
+                        result.getFloat("discountRate"),
+                        result.getInt("ownerNo"),
+                        result.getString("specialInstructions"),
+                        result.getString("shelf"),
+                        result.getInt("priority")
+                ));
+
+            }
+            
+        } catch (SQLException ex) {
+            
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        
+        return jobs;
+    }
 }

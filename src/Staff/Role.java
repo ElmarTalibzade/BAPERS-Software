@@ -12,22 +12,22 @@ package Staff;
 public enum Role {
     
     /**
-     * Office Manager
+     * Office Manager (0)
      */
     OfficeManager,
     
     /**
-     * Shift Manager 
+     * Shift Manager (1)
      */
     ShiftManager,
     
     /**
-     * Technician
+     * Technician (2)
      */
     Technician,
     
     /**
-     * Receptionist
+     * Receptionist (3)
      */
     Receptionist
     

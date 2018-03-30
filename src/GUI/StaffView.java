@@ -42,7 +42,6 @@ public class StaffView extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(720, 480));
         setName("Staff View"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(720, 480));
 
         label_loggedUser.setText("Logged in as: staff-name (staff-role)");
 

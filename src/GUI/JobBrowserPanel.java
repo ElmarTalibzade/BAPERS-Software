@@ -5,17 +5,26 @@
  */
 package GUI;
 
+import Customer.*;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Elmar Talibzade
  */
 public class JobBrowserPanel extends javax.swing.JPanel {
 
+    ArrayList<Job> jobs;
+    
     /**
      * Creates new form JobBrowser
      */
     public JobBrowserPanel() {
         initComponents();
+        getTasks();
     }
 
     /**
@@ -40,8 +49,8 @@ public class JobBrowserPanel extends javax.swing.JPanel {
         label_department = new javax.swing.JLabel();
         dropdown_department = new javax.swing.JComboBox<>();
         btn_findJob = new javax.swing.JButton();
-        table_jobs = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        table = new javax.swing.JScrollPane();
+        table_tasks = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,19 +82,46 @@ public class JobBrowserPanel extends javax.swing.JPanel {
 
         label_jobCode.setText("Job Code");
 
+        field_jobCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_jobCodeActionPerformed(evt);
+            }
+        });
+
         label_status.setText("Status");
 
-        dropdown_jobStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any", "In Progress", "Completed" }));
+        dropdown_jobStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any", "Inactive", "In Progress", "Completed" }));
+        dropdown_jobStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dropdown_jobStatusActionPerformed(evt);
+            }
+        });
 
         label_shelfNo.setText("Shelf No");
+
+        field_shelfNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_shelfNoActionPerformed(evt);
+            }
+        });
 
         label_department.setText("Department");
 
         dropdown_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any", "Copy Room", "Development", "Finishing", "Packing" }));
+        dropdown_department.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dropdown_departmentActionPerformed(evt);
+            }
+        });
 
         btn_findJob.setText("Find Job");
+        btn_findJob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_findJobActionPerformed(evt);
+            }
+        });
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        table_tasks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -101,19 +137,24 @@ public class JobBrowserPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        table_jobs.setViewportView(jTable3);
+        table_tasks.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_tasksMouseClicked(evt);
+            }
+        });
+        table.setViewportView(table_tasks);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_findJob))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(field_jobCode)
                             .addComponent(label_jobCode))
@@ -128,11 +169,8 @@ public class JobBrowserPanel extends javax.swing.JPanel {
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dropdown_department, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(label_department))))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(table_jobs)
+                            .addComponent(label_department)))
+                    .addComponent(table, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -153,11 +191,78 @@ public class JobBrowserPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_findJob)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(table_jobs, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                .addComponent(table, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_findJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_findJobActionPerformed
+        getTasks();
+    }//GEN-LAST:event_btn_findJobActionPerformed
+
+    private void field_jobCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_jobCodeActionPerformed
+        getTasks();
+    }//GEN-LAST:event_field_jobCodeActionPerformed
+
+    private void dropdown_jobStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdown_jobStatusActionPerformed
+        getTasks();
+    }//GEN-LAST:event_dropdown_jobStatusActionPerformed
+
+    private void field_shelfNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_shelfNoActionPerformed
+        getTasks();
+    }//GEN-LAST:event_field_shelfNoActionPerformed
+
+    private void dropdown_departmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdown_departmentActionPerformed
+        getTasks();
+    }//GEN-LAST:event_dropdown_departmentActionPerformed
+
+    private void table_tasksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_tasksMouseClicked
+        if (evt.getClickCount() == 2)
+        {
+            JTable targetTable = (JTable)evt.getSource();
+            int row = targetTable.getSelectedRow();
+            System.err.println(row);
+        }
+    }//GEN-LAST:event_table_tasksMouseClicked
+
+    private void getTasks()
+    {
+        jobs = bapers.Bapers.DB.getJobs(
+                field_jobCode.getText(),
+                (dropdown_jobStatus.getSelectedIndex() == 0) ? 9 : dropdown_jobStatus.getSelectedIndex(),
+                field_shelfNo.getText(),
+                (dropdown_department.getSelectedIndex() == 0) ? 9 : dropdown_department.getSelectedIndex()
+        );
+        
+        updateTable();
+    }
+    
+    private void updateTable()
+    {
+       DefaultTableModel model = (DefaultTableModel)table_tasks.getModel();
+       
+        while (model.getRowCount() > 0)
+        {
+            model.removeRow(0);
+        }
+        
+        for (Job job : jobs)
+        {
+            for (Task task : job.getTasks())
+            {            
+                model.addRow(new Object[]{
+
+                    job.getCode(),
+                    task.getId(),
+                    task.getDepartment(),
+                    task.getShelfSlot(),
+                    "NULL",
+                    task.getStatus()
+                    
+                });
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_findJob;
@@ -169,11 +274,11 @@ public class JobBrowserPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JLabel label_department;
     private javax.swing.JLabel label_jobCode;
     private javax.swing.JLabel label_shelfNo;
     private javax.swing.JLabel label_status;
-    private javax.swing.JScrollPane table_jobs;
+    private javax.swing.JScrollPane table;
+    private javax.swing.JTable table_tasks;
     // End of variables declaration//GEN-END:variables
 }
