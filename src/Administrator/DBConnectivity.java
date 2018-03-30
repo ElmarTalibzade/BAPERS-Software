@@ -317,19 +317,23 @@ public class DBConnectivity implements DBInterface {
         
         try {
             
-            ResultSet result = retrieveData(String.format("SELECT * FROM `customers` "
-                    + "WHERE `accountNo`='%s' "
-                    + "OR `holderName`='%s' "
-                    + "OR `firstName`='%s' "
-                    + "OR `lastName`='%s' "
-                    + "OR `phoneNo`='%s' "
-                    + "OR `emailAddress`='%s'",
-                    accountNo,
-                    holderName,
-                    firstName,
-                    lastName,
-                    phoneNumber,
-                    email));
+            String query = String.format("SELECT * FROM `customers` WHERE 1=1 "
+                    + "OR (`accountNo`='%0$s' or '%0$s'='') "
+                    + "OR (`holderName`='%1$s' or '%1$s'='') "
+                    + "OR (`firstName`='%2$s' or '%2$s'='') "
+                    + "OR (`lastName`='%3$s' or '%3$s'='') "
+                    + "OR (`phoneNo`='%4$s' or '%4$s'='') "
+                    + "OR (`emailAddress`='%5$s' or '%5$s'='')",
+                    accountNo.trim(),
+                    holderName.trim(),
+                    firstName.trim(),
+                    lastName.trim(),
+                    phoneNumber.trim(),
+                    email.trim());
+            
+            ResultSet result = retrieveData(query);
+           
+            System.out.println(query);
             
             while (result.next()) {
 
@@ -351,7 +355,7 @@ public class DBConnectivity implements DBInterface {
             }
             
         } catch (SQLException ex) {
-            
+           
             Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
             
         }
@@ -437,4 +441,5 @@ public class DBConnectivity implements DBInterface {
 
         return tasks;
     }
+    
 }
