@@ -188,6 +188,22 @@ public class DBConnectivity implements DBInterface {
         return storeData(query);
     }
     
+    public boolean updateTask(Task task) {
+        String query = String.format("UPDATE `tasks` SET "
+                + "`description` = '%s', " +
+                "`status` = '%x', "
+                + "`department` = '%x' "
+                + "WHERE `taskID` = '%x' "
+                + "AND `jobCode` = '%s'",
+                task.getDescription(),
+                task.getStatus().ordinal(),
+                task.getDepartment().ordinal(),
+                task.getId(),
+                task.getJobCode());
+        
+        return storeData(query);
+    }
+    
     /**
      * Updates a customer
      *
@@ -195,13 +211,13 @@ public class DBConnectivity implements DBInterface {
      * @return Returns true if customer data has been successfully updated.
      */
     public boolean updateCustomer(Customer customer) {
-        String query = String.format("UPDATE `customers` SET" +
-            " `isValued` = '%b'," +
-            " `isSuspended` = '%b'," +
-            " `isDefault` = '%b'," +
-            " `discountType` = '%i'," +
-            " `debtRemindedAmount` = '%i'" +
-            " WHERE `accountNo` = '%i'", 
+        String query = String.format("UPDATE `customers` SET " +
+            "`isValued` = '%b', " +
+            "`isSuspended` = '%b', " +
+            "`isDefault` = '%b', " +
+            "`discountType` = '%i', " +
+            "`debtRemindedAmount` = '%i' " +
+            "WHERE `accountNo` = '%i' ", 
             customer.isValued() ? 1 : 0,
             customer.isSuspended() ? 1 : 0,
             customer.isDefault() ? 1 : 0,

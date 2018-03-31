@@ -83,6 +83,10 @@ public class Task {
         return status;
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+    
     /**
      * Gets the description of this Task
      * @return task description

@@ -43,6 +43,14 @@ public class TaskProfilePanel extends javax.swing.JPanel {
         dropdown_status.setSelectedIndex(task.getStatus().ordinal());
     }
     
+    private void submitChanges() {
+        task.setDescription(field_description.getText());
+        task.setDepartment(DepartmentType.values()[dropdown_department.getSelectedIndex()]);
+        task.setStatus(Status.values()[dropdown_status.getSelectedIndex()]);
+        bapers.Bapers.DB.updateTask(task);
+        updateGUI();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,6 +103,11 @@ public class TaskProfilePanel extends javax.swing.JPanel {
         label_taskPrice.setText("Price: {task-price}");
 
         btn_applyChanges.setText("Apply Changes");
+        btn_applyChanges.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_applyChangesActionPerformed(evt);
+            }
+        });
 
         btn_resetFields.setText("Reset Fields");
         btn_resetFields.addActionListener(new java.awt.event.ActionListener() {
@@ -183,6 +196,10 @@ public class TaskProfilePanel extends javax.swing.JPanel {
     private void btn_resetFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetFieldsActionPerformed
         updateGUI();
     }//GEN-LAST:event_btn_resetFieldsActionPerformed
+
+    private void btn_applyChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_applyChangesActionPerformed
+        submitChanges();
+    }//GEN-LAST:event_btn_applyChangesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
