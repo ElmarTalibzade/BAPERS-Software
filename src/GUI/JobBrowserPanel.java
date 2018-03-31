@@ -6,8 +6,10 @@
 package GUI;
 
 import Customer.*;
+import java.awt.CardLayout;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,16 +19,39 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JobBrowserPanel extends javax.swing.JPanel {
 
-    ArrayList<Job> jobs;
+    ArrayList<Task> tasks;
+    
+    private TaskProfilePanel pane_taskProfile;
+    
+    private CardLayout cardLayout;
     
     /**
      * Creates new form JobBrowser
      */
     public JobBrowserPanel() {
         initComponents();
+        pane_taskProfile = new TaskProfilePanel();
+        
+        card.setLayout(new CardLayout());
+        cardLayout = (CardLayout)card.getLayout();
+        card.add(pane_taskProfile, "profile");
+        card.add(pane_taskBrowser, "browser");
+        cardLayout.show(card, "browser");
+        
+        addListener();
         getTasks();
     }
 
+    private void addListener()
+    {
+        pane_taskProfile.btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toggleProfile(false);
+            }
+        });
+
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,6 +65,8 @@ public class JobBrowserPanel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        card = new javax.swing.JPanel();
+        pane_taskBrowser = new javax.swing.JPanel();
         label_jobCode = new javax.swing.JLabel();
         field_jobCode = new javax.swing.JTextField();
         label_status = new javax.swing.JLabel();
@@ -144,46 +171,46 @@ public class JobBrowserPanel extends javax.swing.JPanel {
         });
         table.setViewportView(table_tasks);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout pane_taskBrowserLayout = new javax.swing.GroupLayout(pane_taskBrowser);
+        pane_taskBrowser.setLayout(pane_taskBrowserLayout);
+        pane_taskBrowserLayout.setHorizontalGroup(
+            pane_taskBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pane_taskBrowserLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(pane_taskBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pane_taskBrowserLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_findJob))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pane_taskBrowserLayout.createSequentialGroup()
+                        .addGroup(pane_taskBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(field_jobCode)
                             .addComponent(label_jobCode))
                         .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pane_taskBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dropdown_jobStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(label_status))
                         .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pane_taskBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(field_shelfNo)
                             .addComponent(label_shelfNo))
                         .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pane_taskBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dropdown_department, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(label_department)))
-                    .addComponent(table, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(table, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        pane_taskBrowserLayout.setVerticalGroup(
+            pane_taskBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pane_taskBrowserLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pane_taskBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_jobCode)
                     .addComponent(label_status)
                     .addComponent(label_shelfNo)
                     .addComponent(label_department))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pane_taskBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(field_jobCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dropdown_jobStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(field_shelfNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,6 +220,28 @@ public class JobBrowserPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(table, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                 .addContainerGap())
+        );
+
+        javax.swing.GroupLayout cardLayout = new javax.swing.GroupLayout(card);
+        card.setLayout(cardLayout);
+        cardLayout.setHorizontalGroup(
+            cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pane_taskBrowser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        cardLayout.setVerticalGroup(
+            cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pane_taskBrowser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(card, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(card, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -220,19 +269,27 @@ public class JobBrowserPanel extends javax.swing.JPanel {
         if (evt.getClickCount() == 2)
         {
             JTable targetTable = (JTable)evt.getSource();
-            int row = targetTable.getSelectedRow();
-            System.err.println(row);
+            Task task = tasks.get(targetTable.getSelectedRow());
+            pane_taskProfile.setTask(task);
+            toggleProfile(true);
         }
     }//GEN-LAST:event_table_tasksMouseClicked
 
     private void getTasks()
     {
-        jobs = bapers.Bapers.DB.getJobs(
+        ArrayList<Job> jobs = bapers.Bapers.DB.getJobs(
                 field_jobCode.getText(),
                 (dropdown_jobStatus.getSelectedIndex() == 0) ? 9 : dropdown_jobStatus.getSelectedIndex(),
                 field_shelfNo.getText(),
                 (dropdown_department.getSelectedIndex() == 0) ? 9 : dropdown_department.getSelectedIndex()
         );
+        
+        tasks = new ArrayList<Task>();
+        
+        for (Job job : jobs)
+        {
+            tasks.addAll(job.getTasks());
+        }
         
         updateTable();
     }
@@ -246,26 +303,33 @@ public class JobBrowserPanel extends javax.swing.JPanel {
             model.removeRow(0);
         }
         
-        for (Job job : jobs)
+        for (Task task : tasks)
         {
-            for (Task task : job.getTasks())
-            {            
-                model.addRow(new Object[]{
+            model.addRow(new Object[]{
 
-                    job.getCode(),
-                    task.getId(),
-                    task.getDepartment(),
-                    task.getShelfSlot(),
-                    "NULL",
-                    task.getStatus()
-                    
-                });
-            }
+                task.getJobCode(),
+                task.getId(),
+                task.getDepartment(),
+                task.getShelfSlot(),
+                "NULL",
+                task.getStatus()
+
+            });
         }
     }
 
+    private void toggleProfile(boolean state)
+    {
+        String cardName = state ? "profile" : "browser";
+        cardLayout.show(card, cardName);   
+        
+        this.validate();
+        this.repaint();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_findJob;
+    private javax.swing.JPanel card;
     private javax.swing.JComboBox<String> dropdown_department;
     private javax.swing.JComboBox<String> dropdown_jobStatus;
     private javax.swing.JTextField field_jobCode;
@@ -278,6 +342,7 @@ public class JobBrowserPanel extends javax.swing.JPanel {
     private javax.swing.JLabel label_jobCode;
     private javax.swing.JLabel label_shelfNo;
     private javax.swing.JLabel label_status;
+    private javax.swing.JPanel pane_taskBrowser;
     private javax.swing.JScrollPane table;
     private javax.swing.JTable table_tasks;
     // End of variables declaration//GEN-END:variables

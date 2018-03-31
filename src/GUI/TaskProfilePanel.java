@@ -5,12 +5,16 @@
  */
 package GUI;
 
+import Customer.*;
+
 /**
  *
  * @author Elmar Talibzade
  */
 public class TaskProfilePanel extends javax.swing.JPanel {
 
+    private Task task;
+    
     /**
      * Creates new form TaskProfilePanel
      */
@@ -18,6 +22,23 @@ public class TaskProfilePanel extends javax.swing.JPanel {
         initComponents();
     }
 
+    public void setTask(Task task)
+    {
+        this.task = task;
+        updateGUI();
+    }
+    
+    private void updateGUI()
+    {
+        label_jobCode.setText("Job Code: " + task.getJobCode());
+        label_taskId.setText("Task ID: " + task.getId());
+        label_taskPrice.setText("Price: " + task.getPrice());
+        label_shelfNo.setText("Shelf NO: " + task.getShelfSlot());
+        field_description.setText(task.getDescription());
+        dropdown_department.setSelectedIndex(task.getDepartment().ordinal());
+        dropdown_status.setSelectedIndex(task.getStatus().ordinal());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,53 +48,63 @@ public class TaskProfilePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        label_jobCode = new javax.swing.JLabel();
+        label_timeStarted = new javax.swing.JLabel();
+        label_taskId = new javax.swing.JLabel();
+        label_shelfNo = new javax.swing.JLabel();
+        label_description = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        field_description = new javax.swing.JTextArea();
+        label_status = new javax.swing.JLabel();
+        dropdown_status = new javax.swing.JComboBox<>();
+        label_department = new javax.swing.JLabel();
+        dropdown_department = new javax.swing.JComboBox<>();
+        label_taskPrice = new javax.swing.JLabel();
+        btn_applyChanges = new javax.swing.JButton();
+        btn_resetFields = new javax.swing.JButton();
+        btn_back = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(706, 398));
 
-        jLabel1.setText("Job Code: {job-code}");
+        label_jobCode.setText("Job Code: {job-code}");
 
-        jLabel2.setText("Time Started: {start-time}");
+        label_timeStarted.setText("Time Started: {start-time}");
 
-        jLabel3.setText("Task ID: {task-id}");
+        label_taskId.setText("Task ID: {task-id}");
 
-        jLabel4.setText("Shelf NO: {shelf-no}");
+        label_shelfNo.setText("Shelf NO: {shelf-no}");
 
-        jLabel5.setText("Description");
+        label_description.setText("Description");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        field_description.setColumns(20);
+        field_description.setRows(5);
+        jScrollPane1.setViewportView(field_description);
 
-        jLabel6.setText("Status");
+        label_status.setText("Status");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Inactive", "In Progress", "Completed" }));
+        dropdown_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Inactive", "In Progress", "Completed" }));
 
-        jLabel7.setText("Department");
+        label_department.setText("Department");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Copy Room", "Development", "Finishing", "Packing" }));
+        dropdown_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Copy Room", "Development", "Finishing", "Packing" }));
 
-        jLabel8.setText("Price: {task-price}");
+        label_taskPrice.setText("Price: {task-price}");
 
-        jButton2.setText("Apply Changes");
+        btn_applyChanges.setText("Apply Changes");
 
-        jButton3.setText("Reset Fields");
+        btn_resetFields.setText("Reset Fields");
+        btn_resetFields.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_resetFieldsActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Back");
+        btn_back.setText("Back");
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -85,87 +116,95 @@ public class TaskProfilePanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
+                            .addComponent(label_description)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel4))
+                                    .addComponent(label_jobCode)
+                                    .addComponent(label_shelfNo))
                                 .addGap(37, 37, 37)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
+                                    .addComponent(label_taskPrice)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
+                                        .addComponent(label_taskId)
                                         .addGap(47, 47, 47)
-                                        .addComponent(jLabel2)))))
+                                        .addComponent(label_timeStarted)))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6))
+                            .addComponent(label_department)
+                            .addComponent(label_status))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dropdown_status, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dropdown_department, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btn_applyChanges, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_resetFields, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
+                        .addComponent(btn_back)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton2, jButton3, jButton4});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_applyChanges, btn_back, btn_resetFields});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
+                    .addComponent(label_jobCode)
+                    .addComponent(label_taskId)
+                    .addComponent(label_timeStarted))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel8))
+                    .addComponent(label_shelfNo)
+                    .addComponent(label_taskPrice))
                 .addGap(40, 40, 40)
-                .addComponent(jLabel5)
+                .addComponent(label_description)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(label_status)
+                    .addComponent(dropdown_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_resetFields))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(label_department)
+                    .addComponent(dropdown_department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_applyChanges))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(btn_back)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_resetFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetFieldsActionPerformed
+        updateGUI();
+    }//GEN-LAST:event_btn_resetFieldsActionPerformed
+
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        
+    }//GEN-LAST:event_btn_backActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JButton btn_applyChanges;
+    public javax.swing.JButton btn_back;
+    private javax.swing.JButton btn_resetFields;
+    private javax.swing.JComboBox<String> dropdown_department;
+    private javax.swing.JComboBox<String> dropdown_status;
+    private javax.swing.JTextArea field_description;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel label_department;
+    private javax.swing.JLabel label_description;
+    private javax.swing.JLabel label_jobCode;
+    private javax.swing.JLabel label_shelfNo;
+    private javax.swing.JLabel label_status;
+    private javax.swing.JLabel label_taskId;
+    private javax.swing.JLabel label_taskPrice;
+    private javax.swing.JLabel label_timeStarted;
     // End of variables declaration//GEN-END:variables
 }

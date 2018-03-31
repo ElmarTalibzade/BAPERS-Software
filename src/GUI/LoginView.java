@@ -130,9 +130,6 @@ public class LoginView extends javax.swing.JFrame {
         if (DB.connect()) {
             Staff user = DB.validateLogin(email, password);
             if(user != null){
-                System.out.println(user.getAccountNo());
-                
-                //To be discussed at the next meeting
                 StaffView staffView = new StaffView(user);
                 staffView.setVisible(true);
                 this.setVisible(false);

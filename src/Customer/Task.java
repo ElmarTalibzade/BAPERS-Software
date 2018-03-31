@@ -12,6 +12,8 @@ import java.sql.Timestamp;
  * @author Elmar Talibzade
  */
 public class Task {
+    
+    private String jobCode;
     private int id;
     private Status status;
     private double price;
@@ -35,7 +37,8 @@ public class Task {
      * @param startTime
      * @param endTime
      */
-    public Task(int id, Status status, double price, String description, String shelfSlot, DepartmentType department, float discountRate, Timestamp startTime, Timestamp endTime) {
+    public Task(String jobCode, int id, Status status, double price, String description, String shelfSlot, DepartmentType department, float discountRate, Timestamp startTime, Timestamp endTime) {
+        this.jobCode = jobCode;
         this.id = id;
         this.status = status;
         this.price = price;
@@ -53,6 +56,10 @@ public class Task {
     public void MarkAsDone()
     {
         status = Status.Completed;
+    }
+    
+    public String getJobCode() {
+        return jobCode;
     }
     
     /**

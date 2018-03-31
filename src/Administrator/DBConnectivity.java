@@ -236,26 +236,21 @@ public class DBConnectivity implements DBInterface {
                     case OfficeManager:
                     {
                         user = new OfficeManager(staffID, firstName, lastName, emailAddress, phoneNumber);
-                        System.out.println("Office Manager");
-                        
                         break;
                     }
                     case ShiftManager:
                     {
                         user = new ShiftManager(staffID, firstName, lastName, emailAddress, phoneNumber);
-                        System.out.println("Shift Manager");
                         break;                    
                     }
                     case Technician:
                     {
                         user = new Technician(staffID, firstName, lastName, emailAddress, phoneNumber);
-                        System.out.println("Technician");
                         break;                    
                     }
                     case Receptionist:
                     {
                         user = new Receptionist(staffID, firstName, lastName, emailAddress, phoneNumber);
-                        System.out.println("Receptionist");
                         break;                    
                     }
                     default:
@@ -335,8 +330,6 @@ public class DBConnectivity implements DBInterface {
             
             ResultSet result = retrieveData(query);
            
-            System.out.println(query);
-            
             while (result.next()) {
 
                 customers.add(new Customer(
@@ -422,6 +415,7 @@ public class DBConnectivity implements DBInterface {
 
             while (result.next()) {
                 tasks.add(new Task(
+                        jobCode,
                         result.getInt("taskID"),
                         Status.values()[result.getInt("status")],
                         result.getDouble("price"),
@@ -459,6 +453,7 @@ public class DBConnectivity implements DBInterface {
 
             while (result.next()) {
                 tasks.add(new Task(
+                        jobCode,
                         result.getInt("taskID"),
                         Status.values()[result.getInt("status")],
                         result.getDouble("price"),
