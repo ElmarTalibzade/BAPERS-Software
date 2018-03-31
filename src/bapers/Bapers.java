@@ -22,6 +22,9 @@ public class Bapers {
      */
     public static DBConnectivity DB;
     
+    /**
+     * Reusable login window through which the user logs in.
+     */
     public static LoginView loginView;
     
     /**

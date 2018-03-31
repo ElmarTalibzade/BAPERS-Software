@@ -6,6 +6,9 @@ package Staff;
  */
 public abstract class Staff {
 
+    /**
+     *
+     */
     protected Role role;
     
     /**
@@ -112,6 +115,10 @@ public abstract class Staff {
         return phone;
     }
 
+    /**
+     *
+     * @return
+     */
     public Role getRole(){
         return role;       
     }
@@ -140,6 +147,10 @@ public abstract class Staff {
         this.lastName = lastName;
     }
     
+    /**
+     *
+     * @param role
+     */
     public void setRole(Role role){
         this.role = role;
     }

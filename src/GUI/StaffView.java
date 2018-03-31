@@ -8,7 +8,7 @@ package GUI;
 import Staff.*;
 
 /**
- *
+ * Base GUI for all main operations. This is where all menu items are shown based on user's role.
  * @author Elmar Talibzade
  */
 public class StaffView extends javax.swing.JFrame {
@@ -18,6 +18,10 @@ public class StaffView extends javax.swing.JFrame {
      */
     private Staff staff;
     
+    /**
+     * Initializes a GUI and loads appropriate menu items based on user's role.
+     * @param user Object class representing a logged in user.
+     */
     public StaffView(Staff user){
         this.staff = user;
         initComponents();

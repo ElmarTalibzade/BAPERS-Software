@@ -28,20 +28,20 @@ public class Customer {
     private ArrayList<Job> jobs;
 
     /**
-     *
-     * @param accountNo
-     * @param holderName
-     * @param firstName
-     * @param lastName
-     * @param isValued
-     * @param isSuspended
-     * @param isDefault
-     * @param address
-     * @param phoneNumber
-     * @param agreedDiscount
-     * @param emailAddress
-     * @param debtReminded
-     * @param jobs
+     * Constructs a customer object
+     * @param accountNo Customer's account number
+     * @param holderName Customer's holder name
+     * @param firstName Customer's first name
+     * @param lastName Customer's last name
+     * @param isValued Is Customer valued by the company?
+     * @param isSuspended Is Customer suspended?
+     * @param isDefault Is Customer in default?
+     * @param address Customer's address
+     * @param phoneNumber Customer's phone number
+     * @param agreedDiscount Type of a discount this customer is getting
+     * @param emailAddress Customer's email address
+     * @param debtReminded Times the debt has been reminded to this customer
+     * @param jobs A list of jobs that are associated with this customer
      */
     public Customer(int accountNo, String holderName, String firstName, String lastName, boolean isValued, boolean isSuspended, boolean isDefault, String address, String phoneNumber, DiscountType agreedDiscount, String emailAddress, int debtReminded, ArrayList<Job> jobs) {
         this.accountNo = accountNo;
@@ -59,39 +59,61 @@ public class Customer {
         this.jobs = jobs;
     }
 
+    /**
+     * Gets the holder name
+     * @return holder name
+     */
     public String getHolderName() {
         return holderName;
     }
 
-    public void setHolderName(String holderName) {
-        this.holderName = holderName;
-    }
-
+    /**
+     * Gets customer's address
+     * @return address
+     */
     public String getAddress() {
         return address;
     }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
+    
+    /**
+     * Gets discount type
+     * @return discount type
+     */
     public DiscountType getAgreedDiscount() {
         return agreedDiscount;
     }
 
+    /**
+     * Updates the discount type
+     * @param agreedDiscount new discount type
+     */
     public void setAgreedDiscount(DiscountType agreedDiscount) {
         this.agreedDiscount = agreedDiscount;
     }
 
+    /**
+     * Returns the number of times this customer has been reminded of the debt
+     * @return debt counter
+     */
     public int getDebtReminded() {
         return debtReminded;
     }
-
-    public void setDebtReminded(int debtReminded) {
-        this.debtReminded = debtReminded;
+    
+    /**
+     * Increments debt reminder counter by 1
+     */
+    public void incrementDebtReminder()
+    {
+        debtReminded++;
+    }   
+    
+    /**
+     * Resets the debt reminder to 0
+     */
+    public void resetDebtReminder()
+    {
+        debtReminded = 0;
     }
-    
-    
     
     /**
      * Gets whether this customer is suspended or not
@@ -188,15 +210,23 @@ public class Customer {
      * @param jobId Id of a job for which customer is paying for
      * @return Returns true if the payment was successful
      */
-    public boolean makePyament(String jobId)
+    public boolean makePayment(String jobId)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isValued() {
         return isValued;
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean isDefault() {
         return isDefault;
     }

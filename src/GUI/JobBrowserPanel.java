@@ -14,7 +14,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Used to browse tasks and opens the task overview panel
  * @author Elmar Talibzade
  */
 public class JobBrowserPanel extends javax.swing.JPanel {
@@ -22,11 +22,10 @@ public class JobBrowserPanel extends javax.swing.JPanel {
     ArrayList<Task> tasks;
     
     private TaskProfilePanel pane_taskProfile;
-    
     private CardLayout cardLayout;
     
     /**
-     * Creates new form JobBrowser
+     * Creates new form JobBrowser and creates associated layouts.
      */
     public JobBrowserPanel() {
         initComponents();
@@ -49,7 +48,6 @@ public class JobBrowserPanel extends javax.swing.JPanel {
                 toggleProfile(false);
             }
         });
-
     }
     
     /**

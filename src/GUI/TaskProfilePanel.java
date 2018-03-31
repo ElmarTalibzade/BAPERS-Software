@@ -8,7 +8,7 @@ package GUI;
 import Customer.*;
 
 /**
- *
+ * Task Profile
  * @author Elmar Talibzade
  */
 public class TaskProfilePanel extends javax.swing.JPanel {
@@ -22,6 +22,10 @@ public class TaskProfilePanel extends javax.swing.JPanel {
         initComponents();
     }
 
+    /**
+     * Makes this panel display info of a new task
+     * @param task Tasks whose info will be displayed
+     */
     public void setTask(Task task)
     {
         this.task = task;
@@ -100,11 +104,6 @@ public class TaskProfilePanel extends javax.swing.JPanel {
         });
 
         btn_back.setText("Back");
-        btn_back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_backActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -184,10 +183,6 @@ public class TaskProfilePanel extends javax.swing.JPanel {
     private void btn_resetFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetFieldsActionPerformed
         updateGUI();
     }//GEN-LAST:event_btn_resetFieldsActionPerformed
-
-    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
-        
-    }//GEN-LAST:event_btn_backActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

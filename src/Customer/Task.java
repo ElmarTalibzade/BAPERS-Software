@@ -26,16 +26,17 @@ public class Task {
     private Timestamp endTime;
 
     /**
-     *
-     * @param id
-     * @param status
-     * @param price
-     * @param description
-     * @param shelfSlot
-     * @param department
-     * @param discountRate
-     * @param startTime
-     * @param endTime
+     * Constructs a Task
+     * @param jobCode Code of a job associated with this task
+     * @param id ID of a Task
+     * @param status Task current status
+     * @param price Price of a task
+     * @param description Description of a task
+     * @param shelfSlot Shelf slot of a task
+     * @param department Department of a task
+     * @param discountRate Discount rate of a task
+     * @param startTime Time task has started
+     * @param endTime Time task was finished
      */
     public Task(String jobCode, int id, Status status, double price, String description, String shelfSlot, DepartmentType department, float discountRate, Timestamp startTime, Timestamp endTime) {
         this.jobCode = jobCode;
@@ -58,6 +59,10 @@ public class Task {
         status = Status.Completed;
     }
     
+    /**
+     * Gets job code of this task
+     * @return job code
+     */
     public String getJobCode() {
         return jobCode;
     }
@@ -70,6 +75,10 @@ public class Task {
         return id;
     }
 
+    /**
+     * Gets the current status of a task
+     * @return task status
+     */
     public Status getStatus() {
         return status;
     }
@@ -107,16 +116,16 @@ public class Task {
     }
 
     /**
-     *
-     * @return
+     * Gets the department of this task
+     * @return department of this task
      */
     public DepartmentType getDepartment() {
         return department;
     }
 
     /**
-     *
-     * @param department
+     * Changes the department of this task
+     * @param department New department
      */
     public void setDepartment(DepartmentType department) {
         this.department = department;

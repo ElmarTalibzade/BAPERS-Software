@@ -122,6 +122,7 @@ public class DBConnectivity implements DBInterface {
     /**
      * Creates a new staff member
      * @param staff Staff object that will be inserted
+     * @param password
      * @return Returns true if the staff data has been successfully inserted and false otherwise.
      */
     public boolean createStaff(Staff staff, String password)
@@ -306,6 +307,17 @@ public class DBConnectivity implements DBInterface {
         return customers;
     }
     
+    /**
+     * Returns the list of all customers from the database if match passed values.
+     * @param accountNo Customer's account number
+     * @param holderName Customer's holder name
+     * @param firstName Customer's first name
+     * @param lastName Customer's last name
+     * @param phoneNumber Customer's phone number
+     * @param email Customer's email address
+     * @param showDefaultOnly Whether or not we want only customers who are in default.
+     * @return An array list of customers that match entries. If all values are empty, all entries are returned instead.
+     */
     public ArrayList<Customer> getCustomers(String accountNo, String holderName, String firstName, String lastName, String phoneNumber, String email, boolean showDefaultOnly) {
         
         ArrayList<Customer> customers = new ArrayList<Customer>();
@@ -476,6 +488,14 @@ public class DBConnectivity implements DBInterface {
         return tasks;
     }
     
+    /**
+     * Gets a list of jobs as well as their tasks
+     * @param jobCode Job's code
+     * @param status Job's current status
+     * @param shelfNo Job's shelf number
+     * @param departmentIndex Index that represents the department of a job
+     * @return An array list of jobs that match entries. If all values are empty, all entries are returned instead.
+     */
     public ArrayList<Job> getJobs(String jobCode, int status, String shelfNo, int departmentIndex)
     {
         ArrayList<Job> jobs = new ArrayList<Job>();
@@ -516,4 +536,4 @@ public class DBConnectivity implements DBInterface {
         
         return jobs;
     }
-}
+    }
