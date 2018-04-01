@@ -122,6 +122,7 @@ public class DBConnectivity implements DBInterface {
     /**
      * Creates a new staff member
      * @param staff Staff object that will be inserted
+     * @param password
      * @return Returns true if the staff data has been successfully inserted and false otherwise.
      */
     public boolean createStaff(Staff staff, String password)
@@ -187,6 +188,22 @@ public class DBConnectivity implements DBInterface {
         return storeData(query);
     }
     
+    public boolean updateTask(Task task) {
+        String query = String.format("UPDATE `tasks` SET "
+                + "`description` = '%s', " +
+                "`status` = '%x', "
+                + "`department` = '%x' "
+                + "WHERE `taskID` = '%x' "
+                + "AND `jobCode` = '%s'",
+                task.getDescription(),
+                task.getStatus().ordinal(),
+                task.getDepartment().ordinal(),
+                task.getId(),
+                task.getJobCode());
+        
+        return storeData(query);
+    }
+    
     /**
      * Updates a customer
      *
@@ -194,13 +211,13 @@ public class DBConnectivity implements DBInterface {
      * @return Returns true if customer data has been successfully updated.
      */
     public boolean updateCustomer(Customer customer) {
-        String query = String.format("UPDATE `customers` SET" +
-            " `isValued` = '%b'," +
-            " `isSuspended` = '%b'," +
-            " `isDefault` = '%b'," +
-            " `discountType` = '%i'," +
-            " `debtRemindedAmount` = '%i'" +
-            " WHERE `accountNo` = '%i'", 
+        String query = String.format("UPDATE `customers` SET " +
+            "`isValued` = '%b', " +
+            "`isSuspended` = '%b', " +
+            "`isDefault` = '%b', " +
+            "`discountType` = '%i', " +
+            "`debtRemindedAmount` = '%i' " +
+            "WHERE `accountNo` = '%i' ", 
             customer.isValued() ? 1 : 0,
             customer.isSuspended() ? 1 : 0,
             customer.isDefault() ? 1 : 0,
@@ -236,26 +253,21 @@ public class DBConnectivity implements DBInterface {
                     case OfficeManager:
                     {
                         user = new OfficeManager(staffID, firstName, lastName, emailAddress, phoneNumber);
-                        System.out.println("Office Manager");
-                        
                         break;
                     }
                     case ShiftManager:
                     {
                         user = new ShiftManager(staffID, firstName, lastName, emailAddress, phoneNumber);
-                        System.out.println("Shift Manager");
                         break;                    
                     }
                     case Technician:
                     {
                         user = new Technician(staffID, firstName, lastName, emailAddress, phoneNumber);
-                        System.out.println("Technician");
                         break;                    
                     }
                     case Receptionist:
                     {
                         user = new Receptionist(staffID, firstName, lastName, emailAddress, phoneNumber);
-                        System.out.println("Receptionist");
                         break;                    
                     }
                     default:
@@ -311,26 +323,41 @@ public class DBConnectivity implements DBInterface {
         return customers;
     }
     
-    public ArrayList<Customer> getCustomers(String accountNo, String holderName, String firstName, String lastName, String phoneNumber, String email) {
+    /**
+     * Returns the list of all customers from the database if match passed values.
+     * @param accountNo Customer's account number
+     * @param holderName Customer's holder name
+     * @param firstName Customer's first name
+     * @param lastName Customer's last name
+     * @param phoneNumber Customer's phone number
+     * @param email Customer's email address
+     * @param showDefaultOnly Whether or not we want only customers who are in default.
+     * @return An array list of customers that match entries. If all values are empty, all entries are returned instead.
+     */
+    public ArrayList<Customer> getCustomers(String accountNo, String holderName, String firstName, String lastName, String phoneNumber, String email, boolean showDefaultOnly) {
         
         ArrayList<Customer> customers = new ArrayList<Customer>();
         
         try {
             
-            ResultSet result = retrieveData(String.format("SELECT * FROM `customers` "
-                    + "WHERE `accountNo`='%s' "
-                    + "OR `holderName`='%s' "
-                    + "OR `firstName`='%s' "
-                    + "OR `lastName`='%s' "
-                    + "OR `phoneNo`='%s' "
-                    + "OR `emailAddress`='%s'",
-                    accountNo,
-                    holderName,
-                    firstName,
-                    lastName,
-                    phoneNumber,
-                    email));
+            String query = String.format("SELECT * FROM `customers` "
+                    + "WHERE ('%1$s'='' or `accountNo`='%1$s') "
+                    + "AND ('%2$s'='' or `holderName`='%2$s') "
+                    + "AND ('%3$s'='' or `firstName`='%3$s') "
+                    + "AND ('%4$s'='' or `lastName`='%4$s') "
+                    + "AND ('%5$s'='' or `phoneNo`='%5$s') "
+                    + "AND ('%6$s'='' or `emailAddress`='%6$s')"
+                    + "AND ('%7$x'='9' or `isDefault`='%7$x')",
+                    accountNo.trim(),
+                    holderName.trim(),
+                    firstName.trim(),
+                    lastName.trim(),
+                    phoneNumber.trim(),
+                    email.trim(),
+                    (showDefaultOnly) ? 1 : 9);
             
+            ResultSet result = retrieveData(query);
+           
             while (result.next()) {
 
                 customers.add(new Customer(
@@ -351,7 +378,7 @@ public class DBConnectivity implements DBInterface {
             }
             
         } catch (SQLException ex) {
-            
+           
             Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
             
         }
@@ -412,10 +439,11 @@ public class DBConnectivity implements DBInterface {
 
         try {
 
-            ResultSet result = retrieveData(String.format("SELECT * FROM `tasks` WHERE jobCode = \"%s\"", jobCode));
+            ResultSet result = retrieveData(String.format("SELECT * FROM `tasks` WHERE jobCode = \"%s\"", jobCode)); 
 
             while (result.next()) {
                 tasks.add(new Task(
+                        jobCode,
                         result.getInt("taskID"),
                         Status.values()[result.getInt("status")],
                         result.getDouble("price"),
@@ -437,4 +465,91 @@ public class DBConnectivity implements DBInterface {
 
         return tasks;
     }
-}
+    
+    private ArrayList<Task> getTasks(String jobCode, int departmentIndex) {
+
+        ArrayList<Task> tasks = new ArrayList<Task>();
+
+        try {
+
+            String query = String.format("SELECT * FROM `tasks` "
+                    + "WHERE ('%1$s'='' or `jobCode`='%1$s') "
+                    + "AND ('%2$x'='9' or `department`='%2$x')",
+                    jobCode.trim(), departmentIndex);
+            
+            ResultSet result = retrieveData(query);
+
+            while (result.next()) {
+                tasks.add(new Task(
+                        jobCode,
+                        result.getInt("taskID"),
+                        Status.values()[result.getInt("status")],
+                        result.getDouble("price"),
+                        result.getString("description"),
+                        result.getString("shelfSlot"),
+                        DepartmentType.values()[result.getInt("department")],
+                        result.getFloat("discountRate"),
+                        result.getTimestamp("startTime"),
+                        result.getTimestamp("endTime")
+                ));
+
+            }
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        return tasks;
+    }
+    
+    /**
+     * Gets a list of jobs as well as their tasks
+     * @param jobCode Job's code
+     * @param status Job's current status
+     * @param shelfNo Job's shelf number
+     * @param departmentIndex Index that represents the department of a job
+     * @return An array list of jobs that match entries. If all values are empty, all entries are returned instead.
+     */
+    public ArrayList<Job> getJobs(String jobCode, int status, String shelfNo, int departmentIndex)
+    {
+        ArrayList<Job> jobs = new ArrayList<Job>();
+        
+        try {
+            
+            String query = String.format("SELECT * FROM `jobs` "
+                    + "WHERE ('%1$s'='' or `code`='%1$s') "
+                    + "AND ('%2$x'='9' or `status`='%2$x') "
+                    + "AND ('%3$s'='' or `shelf`='%3$s')",
+                    jobCode.trim(), status, shelfNo.trim()
+                    );
+            
+            ResultSet result = retrieveData(query);
+
+            while (result.next()) {
+
+                jobs.add(new Job(
+                        result.getInt("invoiceNo"),
+                        result.getString("code"),
+                        result.getInt("staffNo"),
+                        getTasks(result.getString("code"), departmentIndex),
+                        result.getDouble("price"),
+                        result.getFloat("discountRate"),
+                        result.getInt("ownerNo"),
+                        result.getString("specialInstructions"),
+                        result.getString("shelf"),
+                        result.getInt("priority")
+                ));
+
+            }
+            
+        } catch (SQLException ex) {
+            
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        
+        return jobs;
+    }
+    }

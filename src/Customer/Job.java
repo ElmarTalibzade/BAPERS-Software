@@ -32,17 +32,17 @@ public class Job {
     private String shelf;
 
     /**
-     *
-     * @param invoiceNo
-     * @param code
-     * @param staffCode
-     * @param task
-     * @param price
-     * @param discountRate
-     * @param customerId
-     * @param specialInstructions
-     * @param shelf
-     * @param priority
+     * Constructs a Job
+     * @param invoiceNo Job's invoice number
+     * @param code Job's code
+     * @param staffCode Code of a staff member who created it
+     * @param task A list of tasks that this job is associated with 
+     * @param price Price of this job
+     * @param discountRate Discount rate of this job
+     * @param customerId Id of a customer who is associated with this job
+     * @param specialInstructions Instructions associated with this job
+     * @param shelf Shelf slot of this job
+     * @param priority Priority for this job
      */
     public Job(int invoiceNo, String code, int staffCode, ArrayList<Task> task, double price, float discountRate, int customerId, String specialInstructions, String shelf, int priority) {
         this.invoiceNo = invoiceNo;           
@@ -58,22 +58,42 @@ public class Job {
         this.priority = priority;
     }
 
+    /**
+     * Gets the priority of this Job
+     * @return job priority
+     */
     public int getPriority(){
         return priority;
     }
     
+    /**
+     * Sets the status of this job
+     * @param status new job status
+     */
     public void setStatus(int status) {       
         this.status = status;
     }
     
+    /**
+     * Gets the status of this job
+     * @return job status
+     */
     public int getStatus(){
         return status;
     }          
     
+    /**
+     * Get the invoice number of this job
+     * @return job invoice
+     */
     public int getInvoiceNo(){
         return invoiceNo;
     }
     
+    /**
+     * Gets the staff code 
+     * @return staff code
+     */
     public int getStaffCode(){
         return staffCode;
     }

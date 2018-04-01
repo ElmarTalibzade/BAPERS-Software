@@ -12,6 +12,8 @@ import java.sql.Timestamp;
  * @author Elmar Talibzade
  */
 public class Task {
+    
+    private String jobCode;
     private int id;
     private Status status;
     private double price;
@@ -24,18 +26,20 @@ public class Task {
     private Timestamp endTime;
 
     /**
-     *
-     * @param id
-     * @param status
-     * @param price
-     * @param description
-     * @param shelfSlot
-     * @param department
-     * @param discountRate
-     * @param startTime
-     * @param endTime
+     * Constructs a Task
+     * @param jobCode Code of a job associated with this task
+     * @param id ID of a Task
+     * @param status Task current status
+     * @param price Price of a task
+     * @param description Description of a task
+     * @param shelfSlot Shelf slot of a task
+     * @param department Department of a task
+     * @param discountRate Discount rate of a task
+     * @param startTime Time task has started
+     * @param endTime Time task was finished
      */
-    public Task(int id, Status status, double price, String description, String shelfSlot, DepartmentType department, float discountRate, Timestamp startTime, Timestamp endTime) {
+    public Task(String jobCode, int id, Status status, double price, String description, String shelfSlot, DepartmentType department, float discountRate, Timestamp startTime, Timestamp endTime) {
+        this.jobCode = jobCode;
         this.id = id;
         this.status = status;
         this.price = price;
@@ -56,6 +60,14 @@ public class Task {
     }
     
     /**
+     * Gets job code of this task
+     * @return job code
+     */
+    public String getJobCode() {
+        return jobCode;
+    }
+    
+    /**
      * Returns Id of this Task
      * @return task id
      */
@@ -63,10 +75,18 @@ public class Task {
         return id;
     }
 
+    /**
+     * Gets the current status of a task
+     * @return task status
+     */
     public Status getStatus() {
         return status;
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+    
     /**
      * Gets the description of this Task
      * @return task description
@@ -100,16 +120,16 @@ public class Task {
     }
 
     /**
-     *
-     * @return
+     * Gets the department of this task
+     * @return department of this task
      */
     public DepartmentType getDepartment() {
         return department;
     }
 
     /**
-     *
-     * @param department
+     * Changes the department of this task
+     * @param department New department
      */
     public void setDepartment(DepartmentType department) {
         this.department = department;

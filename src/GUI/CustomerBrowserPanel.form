@@ -137,6 +137,7 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="field_accountNoActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="field_accountNoKeyTyped"/>
       </Events>
     </Component>
@@ -146,6 +147,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="field_holderName">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="field_holderNameActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="label_firstName">
       <Properties>
@@ -153,6 +157,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="field_firstName">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="field_firstNameActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="label_lastName">
       <Properties>
@@ -160,6 +167,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="field_lastName">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="field_lastNameActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="label_phoneNumber">
       <Properties>
@@ -167,6 +177,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="field_phoneNumber">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="field_phoneNumberActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="label_email">
       <Properties>
@@ -174,6 +187,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="field_email">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="field_emailActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="box_showDefault">
       <Properties>
@@ -198,17 +214,23 @@
         <Component class="javax.swing.JTable" name="table_customers">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="0">
+              <Table columnCount="7" rowCount="0">
                 <Column editable="false" title="Account" type="java.lang.String"/>
                 <Column editable="false" title="Holder Name" type="java.lang.String"/>
                 <Column editable="false" title="First Name" type="java.lang.String"/>
                 <Column editable="false" title="Last Name" type="java.lang.String"/>
-                <Column editable="true" title="Email" type="java.lang.String"/>
+                <Column editable="false" title="Email" type="java.lang.String"/>
                 <Column editable="false" title="Phone Number" type="java.lang.String"/>
+                <Column editable="false" title="In Default" type="java.lang.Boolean"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>

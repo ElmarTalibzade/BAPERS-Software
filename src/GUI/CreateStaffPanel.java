@@ -142,7 +142,7 @@ public class CreateStaffPanel extends javax.swing.JPanel {
         String lastName = field_lastName.getText();
         String email = field_email.getText();
         String phoneNumber = field_phone.getText();
-        String password = field_password.getPassword().toString();
+        String password = String.valueOf(field_password.getPassword());
         int roleNo = dropdown_role.getSelectedIndex();
         Role role = Role.values()[roleNo];
 

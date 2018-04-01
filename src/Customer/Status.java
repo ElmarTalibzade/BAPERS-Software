@@ -12,17 +12,22 @@ package Customer;
 public enum Status {
     
     /**
-     *
+     * The status has not been specified
+     */
+    Unspecified,
+    
+    /**
+     * The task is inactive
      */
     Inactive,
 
     /**
-     *
+     * The task is in progress
      */
     InProgress,
 
     /**
-     *
+     * The task has been complete
      */
     Completed
     
