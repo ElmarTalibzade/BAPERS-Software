@@ -137,11 +137,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Browse..."/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_browse_saveLocationActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_backup">
       <Properties>
         <Property name="text" type="java.lang.String" value="Backup"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_backupActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="label_restore">
       <Properties>
@@ -162,11 +168,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Browse..."/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_browse_backupLocationActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_restore">
       <Properties>
         <Property name="text" type="java.lang.String" value="Restore"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_restoreActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="label_restore1">
       <Properties>

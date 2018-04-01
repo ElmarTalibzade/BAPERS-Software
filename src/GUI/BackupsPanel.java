@@ -5,12 +5,32 @@
  */
 package GUI;
 
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+
 /**
  *
  * @author Elmar Talibzade
  */
 public class BackupsPanel extends javax.swing.JPanel {
 
+    private String saveLocation;
+    private String openLocation;
+    
     /**
      * Creates new form BackupsPanel
      */
@@ -54,8 +74,18 @@ public class BackupsPanel extends javax.swing.JPanel {
         label_saveLocation.setText("Export Location");
 
         btn_browse_saveLocation.setText("Browse...");
+        btn_browse_saveLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_browse_saveLocationActionPerformed(evt);
+            }
+        });
 
         btn_backup.setText("Backup");
+        btn_backup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backupActionPerformed(evt);
+            }
+        });
 
         label_restore.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         label_restore.setText("Restore");
@@ -63,8 +93,18 @@ public class BackupsPanel extends javax.swing.JPanel {
         label_backupLocation.setText("Backup Location");
 
         btn_browse_backupLocation.setText("Browse...");
+        btn_browse_backupLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_browse_backupLocationActionPerformed(evt);
+            }
+        });
 
         btn_restore.setText("Restore");
+        btn_restore.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_restoreActionPerformed(evt);
+            }
+        });
 
         label_restore1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         label_restore1.setText("Settings");
@@ -170,6 +210,84 @@ public class BackupsPanel extends javax.swing.JPanel {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void btn_backupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backupActionPerformed
+        try {
+            String user = "root";
+            String password = "";
+            String database = "bloomsday";
+            String pathToMySQL = "/usr/local/mysql-5.7.21-macos10.13-x86_64/bin/";
+            String CMD = "";
+            
+            if(password.equals(""))
+                CMD = pathToMySQL + "mysqldump -u " + user + " --add-drop-database -B " + database + " -r " + saveLocation;
+            else
+                CMD = pathToMySQL + "mysqldump -u " + user + " -p " + password + "--add-drop-database -B " + database + " -r " + saveLocation;
+            System.out.println(CMD);
+            
+            Runtime.getRuntime().exec(CMD);
+            JOptionPane.showMessageDialog(this, "Backup File Created.", "Done", 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btn_backupActionPerformed
+ 
+    private void btn_browse_saveLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_browse_saveLocationActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        int option = chooser.showSaveDialog(this);
+        if (option == JFileChooser.APPROVE_OPTION) {
+            if(chooser.getSelectedFile() != null)
+            {
+                saveLocation = chooser.getCurrentDirectory() + "/" + chooser.getSelectedFile().getName() + ".blmbackup";
+                field_saveLocation.setText(saveLocation);
+            }
+        }
+    }//GEN-LAST:event_btn_browse_saveLocationActionPerformed
+
+    private void btn_browse_backupLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_browse_backupLocationActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        int option = chooser.showOpenDialog(this);
+        if (option == JFileChooser.APPROVE_OPTION) {
+            if(chooser.getSelectedFile() != null)
+            {
+                openLocation = chooser.getCurrentDirectory() + "/" + chooser.getSelectedFile().getName();
+                field_backupLocation.setText(openLocation);
+            }
+        }
+    }//GEN-LAST:event_btn_browse_backupLocationActionPerformed
+
+    private void btn_restoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_restoreActionPerformed
+        try {
+            String user = "root";
+            String password = "";
+            String database = "bloomsday";
+            String pathToMySQL = "/usr/local/mysql-5.7.21-macos10.13-x86_64/bin/";
+            
+            String arrayCommand[] = new String[]{pathToMySQL + "mysql", database, "-u", user, "-e", " source " + openLocation};
+            String arrayCommand2[] = new String[]{pathToMySQL + "mysql", database, "-u", user, "-p" + password, "-e", " source " + openLocation};
+            
+            Process runtimeProcess;
+            if(password.equals(""))
+            {
+                runtimeProcess = Runtime.getRuntime().exec(arrayCommand);
+                System.out.println(Arrays.toString(arrayCommand));
+            }
+            else
+            {
+                runtimeProcess = Runtime.getRuntime().exec(arrayCommand2);
+                System.out.println(Arrays.toString(arrayCommand2));
+            }
+            
+            int processStatus = runtimeProcess.waitFor();
+            if (processStatus == 1)
+                System.out.println("failed");
+            else if (processStatus == 0)
+                System.out.println("success");
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btn_restoreActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
