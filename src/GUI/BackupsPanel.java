@@ -14,6 +14,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.Timer;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -30,6 +31,7 @@ public class BackupsPanel extends javax.swing.JPanel {
 
     private String saveLocation;
     private String openLocation;
+    private String backupLocation;
     
     /**
      * Creates new form BackupsPanel
@@ -112,8 +114,18 @@ public class BackupsPanel extends javax.swing.JPanel {
         label_backupLocation1.setText("Backup Location");
 
         btn_browse_backupLocation1.setText("Browse...");
+        btn_browse_backupLocation1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_browse_backupLocation1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Save Changes");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Frequency");
 
@@ -288,6 +300,53 @@ public class BackupsPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btn_restoreActionPerformed
+
+    private void btn_browse_backupLocation1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_browse_backupLocation1ActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        int option = chooser.showSaveDialog(this);
+        if (option == JFileChooser.APPROVE_OPTION) {
+            if(chooser.getSelectedFile() != null)
+            {
+                backupLocation = chooser.getCurrentDirectory() + "/" + chooser.getSelectedFile().getName() + ".blmbackup";
+                field_backupLocation1.setText(saveLocation);
+            }
+        }
+    }//GEN-LAST:event_btn_browse_backupLocation1ActionPerformed
+
+    public static boolean isInteger(String str) {
+    try {
+        Integer.parseInt(str);
+        return true;
+    } catch (NumberFormatException nfe) {
+        return false;
+    }
+}
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(isInteger(jTextField1.getText())){
+            int number = Integer.parseInt(jTextField1.getText());
+            int option = jComboBox1.getSelectedIndex();
+            if(option == 0)
+                option = 3600; // one hour
+            else if(option == 1)
+                option = 86400; // one day
+            else if(option == 2)
+                option = 604800; // one week
+            else if(option == 3) 
+                option = 86400 * 30; // one month
+            else if(option == 4)
+                option = 86400 * 30 * 365; // one year
+            
+            
+            
+            Timer t = new Timer();
+            bapers.BackupTask backupTask = new bapers.BackupTask(backupLocation);
+
+            int oneSecond = 1000;
+
+            t.scheduleAtFixedRate(backupTask, 0, oneSecond * option * number);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
