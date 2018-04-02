@@ -21,6 +21,11 @@ public class Utils {
         throw new UnsupportedOperationException();
     }
     
+    /**
+     * Splits the camel case letters with spaces
+     * @param s String which will be split.
+     * @return A split version of a string that has been passed as a parameter.
+     */
     public static String splitCamelCase(String s) {
         return s.replaceAll(
             String.format("%s|%s|%s",

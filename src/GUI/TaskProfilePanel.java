@@ -6,7 +6,8 @@
 package GUI;
 
 import Customer.*;
-
+import Staff.Role;
+import bapers.Bapers;
 /**
  * Task Profile
  * @author Elmar Talibzade
@@ -20,6 +21,11 @@ public class TaskProfilePanel extends javax.swing.JPanel {
      */
     public TaskProfilePanel() {
         initComponents();
+        
+        field_description.setEnabled(Bapers.getUser().getRole() != Role.Receptionist);
+        dropdown_department.setEnabled(Bapers.getUser().getRole() != Role.Receptionist);
+        dropdown_status.setEnabled(Bapers.getUser().getRole() != Role.Receptionist);
+        btn_applyChanges.setVisible(Bapers.getUser().getRole() != Role.Receptionist);
     }
 
     /**
