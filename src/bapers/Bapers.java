@@ -9,6 +9,7 @@ import GUI.LoginView;
 import GUI.StaffView;
 import Administrator.*;
 import GUI.*;
+import Staff.Staff;
 import javax.swing.UIManager;
 /**
  * Main class for running BAPERS software.
@@ -26,6 +27,11 @@ public class Bapers {
      * Reusable login window through which the user logs in.
      */
     public static LoginView loginView;
+    
+    public static Staff getUser()
+    {
+        return DB.loggedUser;
+    }
     
     /**
      * @param args the command line arguments

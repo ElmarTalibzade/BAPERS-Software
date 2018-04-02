@@ -24,9 +24,11 @@ public class DBConnectivity implements DBInterface {
 
     static final String USER = "root";
     static final String PASS = "root";
-
+    
     private Connection connection;
 
+    public Staff loggedUser = null;
+    
     /**
      * Connects to a MySQL database
      *
@@ -247,33 +249,32 @@ public class DBConnectivity implements DBInterface {
                 String lastName = result.getString("lastName");
                 String emailAddress = result.getString("emailAddress");
                 String phoneNumber = result.getString("phoneNumber");
-                Staff user = null;
                 
                 switch (role) {
                     case OfficeManager:
                     {
-                        user = new OfficeManager(staffID, firstName, lastName, emailAddress, phoneNumber);
+                        loggedUser = new OfficeManager(staffID, firstName, lastName, emailAddress, phoneNumber);
                         break;
                     }
                     case ShiftManager:
                     {
-                        user = new ShiftManager(staffID, firstName, lastName, emailAddress, phoneNumber);
+                        loggedUser = new ShiftManager(staffID, firstName, lastName, emailAddress, phoneNumber);
                         break;                    
                     }
                     case Technician:
                     {
-                        user = new Technician(staffID, firstName, lastName, emailAddress, phoneNumber);
+                        loggedUser = new Technician(staffID, firstName, lastName, emailAddress, phoneNumber);
                         break;                    
                     }
                     case Receptionist:
                     {
-                        user = new Receptionist(staffID, firstName, lastName, emailAddress, phoneNumber);
+                        loggedUser = new Receptionist(staffID, firstName, lastName, emailAddress, phoneNumber);
                         break;                    
                     }
                     default:
                         break;
                 }
-                return user;
+                return loggedUser;
             }
         } catch (SQLException ex) {
 
