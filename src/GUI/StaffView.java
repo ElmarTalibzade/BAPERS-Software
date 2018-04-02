@@ -96,7 +96,7 @@ public class StaffView extends javax.swing.JFrame {
     private void initMenuItems() {
         
         label_loggedUser.setText(String.format("Logged in as: %s %s (%s)", staff.getFirstName(), staff.getLastName(), staff.getRole().name()));
-        
+    
         switch (staff.getRole())
         {
             case OfficeManager:

@@ -46,6 +46,7 @@ public class JobBrowserPanel extends javax.swing.JPanel {
         pane_taskProfile.btn_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 toggleProfile(false);
+                getTasks();
             }
         });
     }
@@ -307,10 +308,10 @@ public class JobBrowserPanel extends javax.swing.JPanel {
 
                 task.getJobCode(),
                 task.getId(),
-                task.getDepartment(),
+                bapers.Utils.splitCamelCase(task.getDepartment().toString()),
                 task.getShelfSlot(),
                 "NULL",
-                task.getStatus()
+                bapers.Utils.splitCamelCase(task.getStatus().toString())
 
             });
         }

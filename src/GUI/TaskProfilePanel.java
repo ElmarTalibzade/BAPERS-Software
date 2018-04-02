@@ -94,11 +94,11 @@ public class TaskProfilePanel extends javax.swing.JPanel {
 
         label_status.setText("Status");
 
-        dropdown_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Inactive", "In Progress", "Completed" }));
+        dropdown_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unspecified", "Inactive", "In Progress", "Completed" }));
 
         label_department.setText("Department");
 
-        dropdown_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Copy Room", "Development", "Finishing", "Packing" }));
+        dropdown_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unspecified", "Copy Room", "Development", "Finishing", "Packing" }));
 
         label_taskPrice.setText("Price: {task-price}");
 
