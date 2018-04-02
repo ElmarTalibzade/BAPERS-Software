@@ -123,7 +123,7 @@
                                   <Component id="label_department" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="table" alignment="1" pref="694" max="32767" attributes="0"/>
+                          <Component id="table" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -149,7 +149,7 @@
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_findJob" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="table" pref="288" max="32767" attributes="0"/>
+                      <Component id="table" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -211,7 +211,7 @@
                     <StringItem index="0" value="Any"/>
                     <StringItem index="1" value="Copy Room"/>
                     <StringItem index="2" value="Development"/>
-                    <StringItem index="3" value="Finishing"/>
+                    <StringItem index="3" value="Finishing Room"/>
                     <StringItem index="4" value="Packing"/>
                   </StringArray>
                 </Property>

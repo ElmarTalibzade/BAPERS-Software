@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JobBrowserPanel extends javax.swing.JPanel {
 
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
     
     private TaskProfilePanel pane_taskProfile;
     private CardLayout cardLayout;
@@ -29,18 +29,21 @@ public class JobBrowserPanel extends javax.swing.JPanel {
      */
     public JobBrowserPanel() {
         initComponents();
+        initCardLayout();
+        addListener();
+        getTasks();
+    }
+
+    private void initCardLayout()
+    {
         pane_taskProfile = new TaskProfilePanel();
-        
         card.setLayout(new CardLayout());
         cardLayout = (CardLayout)card.getLayout();
         card.add(pane_taskProfile, "profile");
         card.add(pane_taskBrowser, "browser");
         cardLayout.show(card, "browser");
-        
-        addListener();
-        getTasks();
     }
-
+    
     private void addListener()
     {
         pane_taskProfile.btn_back.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +136,7 @@ public class JobBrowserPanel extends javax.swing.JPanel {
 
         label_department.setText("Department");
 
-        dropdown_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any", "Copy Room", "Development", "Finishing", "Packing" }));
+        dropdown_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any", "Copy Room", "Development", "Finishing Room", "Packing" }));
         dropdown_department.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dropdown_departmentActionPerformed(evt);
@@ -196,7 +199,7 @@ public class JobBrowserPanel extends javax.swing.JPanel {
                         .addGroup(pane_taskBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dropdown_department, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(label_department)))
-                    .addComponent(table, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
+                    .addComponent(table, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         pane_taskBrowserLayout.setVerticalGroup(
@@ -217,7 +220,7 @@ public class JobBrowserPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_findJob)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(table, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                .addComponent(table)
                 .addContainerGap())
         );
 

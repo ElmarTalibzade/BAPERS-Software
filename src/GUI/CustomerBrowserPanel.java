@@ -6,7 +6,10 @@
 package GUI;
 
 import Customer.Customer;
+import Customer.Task;
+import java.awt.CardLayout;
 import java.util.ArrayList;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,16 +18,50 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CustomerBrowserPanel extends javax.swing.JPanel {
 
-    ArrayList<Customer> customers;
+    private ArrayList<Customer> customers;
+    
+    private CustomerProfilePanel pane_customerProfile;
+    private CardLayout cardLayout;
     
     /**
      * Creates new form CustomerBrowserPanel
      */
     public CustomerBrowserPanel() {
         initComponents();
+        initCardLayout();
         getAllCustomers();
+        addListener();
     }
 
+    private void initCardLayout()
+    {
+        pane_customerProfile = new CustomerProfilePanel();
+        card.setLayout(new CardLayout());
+        cardLayout = (CardLayout)card.getLayout();
+        card.add(pane_customerProfile, "profile");
+        card.add(pane_customerBrowser, "browser");
+        cardLayout.show(card, "browser");
+    }
+    
+    private void addListener()
+    {
+        pane_customerProfile.btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toggleProfile(false);
+                getCustomers();
+            }
+        });
+    }
+    
+    private void toggleProfile(boolean state)
+    {
+        String cardName = state ? "profile" : "browser";
+        cardLayout.show(card, cardName);   
+        
+        this.validate();
+        this.repaint();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,48 +71,39 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        label_accountNo = new javax.swing.JLabel();
-        field_accountNo = new javax.swing.JTextField();
+        card = new javax.swing.JPanel();
+        pane_customerBrowser = new javax.swing.JPanel();
         label_holderName = new javax.swing.JLabel();
-        field_holderName = new javax.swing.JTextField();
-        label_firstName = new javax.swing.JLabel();
-        field_firstName = new javax.swing.JTextField();
-        label_lastName = new javax.swing.JLabel();
-        field_lastName = new javax.swing.JTextField();
-        label_phoneNumber = new javax.swing.JLabel();
-        field_phoneNumber = new javax.swing.JTextField();
-        label_email = new javax.swing.JLabel();
-        field_email = new javax.swing.JTextField();
-        box_showDefault = new javax.swing.JCheckBox();
         btn_findCustomer = new javax.swing.JButton();
+        label_email = new javax.swing.JLabel();
+        label_accountNo = new javax.swing.JLabel();
+        field_firstName = new javax.swing.JTextField();
+        field_phoneNumber = new javax.swing.JTextField();
         scroll_customers = new javax.swing.JScrollPane();
         table_customers = new javax.swing.JTable();
+        field_holderName = new javax.swing.JTextField();
+        field_email = new javax.swing.JTextField();
+        label_firstName = new javax.swing.JLabel();
+        field_lastName = new javax.swing.JTextField();
+        box_showDefault = new javax.swing.JCheckBox();
+        field_accountNo = new javax.swing.JTextField();
+        label_lastName = new javax.swing.JLabel();
+        label_phoneNumber = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(706, 398));
 
-        label_accountNo.setText("Account NO");
-
-        field_accountNo.setMinimumSize(new java.awt.Dimension(96, 24));
-        field_accountNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                field_accountNoActionPerformed(evt);
-            }
-        });
-        field_accountNo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                field_accountNoKeyTyped(evt);
-            }
-        });
-
         label_holderName.setText("Holder Name");
 
-        field_holderName.addActionListener(new java.awt.event.ActionListener() {
+        btn_findCustomer.setText("Find Customer");
+        btn_findCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                field_holderNameActionPerformed(evt);
+                btn_findCustomerActionPerformed(evt);
             }
         });
 
-        label_firstName.setText("First Name");
+        label_email.setText("Email");
+
+        label_accountNo.setText("Account NO");
 
         field_firstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,36 +111,9 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
             }
         });
 
-        label_lastName.setText("Last Name");
-
-        field_lastName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                field_lastNameActionPerformed(evt);
-            }
-        });
-
-        label_phoneNumber.setText("Phone Number");
-
         field_phoneNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 field_phoneNumberActionPerformed(evt);
-            }
-        });
-
-        label_email.setText("Email");
-
-        field_email.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                field_emailActionPerformed(evt);
-            }
-        });
-
-        box_showDefault.setText("Show Default Accounts Only");
-
-        btn_findCustomer.setText("Find Customer");
-        btn_findCustomer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_findCustomerActionPerformed(evt);
             }
         });
 
@@ -139,79 +140,120 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        table_customers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_customersMouseClicked(evt);
+            }
+        });
         scroll_customers.setViewportView(table_customers);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        field_holderName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_holderNameActionPerformed(evt);
+            }
+        });
+
+        field_email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_emailActionPerformed(evt);
+            }
+        });
+
+        label_firstName.setText("First Name");
+
+        field_lastName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_lastNameActionPerformed(evt);
+            }
+        });
+
+        box_showDefault.setText("Show Default Accounts Only");
+
+        field_accountNo.setMinimumSize(new java.awt.Dimension(96, 24));
+        field_accountNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_accountNoActionPerformed(evt);
+            }
+        });
+        field_accountNo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                field_accountNoKeyTyped(evt);
+            }
+        });
+
+        label_lastName.setText("Last Name");
+
+        label_phoneNumber.setText("Phone Number");
+
+        javax.swing.GroupLayout pane_customerBrowserLayout = new javax.swing.GroupLayout(pane_customerBrowser);
+        pane_customerBrowser.setLayout(pane_customerBrowserLayout);
+        pane_customerBrowserLayout.setHorizontalGroup(
+            pane_customerBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pane_customerBrowserLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(scroll_customers)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(field_phoneNumber)
+                .addGroup(pane_customerBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scroll_customers)
+                    .addGroup(pane_customerBrowserLayout.createSequentialGroup()
+                        .addGroup(pane_customerBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pane_customerBrowserLayout.createSequentialGroup()
+                                .addGroup(pane_customerBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(field_phoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                                     .addComponent(label_accountNo, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(field_accountNo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(35, 35, 35))
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(pane_customerBrowserLayout.createSequentialGroup()
                                 .addComponent(label_phoneNumber)
                                 .addGap(87, 87, 87)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pane_customerBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pane_customerBrowserLayout.createSequentialGroup()
+                                .addGroup(pane_customerBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pane_customerBrowserLayout.createSequentialGroup()
+                                        .addGroup(pane_customerBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(label_holderName, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(field_holderName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
+                                            .addComponent(field_holderName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
                                         .addGap(35, 35, 35))
-                                    .addGroup(layout.createSequentialGroup()
+                                    .addGroup(pane_customerBrowserLayout.createSequentialGroup()
                                         .addComponent(field_email)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(pane_customerBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pane_customerBrowserLayout.createSequentialGroup()
+                                        .addGroup(pane_customerBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(label_firstName)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(field_firstName)
+                                            .addGroup(pane_customerBrowserLayout.createSequentialGroup()
+                                                .addComponent(field_firstName, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                                                 .addGap(21, 21, 21)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(field_lastName)
+                                        .addGroup(pane_customerBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(field_lastName, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                                             .addComponent(label_lastName)))
-                                    .addGroup(layout.createSequentialGroup()
+                                    .addGroup(pane_customerBrowserLayout.createSequentialGroup()
                                         .addGap(8, 8, 8)
                                         .addComponent(box_showDefault)
                                         .addGap(76, 76, 76)
-                                        .addComponent(btn_findCustomer)))
-                                .addContainerGap())
-                            .addComponent(label_email)))))
+                                        .addComponent(btn_findCustomer))))
+                            .addComponent(label_email))))
+                .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        pane_customerBrowserLayout.setVerticalGroup(
+            pane_customerBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pane_customerBrowserLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pane_customerBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_accountNo)
                     .addComponent(label_holderName)
                     .addComponent(label_firstName)
                     .addComponent(label_lastName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pane_customerBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(field_accountNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(field_holderName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(field_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(field_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pane_customerBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_phoneNumber)
                     .addComponent(label_email))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pane_customerBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(field_phoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_findCustomer)
                     .addComponent(field_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,6 +261,28 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scroll_customers, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                 .addContainerGap())
+        );
+
+        javax.swing.GroupLayout cardLayout = new javax.swing.GroupLayout(card);
+        card.setLayout(cardLayout);
+        cardLayout.setHorizontalGroup(
+            cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pane_customerBrowser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        cardLayout.setVerticalGroup(
+            cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pane_customerBrowser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(card, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(card, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -256,6 +320,16 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
     private void field_accountNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_accountNoActionPerformed
         getCustomers();
     }//GEN-LAST:event_field_accountNoActionPerformed
+
+    private void table_customersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_customersMouseClicked
+        if (evt.getClickCount() == 2)
+        {
+            JTable targetTable = (JTable)evt.getSource();
+            Customer customer = customers.get(targetTable.getSelectedRow());
+            pane_customerProfile.setCustomer(customer);
+            toggleProfile(true);
+        }
+    }//GEN-LAST:event_table_customersMouseClicked
 
     private void getAllCustomers() {
         customers = bapers.Bapers.DB.getCustomers();
@@ -298,6 +372,7 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox box_showDefault;
     private javax.swing.JButton btn_findCustomer;
+    private javax.swing.JPanel card;
     private javax.swing.JTextField field_accountNo;
     private javax.swing.JTextField field_email;
     private javax.swing.JTextField field_firstName;
@@ -310,6 +385,7 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
     private javax.swing.JLabel label_holderName;
     private javax.swing.JLabel label_lastName;
     private javax.swing.JLabel label_phoneNumber;
+    private javax.swing.JPanel pane_customerBrowser;
     private javax.swing.JScrollPane scroll_customers;
     private javax.swing.JTable table_customers;
     // End of variables declaration//GEN-END:variables

@@ -6,7 +6,8 @@
 package GUI;
 
 import Staff.*;
-
+import bapers.Bapers;
+import bapers.Utils;
 /**
  * Base GUI for all main operations. This is where all menu items are shown based on user's role.
  * @author Elmar Talibzade
@@ -47,6 +48,7 @@ public class StaffView extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(720, 480));
         setName("Staff View"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(720, 480));
 
         label_loggedUser.setText("Logged in as: staff-name (staff-role)");
 
@@ -57,17 +59,20 @@ public class StaffView extends javax.swing.JFrame {
             }
         });
 
+        tabbedContent.setAlignmentX(0.0F);
+        tabbedContent.setAlignmentY(0.0F);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tabbedContent)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label_loggedUser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 437, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 431, Short.MAX_VALUE)
                         .addComponent(btn_logout)))
                 .addContainerGap())
         );
@@ -79,7 +84,7 @@ public class StaffView extends javax.swing.JFrame {
                     .addComponent(btn_logout)
                     .addComponent(label_loggedUser))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tabbedContent, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                .addComponent(tabbedContent, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -88,14 +93,14 @@ public class StaffView extends javax.swing.JFrame {
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
         this.setVisible(false);
-        bapers.Bapers.loginView.setVisible(true);
+        Bapers.loginView.setVisible(true);
         
         this.dispose();
     }//GEN-LAST:event_btn_logoutActionPerformed
     
     private void initMenuItems() {
         
-        label_loggedUser.setText(String.format("Logged in as: %s %s (%s)", staff.getFirstName(), staff.getLastName(), staff.getRole().name()));
+        label_loggedUser.setText(String.format("Logged in as: %s %s (%s)", staff.getFirstName(), staff.getLastName(), Utils.splitCamelCase(staff.getRole().name())));
     
         switch (staff.getRole())
         {
