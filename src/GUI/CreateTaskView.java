@@ -23,6 +23,7 @@ public class CreateTaskView extends javax.swing.JDialog {
     public CreateTaskView(JFrame parent, boolean modal, String jobCode, int taskId) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         
         this.jobCode = jobCode;
         this.taskId = taskId;
