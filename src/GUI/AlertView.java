@@ -9,12 +9,12 @@ package GUI;
  *
  * @author Elmar Talibzade
  */
-public class AlertWindow extends javax.swing.JFrame {
+public class AlertView extends javax.swing.JFrame {
 
     /**
      * Creates new form AlertWindow
      */
-    public AlertWindow() {
+    public AlertView() {
         initComponents();
     }
 

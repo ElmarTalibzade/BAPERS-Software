@@ -151,6 +151,11 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         });
 
         btn_createJob.setText("Create Job");
+        btn_createJob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_createJobActionPerformed(evt);
+            }
+        });
 
         table_tasks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -247,7 +252,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(label_holderName)
                                     .addComponent(label_email))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                                .addGap(80, 80, 80)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(label_discountRate)
@@ -257,7 +262,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
                                         .addComponent(label_discountType)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(dropdown_discountType, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(96, 96, 96)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_save, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_createJob, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -330,6 +335,10 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
     private void btn_setPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_setPaymentActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_setPaymentActionPerformed
+
+    private void btn_createJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createJobActionPerformed
+        // CREATE JOB
+    }//GEN-LAST:event_btn_createJobActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

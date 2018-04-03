@@ -71,7 +71,7 @@
                                   <Component id="label_holderName" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="label_email" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="67" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="label_discountRate" min="-2" max="-2" attributes="0"/>
@@ -84,7 +84,7 @@
                                       <Component id="dropdown_discountType" min="-2" pref="154" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                              <EmptySpace pref="145" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -266,6 +266,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Create Job"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_createJobActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="table_jobs">
       <AuxValues>

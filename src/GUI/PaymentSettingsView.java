@@ -9,12 +9,12 @@ package GUI;
  *
  * @author Elmar Talibzade
  */
-public class PaymentSettingsWindow extends javax.swing.JFrame {
+public class PaymentSettingsView extends javax.swing.JFrame {
 
     /**
      * Creates new form PaymentSettingsWindow
      */
-    public PaymentSettingsWindow() {
+    public PaymentSettingsView() {
         initComponents();
     }
 

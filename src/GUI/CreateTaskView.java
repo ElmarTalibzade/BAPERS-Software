@@ -5,18 +5,23 @@
  */
 package GUI;
 
-import Customer.Task;
+import Customer.*;
 
 /**
  *
  * @author Elmar Talibzade
  */
-public class CreateTaskWindow extends javax.swing.JFrame {
+public class CreateTaskView extends javax.swing.JFrame {
 
+    private Customer customer;
+    private CreateJobView parent;
+    
     /**
      * Creates new form CreateTaskWindow
      */
-    public CreateTaskWindow() {
+    public CreateTaskView(Customer customer, CreateJobView parent) {
+        this.customer = customer;
+        this.parent = parent;
         initComponents();
     }
 

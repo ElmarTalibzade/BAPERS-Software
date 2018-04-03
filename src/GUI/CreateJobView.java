@@ -5,19 +5,24 @@
  */
 package GUI;
 
+import Customer.*;
+
 /**
  *
  * @author Elmar Talibzade
  */
 public class CreateJobView extends javax.swing.JFrame {
 
+    private Customer customer;
+    
     /**
      * Creates new form CreateJobView
      */
-    public CreateJobView() {
+    public CreateJobView(Customer customer) {
+        this.customer = customer;
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -152,7 +157,7 @@ public class CreateJobView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_addTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addTaskActionPerformed
-        
+        // open add task window
     }//GEN-LAST:event_btn_addTaskActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
