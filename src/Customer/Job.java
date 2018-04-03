@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Job {
     private int staffCode;
     private String code;
-    private ArrayList<Task> task;
+    private ArrayList<Task> tasks;
     
     private double price;
     private float discountRate;
@@ -44,12 +44,12 @@ public class Job {
      * @param shelf Shelf slot of this job
      * @param priority Priority for this job
      */
-    public Job(int invoiceNo, String code, int staffCode, ArrayList<Task> task, double price, float discountRate, int customerId, String specialInstructions, String shelf, int priority) {
+    public Job(int invoiceNo, String code, int staffCode, ArrayList<Task> task, float discountRate, int customerId, String specialInstructions, String shelf, int priority) {
         this.invoiceNo = invoiceNo;           
         this.staffCode = staffCode;
         this.code = code;
-        this.task = task;
-        this.price = price;
+        this.tasks = task;
+        getPrice();     // calculates the price based on all tasks
         this.discountRate = discountRate;
         this.customerId = customerId;
         this.specialInstructions = specialInstructions;
@@ -111,7 +111,7 @@ public class Job {
      * @return array of tasks
      */
     public ArrayList<Task> getTasks() {
-        return task;
+        return tasks;
     }
 
     /**
@@ -119,6 +119,14 @@ public class Job {
      * @return price of the Job
      */
     public double getPrice() {
+        
+        price = 0;
+        
+        for (Task task : tasks)
+        {
+            price += task.getPrice();
+        }
+        
         return price;
     }
     

@@ -6,6 +6,9 @@
 package GUI;
 
 import Customer.*;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -58,6 +61,23 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
             }
         }
         
+    }
+    
+    private void addListener(CreateJobView jobView)
+    {
+        jobView.btn_create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateJob(jobView.getJob());
+                jobView.dispose();
+                assignValues();
+            }
+        });
+    }
+    
+    private void CreateJob(Job newJob)
+    {
+        customer.getJobs().add(newJob);
+        bapers.Bapers.DB.createJob(newJob);
     }
     
     /**
@@ -337,7 +357,10 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_setPaymentActionPerformed
 
     private void btn_createJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createJobActionPerformed
-        // CREATE JOB
+        
+        CreateJobView createJobView = new CreateJobView((JFrame) SwingUtilities.getWindowAncestor(this), true, customer.getAccountNo());
+        addListener(createJobView);
+        createJobView.setVisible(true);
     }//GEN-LAST:event_btn_createJobActionPerformed
 
 

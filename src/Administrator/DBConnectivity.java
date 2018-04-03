@@ -131,8 +131,11 @@ public class DBConnectivity implements DBInterface {
     {
         String query = String.format("INSERT INTO `staff` "
                 + "(role, firstName, lastName, emailAddress, phonenumber, password) VALUES(" 
-                + "'%d', '%s', '%s', '%s', '%s', '%s')", 
-                staff.getRole().ordinal(), staff.getFirstName(), staff.getLastName(), staff.getAddress(), staff.getPhone(), password);
+                + "'%s', '%s', '%s', '%s', '%s', '%s')", 
+                staff.getRole().ordinal(), staff.getFirstName(), 
+                staff.getLastName(), staff.getAddress(), 
+                staff.getPhone(), password);
+        
         return storeData(query);
     }
     
@@ -144,26 +147,75 @@ public class DBConnectivity implements DBInterface {
      * @return Returns true if the job data has been successfully inserted.
      */
     public boolean createJob(Job job) {
-        String query = String.format("INSERT INTO `jobs` "
-                + "(code, ownerNo, staffNo, invoiceNo, shelf, status, "
-                + "priority, discountRate, price, specialInstructions) VALUES(" 
-                + "'%s','%d', '%d', '%d', '%s', '%d', '%d', '%f', '%f', '%s')", 
-                job.getCode(), job.getCustomerId(), job.getStaffCode(), job.getInvoiceNo(), 
-                job.getShelf(), job.getStatus(), job.getPriority(), job.getDiscountRate(), 
-                job.getPrice(), job.getSpecialInstructions());
         
-        for(Task task : job.getTasks())
+        int newInvoiceNo = createInvoice(job.getPrice());
+        
+        if (newInvoiceNo > -1)
         {
-            addTask(job.getCode(), task);
+            String query = String.format("INSERT INTO `jobs` "
+                    + "(`code`, `ownerNo`, `staffNo`, `invoiceNo`, `shelf`, `status`, "
+                    + "`priority`, `discountRate`, `price`, `specialInstructions`) VALUES(" 
+                    + "'%s','%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", 
+                    job.getCode(), job.getCustomerId(), job.getStaffCode(), newInvoiceNo, 
+                    job.getShelf(), job.getStatus(), job.getPriority(), job.getDiscountRate(), 
+                    job.getPrice(), job.getSpecialInstructions());
+
+            if (storeData(query))
+            {
+                for(Task task : job.getTasks())
+                {
+                    if (!addTask(job.getCode(), task))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+        else
+        {
+            return false;
+        }
+    }
+    
+    private int createInvoice(double totalAmount)
+    {
+        String query = "INSERT INTO `invoice` (`totalAmount`) VALUES('" + totalAmount + "')";
         
-        return storeData(query);
+        try 
+        {
+            if (storeData(query))
+            {
+                ResultSet res = retrieveData("SELECT LAST_INSERT_ID()");
+                if (res != null)
+                {
+                    res.next();
+                    return res.getInt(1);
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+
+            return -1;
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+            return -1;
+        }
     }
     
     private boolean addTask(String jobCode, Task task) {
         String query = String.format("INSERT INTO `tasks` "
-                + "(jobCode, status, price, description, shelfSlot, department, discountRate) "
-                + "VALUES('%s, '%i', '%d', '%s', '%s', '%i', '%f')",
+                + "(`jobCode`, `status`, `price`, `description`, `shelfSlot`, `department`, `discountRate`) "
+                + "VALUES('%s', '%d', '%,.2f', '%s', '%s', '%d', '%f')",
                 jobCode, task.getStatus().ordinal(), task.getPrice(), task.getDescription(), 
                 task.getShelfSlot(), task.getDepartment().ordinal(), task.getDiscountRate());
         
@@ -193,9 +245,9 @@ public class DBConnectivity implements DBInterface {
     public boolean updateTask(Task task) {
         String query = String.format("UPDATE `tasks` SET "
                 + "`description` = '%s', " +
-                "`status` = '%x', "
-                + "`department` = '%x' "
-                + "WHERE `taskID` = '%x' "
+                "`status` = '%d', "
+                + "`department` = '%d' "
+                + "WHERE `taskID` = '%d' "
                 + "AND `jobCode` = '%s'",
                 task.getDescription(),
                 task.getStatus().ordinal(),
@@ -408,7 +460,6 @@ public class DBConnectivity implements DBInterface {
                         result.getString("code"),
                         result.getInt("staffNo"),
                         getTasks(result.getString("code")),
-                        result.getDouble("price"),
                         result.getFloat("discountRate"),
                         result.getInt("ownerNo"),
                         result.getString("specialInstructions"),
@@ -535,7 +586,6 @@ public class DBConnectivity implements DBInterface {
                         result.getString("code"),
                         result.getInt("staffNo"),
                         getTasks(result.getString("code"), departmentIndex),
-                        result.getDouble("price"),
                         result.getFloat("discountRate"),
                         result.getInt("ownerNo"),
                         result.getString("specialInstructions"),

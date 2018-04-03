@@ -6,21 +6,75 @@
 package GUI;
 
 import Customer.*;
+import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Elmar Talibzade
  */
-public class CreateJobView extends javax.swing.JFrame {
+public class CreateJobView extends javax.swing.JDialog {
 
-    private Customer customer;
+    private ArrayList<Task> tasks;
+    private int customerNo;
     
     /**
      * Creates new form CreateJobView
      */
-    public CreateJobView(Customer customer) {
-        this.customer = customer;
+    public CreateJobView(JFrame parent, boolean modal, int customerNo) {
+        super(parent, modal);
         initComponents();
+        
+        tasks = new ArrayList<Task>();
+        this.customerNo = customerNo;
+        field_accountNo.setText("" + customerNo);
+    }
+    
+    public Job getJob()
+    {        
+        return new Job(1, 
+                field_jobCode.getText(), 
+                bapers.Bapers.getUser().getAccountNo(), 
+                tasks, 
+                0.0f, 
+                customerNo, 
+                field_instructions.getText(),
+                "shelfNo",
+                0
+            );
+    }
+    
+    private void addListener(CreateTaskView taskView)
+    {
+        taskView.btn_create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addTask(taskView.getTask());
+                taskView.dispose();
+            }
+        });
+    }
+    
+    private void addTask(Task newTask)
+    {
+        tasks.add(newTask);
+        updateTable();
+    }
+    
+    private void updateTable()
+    {
+        DefaultTableModel model = (DefaultTableModel)table_tasks.getModel();
+        
+        while (model.getRowCount() > 0)
+        {
+            model.removeRow(0);
+        }
+        
+        for (Task task : tasks)
+        {
+            model.addRow(new Object[] {task.getId(), bapers.Utils.splitCamelCase(task.getDepartment().toString()), task.getPrice(), task.getDescription()});
+        }
     }
     
     /**
@@ -37,15 +91,15 @@ public class CreateJobView extends javax.swing.JFrame {
         label_jobCode = new javax.swing.JLabel();
         field_jobCode = new javax.swing.JTextField();
         label_instructions = new javax.swing.JLabel();
-        field_instructions = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        pane_instructions = new javax.swing.JScrollPane();
+        field_instructions = new javax.swing.JTextArea();
         label_tasks = new javax.swing.JLabel();
-        table_tasks = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        pane_tasks = new javax.swing.JScrollPane();
+        table_tasks = new javax.swing.JTable();
         btn_addTask = new javax.swing.JButton();
-        btn_createJob = new javax.swing.JButton();
+        btn_create = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Create Job");
         setResizable(false);
 
@@ -55,14 +109,14 @@ public class CreateJobView extends javax.swing.JFrame {
 
         label_instructions.setText("Special Instructions");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        field_instructions.setViewportView(jTextArea1);
+        field_instructions.setColumns(20);
+        field_instructions.setRows(5);
+        pane_instructions.setViewportView(field_instructions);
 
         label_tasks.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         label_tasks.setText("Tasks");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table_tasks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -71,7 +125,7 @@ public class CreateJobView extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -85,19 +139,19 @@ public class CreateJobView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        table_tasks.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(10);
+        pane_tasks.setViewportView(table_tasks);
+        if (table_tasks.getColumnModel().getColumnCount() > 0) {
+            table_tasks.getColumnModel().getColumn(0).setPreferredWidth(10);
         }
 
-        btn_addTask.setText("Add Task");
+        btn_addTask.setText("Add New");
         btn_addTask.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_addTaskActionPerformed(evt);
             }
         });
 
-        btn_createJob.setText("Create Job");
+        btn_create.setText("Create Job");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,8 +160,15 @@ public class CreateJobView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(table_tasks)
-                    .addComponent(field_instructions)
+                    .addComponent(pane_tasks)
+                    .addComponent(pane_instructions)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_create))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(label_tasks)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_addTask))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label_instructions)
@@ -119,14 +180,7 @@ public class CreateJobView extends javax.swing.JFrame {
                                 .addComponent(label_jobCode)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(field_jobCode, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 223, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_createJob))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(label_tasks)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_addTask)))
+                        .addGap(0, 223, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -141,15 +195,15 @@ public class CreateJobView extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(label_instructions)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(field_instructions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pane_instructions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_tasks)
                     .addComponent(btn_addTask))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(table_tasks, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pane_tasks, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_createJob)
+                .addComponent(btn_create)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -157,21 +211,23 @@ public class CreateJobView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_addTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addTaskActionPerformed
-        // open add task window
+        CreateTaskView taskView = new CreateTaskView((JFrame)SwingUtilities.getWindowAncestor(this), true, field_jobCode.getText(), tasks.size());
+        addListener(taskView);
+        taskView.setVisible(true);
     }//GEN-LAST:event_btn_addTaskActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_addTask;
-    private javax.swing.JButton btn_createJob;
+    public javax.swing.JButton btn_create;
     private javax.swing.JTextField field_accountNo;
-    private javax.swing.JScrollPane field_instructions;
+    private javax.swing.JTextArea field_instructions;
     private javax.swing.JTextField field_jobCode;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel label_accountNo;
     private javax.swing.JLabel label_instructions;
     private javax.swing.JLabel label_jobCode;
     private javax.swing.JLabel label_tasks;
-    private javax.swing.JScrollPane table_tasks;
+    private javax.swing.JScrollPane pane_instructions;
+    private javax.swing.JScrollPane pane_tasks;
+    private javax.swing.JTable table_tasks;
     // End of variables declaration//GEN-END:variables
 }

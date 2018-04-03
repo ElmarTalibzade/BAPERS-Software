@@ -6,25 +6,28 @@
 package GUI;
 
 import Customer.*;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Elmar Talibzade
  */
-public class CreateTaskView extends javax.swing.JFrame {
+public class CreateTaskView extends javax.swing.JDialog {
 
-    private Customer customer;
-    private CreateJobView parent;
+    private String jobCode;
+    private int taskId;
     
     /**
      * Creates new form CreateTaskWindow
      */
-    public CreateTaskView(Customer customer, CreateJobView parent) {
-        this.customer = customer;
-        this.parent = parent;
+    public CreateTaskView(JFrame parent, boolean modal, String jobCode, int taskId) {
+        super(parent, modal);
         initComponents();
+        
+        this.jobCode = jobCode;
+        this.taskId = taskId;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,11 +42,11 @@ public class CreateTaskView extends javax.swing.JFrame {
         label_department = new javax.swing.JLabel();
         dropdown_department = new javax.swing.JComboBox<>();
         label_description = new javax.swing.JLabel();
-        field_description = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        scroll_description = new javax.swing.JScrollPane();
+        field_description = new javax.swing.JTextArea();
         btn_create = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Create Task");
         setAlwaysOnTop(true);
         setName("Create Task"); // NOI18N
@@ -53,20 +56,15 @@ public class CreateTaskView extends javax.swing.JFrame {
 
         label_department.setText("Department");
 
-        dropdown_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Copy Room", "Development", "Finishing", "Packing" }));
+        dropdown_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unspecified", "Copy Room", "Development", "Finishing", "Packing" }));
 
         label_description.setText("Description");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        field_description.setViewportView(jTextArea1);
+        field_description.setColumns(20);
+        field_description.setRows(5);
+        scroll_description.setViewportView(field_description);
 
         btn_create.setText("Create");
-        btn_create.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_createActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,7 +75,7 @@ public class CreateTaskView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(field_description, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                            .addComponent(scroll_description, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(label_price)
                                 .addGap(55, 55, 55)
@@ -108,7 +106,7 @@ public class CreateTaskView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label_description)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(field_description, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scroll_description, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_create)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -116,19 +114,27 @@ public class CreateTaskView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btn_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createActionPerformed
-
-    }//GEN-LAST:event_btn_createActionPerformed
-
+    
+    public Task getTask()
+    {
+        return new Task(
+            jobCode,
+            taskId, 
+            Status.Inactive, 
+            Double.parseDouble(field_price.getText()),
+            field_description.getText(),
+            "shelfNo",
+            DepartmentType.values()[dropdown_department.getSelectedIndex()], 0.0f, null, null);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_create;
+    public javax.swing.JButton btn_create;
     private javax.swing.JComboBox<String> dropdown_department;
-    private javax.swing.JScrollPane field_description;
+    private javax.swing.JTextArea field_description;
     private javax.swing.JTextField field_price;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel label_department;
     private javax.swing.JLabel label_description;
     private javax.swing.JLabel label_price;
+    private javax.swing.JScrollPane scroll_description;
     // End of variables declaration//GEN-END:variables
 }

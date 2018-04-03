@@ -61,11 +61,6 @@ public class StaffView extends javax.swing.JFrame {
         setName("Staff View"); // NOI18N
         setPreferredSize(new java.awt.Dimension(720, 480));
         setSize(new java.awt.Dimension(720, 480));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-        });
 
         label_loggedUser.setText("Logged in as: staff-name (staff-role)");
 
@@ -117,10 +112,6 @@ public class StaffView extends javax.swing.JFrame {
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
         logOut();
     }//GEN-LAST:event_btn_logoutActionPerformed
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        
-    }//GEN-LAST:event_formWindowClosed
     
     private void initMenuItems() {
         
