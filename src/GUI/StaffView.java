@@ -7,7 +7,7 @@ package GUI;
 
 import Staff.*;
 import bapers.Bapers;
-import bapers.Utils;
+import bapers.Utils; 
 /**
  * Base GUI for all main operations. This is where all menu items are shown based on user's role.
  * @author Elmar Talibzade
@@ -49,6 +49,7 @@ public class StaffView extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(720, 480));
         setName("Staff View"); // NOI18N
         setPreferredSize(new java.awt.Dimension(720, 480));
+        setSize(new java.awt.Dimension(720, 480));
 
         label_loggedUser.setText("Logged in as: staff-name (staff-role)");
 
@@ -83,8 +84,8 @@ public class StaffView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_logout)
                     .addComponent(label_loggedUser))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tabbedContent, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tabbedContent, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

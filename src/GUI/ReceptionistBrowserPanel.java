@@ -75,7 +75,7 @@ public class ReceptionistBrowserPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(table_receptionists, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
+                    .addComponent(table_receptionists)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -99,7 +99,7 @@ public class ReceptionistBrowserPanel extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addComponent(label_receptionists)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(table_receptionists, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                .addComponent(table_receptionists)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
