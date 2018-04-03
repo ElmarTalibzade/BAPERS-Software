@@ -8,6 +8,9 @@ package GUI;
 import Staff.*;
 import bapers.Bapers;
 import bapers.Utils; 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 /**
  * Base GUI for all main operations. This is where all menu items are shown based on user's role.
  * @author Elmar Talibzade
@@ -28,8 +31,16 @@ public class StaffView extends javax.swing.JFrame {
         initComponents();
         initMenuItems();
         this.setLocationRelativeTo(null);
+        
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent event) {
+                logOut();
+            }
+        });
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,13 +54,18 @@ public class StaffView extends javax.swing.JFrame {
         btn_logout = new javax.swing.JButton();
         tabbedContent = new javax.swing.JTabbedPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("BAPERS");
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(720, 480));
         setName("Staff View"); // NOI18N
         setPreferredSize(new java.awt.Dimension(720, 480));
         setSize(new java.awt.Dimension(720, 480));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         label_loggedUser.setText("Logged in as: staff-name (staff-role)");
 
@@ -92,12 +108,19 @@ public class StaffView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
-        this.setVisible(false);
+    private void logOut()
+    {
         Bapers.loginView.setVisible(true);
-        
         this.dispose();
+    }
+    
+    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
+        logOut();
     }//GEN-LAST:event_btn_logoutActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        
+    }//GEN-LAST:event_formWindowClosed
     
     private void initMenuItems() {
         
