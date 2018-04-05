@@ -225,20 +225,23 @@ public class BackupsPanel extends javax.swing.JPanel {
 
     private void btn_backupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backupActionPerformed
         try {
-            String user = "root";
-            String password = "";
-            String database = "bloomsday";
-            String pathToMySQL = "/usr/local/mysql-5.7.21-macos10.13-x86_64/bin/";
-            String CMD = "";
-            
-            if(password.equals(""))
-                CMD = pathToMySQL + "mysqldump -u " + user + " --add-drop-database -B " + database + " -r " + saveLocation;
-            else
-                CMD = pathToMySQL + "mysqldump -u " + user + " -p " + password + "--add-drop-database -B " + database + " -r " + saveLocation;
-            System.out.println(CMD);
-            
-            Runtime.getRuntime().exec(CMD);
-            JOptionPane.showMessageDialog(this, "Backup File Created.", "Done", 1);
+            if(saveLocation != null) {
+                String user = "root";
+                String password = "";
+                String database = "bloomsday";
+                String pathToMySQL = "/usr/local/mysql-5.7.21-macos10.13-x86_64/bin/";
+                String CMD = "";
+
+                if(password.equals(""))
+                    CMD = pathToMySQL + "mysqldump -u " + user + " --add-drop-database -B " + database + " -r " + saveLocation;
+                else
+                    CMD = pathToMySQL + "mysqldump -u " + user + " -p " + password + "--add-drop-database -B " + database + " -r " + saveLocation;
+                System.out.println(CMD);
+
+                Runtime.getRuntime().exec(CMD);
+                JOptionPane.showMessageDialog(this, "Backup File Created.", "Done", 1);
+            } else 
+                JOptionPane.showMessageDialog(this, "Invalid location",  "Backup failed - no location was selected.", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -270,31 +273,34 @@ public class BackupsPanel extends javax.swing.JPanel {
 
     private void btn_restoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_restoreActionPerformed
         try {
-            String user = "root";
-            String password = "";
-            String database = "bloomsday";
-            String pathToMySQL = "/usr/local/mysql-5.7.21-macos10.13-x86_64/bin/";
-            
-            String arrayCommand[] = new String[]{pathToMySQL + "mysql", database, "-u", user, "-e", " source " + openLocation};
-            String arrayCommand2[] = new String[]{pathToMySQL + "mysql", database, "-u", user, "-p" + password, "-e", " source " + openLocation};
-            
-            Process runtimeProcess;
-            if(password.equals(""))
-            {
-                runtimeProcess = Runtime.getRuntime().exec(arrayCommand);
-                System.out.println(Arrays.toString(arrayCommand));
-            }
-            else
-            {
-                runtimeProcess = Runtime.getRuntime().exec(arrayCommand2);
-                System.out.println(Arrays.toString(arrayCommand2));
-            }
-            
-            int processStatus = runtimeProcess.waitFor();
-            if (processStatus == 1)
-                System.out.println("failed");
-            else if (processStatus == 0)
-                System.out.println("success");
+            if(openLocation != null) {
+                String user = "root";
+                String password = "";
+                String database = "bloomsday";
+                String pathToMySQL = "/usr/local/mysql-5.7.21-macos10.13-x86_64/bin/";
+
+                String arrayCommand[] = new String[]{pathToMySQL + "mysql", database, "-u", user, "-e", " source " + openLocation};
+                String arrayCommand2[] = new String[]{pathToMySQL + "mysql", database, "-u", user, "-p" + password, "-e", " source " + openLocation};
+
+                Process runtimeProcess;
+                if(password.equals(""))
+                {
+                    runtimeProcess = Runtime.getRuntime().exec(arrayCommand);
+                    System.out.println(Arrays.toString(arrayCommand));
+                }
+                else
+                {
+                    runtimeProcess = Runtime.getRuntime().exec(arrayCommand2);
+                    System.out.println(Arrays.toString(arrayCommand2));
+                }
+
+                int processStatus = runtimeProcess.waitFor();
+                if (processStatus == 1)
+                    System.out.println("failed");
+                else if (processStatus == 0)
+                    System.out.println("success");
+            } else
+                JOptionPane.showMessageDialog(this, "Invalid location",  "Backup failed - no location was selected.", JOptionPane.WARNING_MESSAGE);
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -324,27 +330,30 @@ public class BackupsPanel extends javax.swing.JPanel {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(isInteger(jTextField1.getText())){
-            int number = Integer.parseInt(jTextField1.getText());
-            int option = jComboBox1.getSelectedIndex();
-            if(option == 0)
-                option = 3600; // one hour
-            else if(option == 1)
-                option = 86400; // one day
-            else if(option == 2)
-                option = 604800; // one week
-            else if(option == 3) 
-                option = 86400 * 30; // one month
-            else if(option == 4)
-                option = 86400 * 30 * 365; // one year
-            
-            
-            
-            Timer t = new Timer();
-            bapers.BackupTask backupTask = new bapers.BackupTask(backupLocation);
+            if(backupLocation != null) {
+                int number = Integer.parseInt(jTextField1.getText());
+                int option = jComboBox1.getSelectedIndex();
+                if(option == 0)
+                    option = 3600; // one hour
+                else if(option == 1)
+                    option = 86400; // one day
+                else if(option == 2)
+                    option = 604800; // one week
+                else if(option == 3) 
+                    option = 86400 * 30; // one month
+                else if(option == 4)
+                    option = 86400 * 30 * 365; // one year
 
-            int oneSecond = 1000;
 
-            t.scheduleAtFixedRate(backupTask, 0, oneSecond * option * number);
+
+                Timer t = new Timer();
+                bapers.BackupTask backupTask = new bapers.BackupTask(backupLocation);
+
+                int oneSecond = 1000;
+
+                t.scheduleAtFixedRate(backupTask, 0, oneSecond * option * number);
+            } else
+                JOptionPane.showMessageDialog(this, "Invalid location",  "Backup failed - no location was selected.", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
