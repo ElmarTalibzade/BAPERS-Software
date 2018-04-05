@@ -28,7 +28,7 @@ public class BackupTask extends TimerTask{
             System.out.println(CMD);
             
             Runtime.getRuntime().exec(CMD);
-            System.out.println("[BACKUP]: Backup created sucesfully.");
+            System.out.println("[BACKUP]: Automated backup created sucesfully.");
         } catch (Exception e) {
             e.printStackTrace();
         }
