@@ -226,9 +226,9 @@ public class BackupsPanel extends javax.swing.JPanel {
     private void btn_backupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backupActionPerformed
         try {
             String user = "root";
-            String password = "";
+            String password = "root";
             String database = "bloomsday";
-            String pathToMySQL = "/usr/local/mysql-5.7.21-macos10.13-x86_64/bin/";
+            String pathToMySQL = "D:/MySQL/MySQL Workbench 6.3 CE/";
             String CMD = "";
             
             if(password.equals(""))

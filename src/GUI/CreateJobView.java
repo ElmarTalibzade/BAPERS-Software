@@ -8,6 +8,7 @@ package GUI;
 import Customer.*;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -47,9 +48,9 @@ public class CreateJobView extends javax.swing.JDialog {
             );
     }
     
-    private void addListener(CreateTaskView taskView)
+    private void listener_addCreateTask(CreateTaskView taskView)
     {
-        taskView.btn_create.addActionListener(new java.awt.event.ActionListener() {
+        taskView.btn_save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addTask(taskView.getTask());
                 taskView.dispose();
@@ -57,9 +58,38 @@ public class CreateJobView extends javax.swing.JDialog {
         });
     }
     
+    private void listener_editTask(CreateTaskView taskView)
+    {
+        taskView.btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeTask(taskView.getId());
+                taskView.dispose();
+            }
+        });
+        
+        taskView.btn_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateTask(taskView.getId(), taskView.getTask());
+                taskView.dispose();
+            }
+        });
+    }
+    
+    private void updateTask(int index, Task task)
+    {
+        tasks.set(index, task);
+        updateTable();
+    }
+    
     private void addTask(Task newTask)
     {
         tasks.add(newTask);
+        updateTable();
+    }
+    
+    private void removeTask(int index)
+    {
+        tasks.remove(index);
         updateTable();
     }
     
@@ -140,6 +170,11 @@ public class CreateJobView extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        table_tasks.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_tasksMouseClicked(evt);
+            }
+        });
         pane_tasks.setViewportView(table_tasks);
         if (table_tasks.getColumnModel().getColumnCount() > 0) {
             table_tasks.getColumnModel().getColumn(0).setPreferredWidth(10);
@@ -211,11 +246,32 @@ public class CreateJobView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_addTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addTaskActionPerformed
-        CreateTaskView taskView = new CreateTaskView((JFrame)SwingUtilities.getWindowAncestor(this), true, field_jobCode.getText(), tasks.size());
-        addListener(taskView);
-        taskView.setVisible(true);
+        createTask();
     }//GEN-LAST:event_btn_addTaskActionPerformed
 
+    private void table_tasksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_tasksMouseClicked
+        if (evt.getClickCount() == 2)
+        {
+            JTable targetTable = (JTable)evt.getSource();
+            Task task = tasks.get(targetTable.getSelectedRow());
+            editTask(task.getId());
+        }
+    }//GEN-LAST:event_table_tasksMouseClicked
+
+    private void editTask(int id)
+    {
+        CreateTaskView taskView = new CreateTaskView((JFrame)SwingUtilities.getWindowAncestor(this), true, tasks.get(id));
+        listener_editTask(taskView);
+        taskView.setVisible(true);
+    }
+    
+    private void createTask()
+    {
+        CreateTaskView taskView = new CreateTaskView((JFrame)SwingUtilities.getWindowAncestor(this), true, field_jobCode.getText(), tasks.size());
+        listener_addCreateTask(taskView);
+        taskView.setVisible(true);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_addTask;
     public javax.swing.JButton btn_create;

@@ -16,6 +16,7 @@ public class CreateTaskView extends javax.swing.JDialog {
 
     private String jobCode;
     private int taskId;
+    private Task task;      // used when editing tasks
     
     /**
      * Creates new form CreateTaskWindow
@@ -27,6 +28,25 @@ public class CreateTaskView extends javax.swing.JDialog {
         
         this.jobCode = jobCode;
         this.taskId = taskId;
+        btn_delete.setVisible(false);
+    }
+    
+    /**
+     * Creates new form CreateTaskWindow and assigns existing task data to fields.
+     */
+    public CreateTaskView(JFrame parent, boolean modal, Task task)
+    {
+        super(parent, modal);
+        initComponents();
+        this.setLocationRelativeTo(null);
+        
+        this.task = task;
+        this.taskId = task.getId();
+        this.jobCode = task.getJobCode();
+        
+        field_price.setText("" + task.getPrice());
+        field_description.setText(task.getDescription());
+        dropdown_department.setSelectedIndex(task.getDepartment().ordinal());
     }
     
     /**
@@ -45,7 +65,8 @@ public class CreateTaskView extends javax.swing.JDialog {
         label_description = new javax.swing.JLabel();
         scroll_description = new javax.swing.JScrollPane();
         field_description = new javax.swing.JTextArea();
-        btn_create = new javax.swing.JButton();
+        btn_save = new javax.swing.JButton();
+        btn_delete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Create Task");
@@ -65,32 +86,33 @@ public class CreateTaskView extends javax.swing.JDialog {
         field_description.setRows(5);
         scroll_description.setViewportView(field_description);
 
-        btn_create.setText("Create");
+        btn_save.setText("Save");
+
+        btn_delete.setText("Delete");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scroll_description)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(scroll_description, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(label_price)
-                                .addGap(55, 55, 55)
-                                .addComponent(field_price))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(label_description)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(label_department)
-                                .addGap(18, 18, 18)
-                                .addComponent(dropdown_department, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_create)))
+                        .addComponent(label_price)
+                        .addGap(55, 55, 55)
+                        .addComponent(field_price))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(label_department)
+                        .addGap(18, 18, 18)
+                        .addComponent(dropdown_department, 0, 184, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(label_description)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_delete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_save)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -109,12 +131,19 @@ public class CreateTaskView extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scroll_description, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_create)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_save)
+                    .addComponent(btn_delete))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public int getId()
+    {
+        return task.getId();
+    }
     
     public Task getTask()
     {
@@ -129,7 +158,8 @@ public class CreateTaskView extends javax.swing.JDialog {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btn_create;
+    public javax.swing.JButton btn_delete;
+    public javax.swing.JButton btn_save;
     private javax.swing.JComboBox<String> dropdown_department;
     private javax.swing.JTextArea field_description;
     private javax.swing.JTextField field_price;
