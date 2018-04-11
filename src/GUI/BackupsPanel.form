@@ -127,6 +127,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="field_saveLocation">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="label_saveLocation">
       <Properties>
@@ -163,6 +166,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="field_backupLocation">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn_browse_backupLocation">
       <Properties>
@@ -194,6 +200,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="field_backupLocation1">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn_browse_backupLocation1">
       <Properties>

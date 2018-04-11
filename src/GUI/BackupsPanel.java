@@ -73,6 +73,8 @@ public class BackupsPanel extends javax.swing.JPanel {
         label_backup.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         label_backup.setText("Backup");
 
+        field_saveLocation.setEditable(false);
+
         label_saveLocation.setText("Export Location");
 
         btn_browse_saveLocation.setText("Browse...");
@@ -94,6 +96,8 @@ public class BackupsPanel extends javax.swing.JPanel {
 
         label_backupLocation.setText("Backup Location");
 
+        field_backupLocation.setEditable(false);
+
         btn_browse_backupLocation.setText("Browse...");
         btn_browse_backupLocation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +116,8 @@ public class BackupsPanel extends javax.swing.JPanel {
         label_restore1.setText("Settings");
 
         label_backupLocation1.setText("Backup Location");
+
+        field_backupLocation1.setEditable(false);
 
         btn_browse_backupLocation1.setText("Browse...");
         btn_browse_backupLocation1.addActionListener(new java.awt.event.ActionListener() {
