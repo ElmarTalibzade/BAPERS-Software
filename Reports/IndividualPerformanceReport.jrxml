@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Individual Performance Report" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="55fca80d-113f-4331-8d2d-e1c4d92a8464">
+	<property name="ireport.zoom" value="2.143588810000004"/>
+	<property name="ireport.x" value="279"/>
+	<property name="ireport.y" value="233"/>
+	<parameter name="EMPLOYEE_NAME" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="EMPLOYEE_ROLE" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATE_START" class="java.util.Date"/>
+	<parameter name="DATE_END" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT staff.firstName, staff.lastName, jobs.code, taskId, tasks.startTime,
+TIMESTAMPDIFF(MINUTE, tasks.startTime, tasks.endTime) AS timeTaken,
+(SELECT enum_departments.name FROM enum_departments WHERE enum_departments.index = tasks.department) AS department
+FROM staff 
+INNER JOIN jobs ON staff.staffNo = jobs.staffNo 
+INNER JOIN tasks ON jobs.code = tasks.jobCode]]>
+	</queryString>
+	<field name="firstName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="lastName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="code" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="taskId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="startTime" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="timeTaken" class="java.lang.Long"/>
+	<field name="department" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="totalEffort" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{timeTaken}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" uuid="f2db7210-deaa-438f-978d-347ede4d9f94"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["By " + $P{EMPLOYEE_NAME} + " (" + $P{EMPLOYEE_ROLE} + ")"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="41" width="555" height="38" uuid="04ca2ab5-d2fb-444f-9783-8aa899d1752f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Individual Performance Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22" splitType="Stretch">
+			<textField pattern="">
+				<reportElement x="0" y="0" width="555" height="22" uuid="e35e6cf8-3d79-4d7e-840a-5ef9ceeb7335"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Period: " + new SimpleDateFormat("MM/dd/yyyy").format($P{DATE_START}) + " - " + new SimpleDateFormat("MM/dd/yyyy").format($P{DATE_END})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="16" width="131" height="21" uuid="711550e7-5222-44bd-8dcd-0ea67b097c60"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="16" width="47" height="21" uuid="e6183482-0456-4b57-b511-31e549f77423"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="178" y="16" width="54" height="21" uuid="92b9fb1f-3de0-49ed-a6cb-3028fb88cc57"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Task ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="232" y="16" width="108" height="21" uuid="f56a963a-ee1a-4d47-abe8-ef25baa7990d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Department]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="16" width="66" height="21" uuid="5a380ea9-7f83-420b-a69e-f320cfbaa29e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="406" y="16" width="76" height="21" uuid="694af2b8-14ce-45d7-8ffa-c3a15b4d247a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Start Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="482" y="16" width="73" height="21" uuid="9a06a51d-677f-4f12-8824-ebcf625b7de2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Time Taken]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="131" height="20" uuid="bda2675a-5d41-4388-9175-d6e94909e250"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{firstName} + " " + $F{lastName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="131" y="0" width="47" height="20" uuid="e725cd68-de25-430c-94c1-8c804e17eb1a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="178" y="0" width="54" height="20" uuid="8c440c60-c5fb-4eb4-8597-59bde910538b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{taskId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="232" y="0" width="108" height="20" uuid="65aaafaa-12a9-41d1-9f0a-0dc8485e4bae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{department}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="482" y="0" width="73" height="20" uuid="c073bae8-dc6e-400e-a459-ab762da22cf9"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[String.format("%dh %02d min", $F{timeTaken}/60%24, $F{timeTaken}%60)]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="406" y="0" width="76" height="20" uuid="2fbabec1-9d63-41fa-9b87-0ca09447593f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{startTime}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement x="340" y="0" width="66" height="20" uuid="c1bbc4c5-6e2b-4cac-854d-d5b6cd73b19c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{startTime}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="31" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="62" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement x="406" y="38" width="76" height="20" uuid="c75218a5-03c7-454b-a95f-e3907b78d59b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Effort]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="482" y="38" width="73" height="20" uuid="53eb2f3a-6de0-4358-9a42-4635d1e05c00"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[String.format("%dh %02d min", $V{totalEffort}/60%24, $V{totalEffort}%60)]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="31" width="555" height="1" uuid="6a7e9424-d314-4c28-a872-5e258edd3790"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
