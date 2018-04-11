@@ -5,17 +5,22 @@
  */
 package GUI;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Elmar Talibzade
  */
-public class PaymentSettingsView extends javax.swing.JFrame {
-
-    /**
-     * Creates new form PaymentSettingsWindow
-     */
-    public PaymentSettingsView() {
+public class PaymentSettingsView extends javax.swing.JDialog {
+    
+    private int customerNo;
+    
+    public PaymentSettingsView(JFrame parent, boolean modal, int customerNo) {
+        super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
+        
+        this.customerNo = customerNo;
     }
 
     /**
@@ -39,12 +44,12 @@ public class PaymentSettingsView extends javax.swing.JFrame {
         field_expirationDate = new javax.swing.JTextField();
         btn_save = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         label_paymentMethod.setText("Payment Method");
 
-        dropbox_paymentMethod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Card" }));
+        dropbox_paymentMethod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Card", "Cash" }));
         dropbox_paymentMethod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dropbox_paymentMethodActionPerformed(evt);
@@ -128,7 +133,23 @@ public class PaymentSettingsView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void dropbox_paymentMethodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropbox_paymentMethodActionPerformed
-        // TODO add your handling code here:
+        if(dropbox_paymentMethod.getSelectedIndex() != -1)
+        {
+            if(dropbox_paymentMethod.getSelectedIndex() == 1)
+            {//if staff select cash, everything will be hidden
+                label_cardType.setVisible(false); label_cardNumber.setVisible(false);
+                label_csv.setVisible(false); label_expirationDate.setVisible(false);
+                field_cardNumber.setVisible(false); dropdown_cardType.setVisible(false);
+                field_csv.setVisible(false); field_expirationDate.setVisible(false);
+            }
+            else if(dropbox_paymentMethod.getSelectedIndex() == 0)
+            {
+                label_cardType.setVisible(true); label_cardNumber.setVisible(true);
+                label_csv.setVisible(true); label_expirationDate.setVisible(true);
+                field_cardNumber.setVisible(true); dropdown_cardType.setVisible(true);
+                field_csv.setVisible(true); field_expirationDate.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_dropbox_paymentMethodActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
