@@ -45,6 +45,7 @@ public class PaymentSettingsView extends javax.swing.JDialog {
         btn_save = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Payment Method");
         setResizable(false);
 
         label_paymentMethod.setText("Payment Method");
@@ -67,11 +68,8 @@ public class PaymentSettingsView extends javax.swing.JDialog {
         label_expirationDate.setText("Expiration Date");
 
         btn_save.setText("Save");
-        btn_save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_saveActionPerformed(evt);
-            }
-        });
+        btn_save.setAlignmentX(1.0F);
+        btn_save.setAlignmentY(1.0F);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,34 +77,33 @@ public class PaymentSettingsView extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_save)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_paymentMethod)
-                            .addComponent(label_cardType)
-                            .addComponent(label_cardNumber))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(dropbox_paymentMethod, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(dropdown_cardType, 0, 151, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(field_cardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(label_expirationDate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(field_expirationDate)))
-                .addGap(32, 32, 32)
-                .addComponent(label_csv)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(field_csv, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label_paymentMethod)
+                                    .addComponent(label_cardType)
+                                    .addComponent(label_cardNumber))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(dropbox_paymentMethod, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(dropdown_cardType, 0, 151, Short.MAX_VALUE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(3, 3, 3)
+                                        .addComponent(field_cardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label_expirationDate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(field_expirationDate)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(label_csv)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(field_csv, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_save)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,23 +135,17 @@ public class PaymentSettingsView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void dropbox_paymentMethodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropbox_paymentMethodActionPerformed
-        if(dropbox_paymentMethod.getSelectedIndex() != -1)
-        {
-            if(dropbox_paymentMethod.getSelectedIndex() == 1)
-            {//if staff select cash, everything will be hidden
-                label_cardType.setVisible(false); label_cardNumber.setVisible(false);
-                label_csv.setVisible(false); label_expirationDate.setVisible(false);
-                field_cardNumber.setVisible(false); dropdown_cardType.setVisible(false);
-                field_csv.setVisible(false); field_expirationDate.setVisible(false);
-            }
-            else if(dropbox_paymentMethod.getSelectedIndex() == 0)
-            {
-                label_cardType.setVisible(true); label_cardNumber.setVisible(true);
-                label_csv.setVisible(true); label_expirationDate.setVisible(true);
-                field_cardNumber.setVisible(true); dropdown_cardType.setVisible(true);
-                field_csv.setVisible(true); field_expirationDate.setVisible(true);
-            }
-        }
+        
+        boolean showCardSettings = dropbox_paymentMethod.getSelectedIndex() == 0;
+        
+        label_cardType.setVisible(showCardSettings); 
+        label_cardNumber.setVisible(showCardSettings);
+        label_csv.setVisible(showCardSettings); 
+        label_expirationDate.setVisible(showCardSettings);
+        field_cardNumber.setVisible(showCardSettings); 
+        dropdown_cardType.setVisible(showCardSettings);
+        field_csv.setVisible(showCardSettings); 
+        field_expirationDate.setVisible(showCardSettings);
     }//GEN-LAST:event_dropbox_paymentMethodActionPerformed
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed

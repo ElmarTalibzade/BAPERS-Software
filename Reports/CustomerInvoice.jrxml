@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9aafa326-d9b0-46dc-859e-68dc3d3b7d31">
+	<property name="ireport.zoom" value="1.6105100000000017"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="365"/>
+	<style name="Heading 1" fontSize="16" isBold="true"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Unpaid Jobs" uuid="3e0e5ee6-c5cb-4cc0-8b7d-257ce9d774b5">
+		<parameter name="INVOICE_ID" class="java.lang.String"/>
+		<parameter name="OWNER_ID" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     jobs.`code`,
+     jobs.`specialInstructions`,
+     jobs.`price`
+FROM
+     `invoice` invoice INNER JOIN `jobs` jobs ON invoice.`invoiceNo` = jobs.`invoiceNo`
+WHERE
+     invoice.invoiceNo = $P{OWNER_ID}
+ AND invoice.isPaid = '0']]>
+		</queryString>
+		<field name="code" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="specialInstructions" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="price" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="ACCOUNT_NO" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\elmar\\Documents\\NetBeansProjects\\BAPERS-Software\\Reports\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     *
+FROM
+     `jobs` jobs INNER JOIN `invoice` invoice ON jobs.`invoiceNo` = invoice.`invoiceNo`
+     INNER JOIN `customers` customers ON jobs.`ownerNo` = customers.`accountNo`
+WHERE
+     jobs.ownerNo = $P{ACCOUNT_NO}
+LIMIT 1]]>
+	</queryString>
+	<field name="ownerNo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="invoiceNo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="accountNo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="holderName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="firstName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="lastName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="address" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="phoneNo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="54" uuid="35327c4a-ff7b-43e3-86dd-d2bb32a9c657"/>
+				<textElement textAlignment="Right" markup="html"/>
+				<text><![CDATA[<b>The Lab</b><br>
+2, Wynyatt Street<br>
+London, EC1V 7HU<br>
+Phone: 0207 235 7534]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="66" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="57" uuid="fbfe1f89-28ed-46b2-90ad-d7930ed21fa0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Invoice " + String.format("%05d", $F{invoiceNo}) + " / " + new SimpleDateFormat("dd/MM/yyyy").format(new Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="130" splitType="Immediate">
+			<staticText>
+				<reportElement x="0" y="0" width="133" height="20" uuid="ca33e4b3-b4a2-4c73-9d59-597f9a558425"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Account Holder Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="133" height="20" uuid="67f34136-56dd-4959-a808-e7c965785b26"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contact Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="133" height="20" uuid="68cb4e86-d4e0-432c-be5b-cf78fa7b9154"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Account No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="133" height="20" uuid="e085f959-236d-427d-8c27-45ff8cf3b18c"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="133" height="20" uuid="ba98be0e-96a2-492f-814f-5dbc181f1946"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Phone]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="133" y="0" width="422" height="20" uuid="282c00bb-7457-4492-b60f-419e9a2ca546"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{holderName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="20" width="422" height="20" uuid="c12b1f9f-3220-4696-96a8-2b007f58219c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["ACC" + String.format("%04d", $F{accountNo})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="40" width="422" height="20" uuid="48064a36-13c9-4b31-9cb3-d0c70de72891"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{firstName} + " " + $F{lastName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="60" width="422" height="20" uuid="8b283bdc-e774-4be7-a325-eafccc8bb5c9"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="80" width="422" height="20" uuid="84a2876b-858d-4b96-9bbb-199870fbbb5a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{phoneNo}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="159" splitType="Immediate">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="146" uuid="91a39ce5-1a73-46a7-8db0-95f4d4a95020"/>
+				<subreportParameter name="INVOICE_NO">
+					<subreportParameterExpression><![CDATA[$F{invoiceNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "CustomerInvoice_UnpaidJobs.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="83" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="83" uuid="27bcbf9f-777e-4603-85f4-b5c9f015dbcb"/>
+				<textElement markup="html"/>
+				<text><![CDATA[Make a payment within 30 days by cash, card or bank transfer to our account:<br><br>
+‘The Lab’, Bloomsbury’s Image Processing Laboratory<br>
+Barclays Plc, City University Branch, 10, Northampton Square<br>
+Sort Code 30-20-70,<br>
+Account number: 67103456]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="23" splitType="Stretch"/>
+	</summary>
+</jasperReport>
