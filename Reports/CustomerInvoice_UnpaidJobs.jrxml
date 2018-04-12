@@ -40,44 +40,86 @@
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="28" splitType="Stretch">
+		<band height="26" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="28" uuid="7eec2cef-ce8a-42dc-9c43-e575634abf36"/>
+				<reportElement x="0" y="0" width="59" height="26" uuid="7eec2cef-ce8a-42dc-9c43-e575634abf36"/>
+				<box leftPadding="3" rightPadding="3">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Code]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="0" width="355" height="28" uuid="e178fe54-92a4-49d0-8604-fa08d156782b"/>
+				<reportElement x="59" y="0" width="440" height="26" uuid="e178fe54-92a4-49d0-8604-fa08d156782b"/>
+				<box leftPadding="3" rightPadding="3">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Job Description]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="455" y="0" width="100" height="28" uuid="36b1607f-647b-4c48-a9ad-5ba7eda17210"/>
+				<reportElement x="499" y="0" width="56" height="26" uuid="36b1607f-647b-4c48-a9ad-5ba7eda17210"/>
+				<box leftPadding="3" rightPadding="3">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Price]]></text>
+				<text><![CDATA[Price (£)]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="100" height="20" uuid="1a67e3ac-8733-4c0a-8918-61e934125e49"/>
+				<reportElement x="0" y="0" width="59" height="20" uuid="1a67e3ac-8733-4c0a-8918-61e934125e49"/>
+				<box leftPadding="3" rightPadding="3">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{code}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="0" width="355" height="20" uuid="f86db4d6-f428-43e2-835c-aa3a09de9f6e"/>
+				<reportElement x="59" y="0" width="440" height="20" uuid="f86db4d6-f428-43e2-835c-aa3a09de9f6e"/>
+				<box leftPadding="3" rightPadding="3">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{specialInstructions}]]></textFieldExpression>
 			</textField>
-			<textField pattern="£ #,##0.00">
-				<reportElement x="455" y="0" width="100" height="20" uuid="4f0ffc1c-faea-4c72-8f05-a591585762f9"/>
+			<textField pattern="#,##0.00">
+				<reportElement x="499" y="0" width="56" height="20" uuid="4f0ffc1c-faea-4c72-8f05-a591585762f9"/>
+				<box leftPadding="3" rightPadding="3">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
 			</textField>
@@ -90,54 +132,55 @@
 		<band splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="114" splitType="Stretch">
+		<band height="100" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="34" width="147" height="20" uuid="ce5e24b1-de1a-4dcf-a936-fc14eeae8a98"/>
+				<reportElement x="0" y="20" width="156" height="20" uuid="ce5e24b1-de1a-4dcf-a936-fc14eeae8a98"/>
+				<box leftPadding="3"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Sub-Total]]></text>
 			</staticText>
-			<textField pattern="£ #,##0.00">
-				<reportElement x="147" y="34" width="408" height="20" uuid="ce9b25ac-21ab-4b95-a712-c26684de79f7"/>
+			<textField pattern="#,##0.00">
+				<reportElement x="156" y="20" width="399" height="20" uuid="ce9b25ac-21ab-4b95-a712-c26684de79f7"/>
+				<box rightPadding="3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{invoice_subTotal}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="54" width="147" height="20" uuid="1317c2d8-6c7e-4caa-bd41-50904f97ddcb"/>
+				<reportElement x="0" y="40" width="156" height="20" uuid="1317c2d8-6c7e-4caa-bd41-50904f97ddcb"/>
+				<box leftPadding="3"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Discount Agreed]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="94" width="147" height="20" uuid="99bee295-5f6c-4b9e-98fb-b2db652b0900"/>
+				<reportElement x="0" y="80" width="156" height="20" uuid="99bee295-5f6c-4b9e-98fb-b2db652b0900"/>
+				<box leftPadding="3"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total payable (VAT at 20%)]]></text>
 			</staticText>
-			<textField pattern="#,##0.00 %">
-				<reportElement x="147" y="54" width="408" height="20" uuid="c88bd787-c3a2-4682-8b72-a9d93fc43ae7"/>
+			<textField pattern="%#,##0.00" isBlankWhenNull="true">
+				<reportElement x="156" y="40" width="399" height="20" uuid="c88bd787-c3a2-4682-8b72-a9d93fc43ae7"/>
+				<box rightPadding="3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{discountRate}]]></textFieldExpression>
 			</textField>
-			<textField pattern="£ #,##0.00">
-				<reportElement x="147" y="74" width="408" height="20" uuid="12d857b3-753d-440b-b08d-5c8e0ebb9a89"/>
+			<textField pattern="#,##0.00">
+				<reportElement x="156" y="60" width="399" height="20" uuid="12d857b3-753d-440b-b08d-5c8e0ebb9a89"/>
+				<box rightPadding="3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{invoice_subTotalDiscounted}]]></textFieldExpression>
 			</textField>
-			<textField pattern="£ #,##0.00">
-				<reportElement x="147" y="94" width="408" height="20" uuid="d0de706a-8ad7-4be7-b1ef-182bfbeb3f08"/>
+			<textField pattern="#,##0.00">
+				<reportElement x="156" y="80" width="399" height="20" uuid="d0de706a-8ad7-4be7-b1ef-182bfbeb3f08"/>
+				<box rightPadding="3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{invoice_totalPayable}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement x="0" y="21" width="555" height="1" uuid="f92d736a-5eeb-493d-84ff-239901202734"/>
-				<graphicElement>
-					<pen lineWidth="0.25"/>
-				</graphicElement>
-			</line>
 		</band>
 	</summary>
 </jasperReport>
