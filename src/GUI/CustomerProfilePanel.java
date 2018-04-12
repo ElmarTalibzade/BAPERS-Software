@@ -40,6 +40,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         label_holderName.setText("Holder Name: " + customer.getHolderName());
         label_email.setText("Email: " + customer.getEmailAddress());
         label_phone.setText("Phone Number: " + customer.getPhoneNumber());
+        label_paymentType.setText("Payment Type: " + customer.getCard());
         
         label_stat_inDefault.setVisible(customer.isDefault());
         label_stat_suspended.setVisible(customer.isSuspended());
@@ -116,6 +117,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         label_stat_suspended = new javax.swing.JLabel();
         label_stat_inDefault = new javax.swing.JLabel();
         label_stat_valued = new javax.swing.JLabel();
+        label_paymentType = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -245,6 +247,8 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        label_paymentType.setText("Payment Type: {payment-type}");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -255,7 +259,6 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
                     .addComponent(table_jobs)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_phone)
                             .addComponent(label_accountNo)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(label_jobCode)
@@ -268,9 +271,11 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(label_holderName)
-                                    .addComponent(label_email))
-                                .addGap(80, 80, 80)
+                                    .addComponent(label_email)
+                                    .addComponent(label_phone))
+                                .addGap(57, 57, 57)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label_paymentType)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(label_discountRate)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -279,7 +284,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
                                         .addComponent(label_discountType)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(dropdown_discountType, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_save, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_createJob, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -321,23 +326,24 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
                         .addComponent(btn_print_receipt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(btn_print_reminder, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(label_phone))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_setPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(btn_save, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_setPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(btn_save, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(label_paymentType))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_createJob, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_applyFilters)
                             .addComponent(dropdown_department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(field_jobCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label_jobCode))))
+                            .addComponent(label_jobCode)))
+                    .addComponent(label_phone))
                 .addGap(8, 8, 8)
-                .addComponent(table_jobs, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                .addComponent(table_jobs, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7))
@@ -382,6 +388,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
     private javax.swing.JLabel label_fullName;
     private javax.swing.JLabel label_holderName;
     private javax.swing.JLabel label_jobCode;
+    private javax.swing.JLabel label_paymentType;
     private javax.swing.JLabel label_phone;
     private javax.swing.JLabel label_stat_inDefault;
     private javax.swing.JLabel label_stat_suspended;

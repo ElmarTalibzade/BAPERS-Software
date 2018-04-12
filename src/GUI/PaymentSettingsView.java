@@ -148,6 +148,19 @@ public class PaymentSettingsView extends javax.swing.JDialog {
         field_expirationDate.setVisible(showCardSettings);
     }//GEN-LAST:event_dropbox_paymentMethodActionPerformed
 
+    private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
+        if(dropbox_paymentMethod.getSelectedIndex() == 1){ //if users pay by cash
+            // select, if 0 insert, otherwise update
+            
+        }
+        else if(dropbox_paymentMethod.getSelectedIndex() == 0){
+            //card number: field_cardNumber
+            //expiration date: field_expirationDate
+            //csv: field_csv
+            //card type: dropdown_cardType
+        }
+    }//GEN-LAST:event_btn_saveActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_save;
     private javax.swing.JComboBox<String> dropbox_paymentMethod;
