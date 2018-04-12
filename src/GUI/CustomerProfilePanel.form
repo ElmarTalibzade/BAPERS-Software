@@ -50,7 +50,6 @@
                   <Component id="table_jobs" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="label_phone" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="label_accountNo" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="label_jobCode" min="-2" max="-2" attributes="0"/>
@@ -65,9 +64,11 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="label_holderName" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="label_email" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="label_phone" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="label_paymentType" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="label_discountRate" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -81,7 +82,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="53" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btn_save" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
                           <Component id="btn_createJob" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
@@ -137,16 +138,17 @@
                       <Component id="btn_print_reminder" min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="label_phone" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btn_setPayment" min="-2" pref="32" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Component id="btn_save" min="-2" pref="32" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="btn_setPayment" min="-2" pref="32" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                              <Component id="btn_save" min="-2" pref="32" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="label_paymentType" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_createJob" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="btn_applyFilters" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -155,9 +157,10 @@
                           <Component id="label_jobCode" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="label_phone" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-              <Component id="table_jobs" pref="115" max="32767" attributes="0"/>
+              <Component id="table_jobs" pref="102" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="btn_back" min="-2" pref="32" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
@@ -417,5 +420,10 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="label_paymentType">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Payment Type: {payment-type}"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>
