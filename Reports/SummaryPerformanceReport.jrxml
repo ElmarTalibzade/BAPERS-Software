@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fa4fd438-53ad-459e-a965-45a5d9df16a4">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="57"/>
+	<parameter name="DATE_START" class="java.util.Date"/>
+	<parameter name="DATE_END" class="java.util.Date"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\elmar\\Documents\\NetBeansProjects\\BAPERS-Software\\Reports\\"]]></defaultValueExpression>
+	</parameter>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="39" width="555" height="40" uuid="d4e39ad0-5adc-417b-8860-232257fabe11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Summary Performance Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="22" uuid="2171b462-a3ea-4f6c-af18-5fa94d6852f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Period: " + new SimpleDateFormat("MM/dd/yyyy").format($P{DATE_START}) + " - " + new SimpleDateFormat("MM/dd/yyyy").format($P{DATE_END})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="399" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="11" width="555" height="90" uuid="f0600b57-b647-49f4-8ea1-ee2a1fb96b43"/>
+				<subreportParameter name="SHIFT_NAME">
+					<subreportParameterExpression><![CDATA["Day Shift 1"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DATE_START">
+					<subreportParameterExpression><![CDATA[$P{DATE_START}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="TIME_START">
+					<subreportParameterExpression><![CDATA["5:00"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DATE_END">
+					<subreportParameterExpression><![CDATA[$P{DATE_END}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="TIME_END">
+					<subreportParameterExpression><![CDATA["14:30"]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_Shift.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="101" width="555" height="90" uuid="9d443bf5-1a52-4e34-961a-8f1fca22fb8f"/>
+				<subreportParameter name="SHIFT_NAME">
+					<subreportParameterExpression><![CDATA["Day Shift 2"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DATE_START">
+					<subreportParameterExpression><![CDATA[$P{DATE_START}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="TIME_START">
+					<subreportParameterExpression><![CDATA["2:30"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DATE_END">
+					<subreportParameterExpression><![CDATA[$P{DATE_END}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="TIME_END">
+					<subreportParameterExpression><![CDATA["22:00"]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_Shift.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="191" width="555" height="90" uuid="091ef70c-3140-4855-b279-ac7207e4ea2b"/>
+				<subreportParameter name="SHIFT_NAME">
+					<subreportParameterExpression><![CDATA["Night Shift"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DATE_START">
+					<subreportParameterExpression><![CDATA[$P{DATE_START}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="TIME_START">
+					<subreportParameterExpression><![CDATA["22:00"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DATE_END">
+					<subreportParameterExpression><![CDATA[$P{DATE_END}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="TIME_END">
+					<subreportParameterExpression><![CDATA["5:00"]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_Shift.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>
