@@ -59,12 +59,12 @@ public class StaffView extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(720, 480));
         setName("Staff View"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(720, 480));
         setSize(new java.awt.Dimension(720, 480));
 
         label_loggedUser.setText("Logged in as: staff-name (staff-role)");
 
         btn_logout.setText("Log Out");
+        btn_logout.setFocusable(false);
         btn_logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_logoutActionPerformed(evt);
@@ -105,6 +105,7 @@ public class StaffView extends javax.swing.JFrame {
 
     private void logOut()
     {
+        Bapers.loginView.toggleLogin(true);
         Bapers.loginView.setVisible(true);
         this.dispose();
     }
