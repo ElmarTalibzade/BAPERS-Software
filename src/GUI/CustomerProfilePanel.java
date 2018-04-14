@@ -40,7 +40,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         label_holderName.setText("Holder Name: " + customer.getHolderName());
         label_email.setText("Email: " + customer.getEmailAddress());
         label_phone.setText("Phone Number: " + customer.getPhoneNumber());
-        label_paymentType.setText("Payment Type: " + customer.getCard());
+        //label_paymentType.setText("Payment Type: " + customer.getCard());
         
         label_stat_inDefault.setVisible(customer.isDefault());
         label_stat_suspended.setVisible(customer.isSuspended());
