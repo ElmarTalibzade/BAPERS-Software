@@ -29,6 +29,11 @@ public class DBConnectivity implements DBInterface {
 
     public Staff loggedUser = null;
     
+    public boolean isConnected()
+    {
+        return connection != null;
+    }
+    
     /**
      * Connects to a MySQL database
      *
@@ -363,7 +368,6 @@ public class DBConnectivity implements DBInterface {
                         DiscountType.values()[result.getInt("discountType")],
                         result.getString("emailAddress"),
                         result.getInt("debtRemindedAmount"),
-                        result.getBoolean("usingCard"),
                         getJobs(result.getInt("accountNo"))
                 ));
             }
@@ -427,7 +431,6 @@ public class DBConnectivity implements DBInterface {
                         DiscountType.values()[result.getInt("discountType")],
                         result.getString("emailAddress"),
                         result.getInt("debtRemindedAmount"),
-                        result.getBoolean("usingCard"),
                         getJobs(result.getInt("accountNo"))
                 ));
             }

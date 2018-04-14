@@ -42,7 +42,8 @@ public class Bapers {
         
         DB = new DBConnectivity();
         
-        if (DB.connect() ){
+        if (DB.connect())
+        {
             loginView = new LoginView();
             loginView.setVisible(true);       
         }
