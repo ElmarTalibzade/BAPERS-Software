@@ -8,7 +8,9 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["D:\\elmar\\Documents\\NetBeansProjects\\BAPERS-Software\\Reports\\"]]></defaultValueExpression>
 	</parameter>
-	<variable name="total_dayShiftA_copyRoom" class="java.math.BigDecimal"/>
+	<variable name="total_dayShiftA_copyRoom" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
 	<variable name="total_dayShiftA_development" class="java.math.BigDecimal"/>
 	<variable name="total_dayShiftA_finishing" class="java.math.BigDecimal"/>
 	<variable name="total_dayShiftA_packing" class="java.math.BigDecimal"/>
@@ -77,10 +79,10 @@
 					<subreportParameterExpression><![CDATA[$P{DATE_END}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<returnValue subreportVariable="total_dayShiftA_copyRoom" toVariable="total_dayShiftA_copyRoom"/>
-				<returnValue subreportVariable="total_dayShiftA_development" toVariable="total_dayShiftA_development"/>
-				<returnValue subreportVariable="total_dayShiftA_finishing" toVariable="total_dayShiftA_finishing"/>
-				<returnValue subreportVariable="total_dayShiftA_packing" toVariable="total_dayShiftA_packing"/>
+				<returnValue subreportVariable="total_copyRoom" toVariable="total_dayShiftA_copyRoom" calculation="First"/>
+				<returnValue subreportVariable="total_development" toVariable="total_dayShiftA_development"/>
+				<returnValue subreportVariable="total_finishing" toVariable="total_dayShiftA_finishing"/>
+				<returnValue subreportVariable="total_packing" toVariable="total_dayShiftA_packing"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_ShiftSummary.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
@@ -101,10 +103,10 @@
 					<subreportParameterExpression><![CDATA[$P{DATE_END}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<returnValue subreportVariable="total_dayShiftB_copyRoom" toVariable="total_dayShiftB_copyRoom"/>
-				<returnValue subreportVariable="total_dayShiftB_development" toVariable="total_dayShiftB_development"/>
-				<returnValue subreportVariable="total_dayShiftB_finishing" toVariable="total_dayShiftB_finishing"/>
-				<returnValue subreportVariable="total_dayShiftB_packing" toVariable="total_dayShiftB_packing"/>
+				<returnValue subreportVariable="total_copyRoom" toVariable="total_dayShiftB_copyRoom"/>
+				<returnValue subreportVariable="total_development" toVariable="total_dayShiftB_development"/>
+				<returnValue subreportVariable="total_finishing" toVariable="total_dayShiftB_finishing"/>
+				<returnValue subreportVariable="total_packing" toVariable="total_dayShiftB_packing"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_ShiftSummary.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
@@ -116,7 +118,7 @@
 					<subreportParameterExpression><![CDATA[new java.sql.Time(new SimpleDateFormat("HH:mm").parse("05:00").getTime())]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="SHIFT_NAME">
-					<subreportParameterExpression><![CDATA["Night Shift 1"]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA["Night Shift"]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="DATE_START">
 					<subreportParameterExpression><![CDATA[$P{DATE_START}]]></subreportParameterExpression>
@@ -125,10 +127,10 @@
 					<subreportParameterExpression><![CDATA[$P{DATE_END}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<returnValue subreportVariable="total_nightShift_copyRoom" toVariable="total_nightShift_copyRoom"/>
-				<returnValue subreportVariable="total_nightShift_development" toVariable="total_nightShift_development"/>
-				<returnValue subreportVariable="total_nightShift_finishing" toVariable="total_nightShift_finishing"/>
-				<returnValue subreportVariable="total_nightShift_packing" toVariable="total_nightShift_packing"/>
+				<returnValue subreportVariable="total_copyRoom" toVariable="total_nightShift_copyRoom"/>
+				<returnValue subreportVariable="total_development" toVariable="total_nightShift_development"/>
+				<returnValue subreportVariable="total_finishing" toVariable="total_nightShift_finishing"/>
+				<returnValue subreportVariable="total_packing" toVariable="total_nightShift_packing"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_ShiftSummary.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>

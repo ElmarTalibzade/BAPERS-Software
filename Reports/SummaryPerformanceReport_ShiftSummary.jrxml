@@ -51,7 +51,7 @@ GROUP BY date_format(tasks.startTime, '%d/%m/%Y')]]>
 			<textField>
 				<reportElement x="0" y="0" width="555" height="25" uuid="916f4eb0-1a98-4735-8c38-0eebc6736214"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{SHIFT_NAME} + " " + String.format("(%s - %s)", new SimpleDateFormat("HH:mm").format($P{SHIFT_START}), new SimpleDateFormat("HH:mm").format($P{SHIFT_END}))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{SHIFT_NAME} + " " + String.format("(%s - %s)", new SimpleDateFormat("h:mma").format($P{SHIFT_START}), new SimpleDateFormat("h:mma").format($P{SHIFT_END}))]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
