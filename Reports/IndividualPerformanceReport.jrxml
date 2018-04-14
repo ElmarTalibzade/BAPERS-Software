@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Individual Performance Report" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="55fca80d-113f-4331-8d2d-e1c4d92a8464">
-	<property name="ireport.zoom" value="1.2100000000000026"/>
+	<property name="ireport.zoom" value="1.7715610000000044"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="9"/>
 	<parameter name="EMPLOYEE_NAME" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -48,14 +48,14 @@ WHERE tasks.startTime BETWEEN $P{DATE_START} AND $P{DATE_END}]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="80" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="555" height="20" uuid="f2db7210-deaa-438f-978d-347ede4d9f94"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["By " + $P{EMPLOYEE_NAME} + " (" + $P{EMPLOYEE_ROLE} + ")"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="39" width="555" height="40" uuid="04ca2ab5-d2fb-444f-9783-8aa899d1752f"/>
+				<reportElement x="0" y="40" width="555" height="40" uuid="04ca2ab5-d2fb-444f-9783-8aa899d1752f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="15" isBold="true"/>
 				</textElement>
@@ -64,9 +64,9 @@ WHERE tasks.startTime BETWEEN $P{DATE_START} AND $P{DATE_END}]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="22" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField pattern="">
-				<reportElement x="0" y="0" width="555" height="22" uuid="e35e6cf8-3d79-4d7e-840a-5ef9ceeb7335"/>
+				<reportElement x="0" y="0" width="555" height="20" uuid="e35e6cf8-3d79-4d7e-840a-5ef9ceeb7335"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="false" isItalic="false"/>
 				</textElement>
