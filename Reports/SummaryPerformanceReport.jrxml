@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fa4fd438-53ad-459e-a965-45a5d9df16a4">
-	<property name="ireport.zoom" value="1.2100000000000006"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Summary Performance Report" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="03ef7217-8211-44bd-a30b-c6481af5e9d6">
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="57"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="DATE_START" class="java.util.Date"/>
 	<parameter name="DATE_END" class="java.util.Date"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["D:\\elmar\\Documents\\NetBeansProjects\\BAPERS-Software\\Reports\\"]]></defaultValueExpression>
 	</parameter>
+	<variable name="total_dayShiftA_copyRoom" class="java.math.BigDecimal"/>
+	<variable name="total_dayShiftA_development" class="java.math.BigDecimal"/>
+	<variable name="total_dayShiftA_finishing" class="java.math.BigDecimal"/>
+	<variable name="total_dayShiftA_packing" class="java.math.BigDecimal"/>
+	<variable name="total_dayShiftB_copyRoom" class="java.math.BigDecimal"/>
+	<variable name="total_dayShiftB_development" class="java.math.BigDecimal"/>
+	<variable name="total_dayShiftB_finishing" class="java.math.BigDecimal"/>
+	<variable name="total_dayShiftB_packing" class="java.math.BigDecimal"/>
+	<variable name="total_nightShift_copyRoom" class="java.math.BigDecimal"/>
+	<variable name="total_nightShift_development" class="java.math.BigDecimal"/>
+	<variable name="total_nightShift_finishing" class="java.math.BigDecimal"/>
+	<variable name="total_nightShift_packing" class="java.math.BigDecimal"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="39" width="555" height="40" uuid="d4e39ad0-5adc-417b-8860-232257fabe11"/>
+				<reportElement x="0" y="39" width="555" height="40" uuid="a4d83ed6-e1aa-4526-b29a-3e1cf22999d9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="15" isBold="true"/>
 				</textElement>
@@ -23,13 +35,13 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="22" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="555" height="22" uuid="2171b462-a3ea-4f6c-af18-5fa94d6852f5"/>
+				<reportElement x="0" y="0" width="555" height="20" uuid="8f9d3945-c2e1-4dd1-9631-5d2a7d7b4ed0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Period: " + new SimpleDateFormat("MM/dd/yyyy").format($P{DATE_START}) + " - " + new SimpleDateFormat("MM/dd/yyyy").format($P{DATE_END})]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Period: " + String.format("%s - %s", new SimpleDateFormat("dd/MM/yyyy").format($P{DATE_START}), new SimpleDateFormat("dd/MM/yyyy").format($P{DATE_END}))]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -46,66 +58,125 @@
 		<band splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="399" splitType="Stretch">
+		<band height="340" splitType="Stretch">
 			<subreport>
-				<reportElement x="0" y="11" width="555" height="90" uuid="f0600b57-b647-49f4-8ea1-ee2a1fb96b43"/>
+				<reportElement positionType="Float" x="0" y="0" width="555" height="85" uuid="d1af6e58-dec5-4b85-926d-b6ea0e3ba815"/>
+				<subreportParameter name="SHIFT_START">
+					<subreportParameterExpression><![CDATA[new java.sql.Time(new SimpleDateFormat("HH:mm").parse("05:00").getTime())]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SHIFT_END">
+					<subreportParameterExpression><![CDATA[new java.sql.Time(new SimpleDateFormat("HH:mm").parse("14:30").getTime())]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="SHIFT_NAME">
 					<subreportParameterExpression><![CDATA["Day Shift 1"]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="DATE_START">
 					<subreportParameterExpression><![CDATA[$P{DATE_START}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="TIME_START">
-					<subreportParameterExpression><![CDATA["5:00"]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="DATE_END">
 					<subreportParameterExpression><![CDATA[$P{DATE_END}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="TIME_END">
-					<subreportParameterExpression><![CDATA["14:30"]]></subreportParameterExpression>
-				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_Shift.jasper"]]></subreportExpression>
+				<returnValue subreportVariable="total_dayShiftA_copyRoom" toVariable="total_dayShiftA_copyRoom"/>
+				<returnValue subreportVariable="total_dayShiftA_development" toVariable="total_dayShiftA_development"/>
+				<returnValue subreportVariable="total_dayShiftA_finishing" toVariable="total_dayShiftA_finishing"/>
+				<returnValue subreportVariable="total_dayShiftA_packing" toVariable="total_dayShiftA_packing"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_ShiftSummary.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="0" y="101" width="555" height="90" uuid="9d443bf5-1a52-4e34-961a-8f1fca22fb8f"/>
+				<reportElement positionType="Float" x="0" y="85" width="555" height="85" uuid="a1afb9b4-a827-4069-8787-78d2fd8b15d2"/>
+				<subreportParameter name="SHIFT_START">
+					<subreportParameterExpression><![CDATA[new java.sql.Time(new SimpleDateFormat("HH:mm").parse("14:30").getTime())]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SHIFT_END">
+					<subreportParameterExpression><![CDATA[new java.sql.Time(new SimpleDateFormat("HH:mm").parse("22:00").getTime())]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="SHIFT_NAME">
 					<subreportParameterExpression><![CDATA["Day Shift 2"]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="DATE_START">
 					<subreportParameterExpression><![CDATA[$P{DATE_START}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="TIME_START">
-					<subreportParameterExpression><![CDATA["2:30"]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="DATE_END">
 					<subreportParameterExpression><![CDATA[$P{DATE_END}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="TIME_END">
-					<subreportParameterExpression><![CDATA["22:00"]]></subreportParameterExpression>
-				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_Shift.jasper"]]></subreportExpression>
+				<returnValue subreportVariable="total_dayShiftB_copyRoom" toVariable="total_dayShiftB_copyRoom"/>
+				<returnValue subreportVariable="total_dayShiftB_development" toVariable="total_dayShiftB_development"/>
+				<returnValue subreportVariable="total_dayShiftB_finishing" toVariable="total_dayShiftB_finishing"/>
+				<returnValue subreportVariable="total_dayShiftB_packing" toVariable="total_dayShiftB_packing"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_ShiftSummary.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="0" y="191" width="555" height="90" uuid="091ef70c-3140-4855-b279-ac7207e4ea2b"/>
+				<reportElement positionType="Float" x="0" y="170" width="555" height="85" uuid="f492d3ed-9735-4c29-bcd9-f4e32d03e50f"/>
+				<subreportParameter name="SHIFT_START">
+					<subreportParameterExpression><![CDATA[new java.sql.Time(new SimpleDateFormat("HH:mm").parse("22:00").getTime())]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SHIFT_END">
+					<subreportParameterExpression><![CDATA[new java.sql.Time(new SimpleDateFormat("HH:mm").parse("05:00").getTime())]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="SHIFT_NAME">
-					<subreportParameterExpression><![CDATA["Night Shift"]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA["Night Shift 1"]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="DATE_START">
 					<subreportParameterExpression><![CDATA[$P{DATE_START}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="TIME_START">
-					<subreportParameterExpression><![CDATA["22:00"]]></subreportParameterExpression>
+				<subreportParameter name="DATE_END">
+					<subreportParameterExpression><![CDATA[$P{DATE_END}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="total_nightShift_copyRoom" toVariable="total_nightShift_copyRoom"/>
+				<returnValue subreportVariable="total_nightShift_development" toVariable="total_nightShift_development"/>
+				<returnValue subreportVariable="total_nightShift_finishing" toVariable="total_nightShift_finishing"/>
+				<returnValue subreportVariable="total_nightShift_packing" toVariable="total_nightShift_packing"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_ShiftSummary.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="255" width="555" height="85" uuid="ed04037b-3943-4fe5-b63d-df562153b8e7"/>
+				<subreportParameter name="total_nightShift_finishing">
+					<subreportParameterExpression><![CDATA[$V{total_nightShift_finishing}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_dayShiftA_packing">
+					<subreportParameterExpression><![CDATA[$V{total_dayShiftA_packing}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_dayShiftA_finishing">
+					<subreportParameterExpression><![CDATA[$V{total_dayShiftA_finishing}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_dayShiftB_packing">
+					<subreportParameterExpression><![CDATA[$V{total_dayShiftB_packing}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_dayShiftB_finishing">
+					<subreportParameterExpression><![CDATA[$V{total_dayShiftB_finishing}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_dayShiftA_development">
+					<subreportParameterExpression><![CDATA[$V{total_dayShiftA_development}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_nightShift_development">
+					<subreportParameterExpression><![CDATA[$V{total_nightShift_development}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_dayShiftB_development">
+					<subreportParameterExpression><![CDATA[$V{total_dayShiftB_development}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_nightShift_packing">
+					<subreportParameterExpression><![CDATA[$V{total_nightShift_packing}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_dayShiftB_copyRoom">
+					<subreportParameterExpression><![CDATA[$V{total_dayShiftB_copyRoom}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_nightShift_copyRoom">
+					<subreportParameterExpression><![CDATA[$V{total_nightShift_copyRoom}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DATE_START">
+					<subreportParameterExpression><![CDATA[$P{DATE_START}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_dayShiftA_copyRoom">
+					<subreportParameterExpression><![CDATA[$V{total_dayShiftA_copyRoom}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="DATE_END">
 					<subreportParameterExpression><![CDATA[$P{DATE_END}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="TIME_END">
-					<subreportParameterExpression><![CDATA["5:00"]]></subreportParameterExpression>
-				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_Shift.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_Overall.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</summary>
