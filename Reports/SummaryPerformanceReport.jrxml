@@ -8,20 +8,20 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["D:\\elmar\\Documents\\NetBeansProjects\\BAPERS-Software\\Reports\\"]]></defaultValueExpression>
 	</parameter>
-	<variable name="total_dayShiftA_copyRoom" class="java.math.BigDecimal">
+	<variable name="total_dayShiftA_copyRoom" class="java.math.BigDecimal" resetType="None" incrementType="Column">
 		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
-	<variable name="total_dayShiftA_development" class="java.math.BigDecimal"/>
-	<variable name="total_dayShiftA_finishing" class="java.math.BigDecimal"/>
-	<variable name="total_dayShiftA_packing" class="java.math.BigDecimal"/>
-	<variable name="total_dayShiftB_copyRoom" class="java.math.BigDecimal"/>
-	<variable name="total_dayShiftB_development" class="java.math.BigDecimal"/>
-	<variable name="total_dayShiftB_finishing" class="java.math.BigDecimal"/>
-	<variable name="total_dayShiftB_packing" class="java.math.BigDecimal"/>
-	<variable name="total_nightShift_copyRoom" class="java.math.BigDecimal"/>
-	<variable name="total_nightShift_development" class="java.math.BigDecimal"/>
-	<variable name="total_nightShift_finishing" class="java.math.BigDecimal"/>
-	<variable name="total_nightShift_packing" class="java.math.BigDecimal"/>
+	<variable name="total_dayShiftA_development" class="java.math.BigDecimal" resetType="None" incrementType="Column"/>
+	<variable name="total_dayShiftA_finishing" class="java.math.BigDecimal" resetType="None" incrementType="Column"/>
+	<variable name="total_dayShiftA_packing" class="java.math.BigDecimal" resetType="None" incrementType="Column"/>
+	<variable name="total_dayShiftB_copyRoom" class="java.math.BigDecimal" resetType="None" incrementType="Column"/>
+	<variable name="total_dayShiftB_development" class="java.math.BigDecimal" resetType="None" incrementType="Column"/>
+	<variable name="total_dayShiftB_finishing" class="java.math.BigDecimal" resetType="None" incrementType="Column"/>
+	<variable name="total_dayShiftB_packing" class="java.math.BigDecimal" resetType="None" incrementType="Column"/>
+	<variable name="total_nightShift_copyRoom" class="java.math.BigDecimal" resetType="None" incrementType="Column"/>
+	<variable name="total_nightShift_development" class="java.math.BigDecimal" resetType="None" incrementType="Column"/>
+	<variable name="total_nightShift_finishing" class="java.math.BigDecimal" resetType="None" incrementType="Column"/>
+	<variable name="total_nightShift_packing" class="java.math.BigDecimal" resetType="None" incrementType="Column"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -133,7 +133,7 @@
 				<returnValue subreportVariable="total_packing" toVariable="total_nightShift_packing"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_ShiftSummary.jasper"]]></subreportExpression>
 			</subreport>
-			<subreport>
+			<subreport runToBottom="false">
 				<reportElement positionType="Float" x="0" y="255" width="555" height="85" uuid="ed04037b-3943-4fe5-b63d-df562153b8e7"/>
 				<subreportParameter name="total_nightShift_finishing">
 					<subreportParameterExpression><![CDATA[$V{total_nightShift_finishing}]]></subreportParameterExpression>
@@ -182,4 +182,7 @@
 			</subreport>
 		</band>
 	</summary>
+	<noData>
+		<band/>
+	</noData>
 </jasperReport>

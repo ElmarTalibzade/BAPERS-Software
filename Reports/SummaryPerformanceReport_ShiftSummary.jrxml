@@ -143,7 +143,7 @@ GROUP BY date_format(tasks.startTime, '%d/%m/%Y')]]>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="">
 				<reportElement x="111" y="0" width="111" height="20" uuid="25ece6d3-10b5-4106-a8d7-3785c6fda155"/>
 				<box>
 					<pen lineWidth="0.25"/>
@@ -153,7 +153,7 @@ GROUP BY date_format(tasks.startTime, '%d/%m/%Y')]]>
 					<rightPen lineWidth="0.25"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{copyRoom}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{copyRoom} > 1 ? $F{copyRoom}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($F{copyRoom}.intValue()%60) + " min" : "0 min"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="222" y="0" width="111" height="20" uuid="63bb8647-10a2-4976-b175-36407889e299"/>
@@ -165,7 +165,7 @@ GROUP BY date_format(tasks.startTime, '%d/%m/%Y')]]>
 					<rightPen lineWidth="0.25"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{development}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{development} > 1 ? $F{development}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($F{development}.intValue()%60) + " min" : "0 min"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="333" y="0" width="111" height="20" uuid="b0ac59e9-9f2a-4fe2-8876-6392eb663566"/>
@@ -177,7 +177,7 @@ GROUP BY date_format(tasks.startTime, '%d/%m/%Y')]]>
 					<rightPen lineWidth="0.25"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{finishing}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{finishing} > 1 ? $F{finishing}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($F{finishing}.intValue()%60) + " min" : "0 min"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="444" y="0" width="111" height="20" uuid="4742856c-12f7-45d6-aeec-8b32c200e877"/>
@@ -189,7 +189,7 @@ GROUP BY date_format(tasks.startTime, '%d/%m/%Y')]]>
 					<rightPen lineWidth="0.25"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{packing}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{packing} > 1 ? $F{packing}.divide(60).intValue() + "h " + new Integer($F{packing}.intValue()%60) + " min" : "0 min"]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -228,7 +228,7 @@ GROUP BY date_format(tasks.startTime, '%d/%m/%Y')]]>
 					<rightPen lineWidth="0.25"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$V{total_copyRoom} !=null ? $V{total_copyRoom} : "0"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{total_copyRoom} !=null ? $V{total_copyRoom} > 1 ? $V{total_copyRoom}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_copyRoom}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="false">
 				<reportElement x="222" y="0" width="111" height="20" uuid="1eb79a5e-7d95-4c95-b82a-3d2b54cab578"/>
@@ -240,7 +240,7 @@ GROUP BY date_format(tasks.startTime, '%d/%m/%Y')]]>
 					<rightPen lineWidth="0.25"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$V{total_development} != null ? $V{total_development} : "0"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{total_development} !=null ? $V{total_development} > 1 ? $V{total_development}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_development}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="false">
 				<reportElement x="333" y="0" width="111" height="20" uuid="b415a977-caf3-4a3e-a852-dd851d6af5ff"/>
@@ -252,7 +252,7 @@ GROUP BY date_format(tasks.startTime, '%d/%m/%Y')]]>
 					<rightPen lineWidth="0.25"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$V{total_finishing} != null ? $V{total_finishing} : "0"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{total_finishing} !=null ? $V{total_finishing} > 1 ? $V{total_finishing}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_finishing}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="false">
 				<reportElement x="444" y="0" width="111" height="20" uuid="5aa986cb-4ce6-4490-9c83-8df6b2ed2710"/>
@@ -264,7 +264,7 @@ GROUP BY date_format(tasks.startTime, '%d/%m/%Y')]]>
 					<rightPen lineWidth="0.25"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$V{total_packing} != null ? $V{total_packing} : "0"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{total_packing} !=null ? $V{total_packing} > 1 ? $V{total_packing}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_packing}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
