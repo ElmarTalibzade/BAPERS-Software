@@ -29,8 +29,11 @@ public class DBConnectivity implements DBInterface {
 
     public Staff loggedUser = null;
     
-    public boolean isConnected()
-    {
+    public Connection getConnection() {
+        return connection;
+    }
+    
+    public boolean isConnected() {
         return connection != null;
     }
     
