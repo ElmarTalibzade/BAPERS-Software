@@ -11,11 +11,9 @@ public class ShiftManager extends Staff {
      * @param accountNo Account number
      * @param firstName Staff's first name
      * @param lastName Staff's last name
-     * @param address Staff's physical address
-     * @param phone Staff's phone number
      */
-    public ShiftManager(int accountNo, String firstName, String lastName, String address, String phone) {
-        super(accountNo, Role.ShiftManager, firstName, lastName, address, phone);
+    public ShiftManager(int accountNo, String username, String firstName, String lastName) {
+        super(accountNo, Role.ShiftManager, username, firstName, lastName);
     }
 
     /**

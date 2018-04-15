@@ -17,6 +17,11 @@ public abstract class Staff {
     protected int accountNo;
 
     /**
+     * Staff username used to log into BAPERS system
+     */
+    protected String username;
+    
+    /**
      * First Name of this staff member
      */
     protected String firstName;
@@ -25,16 +30,6 @@ public abstract class Staff {
      * Last Name of this staff member
      */
     protected String lastName;
-
-    /**
-     * Address of this staff member
-     */
-    protected String address;
-
-    /**
-     * Phone number of this staff member
-     */
-    protected String phone;
 
     /**
      * Determines whether or not this staff member is currently interacting with BAPERS
@@ -47,16 +42,14 @@ public abstract class Staff {
      * @param role Staff's access level
      * @param firstName Staff's first name
      * @param lastName Staff's last name
-     * @param address Staff's physical address
      * @param phone Staff's phone number
      */
-    public Staff(int accountNo, Role role, String firstName, String lastName, String address, String phone) {
+    public Staff(int accountNo, Role role, String username, String firstName, String lastName) {
         this.accountNo = accountNo;
         this.role = role;
+        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address = address;
-        this.phone = phone;
     }
 
     /**
@@ -99,22 +92,10 @@ public abstract class Staff {
         return lastName;
     }
 
-    /**
-     * Gets Staff physical address
-     * @return A string that represents a physical address
-     */
-    public String getAddress() {
-        return address;
+    public String getUsername() {
+        return username;
     }
-
-    /**
-     * Gets Staff phone
-     * @return A string that represents the phone number of the Staff
-     */
-    public String getPhone() {
-        return phone;
-    }
-
+    
     /**
      *
      * @return

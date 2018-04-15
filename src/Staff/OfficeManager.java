@@ -11,11 +11,9 @@ public class OfficeManager extends Staff {
      * @param accountNo Account number
      * @param firstName Staff's first name
      * @param lastName Staff's last name
-     * @param address Staff's physical address
-     * @param phone Staff's phone number
      */
-    public OfficeManager(int accountNo, String firstName, String lastName, String address, String phone) {
-        super(accountNo, Role.OfficeManager, firstName, lastName, address, phone);
+    public OfficeManager(int accountNo, String username, String firstName, String lastName) {
+        super(accountNo, Role.OfficeManager, username, firstName, lastName);
     }
 
     /**

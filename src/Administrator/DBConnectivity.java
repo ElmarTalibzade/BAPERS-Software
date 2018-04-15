@@ -192,11 +192,9 @@ public class DBConnectivity implements DBInterface {
     public boolean createStaff(Staff staff, String password)
     {
         String query = String.format("INSERT INTO `staff` "
-                + "(role, firstName, lastName, emailAddress, phonenumber, password) VALUES(" 
-                + "'%s', '%s', '%s', '%s', '%s', '%s')", 
-                staff.getRole().ordinal(), staff.getFirstName(), 
-                staff.getLastName(), staff.getAddress(), 
-                staff.getPhone(), password);
+                + "(role, firstName, lastName, username, password) VALUES(" 
+                + "'%s', '%s', '%s', '%s', '%s')", 
+                staff.getRole().ordinal(), staff.getFirstName(), staff.getLastName(), staff.getUsername(), password);
         
         return storeData(query);
     }
@@ -351,9 +349,9 @@ public class DBConnectivity implements DBInterface {
      * @return Returns true if credentials are valid. Returns false if either
      * credentials are invalid or there is an issue with the database.
      */
-    public Staff validateLogin(String email, String password) {
+    public Staff validateLogin(String username, String password) {
 
-        ResultSet result = retrieveData(String.format("SELECT * FROM `staff` WHERE emailAddress = '%s' AND password = '%s'", email, password));
+        ResultSet result = retrieveData(String.format("SELECT * FROM `staff` WHERE username = '%s' AND password = '%s'", username, password));
 
         try {
             if(result.next()){
@@ -361,28 +359,26 @@ public class DBConnectivity implements DBInterface {
                 Role role = Role.values()[result.getInt("role")];
                 String firstName = result.getString("firstName");
                 String lastName = result.getString("lastName");
-                String emailAddress = result.getString("emailAddress");
-                String phoneNumber = result.getString("phoneNumber");
                 
                 switch (role) {
                     case OfficeManager:
                     {
-                        loggedUser = new OfficeManager(staffID, firstName, lastName, emailAddress, phoneNumber);
+                        loggedUser = new OfficeManager(staffID, username, firstName, lastName);
                         break;
                     }
                     case ShiftManager:
                     {
-                        loggedUser = new ShiftManager(staffID, firstName, lastName, emailAddress, phoneNumber);
+                        loggedUser = new ShiftManager(staffID, username, firstName, lastName);
                         break;                    
                     }
                     case Technician:
                     {
-                        loggedUser = new Technician(staffID, firstName, lastName, emailAddress, phoneNumber);
+                        loggedUser = new Technician(staffID, username, firstName, lastName);
                         break;                    
                     }
                     case Receptionist:
                     {
-                        loggedUser = new Receptionist(staffID, firstName, lastName, emailAddress, phoneNumber);
+                        loggedUser = new Receptionist(staffID, username, firstName, lastName);
                         break;                    
                     }
                     default:

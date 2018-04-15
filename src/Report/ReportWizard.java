@@ -108,6 +108,31 @@ public class ReportWizard
         return null;
     }
     
+    public static String GenerateCustomerReport(int accountNo, Date period_start, Date period_end)
+    {
+        if (!DB.isConnected()) return null;
+        
+        HashMap params = new HashMap();
+        params.put("DATE_START", period_start);
+        params.put("DATE_END", period_end);
+        
+        String jasperPath = System.getProperty("user.dir") + "\\Reports\\CustomerReport.jasper";
+        String pdfPath = System.getProperty("user.dir") + "\\Generated Reports\\Customer Report " + LocalDate.now().toString() + ".pdf";
+        
+        try {
+            
+            GenerateJasperReport(params, jasperPath, pdfPath);
+            
+            return pdfPath;
+            
+        } catch (JRException ex) {
+            
+            Logger.getLogger(ReportWizard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
     private static void GenerateJasperReport(HashMap params, String jasperPath, String pdfPath) throws JRException
     {
         JasperPrint jprint = (JasperPrint)JasperFillManager.fillReport(jasperPath, params, DB.getConnection());

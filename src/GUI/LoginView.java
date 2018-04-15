@@ -36,8 +36,8 @@ public class LoginView extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        field_email = new javax.swing.JTextField();
-        label_email = new javax.swing.JLabel();
+        field_username = new javax.swing.JTextField();
+        label_username = new javax.swing.JLabel();
         label_password = new javax.swing.JLabel();
         btn_login = new javax.swing.JButton();
         label_bapers = new javax.swing.JLabel();
@@ -61,13 +61,13 @@ public class LoginView extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(0, 0));
 
-        field_email.addActionListener(new java.awt.event.ActionListener() {
+        field_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                field_emailActionPerformed(evt);
+                field_usernameActionPerformed(evt);
             }
         });
 
-        label_email.setText("Email");
+        label_username.setText("Username");
 
         label_password.setText("Password");
 
@@ -98,8 +98,8 @@ public class LoginView extends javax.swing.JFrame {
                     .addComponent(label_bapers, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                     .addComponent(btn_login)
                     .addComponent(label_password, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(field_email)
-                    .addComponent(label_email, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(field_username)
+                    .addComponent(label_username, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(field_password))
                 .addContainerGap(114, Short.MAX_VALUE))
         );
@@ -109,9 +109,9 @@ public class LoginView extends javax.swing.JFrame {
                 .addContainerGap(34, Short.MAX_VALUE)
                 .addComponent(label_bapers, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
-                .addComponent(label_email)
+                .addComponent(label_username)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(field_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(field_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(label_password)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -132,9 +132,9 @@ public class LoginView extends javax.swing.JFrame {
         btn_loginActionPerformed(evt);
     }//GEN-LAST:event_field_passwordActionPerformed
 
-    private void field_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_emailActionPerformed
+    private void field_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_usernameActionPerformed
         btn_loginActionPerformed(evt);
-    }//GEN-LAST:event_field_emailActionPerformed
+    }//GEN-LAST:event_field_usernameActionPerformed
     
     public void toggleLogin(boolean enabled) {
         canLogin = enabled;
@@ -144,9 +144,9 @@ public class LoginView extends javax.swing.JFrame {
     private void attemptLogin() {
         if (!canLogin) return;
         
-        String email = field_email.getText();
+        String username = field_username.getText();
         String password = String.valueOf(field_password.getPassword());
-        Staff user = DB.validateLogin(email, password);
+        Staff user = DB.validateLogin(username, password);
         toggleLogin(false);         // used to avoid duplicate sessions
         
         if(user != null) {
@@ -162,11 +162,11 @@ public class LoginView extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_login;
-    private javax.swing.JTextField field_email;
     private javax.swing.JPasswordField field_password;
+    private javax.swing.JTextField field_username;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel label_bapers;
-    private javax.swing.JLabel label_email;
     private javax.swing.JLabel label_password;
+    private javax.swing.JLabel label_username;
     // End of variables declaration//GEN-END:variables
 }

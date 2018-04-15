@@ -53,8 +53,8 @@
                   <Component id="label_bapers" pref="154" max="32767" attributes="0"/>
                   <Component id="btn_login" min="-2" max="-2" attributes="0"/>
                   <Component id="label_password" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="field_email" alignment="1" max="32767" attributes="0"/>
-                  <Component id="label_email" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="field_username" alignment="1" max="32767" attributes="0"/>
+                  <Component id="label_username" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="field_password" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="114" max="32767" attributes="0"/>
@@ -67,9 +67,9 @@
               <EmptySpace pref="34" max="32767" attributes="0"/>
               <Component id="label_bapers" min="-2" pref="43" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-              <Component id="label_email" min="-2" max="-2" attributes="0"/>
+              <Component id="label_username" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="field_email" min="-2" max="-2" attributes="0"/>
+              <Component id="field_username" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="label_password" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -82,14 +82,14 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="field_email">
+    <Component class="javax.swing.JTextField" name="field_username">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="field_emailActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="field_usernameActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="label_email">
+    <Component class="javax.swing.JLabel" name="label_username">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Email"/>
+        <Property name="text" type="java.lang.String" value="Username"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="label_password">

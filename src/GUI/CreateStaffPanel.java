@@ -147,7 +147,7 @@ public class CreateStaffPanel extends javax.swing.JPanel {
         Role role = Role.values()[roleNo];
 
         DB = new DBConnectivity();
-        Staff newStaff = new Staff(accNo, role, firstName, lastName, email, phoneNumber) {};
+        Staff newStaff = new Staff(accNo, role, firstName, lastName, email) {};
         if(DB.connect()) {
             if(DB.createStaff(newStaff, password))
                 JOptionPane.showMessageDialog(this, "Staff member created succesfully!",  "SUCCESS", JOptionPane.WARNING_MESSAGE);
