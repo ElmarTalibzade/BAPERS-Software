@@ -24,6 +24,11 @@ public enum DiscountType {
     /**
      *
      */
-    Fixed
+    Fixed,
+    
+    /**
+     * 
+     */
+    Variable,
     
 }
