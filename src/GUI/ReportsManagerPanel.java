@@ -13,6 +13,8 @@ import Report.ReportWizard;
  */
 public class ReportsManagerPanel extends javax.swing.JPanel {
 
+    private boolean canGenerate = true;
+    
     /**
      * Creates new form ReportsManagerPanel
      */
@@ -177,6 +179,9 @@ public class ReportsManagerPanel extends javax.swing.JPanel {
 
     private void GenerateReport()
     {
+        if (!canGenerate) return;
+        toggleReportFunctionality(false);
+        
         String reportPath = "";
         
         switch (dropdown_reportType.getSelectedIndex())
@@ -189,6 +194,7 @@ public class ReportsManagerPanel extends javax.swing.JPanel {
                 
             case 1:
                 
+                // Individual Performance Report
                 reportPath = Report.ReportWizard.GenerateIndividualPerformanceReport(date_reportStart.getDate(), date_reportEnd.getDate());
                 
                 break;
@@ -196,6 +202,7 @@ public class ReportsManagerPanel extends javax.swing.JPanel {
             case 2:
                 
                 // Summary Performance Report
+                reportPath = Report.ReportWizard.GenerateSummaryPerformanceReport(date_reportStart.getDate(), date_reportEnd.getDate());
                 
                 break;
                 
@@ -204,12 +211,29 @@ public class ReportsManagerPanel extends javax.swing.JPanel {
                 break;
         }
         
+        toggleReportFunctionality(true);
+        
         if (!checkbox_openOnceDone.isSelected()) return;
         
         if (reportPath != null)
         {
             ReportWizard.OpenPDF(reportPath);
         }
+    }
+    
+    private void toggleReportFunctionality(boolean enabled)
+    {
+        if (enabled)
+        {
+            btn_generateReport.setText("Generate");
+        }
+        else
+        {
+            btn_generateReport.setText("Please Wait");
+        }
+        
+        btn_generateReport.setEnabled(enabled);
+        canGenerate = enabled;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

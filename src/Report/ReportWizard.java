@@ -7,6 +7,7 @@ package Report;
 import Administrator.DBConnectivity;
 import static bapers.Bapers.DB;
 import bapers.Utils;
+import com.mysql.jdbc.StringUtils;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,19 +35,19 @@ public class ReportWizard
     
     public static void main(String[] args) {
         Date begin = null;
+        Date end = null;
         
         DB = new DBConnectivity();
         DB.connect();
         
         try {
             begin = new Date(new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2017").getTime());
+            end = new Date(new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2019").getTime());
         } catch (ParseException ex) {
             Logger.getLogger(ReportWizard.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        Date end = java.sql.Date.valueOf(LocalDate.now());
-        
-        GenerateIndividualPerformanceReport(begin, end);
+       
+        OpenPDF(GenerateSummaryPerformanceReport(begin, end));
     }
     
     public static String GenerateIndividualPerformanceReport(Date period_start, Date period_end)
@@ -69,8 +70,7 @@ public class ReportWizard
         
         try {
             
-            JasperPrint jprint = (JasperPrint)JasperFillManager.fillReport(jasperPath, params, DB.getConnection());
-            JasperExportManager.exportReportToPdfFile(jprint, pdfPath);
+            GenerateJasperReport(params, jasperPath, pdfPath);
             
             return pdfPath;
             
@@ -83,8 +83,41 @@ public class ReportWizard
         return null;
     }
     
+    public static String GenerateSummaryPerformanceReport(Date period_start, Date period_end)
+    {
+        if (!DB.isConnected()) return null;
+        
+        HashMap params = new HashMap();
+        params.put("DATE_START", period_start);
+        params.put("DATE_END", period_end);
+        
+        String jasperPath = System.getProperty("user.dir") + "\\Reports\\SummaryPerformanceReport.jasper";
+        String pdfPath = System.getProperty("user.dir") + "\\Generated Reports\\Summary Performance Report " + LocalDate.now().toString() + ".pdf";
+        
+        try {
+            
+            GenerateJasperReport(params, jasperPath, pdfPath);
+            
+            return pdfPath;
+            
+        } catch (JRException ex) {
+            
+            Logger.getLogger(ReportWizard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
+    private static void GenerateJasperReport(HashMap params, String jasperPath, String pdfPath) throws JRException
+    {
+        JasperPrint jprint = (JasperPrint)JasperFillManager.fillReport(jasperPath, params, DB.getConnection());
+        JasperExportManager.exportReportToPdfFile(jprint, pdfPath);
+    }
+    
     public static void OpenPDF(String filePath)
     {
+        if (StringUtils.isNullOrEmpty(filePath)) return;
+        
         try 
         {
             File file = new File(filePath);
