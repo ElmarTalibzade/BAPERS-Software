@@ -158,6 +158,8 @@ public class PaymentSettingsView extends javax.swing.JDialog {
         if(dropbox_paymentMethod.getSelectedIndex() == 1) { 
             bapers.Bapers.DB.updateCustomerPayment(customerNo, false);
             JOptionPane.showMessageDialog(this, "Payment method changed",  "Customer is paying now using cash.", JOptionPane.INFORMATION_MESSAGE);
+            if(bapers.Bapers.DB.isCardInserted(customerNo) == true)
+                bapers.Bapers.DB.deleteCard(customerNo);
         }
         else if(dropbox_paymentMethod.getSelectedIndex() == 0) {
             int last4Digit = Integer.parseInt(field_cardNumber.getText().substring(12, 16));

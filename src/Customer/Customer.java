@@ -24,7 +24,6 @@ public class Customer {
     private DiscountType agreedDiscount;
     private String emailAddress;
     private int debtReminded;
-    private boolean usingCard;
     
     private ArrayList<Job> jobs;
 
@@ -44,7 +43,7 @@ public class Customer {
      * @param debtReminded Times the debt has been reminded to this customer
      * @param jobs A list of jobs that are associated with this customer
      */
-    public Customer(int accountNo, String holderName, String firstName, String lastName, boolean isValued, boolean isSuspended, boolean isDefault, String address, String phoneNumber, DiscountType agreedDiscount, String emailAddress, int debtReminded, ArrayList<Job> jobs, boolean usingCard) {
+    public Customer(int accountNo, String holderName, String firstName, String lastName, boolean isValued, boolean isSuspended, boolean isDefault, String address, String phoneNumber, DiscountType agreedDiscount, String emailAddress, int debtReminded, ArrayList<Job> jobs) {
         this.accountNo = accountNo;
         this.holderName = holderName;
         this.firstName = firstName;
@@ -58,7 +57,6 @@ public class Customer {
         this.emailAddress = emailAddress;
         this.debtReminded = debtReminded;
         this.jobs = jobs;
-        this.usingCard = usingCard;
     }
 
     /**
@@ -182,10 +180,7 @@ public class Customer {
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
-    public boolean getCard() {
-        return usingCard;
-    }
+    
     /**
      * Gets account number of the customer
      * @return string

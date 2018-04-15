@@ -23,7 +23,7 @@ public class DBConnectivity implements DBInterface {
     static final String DB_URL = "jdbc:mysql://localhost:3306/bloomsday?autoReconnect=true&useSSL=false";
 
     static final String USER = "root";
-    static final String PASS = "root";
+    static final String PASS = "";
     
     private Connection connection;
 
@@ -165,6 +165,13 @@ public class DBConnectivity implements DBInterface {
         }
         return 0;
     }
+    
+    public boolean deleteCard(int customerID) {
+        String query = String.format("DELETE FROM `carddetails` WHERE ownerAccountNo = '%d' ", customerID);
+        System.out.println(query);
+        return storeData(query);
+    }
+    
     public boolean isCardInserted(int customerID) {
         try {
             ResultSet result = retrieveData(String.format("SELECT * FROM `carddetails` WHERE ownerAccountNo = '%d'", customerID));
@@ -421,8 +428,7 @@ public class DBConnectivity implements DBInterface {
                         DiscountType.values()[result.getInt("discountType")],
                         result.getString("emailAddress"),
                         result.getInt("debtRemindedAmount"),
-                        getJobs(result.getInt("accountNo")),
-                        result.getBoolean("usingCard")
+                        getJobs(result.getInt("accountNo"))
                 ));
             }
 
@@ -485,8 +491,7 @@ public class DBConnectivity implements DBInterface {
                         DiscountType.values()[result.getInt("discountType")],
                         result.getString("emailAddress"),
                         result.getInt("debtRemindedAmount"),
-                        getJobs(result.getInt("accountNo")),
-                        result.getBoolean("usingCard")
+                        getJobs(result.getInt("accountNo"))
                 ));
             }
             
