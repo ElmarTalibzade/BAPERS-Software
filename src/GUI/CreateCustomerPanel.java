@@ -148,7 +148,7 @@ public class CreateCustomerPanel extends javax.swing.JPanel {
         
         //TO BE EDITED AFTER ADDING JOBS
         DB = new DBConnectivity();
-        Customer newCustomer = new Customer(accNo, holderName, firstName, lastName, false, false, false, address, phoneNumber, DiscountType.values()[0], email, 0, false, null);
+        Customer newCustomer = new Customer(accNo, holderName, firstName, lastName, false, false, false, address, phoneNumber, DiscountType.values()[0], email, 0, null);
         if (DB.connect()) {
             if(DB.createCustomer(newCustomer)) 
                 JOptionPane.showMessageDialog(this, "Customer created succesfully!",  "SUCCESS", JOptionPane.WARNING_MESSAGE);

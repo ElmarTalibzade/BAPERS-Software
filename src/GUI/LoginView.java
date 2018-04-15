@@ -5,10 +5,8 @@
  */
 package GUI;
 
-import Administrator.DBConnectivity;
 import Staff.Staff;
 import static bapers.Bapers.DB;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,11 +15,14 @@ import javax.swing.JOptionPane;
  */
 public class LoginView extends javax.swing.JFrame {
 
+    private boolean canLogin = false;
+    
     /**
      * Creates new form LoginUI
      */
     public LoginView() {
         initComponents();
+        canLogin = DB.isConnected();
         this.setLocationRelativeTo(null);
     }
 
@@ -124,20 +125,7 @@ public class LoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
-        String email = field_email.getText();
-        String password = String.valueOf(field_password.getPassword());
-       
-        DB = new DBConnectivity();
-        if (DB.connect()) {
-            Staff user = DB.validateLogin(email, password);
-            if(user != null){
-                StaffView staffView = new StaffView(user);
-                staffView.setVisible(true);
-                this.setVisible(false);
-            }
-            else
-                JOptionPane.showMessageDialog(this, "Invalid e-mail address or password",  "Could not log in", JOptionPane.WARNING_MESSAGE);
-        }
+        attemptLogin();
     }//GEN-LAST:event_btn_loginActionPerformed
 
     private void field_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_passwordActionPerformed
@@ -147,7 +135,31 @@ public class LoginView extends javax.swing.JFrame {
     private void field_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_emailActionPerformed
         btn_loginActionPerformed(evt);
     }//GEN-LAST:event_field_emailActionPerformed
-
+    
+    public void toggleLogin(boolean enabled) {
+        canLogin = enabled;
+        btn_login.setEnabled(enabled);
+    }
+    
+    private void attemptLogin() {
+        if (!canLogin) return;
+        
+        String email = field_email.getText();
+        String password = String.valueOf(field_password.getPassword());
+        Staff user = DB.validateLogin(email, password);
+        toggleLogin(false);         // used to avoid duplicate sessions
+        
+        if(user != null) {
+            StaffView staffView = new StaffView(user);
+            staffView.setVisible(true);
+            this.setVisible(false);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Invalid e-mail address or password",  "Could not log in", JOptionPane.WARNING_MESSAGE);
+            toggleLogin(true);      // allow user to user login functionality if credentials are invalid
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_login;
     private javax.swing.JTextField field_email;

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SummaryPerformanceReport_ShiftSummary" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="0cc5c890-c022-4c24-89a8-fa288e03deef">
+	<property name="ireport.zoom" value="1.4641000000000015"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SHIFT_NAME" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Shift"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SHIFT_START" class="java.sql.Time"/>
+	<parameter name="SHIFT_END" class="java.sql.Time"/>
+	<parameter name="DATE_START" class="java.util.Date"/>
+	<parameter name="DATE_END" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT date_format(tasks.startTime, '%d/%m/%Y') as `date`,
+sum(if(tasks.department = '1', timestampdiff(MINUTE, tasks.startTime, tasks.endTime), 0)) as `copyRoom`,
+sum(if(tasks.department = '2', timestampdiff(MINUTE, tasks.startTime, tasks.endTime), 0)) as `development`,
+sum(if(tasks.department = '3', timestampdiff(MINUTE, tasks.startTime, tasks.endTime), 0)) as `finishing`,
+sum(if(tasks.department = '4', timestampdiff(MINUTE, tasks.startTime, tasks.endTime), 0)) as `packing`
+FROM tasks
+WHERE time(tasks.startTime) BETWEEN date($P{DATE_START}) AND date($P{DATE_END})
+AND time(tasks.startTime) BETWEEN time($P{SHIFT_START}) AND time($P{SHIFT_END})
+GROUP BY date_format(tasks.startTime, '%d/%m/%Y')]]>
+	</queryString>
+	<field name="date" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="copyRoom" class="java.math.BigDecimal"/>
+	<field name="development" class="java.math.BigDecimal"/>
+	<field name="finishing" class="java.math.BigDecimal"/>
+	<field name="packing" class="java.math.BigDecimal"/>
+	<variable name="total_copyRoom" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{copyRoom}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_development" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{development}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_finishing" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{finishing}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_packing" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{packing}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="11" width="555" height="25" uuid="916f4eb0-1a98-4735-8c38-0eebc6736214"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{SHIFT_NAME} + " " + String.format("(%s - %s)", new SimpleDateFormat("h:mma").format($P{SHIFT_START}), new SimpleDateFormat("h:mma").format($P{SHIFT_END}))]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="111" height="20" uuid="64e13d14-141e-479c-b18a-c06df0fd0a85"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="0" width="111" height="20" uuid="a841edb9-8da7-469d-8af8-75cf97d2fc26"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Copy Room]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="111" height="20" uuid="2ebada0e-d83f-4e0a-9051-bdc6e794d277"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Development]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="0" width="111" height="20" uuid="e69fbfd9-3580-445c-b0dc-d8a48d10a6e0"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Finishing]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="444" y="0" width="111" height="20" uuid="de4a64b9-a7d4-472f-866c-ae0c550f3d46"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Packing]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="111" height="20" uuid="6c963755-82de-40ce-832d-dd1447c1eae8"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="111" y="0" width="111" height="20" uuid="25ece6d3-10b5-4106-a8d7-3785c6fda155"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{copyRoom} > 1 ? $F{copyRoom}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($F{copyRoom}.intValue()%60) + " min" : "0 min"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="0" width="111" height="20" uuid="63bb8647-10a2-4976-b175-36407889e299"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{development} > 1 ? $F{development}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($F{development}.intValue()%60) + " min" : "0 min"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="0" width="111" height="20" uuid="b0ac59e9-9f2a-4fe2-8876-6392eb663566"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{finishing} > 1 ? $F{finishing}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($F{finishing}.intValue()%60) + " min" : "0 min"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="0" width="111" height="20" uuid="4742856c-12f7-45d6-aeec-8b32c200e877"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{packing} > 1 ? $F{packing}.divide(60).intValue() + "h " + new Integer($F{packing}.intValue()%60) + " min" : "0 min"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band/>
+	</lastPageFooter>
+	<summary>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="111" height="20" uuid="3669323b-cb6c-46ee-8291-18b72c3ce7ee"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField evaluationTime="Auto" isBlankWhenNull="false">
+				<reportElement x="111" y="0" width="111" height="20" uuid="75ef9547-f0e7-4274-ba0f-9203ef8c9b68"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{total_copyRoom} !=null ? $V{total_copyRoom} > 1 ? $V{total_copyRoom}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_copyRoom}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Auto" isBlankWhenNull="false">
+				<reportElement x="222" y="0" width="111" height="20" uuid="1eb79a5e-7d95-4c95-b82a-3d2b54cab578"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{total_development} !=null ? $V{total_development} > 1 ? $V{total_development}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_development}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Auto" isBlankWhenNull="false">
+				<reportElement x="333" y="0" width="111" height="20" uuid="b415a977-caf3-4a3e-a852-dd851d6af5ff"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{total_finishing} !=null ? $V{total_finishing} > 1 ? $V{total_finishing}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_finishing}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Auto" isBlankWhenNull="false">
+				<reportElement x="444" y="0" width="111" height="20" uuid="5aa986cb-4ce6-4490-9c83-8df6b2ed2710"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{total_packing} !=null ? $V{total_packing} > 1 ? $V{total_packing}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_packing}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -5,12 +5,16 @@
  */
 package GUI;
 
+import Report.ReportWizard;
+
 /**
  *
  * @author Elmar Talibzade
  */
 public class ReportsManagerPanel extends javax.swing.JPanel {
 
+    private boolean canGenerate = true;
+    
     /**
      * Creates new form ReportsManagerPanel
      */
@@ -41,8 +45,9 @@ public class ReportsManagerPanel extends javax.swing.JPanel {
         field_timing = new javax.swing.JTextField();
         label_frequencyTiming = new javax.swing.JLabel();
         btn_saveSettings = new javax.swing.JButton();
-        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
-        jXDatePicker2 = new org.jdesktop.swingx.JXDatePicker();
+        date_reportStart = new org.jdesktop.swingx.JXDatePicker();
+        date_reportEnd = new org.jdesktop.swingx.JXDatePicker();
+        checkbox_openOnceDone = new javax.swing.JCheckBox();
 
         setPreferredSize(new java.awt.Dimension(706, 398));
 
@@ -56,6 +61,11 @@ public class ReportsManagerPanel extends javax.swing.JPanel {
         label_accountNO.setText("Customer Account NO");
 
         btn_generateReport.setText("Generate");
+        btn_generateReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_generateReportActionPerformed(evt);
+            }
+        });
 
         label_dateStart.setText("Start");
 
@@ -73,6 +83,8 @@ public class ReportsManagerPanel extends javax.swing.JPanel {
 
         btn_saveSettings.setText("Save Changes");
 
+        checkbox_openOnceDone.setText("Open After Completion");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,29 +97,22 @@ public class ReportsManagerPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(label_accountNO)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(field_accountNO, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
+                                .addComponent(field_accountNO))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(label_reportType)
-                                .addGap(43, 43, 43)
-                                .addComponent(dropdown_reportType, 0, 205, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_generateReport))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(44, 44, 44)
-                                .addComponent(label_dateStart)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)
-                                .addComponent(label_dateEnd)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(dropdown_reportType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(label_dateStart)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(date_reportStart, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(label_dateEnd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(date_reportEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label_generateReport)
-                            .addComponent(label_reportSettings)
                             .addComponent(label_frequency)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(dropdown_timing, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -117,7 +122,17 @@ public class ReportsManagerPanel extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_saveSettings)))
+                        .addComponent(btn_saveSettings))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label_reportSettings)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(checkbox_openOnceDone)
+                                .addGap(6, 6, 6)))
+                        .addComponent(btn_generateReport)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -125,20 +140,24 @@ public class ReportsManagerPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(label_generateReport)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
+                .addComponent(label_reportType)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_reportType)
                     .addComponent(dropdown_reportType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label_dateStart)
+                    .addComponent(date_reportStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label_dateEnd)
-                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(date_reportEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_accountNO)
-                    .addComponent(field_accountNO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_generateReport))
-                .addGap(53, 53, 53)
+                    .addComponent(field_accountNO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_generateReport)
+                    .addComponent(checkbox_openOnceDone))
+                .addGap(1, 1, 1)
                 .addComponent(label_reportSettings)
                 .addGap(18, 18, 18)
                 .addComponent(label_frequency)
@@ -148,22 +167,85 @@ public class ReportsManagerPanel extends javax.swing.JPanel {
                     .addComponent(field_timing, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(label_frequencyTiming)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_saveSettings)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_generateReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generateReportActionPerformed
+        GenerateReport();
+    }//GEN-LAST:event_btn_generateReportActionPerformed
 
+    private void GenerateReport()
+    {
+        if (!canGenerate) return;
+        toggleReportFunctionality(false);
+        
+        String reportPath = "";
+        
+        switch (dropdown_reportType.getSelectedIndex())
+        {
+            case 0:
+                
+                // Customer Report
+                
+                break;
+                
+            case 1:
+                
+                // Individual Performance Report
+                reportPath = Report.ReportWizard.GenerateIndividualPerformanceReport(date_reportStart.getDate(), date_reportEnd.getDate());
+                
+                break;
+                
+            case 2:
+                
+                // Summary Performance Report
+                reportPath = Report.ReportWizard.GenerateSummaryPerformanceReport(date_reportStart.getDate(), date_reportEnd.getDate());
+                
+                break;
+                
+            default:
+                reportPath = null;
+                break;
+        }
+        
+        toggleReportFunctionality(true);
+        
+        if (!checkbox_openOnceDone.isSelected()) return;
+        
+        if (reportPath != null)
+        {
+            ReportWizard.OpenPDF(reportPath);
+        }
+    }
+    
+    private void toggleReportFunctionality(boolean enabled)
+    {
+        if (enabled)
+        {
+            btn_generateReport.setText("Generate");
+        }
+        else
+        {
+            btn_generateReport.setText("Please Wait");
+        }
+        
+        btn_generateReport.setEnabled(enabled);
+        canGenerate = enabled;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_generateReport;
     private javax.swing.JButton btn_saveSettings;
+    private javax.swing.JCheckBox checkbox_openOnceDone;
+    private org.jdesktop.swingx.JXDatePicker date_reportEnd;
+    private org.jdesktop.swingx.JXDatePicker date_reportStart;
     private javax.swing.JComboBox<String> dropdown_reportType;
     private javax.swing.JComboBox<String> dropdown_timing;
     private javax.swing.JTextField field_accountNO;
     private javax.swing.JTextField field_timing;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
     private javax.swing.JLabel label_accountNO;
     private javax.swing.JLabel label_dateEnd;
     private javax.swing.JLabel label_dateStart;

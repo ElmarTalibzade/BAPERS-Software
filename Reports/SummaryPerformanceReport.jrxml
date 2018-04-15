@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Summary Performance Report" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="03ef7217-8211-44bd-a30b-c6481af5e9d6">
+	<property name="ireport.zoom" value="1.331000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="176"/>
+	<parameter name="DATE_START" class="java.util.Date"/>
+	<parameter name="DATE_END" class="java.util.Date"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\elmar\\Documents\\NetBeansProjects\\BAPERS-Software\\Reports\\"]]></defaultValueExpression>
+	</parameter>
+	<variable name="total_dayShiftA_copyRoom" class="java.math.BigDecimal" resetType="None">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_dayShiftA_development" class="java.math.BigDecimal" resetType="None">
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_dayShiftA_finishing" class="java.math.BigDecimal" resetType="None">
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_dayShiftA_packing" class="java.math.BigDecimal" resetType="None">
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_dayShiftB_copyRoom" class="java.math.BigDecimal" resetType="None">
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_dayShiftB_development" class="java.math.BigDecimal" resetType="None">
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_dayShiftB_finishing" class="java.math.BigDecimal" resetType="None">
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_dayShiftB_packing" class="java.math.BigDecimal" resetType="None">
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_nightShift_copyRoom" class="java.math.BigDecimal" resetType="None">
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_nightShift_development" class="java.math.BigDecimal" resetType="None">
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_nightShift_finishing" class="java.math.BigDecimal" resetType="None">
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_nightShift_packing" class="java.math.BigDecimal" resetType="None">
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_copyRoom" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_development" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_finishing" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_packing" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="39" width="555" height="40" uuid="a4d83ed6-e1aa-4526-b29a-3e1cf22999d9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Summary Performance Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" uuid="8f9d3945-c2e1-4dd1-9631-5d2a7d7b4ed0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Period: " + String.format("%s - %s", new SimpleDateFormat("dd/MM/yyyy").format($P{DATE_START}), new SimpleDateFormat("dd/MM/yyyy").format($P{DATE_END}))]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="438" splitType="Stretch">
+			<subreport>
+				<reportElement positionType="Float" x="0" y="0" width="555" height="85" uuid="d1af6e58-dec5-4b85-926d-b6ea0e3ba815"/>
+				<subreportParameter name="SHIFT_START">
+					<subreportParameterExpression><![CDATA[new java.sql.Time(new SimpleDateFormat("HH:mm").parse("05:00").getTime())]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SHIFT_END">
+					<subreportParameterExpression><![CDATA[new java.sql.Time(new SimpleDateFormat("HH:mm").parse("14:30").getTime())]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SHIFT_NAME">
+					<subreportParameterExpression><![CDATA["Day Shift 1"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DATE_START">
+					<subreportParameterExpression><![CDATA[$P{DATE_START}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DATE_END">
+					<subreportParameterExpression><![CDATA[$P{DATE_END}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="total_copyRoom" toVariable="total_dayShiftA_copyRoom"/>
+				<returnValue subreportVariable="total_development" toVariable="total_dayShiftA_development"/>
+				<returnValue subreportVariable="total_finishing" toVariable="total_dayShiftA_finishing"/>
+				<returnValue subreportVariable="total_packing" toVariable="total_dayShiftA_packing"/>
+				<returnValue subreportVariable="total_copyRoom" toVariable="total_copyRoom" calculation="Sum"/>
+				<returnValue subreportVariable="total_development" toVariable="total_development" calculation="Sum"/>
+				<returnValue subreportVariable="total_finishing" toVariable="total_finishing" calculation="Sum"/>
+				<returnValue subreportVariable="total_packing" toVariable="total_packing" calculation="Sum"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_ShiftSummary.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="85" width="555" height="85" uuid="a1afb9b4-a827-4069-8787-78d2fd8b15d2"/>
+				<subreportParameter name="SHIFT_START">
+					<subreportParameterExpression><![CDATA[new java.sql.Time(new SimpleDateFormat("HH:mm").parse("14:30").getTime())]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SHIFT_END">
+					<subreportParameterExpression><![CDATA[new java.sql.Time(new SimpleDateFormat("HH:mm").parse("22:00").getTime())]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SHIFT_NAME">
+					<subreportParameterExpression><![CDATA["Day Shift 2"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DATE_START">
+					<subreportParameterExpression><![CDATA[$P{DATE_START}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DATE_END">
+					<subreportParameterExpression><![CDATA[$P{DATE_END}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="total_copyRoom" toVariable="total_dayShiftB_copyRoom"/>
+				<returnValue subreportVariable="total_development" toVariable="total_dayShiftB_development"/>
+				<returnValue subreportVariable="total_finishing" toVariable="total_dayShiftB_finishing"/>
+				<returnValue subreportVariable="total_packing" toVariable="total_dayShiftB_packing"/>
+				<returnValue subreportVariable="total_copyRoom" toVariable="total_copyRoom" calculation="Sum"/>
+				<returnValue subreportVariable="total_development" toVariable="total_development" calculation="Sum"/>
+				<returnValue subreportVariable="total_finishing" toVariable="total_finishing" calculation="Sum"/>
+				<returnValue subreportVariable="total_packing" toVariable="total_packing" calculation="Sum"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_ShiftSummary.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="170" width="555" height="85" uuid="f492d3ed-9735-4c29-bcd9-f4e32d03e50f"/>
+				<subreportParameter name="SHIFT_START">
+					<subreportParameterExpression><![CDATA[new java.sql.Time(new SimpleDateFormat("HH:mm").parse("22:00").getTime())]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SHIFT_END">
+					<subreportParameterExpression><![CDATA[new java.sql.Time(new SimpleDateFormat("HH:mm").parse("05:00").getTime())]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SHIFT_NAME">
+					<subreportParameterExpression><![CDATA["Night Shift"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DATE_START">
+					<subreportParameterExpression><![CDATA[$P{DATE_START}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DATE_END">
+					<subreportParameterExpression><![CDATA[$P{DATE_END}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="total_copyRoom" toVariable="total_nightShift_copyRoom"/>
+				<returnValue subreportVariable="total_development" toVariable="total_nightShift_development"/>
+				<returnValue subreportVariable="total_finishing" toVariable="total_nightShift_finishing"/>
+				<returnValue subreportVariable="total_packing" toVariable="total_nightShift_packing"/>
+				<returnValue subreportVariable="total_copyRoom" toVariable="total_copyRoom" calculation="Sum"/>
+				<returnValue subreportVariable="total_development" toVariable="total_development" calculation="Sum"/>
+				<returnValue subreportVariable="total_finishing" toVariable="total_finishing" calculation="Sum"/>
+				<returnValue subreportVariable="total_packing" toVariable="total_packing" calculation="Sum"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SummaryPerformanceReport_ShiftSummary.jasper"]]></subreportExpression>
+			</subreport>
+			<elementGroup>
+				<textField evaluationTime="Column">
+					<reportElement positionType="Float" x="111" y="398" width="111" height="20" uuid="a24080b4-fe3d-4b82-aeca-ec79e2d8c681"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{total_nightShift_copyRoom} !=null ? $V{total_nightShift_copyRoom} > 1 ? $V{total_nightShift_copyRoom}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_nightShift_copyRoom}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" x="0" y="398" width="111" height="20" uuid="cdc44f5f-1fd9-477e-bf52-bebdd30b7b5b"/>
+					<box leftPadding="3">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Night Shift]]></text>
+				</staticText>
+				<textField evaluationTime="Column">
+					<reportElement positionType="Float" x="444" y="418" width="111" height="20" uuid="b06e23aa-c86a-4b93-beb0-9595643a476e"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{total_packing} !=null ? $V{total_packing} > 1 ? $V{total_packing}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_packing}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" x="0" y="418" width="111" height="20" uuid="6c057a3b-169a-4388-8a48-fa19bb3f5763"/>
+					<box leftPadding="3">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="0" y="338" width="111" height="20" uuid="cf24efec-1d39-4902-9403-3e08ddb20b26"/>
+					<box leftPadding="3">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date]]></text>
+				</staticText>
+				<textField evaluationTime="Column">
+					<reportElement positionType="Float" x="222" y="358" width="111" height="20" uuid="8cbdddb8-81d3-4bf1-8fd4-d70b27ded589"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{total_dayShiftA_development} !=null ? $V{total_dayShiftA_development} > 1 ? $V{total_dayShiftA_development}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_dayShiftA_development}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Column">
+					<reportElement positionType="Float" x="333" y="398" width="111" height="20" uuid="8d6a04d0-68c1-43e5-9a74-28cee7512d2a"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{total_nightShift_finishing} !=null ? $V{total_nightShift_finishing} > 1 ? $V{total_nightShift_finishing}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_nightShift_finishing}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" x="444" y="338" width="111" height="20" uuid="7d6e0562-3680-414e-bc93-7988d3d2e57f"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Packing]]></text>
+				</staticText>
+				<textField evaluationTime="Column">
+					<reportElement positionType="Float" x="111" y="418" width="111" height="20" uuid="7c8c4855-315e-48e1-a0fc-b745369874be"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{total_copyRoom} !=null ? $V{total_copyRoom} > 1 ? $V{total_copyRoom}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_copyRoom}.intValue()%60) + " min" : "0 mins" : "NULL min"]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Column">
+					<reportElement positionType="Float" x="111" y="378" width="111" height="20" uuid="07c29c99-7634-4ae2-b558-b783ac287bea"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{total_dayShiftB_copyRoom} !=null ? $V{total_dayShiftB_copyRoom} > 1 ? $V{total_dayShiftB_copyRoom}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_dayShiftB_copyRoom}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Column">
+					<reportElement positionType="Float" x="222" y="378" width="111" height="20" uuid="92d83eed-f204-404e-a893-fe587380e3fb"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{total_dayShiftB_development} !=null ? $V{total_dayShiftB_development} > 1 ? $V{total_dayShiftB_development}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_dayShiftB_development}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Column">
+					<reportElement positionType="Float" x="111" y="358" width="111" height="20" uuid="082bcccf-bb1a-4a10-993c-9cb33ea183f4"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{total_dayShiftA_copyRoom} !=null ? $V{total_dayShiftA_copyRoom} > 1 ? $V{total_dayShiftA_copyRoom}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_dayShiftA_copyRoom}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" x="0" y="378" width="111" height="20" uuid="484347db-48a1-4f0f-9cac-94c967d8c137"/>
+					<box leftPadding="3">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Day Shift 2]]></text>
+				</staticText>
+				<textField>
+					<reportElement positionType="Float" x="0" y="313" width="555" height="25" uuid="6b214382-a338-4a95-bafe-30c328742660"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["For period " + String.format("(%s - %s)", new SimpleDateFormat("dd/MM/yyyy").format($P{DATE_START}), new SimpleDateFormat("dd/MM/yyyy").format($P{DATE_END}))]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Column">
+					<reportElement positionType="Float" x="222" y="418" width="111" height="20" uuid="78d8411a-d118-4798-8e22-4d1bc9dab6e6"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{total_development} !=null ? $V{total_development} > 1 ? $V{total_development}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_development}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Column">
+					<reportElement positionType="Float" x="444" y="378" width="111" height="20" uuid="248f5da5-a4f6-409b-90d6-a27bcee26564"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{total_dayShiftB_packing} !=null ? $V{total_dayShiftB_packing} > 1 ? $V{total_dayShiftB_packing}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_dayShiftB_packing}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Column">
+					<reportElement positionType="Float" x="444" y="398" width="111" height="20" uuid="c8dbc72a-0b51-42d8-b86b-6672c31a7360"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{total_nightShift_packing} !=null ? $V{total_nightShift_packing} > 1 ? $V{total_nightShift_packing}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_nightShift_packing}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Column">
+					<reportElement positionType="Float" x="333" y="378" width="111" height="20" uuid="21853d55-871a-4b10-96c8-d5c939ff3d58"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{total_dayShiftB_finishing} !=null ? $V{total_dayShiftB_finishing} > 1 ? $V{total_dayShiftB_finishing}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_dayShiftB_finishing}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" x="111" y="338" width="111" height="20" uuid="89fdd34f-7642-4c2f-908d-ba3f5725acc4"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Copy Room]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="0" y="358" width="111" height="20" uuid="8f71ea88-30d7-4cbe-9f49-4a3aab6611c3"/>
+					<box leftPadding="3">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Day Shift 1]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="333" y="338" width="111" height="20" uuid="479cfff2-2d4e-4483-bebc-31f010af7ef3"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Finishing]]></text>
+				</staticText>
+				<textField evaluationTime="Column">
+					<reportElement positionType="Float" x="444" y="358" width="111" height="20" uuid="a158701c-3e78-4b4f-8808-3f602005d581"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{total_dayShiftA_packing} !=null ? $V{total_dayShiftA_packing} > 1 ? $V{total_dayShiftA_packing}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_dayShiftA_packing}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Column">
+					<reportElement positionType="Float" x="222" y="398" width="111" height="20" uuid="580fb65c-9b0a-4b6e-a404-c9b58f03c4c0"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{total_nightShift_development} !=null ? $V{total_nightShift_development} > 1 ? $V{total_nightShift_development}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_nightShift_development}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Column">
+					<reportElement positionType="Float" x="333" y="418" width="111" height="20" uuid="6ce807ab-a6b2-438a-a1b6-2140d458eba5"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{total_finishing} !=null ? $V{total_finishing} > 1 ? $V{total_finishing}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_finishing}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" x="222" y="338" width="111" height="20" uuid="53e37900-2565-4773-bb0b-83709a224817"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Development]]></text>
+				</staticText>
+				<textField evaluationTime="Column">
+					<reportElement positionType="Float" x="333" y="358" width="111" height="20" uuid="dd115475-6c6b-4d07-afec-7dfe3b490144"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{total_dayShiftA_finishing} !=null ? $V{total_dayShiftA_finishing} > 1 ? $V{total_dayShiftA_finishing}.divide(new BigDecimal(60), 0, RoundingMode.HALF_UP).toPlainString() + "h " + new Integer($V{total_dayShiftA_finishing}.intValue()%60) + " min" : "0 min" : "0 min"]]></textFieldExpression>
+				</textField>
+			</elementGroup>
+		</band>
+	</summary>
+	<noData>
+		<band/>
+	</noData>
+</jasperReport>
