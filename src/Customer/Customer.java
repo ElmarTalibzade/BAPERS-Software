@@ -195,6 +195,10 @@ public class Customer {
         return usingCard;
     }
     
+    public int getLast4Digit() {
+        return bapers.Bapers.DB.last4Digit(accountNo);
+    }
+    
     /**
      * Suspends this Customer's account
      */
