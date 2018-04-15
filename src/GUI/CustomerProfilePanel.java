@@ -42,7 +42,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         label_phone.setText("Phone Number: " + customer.getPhoneNumber());
         
         int cardNumber = customer.getLast4Digit();
-        String cardLabel = customer.getCard() ? "Card ending in " + cardNumber : "Cash";
+        String cardLabel = bapers.Bapers.DB.isCardInserted(customer.getAccountNo()) ? "Card ending in " + cardNumber : "Cash";
         label_paymentType.setText("Payment Type: " + cardLabel);
         
         label_stat_inDefault.setVisible(customer.isDefault());
