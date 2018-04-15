@@ -155,7 +155,7 @@ public class LoginView extends javax.swing.JFrame {
             this.setVisible(false);
         }
         else {
-            JOptionPane.showMessageDialog(this, "Invalid e-mail address or password",  "Could not log in", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid username or password",  "Could not log in", JOptionPane.WARNING_MESSAGE);
             toggleLogin(true);      // allow user to user login functionality if credentials are invalid
         }
     }
