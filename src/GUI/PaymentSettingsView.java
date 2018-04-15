@@ -6,6 +6,7 @@
 package GUI;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -70,6 +71,11 @@ public class PaymentSettingsView extends javax.swing.JDialog {
         btn_save.setText("Save");
         btn_save.setAlignmentX(1.0F);
         btn_save.setAlignmentY(1.0F);
+        btn_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_saveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,15 +155,28 @@ public class PaymentSettingsView extends javax.swing.JDialog {
     }//GEN-LAST:event_dropbox_paymentMethodActionPerformed
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
-        if(dropbox_paymentMethod.getSelectedIndex() == 1){ //if users pay by cash
-            // select, if 0 insert, otherwise update
-            
+        if(dropbox_paymentMethod.getSelectedIndex() == 1) { 
+            bapers.Bapers.DB.updateCustomerPayment(customerNo, false);
+            JOptionPane.showMessageDialog(this, "Payment method changed",  "Customer is paying now using cash.", JOptionPane.INFORMATION_MESSAGE);
         }
-        else if(dropbox_paymentMethod.getSelectedIndex() == 0){
-            //card number: field_cardNumber
-            //expiration date: field_expirationDate
-            //csv: field_csv
-            //card type: dropdown_cardType
+        else if(dropbox_paymentMethod.getSelectedIndex() == 0) {
+            int last4Digit = Integer.parseInt(field_cardNumber.getText().substring(12, 16));
+            String cardType = dropdown_cardType.getItemAt(dropdown_cardType.getSelectedIndex());
+            
+            String expDate = field_expirationDate.getText();
+            int monthExpiry = Integer.parseInt(expDate.substring(0, 2));
+            int yearExpiry = Integer.parseInt(expDate.substring(3, 5));
+            
+            if(bapers.Bapers.DB.isCardInserted(customerNo) == false) {
+                bapers.Bapers.DB.insertCard(customerNo, cardType, last4Digit, monthExpiry, yearExpiry, 0);
+                JOptionPane.showMessageDialog(this, "Card Inserted",  "Card inserted successfully.", JOptionPane.INFORMATION_MESSAGE);
+                bapers.Bapers.DB.updateCustomerPayment(customerNo, true);
+            }
+            else {
+                bapers.Bapers.DB.updateCard(customerNo, cardType, last4Digit, monthExpiry, yearExpiry, 0);
+                JOptionPane.showMessageDialog(this, "Card Updated",  "Card updated successfully.", JOptionPane.INFORMATION_MESSAGE);
+                bapers.Bapers.DB.updateCustomerPayment(customerNo, true);
+            }
         }
     }//GEN-LAST:event_btn_saveActionPerformed
 
