@@ -114,8 +114,62 @@ public class DBConnectivity implements DBInterface {
             Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+    }            
+    public boolean insertCard(int customerID, String cardType, int last4Digit, int monthExpiry, int yearExpiry, int cardDetailsId){
+        String query = String.format("INSERT INTO `carddetails` "
+                + "(cardType, last4Digits, monthExpiry, yearExpiry, ownerAccountNo, cardDetailsId) VALUES(" 
+                + "'%s', '%d', '%d', '%d', '%d', '%d')", 
+                cardType, last4Digit, monthExpiry, yearExpiry, customerID, cardDetailsId);
+        
+        return storeData(query);
     }
-
+    
+    public boolean updateCustomerPayment(int customerID, boolean usingCard){
+        String query = String.format("UPDATE `customers` SET `usingCard` = '%d' WHERE `accountNo` = '%d'", (usingCard) ? 1 : 0, customerID);
+        return storeData(query);
+    }
+    
+    public boolean updateCard(int customerID, String cardType, int last4Digit, int monthExpiry, int yearExpiry, int cardDetailsId){
+        String query = String.format("UPDATE `carddetails` SET `cardType` = '%s', "
+                + "`last4Digits` = '%d', "
+                + "`monthExpiry` = '%d', "
+                + "`yearExpiry` = '%d', "
+                + "`cardDetailsId` = '%d' "
+                + "WHERE `ownerAccountNo` = '%d'",
+                cardType,
+                last4Digit,
+                monthExpiry,
+                yearExpiry,
+                cardDetailsId,
+                customerID);
+        return storeData(query);
+    }
+    
+    public int last4Digit(int customerID){
+        try {
+            ResultSet result = retrieveData(String.format("SELECT last4Digits FROM `carddetails` WHERE ownerAccountNo = '%d'", customerID));
+            if(result.next())
+                return result.getInt("last4Digits");
+            else
+                return 0;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public boolean isCardInserted(int customerID) {
+        try {
+            ResultSet result = retrieveData(String.format("SELECT * FROM `carddetails` WHERE ownerAccountNo = '%d'", customerID));
+            if(result.next())
+                return true;
+            else
+                return false;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     // To-do:
     // I/O Customers, Job, Tasks, Payment for existing entries
     // Create Job, Tasks, Customers, Staff
