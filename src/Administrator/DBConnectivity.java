@@ -9,6 +9,7 @@ import Customer.Task;
 import Staff.*;
 import java.sql.*;
 import java.util.ArrayList;
+import static java.util.Optional.ofNullable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,7 +24,7 @@ public class DBConnectivity implements DBInterface {
     static final String DB_URL = "jdbc:mysql://localhost:3306/bloomsday?autoReconnect=true&useSSL=false";
 
     static final String USER = "root";
-    static final String PASS = "";
+    static final String PASS = "root";
     
     private Connection connection;
 
@@ -168,7 +169,6 @@ public class DBConnectivity implements DBInterface {
     
     public boolean deleteCard(int customerID) {
         String query = String.format("DELETE FROM `carddetails` WHERE ownerAccountNo = '%d' ", customerID);
-        System.out.println(query);
         return storeData(query);
     }
     
@@ -252,7 +252,7 @@ public class DBConnectivity implements DBInterface {
     
     private int createInvoice(double totalAmount)
     {
-        String query = "INSERT INTO `invoice` (`totalAmount`) VALUES('" + totalAmount + "')";
+        String query = "INSERT INTO `invoices` (`totalAmount`) VALUES('" + totalAmount + "')";
         
         try 
         {
@@ -289,6 +289,13 @@ public class DBConnectivity implements DBInterface {
         return storeData(query);
     }
     
+    public boolean deleteTask(String jobCode, int taskId) {
+        
+        String query = String.format("DELETE FROM `tasks` WHERE jobCode=%s AND taskId=%s", jobCode, taskId );
+        
+        return storeData(query);
+    }
+    
     /**
      * Creates a new customer
      * @param customer Customer object that will be inserted
@@ -313,14 +320,21 @@ public class DBConnectivity implements DBInterface {
         String query = String.format("UPDATE `tasks` SET "
                 + "`description` = '%s', " +
                 "`status` = '%d', "
-                + "`department` = '%d' "
-                + "WHERE `taskID` = '%d' "
+                + "`department` = '%s', "
+                + "`assigneeId` = '%s', "
+                + "`startTime` = %s, "
+                + "`endTime` = %s "
+                + "WHERE `taskID` = '%s' "
                 + "AND `jobCode` = '%s'",
                 task.getDescription(),
                 task.getStatus().ordinal(),
                 task.getDepartment().ordinal(),
+                task.getAssigneeId(),
+                task.getStartTime() != null ? "'" + task.getStartTime() + "'" : "NULL",
+                task.getEndTime() != null ? "'" + task.getEndTime() + "'" : "NULL",
                 task.getId(),
-                task.getJobCode());
+                task.getJobCode()
+        );
         
         return storeData(query);
     }
@@ -562,6 +576,7 @@ public class DBConnectivity implements DBInterface {
                 tasks.add(new Task(
                         jobCode,
                         result.getInt("taskID"),
+                        result.getInt("assigneeId"),
                         Status.values()[result.getInt("status")],
                         result.getDouble("price"),
                         result.getString("description"),
@@ -600,6 +615,7 @@ public class DBConnectivity implements DBInterface {
                 tasks.add(new Task(
                         jobCode,
                         result.getInt("taskID"),
+                        result.getInt("assigneeId"),
                         Status.values()[result.getInt("status")],
                         result.getDouble("price"),
                         result.getString("description"),

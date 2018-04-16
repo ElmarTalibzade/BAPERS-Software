@@ -6,8 +6,9 @@
 	<parameter name="INVOICE_NO" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="ACCOUNT_NO" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[SELECT code, specialInstructions, price, discountRate FROM jobs INNER JOIN invoice ON invoice.invoiceNo = jobs.invoiceNo WHERE invoice.invoiceNo = $P{INVOICE_NO} AND invoice.isPaid = 0]]>
+		<![CDATA[SELECT code, specialInstructions, price, customers.discountRate FROM jobs INNER JOIN invoices ON invoices.invoiceNo = jobs.invoiceNo INNER JOIN customers ON customers.accountNo = $P{ACCOUNT_NO} WHERE invoices.invoiceNo = $P{INVOICE_NO} AND invoices.isPaid = 0]]>
 	</queryString>
 	<field name="code" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -18,7 +19,7 @@
 	<field name="price" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="discountRate" class="java.lang.Float">
+	<field name="discountRate" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<variable name="invoice_subTotal" class="java.lang.Double" calculation="Sum">

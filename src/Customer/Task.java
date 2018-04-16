@@ -5,16 +5,19 @@
  */
 package Customer;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  * Task which is a part of a Job.
  * @author Elmar Talibzade
  */
-public class Task {
+    public class Task {
     
     private String jobCode;
     private int id;
+    private int assigneeId;
     private Status status;
     private double price;
     private String description;
@@ -22,8 +25,8 @@ public class Task {
     private DepartmentType department;
     private float discountRate;
     
-    private Timestamp startTime;
-    private Timestamp endTime;
+    private java.sql.Timestamp startTime;
+    private java.sql.Timestamp endTime;
 
     /**
      * Constructs a Task
@@ -38,9 +41,10 @@ public class Task {
      * @param startTime Time task has started
      * @param endTime Time task was finished
      */
-    public Task(String jobCode, int id, Status status, double price, String description, String shelfSlot, DepartmentType department, float discountRate, Timestamp startTime, Timestamp endTime) {
+    public Task(String jobCode, int id, int assigneeId, Status status, double price, String description, String shelfSlot, DepartmentType department, float discountRate, java.sql.Timestamp startTime, java.sql.Timestamp endTime) {
         this.jobCode = jobCode;
         this.id = id;
+        this.assigneeId = assigneeId;
         this.status = status;
         this.price = price;
         this.description = description;
@@ -50,13 +54,43 @@ public class Task {
         this.startTime = startTime;
         this.endTime = endTime;
     }
-
+    
     /**
      * Marks this task as done
      */
-    public void MarkAsDone()
+    public void endTask()
     {
+        if (status == Status.Completed) return;
+        
         status = Status.Completed;
+        endTime = new java.sql.Timestamp(new java.util.Date().getTime());
+    }
+    
+    /**
+     * Begins this task and assigns a staff user to it
+     */
+    public void beginTask(int assigneeId)
+    {
+        if (status == Status.Completed) return;
+        
+        status = Status.InProgress;
+        this.assigneeId = assigneeId;
+        startTime = new java.sql.Timestamp(new java.util.Date().getTime());
+    }
+    
+    public java.sql.Timestamp getStartTime()
+    {
+        return startTime;
+    }
+    
+    public java.sql.Timestamp getEndTime()
+    {
+        return endTime;
+    }
+    
+    public int getAssigneeId()
+    {
+        return assigneeId;
     }
     
     /**

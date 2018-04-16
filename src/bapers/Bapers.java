@@ -6,11 +6,9 @@
 package bapers;
 
 import GUI.LoginView;
-import GUI.StaffView;
 import Administrator.*;
-import GUI.*;
 import Staff.Staff;
-import javax.swing.UIManager;
+
 /**
  * Main class for running BAPERS software.
  *

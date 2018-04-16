@@ -8,6 +8,8 @@ package GUI;
 import Customer.*;
 import Staff.Role;
 import bapers.Bapers;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 /**
  * Task Profile
  * @author Elmar Talibzade
@@ -25,7 +27,6 @@ public class TaskProfilePanel extends javax.swing.JPanel {
         //enable editing of some fields of the task based on user's role
         field_description.setEnabled(Bapers.getUser().getRole() != Role.Receptionist);
         dropdown_department.setEnabled(Bapers.getUser().getRole() != Role.Receptionist);
-        dropdown_status.setEnabled(Bapers.getUser().getRole() != Role.Receptionist);
         btn_applyChanges.setVisible(Bapers.getUser().getRole() != Role.Receptionist);
         btn_resetFields.setVisible(Bapers.getUser().getRole() != Role.Receptionist);
     }
@@ -48,14 +49,76 @@ public class TaskProfilePanel extends javax.swing.JPanel {
         label_shelfNo.setText("Shelf NO: " + task.getShelfSlot());
         field_description.setText(task.getDescription());
         dropdown_department.setSelectedIndex(task.getDepartment().ordinal());
-        dropdown_status.setSelectedIndex(task.getStatus().ordinal());
+        label_status.setText("Status: " + bapers.Utils.splitCamelCase(task.getStatus().toString()));
+        
+        label_endTime.setText("Time Ended: Never");
+        label_startTime.setText("Time Started: Never");
+        btn_setTaskStatus.setText("Start Task");
+        
+        btn_delete.setEnabled(task.getStatus() != Status.InProgress);
+        btn_setTaskStatus.setVisible(Bapers.getUser().getRole() != Role.Receptionist && task.getStatus() != Status.Completed);
+        dropdown_department.setEnabled(Bapers.getUser().getRole() != Role.Receptionist && task.getStatus() == Status.Inactive);
+        field_description.setEnabled(Bapers.getUser().getRole() != Role.Receptionist && task.getStatus() == Status.Inactive);
+        btn_applyChanges.setVisible(Bapers.getUser().getRole() != Role.Receptionist && task.getStatus() == Status.Inactive);
+        btn_resetFields.setVisible(Bapers.getUser().getRole() != Role.Receptionist && task.getStatus() == Status.Inactive);
+        
+        if (task.getStatus() != Status.Inactive)
+        {
+            if (task.getStartTime() != null)
+                label_startTime.setText(String.format("Time Started: %s", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(task.getStartTime())));
+        }
+        
+        if (task.getStatus() == Status.Completed)
+        {
+            if (task.getEndTime() != null)
+                label_endTime.setText(String.format("Time Ended: %s", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(task.getEndTime())));
+        }
+        
+        if (task.getStatus() == Status.InProgress)
+        {
+            btn_setTaskStatus.setEnabled(task.getAssigneeId() == Bapers.getUser().getAccountNo());
+            
+            if (task.getAssigneeId() == Bapers.getUser().getAccountNo())
+            {
+                btn_setTaskStatus.setText("Finish Task");
+            }
+            else
+            {
+                btn_setTaskStatus.setText("Already Assigned");
+            }
+        }
     }
     
     private void submitChanges() {
         task.setDescription(field_description.getText());
         task.setDepartment(DepartmentType.values()[dropdown_department.getSelectedIndex()]);
-        task.setStatus(Status.values()[dropdown_status.getSelectedIndex()]);
         bapers.Bapers.DB.updateTask(task);
+        updateGUI();
+    }
+    
+    private void removeTaskDialog() {
+        
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to remove this Task? This cannot be undone!", "Attention!", JOptionPane.YES_OPTION);
+        
+        if (dialogResult == JOptionPane.YES_OPTION)
+        {
+            
+        }
+    }
+    
+    private void beginTask()
+    {
+        if (Bapers.getUser().getRole() != Role.Technician) return;
+        task.beginTask(Bapers.getUser().getAccountNo());
+        submitChanges();
+        updateGUI();
+    }
+    
+    private void endTask()
+    {
+        if (Bapers.getUser().getRole() != Role.Technician) return;
+        task.endTask();
+        submitChanges();
         updateGUI();
     }
     
@@ -69,26 +132,30 @@ public class TaskProfilePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         label_jobCode = new javax.swing.JLabel();
-        label_timeStarted = new javax.swing.JLabel();
+        label_startTime = new javax.swing.JLabel();
+        label_endTime = new javax.swing.JLabel();
         label_taskId = new javax.swing.JLabel();
         label_shelfNo = new javax.swing.JLabel();
         label_description = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         field_description = new javax.swing.JTextArea();
         label_status = new javax.swing.JLabel();
-        dropdown_status = new javax.swing.JComboBox<>();
         label_department = new javax.swing.JLabel();
         dropdown_department = new javax.swing.JComboBox<>();
         label_taskPrice = new javax.swing.JLabel();
         btn_applyChanges = new javax.swing.JButton();
         btn_resetFields = new javax.swing.JButton();
         btn_back = new javax.swing.JButton();
+        btn_delete = new javax.swing.JButton();
+        btn_setTaskStatus = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(706, 398));
 
         label_jobCode.setText("Job Code: {job-code}");
 
-        label_timeStarted.setText("Time Started: {start-time}");
+        label_startTime.setText("Time Started: {start-time}");
+
+        label_endTime.setText("Time Ended: {end-time}");
 
         label_taskId.setText("Task ID: {task-id}");
 
@@ -100,11 +167,9 @@ public class TaskProfilePanel extends javax.swing.JPanel {
         field_description.setRows(5);
         jScrollPane1.setViewportView(field_description);
 
-        label_status.setText("Status");
+        label_status.setText("Status : {task-status}");
 
-        dropdown_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unspecified", "Inactive", "In Progress", "Completed" }));
-
-        label_department.setText("Department");
+        label_department.setText("Department:");
 
         dropdown_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unspecified", "Copy Room", "Development", "Finishing", "Packing" }));
 
@@ -126,6 +191,20 @@ public class TaskProfilePanel extends javax.swing.JPanel {
 
         btn_back.setText("Back");
 
+        btn_delete.setText("Delete");
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
+
+        btn_setTaskStatus.setText("Begin Task");
+        btn_setTaskStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_setTaskStatusActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -140,30 +219,34 @@ public class TaskProfilePanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(label_jobCode)
-                                    .addComponent(label_shelfNo))
-                                .addGap(37, 37, 37)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(label_taskPrice)
+                                    .addComponent(label_shelfNo)
+                                    .addComponent(label_status))
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(label_taskId)
-                                        .addGap(47, 47, 47)
-                                        .addComponent(label_timeStarted)))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(label_department)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(dropdown_department, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(label_taskId)
+                                            .addComponent(label_taskPrice))
+                                        .addGap(40, 40, 40)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(label_endTime)
+                                            .addComponent(label_startTime))))))
+                        .addGap(0, 250, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(label_status)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dropdown_status, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(label_department)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dropdown_department, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_resetFields, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                            .addComponent(btn_applyChanges, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                            .addComponent(btn_back, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btn_resetFields, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btn_setTaskStatus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_applyChanges, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -176,27 +259,31 @@ public class TaskProfilePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_jobCode)
                     .addComponent(label_taskId)
-                    .addComponent(label_timeStarted))
+                    .addComponent(label_startTime))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_shelfNo)
-                    .addComponent(label_taskPrice))
-                .addGap(40, 40, 40)
-                .addComponent(label_description)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_taskPrice)
+                    .addComponent(label_endTime))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_status)
-                    .addComponent(dropdown_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label_department)
                     .addComponent(dropdown_department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_applyChanges)
+                .addGap(31, 31, 31)
+                .addComponent(label_description)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_applyChanges)
+                    .addComponent(btn_setTaskStatus))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_resetFields)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_back)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_back)
+                    .addComponent(btn_delete))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -209,22 +296,39 @@ public class TaskProfilePanel extends javax.swing.JPanel {
         submitChanges();
     }//GEN-LAST:event_btn_applyChangesActionPerformed
 
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+        removeTaskDialog();
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void btn_setTaskStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_setTaskStatusActionPerformed
+        if (task.getStatus() == Status.Inactive)
+        {
+            beginTask();
+        }
+        else if (task.getStatus() == Status.InProgress)
+        {
+            endTask();
+        }
+    }//GEN-LAST:event_btn_setTaskStatusActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_applyChanges;
     public javax.swing.JButton btn_back;
+    private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_resetFields;
+    private javax.swing.JButton btn_setTaskStatus;
     private javax.swing.JComboBox<String> dropdown_department;
-    private javax.swing.JComboBox<String> dropdown_status;
     private javax.swing.JTextArea field_description;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_department;
     private javax.swing.JLabel label_description;
+    private javax.swing.JLabel label_endTime;
     private javax.swing.JLabel label_jobCode;
     private javax.swing.JLabel label_shelfNo;
+    private javax.swing.JLabel label_startTime;
     private javax.swing.JLabel label_status;
     private javax.swing.JLabel label_taskId;
     private javax.swing.JLabel label_taskPrice;
-    private javax.swing.JLabel label_timeStarted;
     // End of variables declaration//GEN-END:variables
 }
