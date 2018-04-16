@@ -89,6 +89,7 @@
                           <Component id="btn_setPayment" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
                           <Component id="btn_print_receipt" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
                           <Component id="btn_print_reminder" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
+                          <Component id="btn_accProperties" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -128,6 +129,7 @@
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="label_discountRate" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="field_discountRate" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_accProperties" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
                           <Component id="label_email" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -160,7 +162,7 @@
                   <Component id="label_phone" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-              <Component id="table_jobs" pref="102" max="32767" attributes="0"/>
+              <Component id="table_jobs" pref="96" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="btn_back" min="-2" pref="32" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
@@ -424,6 +426,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Payment Type: {payment-type}"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_accProperties">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Upgrade account"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_accPropertiesActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
