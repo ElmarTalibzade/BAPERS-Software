@@ -49,6 +49,9 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         label_stat_suspended.setVisible(customer.isSuspended());
         label_stat_valued.setVisible(customer.isValued());
         
+        dropdown_discountType.setSelectedIndex(customer.getAgreedDiscount().ordinal());
+        field_discountRate.setText("" + customer.getDiscountValue());
+        
         // set discount type
         DefaultTableModel model = (DefaultTableModel)table_tasks.getModel();
         
