@@ -426,6 +426,7 @@ public class DBConnectivity implements DBInterface {
                         result.getString("address"),
                         result.getString("phoneNo"),
                         DiscountType.values()[result.getInt("discountType")],
+                        result.getInt("discountRate"),
                         result.getString("emailAddress"),
                         result.getInt("debtRemindedAmount"),
                         getJobs(result.getInt("accountNo"))
@@ -489,6 +490,7 @@ public class DBConnectivity implements DBInterface {
                         result.getString("address"),
                         result.getString("phoneNo"),
                         DiscountType.values()[result.getInt("discountType")],
+                        result.getInt("discountRate"),
                         result.getString("emailAddress"),
                         result.getInt("debtRemindedAmount"),
                         getJobs(result.getInt("accountNo"))
