@@ -8,6 +8,7 @@ package GUI;
 import Customer.*;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -357,7 +358,14 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
-        // TODO add your handling code here:
+        int newDiscountType = dropdown_discountType.getSelectedIndex();
+        int newDiscountRate = Integer.parseInt(field_discountRate.getText());
+        customer.setAgreedDiscount(DiscountType.values()[newDiscountType]);
+        customer.setDiscountValue(newDiscountRate);
+        
+        JOptionPane.showMessageDialog(this, "Discount Updated",  "Customer discount values updated.", JOptionPane.INFORMATION_MESSAGE);
+        bapers.Bapers.DB.updateCustomerDiscount(customer.getAccountNo(), newDiscountType, newDiscountRate);
+        assignValues();
     }//GEN-LAST:event_btn_saveActionPerformed
 
     private void btn_setPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_setPaymentActionPerformed
