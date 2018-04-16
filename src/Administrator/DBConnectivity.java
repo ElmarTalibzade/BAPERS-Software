@@ -122,18 +122,19 @@ public class DBConnectivity implements DBInterface {
             Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
 
         }
-    }            
+    }
+    
+    public boolean updateCustomerDiscount(int customerID, int discountType, int discountRate){
+        String query = String.format("UPDATE `customers` SET `discountType` = '%d', `discountRate` = '%d' WHERE `accountNo` = '%d'", discountType, discountRate, customerID);
+        return storeData(query);
+    }
+    
     public boolean insertCard(int customerID, String cardType, int last4Digit, int monthExpiry, int yearExpiry, int cardDetailsId){
         String query = String.format("INSERT INTO `carddetails` "
                 + "(cardType, last4Digits, monthExpiry, yearExpiry, ownerAccountNo, cardDetailsId) VALUES(" 
                 + "'%s', '%d', '%d', '%d', '%d', '%d')", 
                 cardType, last4Digit, monthExpiry, yearExpiry, customerID, cardDetailsId);
         
-        return storeData(query);
-    }
-    
-    public boolean updateCustomerPayment(int customerID, boolean usingCard){
-        String query = String.format("UPDATE `customers` SET `usingCard` = '%d' WHERE `accountNo` = '%d'", (usingCard) ? 1 : 0, customerID);
         return storeData(query);
     }
     
