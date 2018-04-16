@@ -156,7 +156,6 @@ public class PaymentSettingsView extends javax.swing.JDialog {
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
         if(dropbox_paymentMethod.getSelectedIndex() == 1) { 
-            bapers.Bapers.DB.updateCustomerPayment(customerNo, false);
             JOptionPane.showMessageDialog(this, "Payment method changed",  "Customer is paying now using cash.", JOptionPane.INFORMATION_MESSAGE);
             if(bapers.Bapers.DB.isCardInserted(customerNo) == true)
                 bapers.Bapers.DB.deleteCard(customerNo);
@@ -172,12 +171,10 @@ public class PaymentSettingsView extends javax.swing.JDialog {
             if(bapers.Bapers.DB.isCardInserted(customerNo) == false) {
                 bapers.Bapers.DB.insertCard(customerNo, cardType, last4Digit, monthExpiry, yearExpiry, 0);
                 JOptionPane.showMessageDialog(this, "Card Inserted",  "Card inserted successfully.", JOptionPane.INFORMATION_MESSAGE);
-                bapers.Bapers.DB.updateCustomerPayment(customerNo, true);
             }
             else {
                 bapers.Bapers.DB.updateCard(customerNo, cardType, last4Digit, monthExpiry, yearExpiry, 0);
                 JOptionPane.showMessageDialog(this, "Card Updated",  "Card updated successfully.", JOptionPane.INFORMATION_MESSAGE);
-                bapers.Bapers.DB.updateCustomerPayment(customerNo, true);
             }
         }
     }//GEN-LAST:event_btn_saveActionPerformed
