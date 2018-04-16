@@ -253,7 +253,7 @@ public class DBConnectivity implements DBInterface {
     
     private int createInvoice(double totalAmount)
     {
-        String query = "INSERT INTO `invoice` (`totalAmount`) VALUES('" + totalAmount + "')";
+        String query = "INSERT INTO `invoices` (`totalAmount`) VALUES('" + totalAmount + "')";
         
         try 
         {
