@@ -146,14 +146,11 @@ public class CreateStaffPanel extends javax.swing.JPanel {
         int roleNo = dropdown_role.getSelectedIndex();
         Role role = Role.values()[roleNo];
 
-        DB = new DBConnectivity();
         Staff newStaff = new Staff(accNo, role, firstName, lastName, email) {};
-        if(DB.connect()) {
-            if(DB.createStaff(newStaff, password))
-                JOptionPane.showMessageDialog(this, "Staff member created succesfully!",  "SUCCESS", JOptionPane.WARNING_MESSAGE);
-            else
-                JOptionPane.showMessageDialog(this, "An error has occurred while creating a new staff member!",  "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
+        if(bapers.Bapers.DB.createStaff(newStaff, password))
+            JOptionPane.showMessageDialog(this, "Staff member created succesfully!",  "SUCCESS", JOptionPane.WARNING_MESSAGE);
+        else
+            JOptionPane.showMessageDialog(this, "An error has occurred while creating a new staff member!",  "ERROR", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btn_createActionPerformed
 
 
