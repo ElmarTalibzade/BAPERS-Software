@@ -141,6 +141,10 @@ public class Customer {
     public void setIsDefault(boolean isDefault) {
         this.isDefault = isDefault;
     }
+    
+    public void setIsSuspended(boolean isSuspended){
+        this.isSuspended = isSuspended;
+    }
 
     /**
      * Gets jobs associated with this customer
@@ -235,6 +239,10 @@ public class Customer {
      */
     public boolean isValued() {
         return isValued;
+    }
+    
+    public void setValued(boolean isValued){
+        this.isValued = isValued;
     }
     
     /**
