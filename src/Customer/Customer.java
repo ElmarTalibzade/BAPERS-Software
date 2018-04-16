@@ -22,6 +22,7 @@ public class Customer {
     private String address;
     private String phoneNumber;
     private DiscountType agreedDiscount;
+    private int discountRate;
     private String emailAddress;
     private int debtReminded;
     
@@ -43,7 +44,7 @@ public class Customer {
      * @param debtReminded Times the debt has been reminded to this customer
      * @param jobs A list of jobs that are associated with this customer
      */
-    public Customer(int accountNo, String holderName, String firstName, String lastName, boolean isValued, boolean isSuspended, boolean isDefault, String address, String phoneNumber, DiscountType agreedDiscount, String emailAddress, int debtReminded, ArrayList<Job> jobs) {
+    public Customer(int accountNo, String holderName, String firstName, String lastName, boolean isValued, boolean isSuspended, boolean isDefault, String address, String phoneNumber, DiscountType agreedDiscount, int discountRate, String emailAddress, int debtReminded, ArrayList<Job> jobs) {
         this.accountNo = accountNo;
         this.holderName = holderName;
         this.firstName = firstName;
@@ -54,6 +55,7 @@ public class Customer {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.agreedDiscount = agreedDiscount;
+        this.discountRate = discountRate;
         this.emailAddress = emailAddress;
         this.debtReminded = debtReminded;
         this.jobs = jobs;
@@ -73,6 +75,14 @@ public class Customer {
      */
     public String getAddress() {
         return address;
+    }
+    
+    public int getDiscountValue() {
+        return discountRate;
+    }
+    
+    public void setDiscountValue(int discountRate){
+        this.discountRate = discountRate;
     }
     
     /**
