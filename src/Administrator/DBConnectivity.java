@@ -129,6 +129,15 @@ public class DBConnectivity implements DBInterface {
         return storeData(query);
     }
     
+    public boolean updateCusotmerAccountType(int customerID, boolean isValued, boolean isSuspended, boolean isInDefault){
+        String query = String.format("UPDATE `customers` SET `isValued` = '%d', `isSuspended` = '%d', `isDefault` = '%d' WHERE `accountNo` = '%d'", 
+                (isValued) ? 1 : 0, 
+                (isSuspended) ? 1 : 0, 
+                (isInDefault) ? 1 : 0, 
+                customerID);
+        return storeData(query);
+    }
+    
     public boolean insertCard(int customerID, String cardType, int last4Digit, int monthExpiry, int yearExpiry, int cardDetailsId){
         String query = String.format("INSERT INTO `carddetails` "
                 + "(cardType, last4Digits, monthExpiry, yearExpiry, ownerAccountNo, cardDetailsId) VALUES(" 
