@@ -6,6 +6,8 @@
 package GUI;
 
 import Staff.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
 /**
@@ -29,6 +31,12 @@ public class AlertView extends javax.swing.JDialog {
         this.user = user;
         this.reminder = reminder;
         updateBody();
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent event) {
+                actionOnClose();
+            }
+        });
     }
 
     private void updateBody(){
@@ -112,13 +120,19 @@ public class AlertView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_confirmActionPerformed
-        // TODO add your handling code here:
+        reminder.markAsRead();
+        bapers.Bapers.DB.updateReminder(reminder);
     }//GEN-LAST:event_btn_confirmActionPerformed
 
     private void btn_remindLaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_remindLaterActionPerformed
-        // TODO add your handling code here:
+        actionOnClose();
     }//GEN-LAST:event_btn_remindLaterActionPerformed
 
+    private void actionOnClose(){
+        reminder.incrementTimesReminded();
+        bapers.Bapers.DB.updateReminder(reminder);
+        this.dispose();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_confirm;
     private javax.swing.JButton btn_remindLater;

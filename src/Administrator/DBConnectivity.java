@@ -132,6 +132,11 @@ public class DBConnectivity implements DBInterface {
         return storeData(query);
     }
     
+    public boolean updateReminder(Reminder reminder){
+        String query = String.format("UPDATE `reminders` SET `timesReminded` = '%d', `isRead` = '%d' WHERE `id` = '%d'", reminder.getTimesReminded(), reminder.isRead() ? 1 : 0, reminder.getID());
+        return storeData(query);
+    }
+    
     public boolean updateCusotmerAccountType(int customerID, boolean isValued, boolean isSuspended, boolean isInDefault){
         String query = String.format("UPDATE `customers` SET `isValued` = '%d', `isSuspended` = '%d', `isDefault` = '%d' WHERE `accountNo` = '%d'", 
                 (isValued) ? 1 : 0, 
@@ -723,7 +728,7 @@ public class DBConnectivity implements DBInterface {
         ArrayList<Reminder> reminders = new ArrayList<Reminder>();
         try {
             String query = String.format("SELECT * FROM `reminders` "
-                    + "WHERE `receiveNo`='%s' AND `isRead` = '0' ",
+                    + "WHERE `receiveNo`='%s' AND `isRead` = '0' ORDER BY receiveTime DESC",
                     loggedUser.getAccountNo());
 
             ResultSet result = retrieveData(query);

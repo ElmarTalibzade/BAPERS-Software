@@ -50,6 +50,10 @@ public class Reminder {
         return timesReminded;
     }
     
+    public void incrementTimesReminded(){
+        timesReminded++;
+    }
+    
     public String getSubject(){
         return subject;
     }
