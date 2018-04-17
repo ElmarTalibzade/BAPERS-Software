@@ -65,7 +65,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         {
             for (Task task : job.getTasks())
             {
-                model.addRow(new Object[] {job.getCode(), task.getId(), task.getDepartment(), "NULL", task.getDescription()});
+                model.addRow(new Object[] {job.getCode(), task.getId(), task.getDepartment(), job.getDateCreated(), task.getDescription()});
             }
         }
         
