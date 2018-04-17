@@ -5,19 +5,45 @@
  */
 package GUI;
 
+import Staff.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Elmar Talibzade
  */
-public class AlertView extends javax.swing.JFrame {
+public class AlertView extends javax.swing.JDialog {
 
     /**
      * Creates new form AlertWindow
      */
-    public AlertView() {
+    
+    private Reminder reminder;
+    private Staff user;
+    
+    public AlertView(JFrame parent, boolean modal, Reminder reminder, Staff user) {
+        super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
+        
+        this.user = user;
+        this.reminder = reminder;
+        updateBody();
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent event) {
+                actionOnClose();
+            }
+        });
     }
 
+    private void updateBody(){
+        label_alertTitle.setText(reminder.getSubject());
+        label_alertContent.setText(reminder.getMessage());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,8 +56,9 @@ public class AlertView extends javax.swing.JFrame {
         label_alertTitle = new javax.swing.JLabel();
         label_alertContent = new javax.swing.JLabel();
         btn_confirm = new javax.swing.JButton();
+        btn_remindLater = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alert Message");
         setResizable(false);
 
@@ -42,6 +69,18 @@ public class AlertView extends javax.swing.JFrame {
         label_alertContent.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         btn_confirm.setText("Understood");
+        btn_confirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_confirmActionPerformed(evt);
+            }
+        });
+
+        btn_remindLater.setText("Remind me later");
+        btn_remindLater.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_remindLaterActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -50,13 +89,17 @@ public class AlertView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label_alertContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_alertContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btn_confirm)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_remindLater))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label_alertTitle)
-                        .addGap(0, 189, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_confirm)))
+                        .addGap(0, 189, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -66,16 +109,33 @@ public class AlertView extends javax.swing.JFrame {
                 .addComponent(label_alertTitle)
                 .addGap(18, 18, 18)
                 .addComponent(label_alertContent, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_confirm)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_confirm)
+                    .addComponent(btn_remindLater))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_confirmActionPerformed
+        reminder.markAsRead();
+        bapers.Bapers.DB.updateReminder(reminder);
+    }//GEN-LAST:event_btn_confirmActionPerformed
+
+    private void btn_remindLaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_remindLaterActionPerformed
+        actionOnClose();
+    }//GEN-LAST:event_btn_remindLaterActionPerformed
+
+    private void actionOnClose(){
+        reminder.incrementTimesReminded();
+        bapers.Bapers.DB.updateReminder(reminder);
+        this.dispose();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_confirm;
+    private javax.swing.JButton btn_remindLater;
     private javax.swing.JLabel label_alertContent;
     private javax.swing.JLabel label_alertTitle;
     // End of variables declaration//GEN-END:variables

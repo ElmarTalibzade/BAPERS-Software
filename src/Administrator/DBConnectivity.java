@@ -9,7 +9,6 @@ import Customer.Task;
 import Staff.*;
 import java.sql.*;
 import java.util.ArrayList;
-import static java.util.Optional.ofNullable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -129,6 +128,11 @@ public class DBConnectivity implements DBInterface {
     
     public boolean updateCustomerDiscount(int customerID, int discountType, int discountRate){
         String query = String.format("UPDATE `customers` SET `discountType` = '%d', `discountRate` = '%d' WHERE `accountNo` = '%d'", discountType, discountRate, customerID);
+        return storeData(query);
+    }
+    
+    public boolean updateReminder(Reminder reminder){
+        String query = String.format("UPDATE `reminders` SET `timesReminded` = '%d', `isRead` = '%d' WHERE `id` = '%d'", reminder.getTimesReminded(), reminder.isRead() ? 1 : 0, reminder.getID());
         return storeData(query);
     }
     
@@ -753,4 +757,33 @@ public class DBConnectivity implements DBInterface {
         
         return jobs;
     }
+
+    public ArrayList<Reminder> getReminders() {
+        ArrayList<Reminder> reminders = new ArrayList<Reminder>();
+        try {
+            String query = String.format("SELECT * FROM `reminders` "
+                    + "WHERE `receiveNo`='%s' AND `isRead` = '0' ORDER BY receiveTime DESC",
+                    loggedUser.getAccountNo());
+
+            ResultSet result = retrieveData(query);
+
+            while (result.next()) {
+                reminders.add(new Reminder(
+                        result.getInt("id"),
+                        result.getString("subject"),
+                        result.getString("message"),
+                        result.getInt("receiveNo"),
+                        result.getTimestamp("receiveTime"),
+                        result.getInt("timesReminded"),
+                        result.getBoolean("isRead")
+                ));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return reminders;
+    }
+
 }
