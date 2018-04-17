@@ -24,7 +24,7 @@ public class DBConnectivity implements DBInterface {
     static final String DB_URL = "jdbc:mysql://localhost:3306/bloomsday?autoReconnect=true&useSSL=false";
 
     static final String USER = "root";
-    static final String PASS = "root";
+    static final String PASS = "";
     
     private Connection connection;
 
@@ -231,11 +231,11 @@ public class DBConnectivity implements DBInterface {
         {
             String query = String.format("INSERT INTO `jobs` "
                     + "(`code`, `ownerNo`, `staffNo`, `invoiceNo`, `shelf`, `status`, "
-                    + "`priority`, `discountRate`, `price`, `specialInstructions`) VALUES(" 
-                    + "'%s','%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", 
+                    + "`priority`, `discountRate`, `price`, `specialInstructions`, `dateCreated`) VALUES(" 
+                    + "'%s','%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", 
                     job.getCode(), job.getCustomerId(), job.getStaffCode(), newInvoiceNo, 
                     job.getShelf(), job.getStatus(), job.getPriority(), job.getDiscountRate(), 
-                    job.getPrice(), job.getSpecialInstructions());
+                    job.getPrice(), job.getSpecialInstructions(), job.getDateCreated());
 
             if (storeData(query))
             {
@@ -555,7 +555,8 @@ public class DBConnectivity implements DBInterface {
                         result.getInt("ownerNo"),
                         result.getString("specialInstructions"),
                         result.getString("shelf"),
-                        result.getInt("priority")
+                        result.getInt("priority"),
+                        result.getTimestamp("dateCreated")
                 ));
 
             }
@@ -683,7 +684,8 @@ public class DBConnectivity implements DBInterface {
                         result.getInt("ownerNo"),
                         result.getString("specialInstructions"),
                         result.getString("shelf"),
-                        result.getInt("priority")
+                        result.getInt("priority"),
+                        result.getTimestamp("dateCreated")
                 ));
 
             }

@@ -44,7 +44,8 @@ public class CreateJobView extends javax.swing.JDialog {
                 customerNo, 
                 field_instructions.getText(),
                 "shelfNo",
-                0
+                0,
+                new java.sql.Timestamp(new java.util.Date().getTime())
             );
     }
     

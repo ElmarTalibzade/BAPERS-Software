@@ -30,6 +30,8 @@ public class Job {
     
     private String specialInstructions;
     private String shelf;
+    
+    private Timestamp dateCreated;
 
     /**
      * Constructs a Job
@@ -44,7 +46,7 @@ public class Job {
      * @param shelf Shelf slot of this job
      * @param priority Priority for this job
      */
-    public Job(int invoiceNo, String code, int staffCode, ArrayList<Task> task, float discountRate, int customerId, String specialInstructions, String shelf, int priority) {
+    public Job(int invoiceNo, String code, int staffCode, ArrayList<Task> task, float discountRate, int customerId, String specialInstructions, String shelf, int priority, Timestamp dateCreated) {
         this.invoiceNo = invoiceNo;           
         this.staffCode = staffCode;
         this.code = code;
@@ -56,6 +58,7 @@ public class Job {
         this.shelf = shelf;
         this.status = 0;
         this.priority = priority;
+        this.dateCreated = dateCreated;
     }
 
     /**
@@ -96,6 +99,10 @@ public class Job {
      */
     public int getStaffCode(){
         return staffCode;
+    }
+    
+    public Timestamp getDateCreated(){
+        return dateCreated;
     }
     
     /**
