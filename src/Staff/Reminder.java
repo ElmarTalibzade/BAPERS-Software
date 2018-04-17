@@ -57,4 +57,8 @@ public class Reminder {
     public boolean isRead(){
         return isRead;
     }
+    
+    public void markAsRead(){
+        isRead = true;
+    }
 }
