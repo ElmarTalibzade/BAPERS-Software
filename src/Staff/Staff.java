@@ -6,7 +6,7 @@ import Customer.DepartmentType;
  * The main class for all types of Staff users
  * @author Mihai
  */
-public abstract class Staff {
+public class Staff {
 
     /**
      * Role of the staff
@@ -59,6 +59,7 @@ public abstract class Staff {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
+        setDepartment(null);
     }
 
     public Staff(int accountNo, Role role, DepartmentType assignedDepartment, String username, String firstName, String lastName) {

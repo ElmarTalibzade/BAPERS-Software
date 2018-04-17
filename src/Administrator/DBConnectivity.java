@@ -664,10 +664,45 @@ public class DBConnectivity implements DBInterface {
         } catch (SQLException ex) {
 
             Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
-
+            
         }
 
         return tasks;
+    }
+    
+    public ArrayList<Staff> getStaff(int accountNo, String firstName, String lastName, Role staffRole)
+    {
+        ArrayList<Staff> staff = new ArrayList<Staff>();
+        
+        String query = String.format("SELECT * FROM `staff` "
+            + "WHERE ('%1$s'='' or `staffNo`='%1$s') "
+            + "AND ('%2$s'='' or `firstName`='%2$s') "
+            + "AND ('%4$s'='' or `role`='%4$s') ",
+            accountNo != -1 ? accountNo : "", 
+            firstName.trim(), 
+            lastName.trim(), 
+            staffRole != null ? staffRole.ordinal() : ""
+        );
+            
+        ResultSet result = retrieveData(query);
+        
+        try {
+            while (result.next()) {
+                
+                staff.add(new Staff(
+                    result.getInt("staffNo"),
+                    Role.values()[result.getInt("role")],
+                    result.getString("username"),
+                    result.getString("firstName"),
+                    result.getString("lastName")
+                ));
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return staff;
     }
     
     /**
@@ -718,4 +753,4 @@ public class DBConnectivity implements DBInterface {
         
         return jobs;
     }
-    }
+}

@@ -16,3 +16,4 @@ public class ShiftManager extends Staff {
         super(accountNo, Role.ShiftManager, username, firstName, lastName);
     }
 }
+    

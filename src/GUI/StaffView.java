@@ -122,7 +122,7 @@ public class StaffView extends javax.swing.JFrame {
                         staff.getFirstName(), 
                         staff.getLastName(), 
                         Utils.splitCamelCase(staff.getRole().name()),
-                        staff.isAssigned() ? ", " + Utils.splitCamelCase(staff.getDepartment().toString()) : ""
+                        staff.isAssigned() ? " - " + Utils.splitCamelCase(staff.getDepartment().toString()) : ""
                 )
         );
     
