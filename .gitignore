@@ -18,6 +18,9 @@
 *.tar.gz
 *.rar
 
+# Generated PDF Reports
+/Generated Reports/
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /Bapers/nbproject/private/
@@ -25,4 +28,5 @@ hs_err_pid*
 /build/
 /nbproject/private/
 
+# Exclude the following directories
 !/libs/*
