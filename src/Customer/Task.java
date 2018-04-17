@@ -5,10 +5,6 @@
  */
 package Customer;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-
 /**
  * Task which is a part of a Job.
  * @author Elmar Talibzade

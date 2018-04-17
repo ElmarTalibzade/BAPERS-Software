@@ -31,6 +31,7 @@ public class ReportsManagerPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
         label_generateReport = new javax.swing.JLabel();
         label_reportType = new javax.swing.JLabel();
         dropdown_reportType = new javax.swing.JComboBox<>();
@@ -57,6 +58,11 @@ public class ReportsManagerPanel extends javax.swing.JPanel {
         label_reportType.setText("Type");
 
         dropdown_reportType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer Report", "Individual Performance Report", "Summary Performance Report" }));
+        dropdown_reportType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dropdown_reportTypeActionPerformed(evt);
+            }
+        });
 
         label_accountNO.setText("Customer Account NO");
 
@@ -177,6 +183,11 @@ public class ReportsManagerPanel extends javax.swing.JPanel {
         GenerateReport();
     }//GEN-LAST:event_btn_generateReportActionPerformed
 
+    private void dropdown_reportTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdown_reportTypeActionPerformed
+        label_accountNO.setEnabled(dropdown_reportType.getSelectedIndex() == 0);
+        field_accountNO.setEnabled(dropdown_reportType.getSelectedIndex() == 0);
+    }//GEN-LAST:event_dropdown_reportTypeActionPerformed
+
     private void GenerateReport()
     {
         if (!canGenerate) return;
@@ -246,6 +257,7 @@ public class ReportsManagerPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> dropdown_timing;
     private javax.swing.JTextField field_accountNO;
     private javax.swing.JTextField field_timing;
+    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private javax.swing.JLabel label_accountNO;
     private javax.swing.JLabel label_dateEnd;
     private javax.swing.JLabel label_dateStart;

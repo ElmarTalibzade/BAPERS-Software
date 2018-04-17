@@ -10,11 +10,6 @@ package Customer;
  * @author Elmar Talibzade
  */
 public enum DepartmentType {
-    
-    /**
-     * Not specified
-     */
-    Unspecified,
 
     /**
      * Copy Room

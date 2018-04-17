@@ -6,6 +6,8 @@
 package GUI;
 
 import Customer.*;
+import Staff.Role;
+import static bapers.Bapers.DB;
 import java.awt.CardLayout;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 public class JobBrowserPanel extends javax.swing.JPanel {
 
     private ArrayList<Task> tasks;
-    
+    private int selectedTaskIndex = -1;
     private TaskProfilePanel pane_taskProfile;
     private CardLayout cardLayout;
     
@@ -33,6 +35,7 @@ public class JobBrowserPanel extends javax.swing.JPanel {
         initCardLayout();
         addListener();
         getTasks();
+        updateGUI();
     }
 
     private void initCardLayout()
@@ -53,6 +56,35 @@ public class JobBrowserPanel extends javax.swing.JPanel {
                 getTasks();
             }
         });
+        
+        pane_taskProfile.btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
+                int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove this Task? This cannot be undone!", "Attention!", JOptionPane.YES_OPTION);
+        
+                if (dialogResult == JOptionPane.YES_OPTION)
+                {   
+                    if (bapers.Bapers.DB.deleteTask(tasks.get(selectedTaskIndex)))
+                    {
+                        toggleProfile(false);
+                        getTasks();
+                        selectedTaskIndex = -1;
+                    }
+                }
+            }
+        });
+    }
+   
+    private void updateGUI()
+    {
+        dropdown_department.setEnabled(DB.loggedUser.getRole() != Role.Technician);
+        
+        if (DB.loggedUser.isAssigned())
+        {        
+            dropdown_department.setSelectedIndex(DB.loggedUser.getDepartment().ordinal());
+        }
+        
+        getTasks();
     }
     
     /**
@@ -156,11 +188,11 @@ public class JobBrowserPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Job Code", "Task ID", "Department", "Shelf No", "Date Created", "Status"
+                "Job Code", "Task ID", "Department", "Shelf No", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -272,7 +304,8 @@ public class JobBrowserPanel extends javax.swing.JPanel {
         if (evt.getClickCount() == 2)
         {
             JTable targetTable = (JTable)evt.getSource();
-            Task task = tasks.get(targetTable.getSelectedRow());
+            selectedTaskIndex = targetTable.getSelectedRow();
+            Task task = tasks.get(selectedTaskIndex);
             pane_taskProfile.setTask(task);
             toggleProfile(true);
         }
@@ -308,15 +341,12 @@ public class JobBrowserPanel extends javax.swing.JPanel {
         
         for (Task task : tasks)
         {
-            model.addRow(new Object[]{
-
+            model.addRow(new Object[] {
                 task.getJobCode(),
                 task.getId(),
                 bapers.Utils.splitCamelCase(task.getDepartment().toString()),
                 task.getShelfSlot(),
-                "NULL",
                 bapers.Utils.splitCamelCase(task.getStatus().toString())
-
             });
         }
     }

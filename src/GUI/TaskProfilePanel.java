@@ -8,6 +8,8 @@ package GUI;
 import Customer.*;
 import Staff.Role;
 import bapers.Bapers;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 /**
@@ -23,12 +25,6 @@ public class TaskProfilePanel extends javax.swing.JPanel {
      */
     public TaskProfilePanel() {
         initComponents();
-        
-        //enable editing of some fields of the task based on user's role
-        field_description.setEnabled(Bapers.getUser().getRole() != Role.Receptionist);
-        dropdown_department.setEnabled(Bapers.getUser().getRole() != Role.Receptionist);
-        btn_applyChanges.setVisible(Bapers.getUser().getRole() != Role.Receptionist);
-        btn_resetFields.setVisible(Bapers.getUser().getRole() != Role.Receptionist);
     }
 
     /**
@@ -55,12 +51,12 @@ public class TaskProfilePanel extends javax.swing.JPanel {
         label_startTime.setText("Time Started: Never");
         btn_setTaskStatus.setText("Start Task");
         
-        btn_delete.setEnabled(task.getStatus() != Status.InProgress);
-        btn_setTaskStatus.setVisible(Bapers.getUser().getRole() != Role.Receptionist && task.getStatus() != Status.Completed);
-        dropdown_department.setEnabled(Bapers.getUser().getRole() != Role.Receptionist && task.getStatus() == Status.Inactive);
-        field_description.setEnabled(Bapers.getUser().getRole() != Role.Receptionist && task.getStatus() == Status.Inactive);
-        btn_applyChanges.setVisible(Bapers.getUser().getRole() != Role.Receptionist && task.getStatus() == Status.Inactive);
-        btn_resetFields.setVisible(Bapers.getUser().getRole() != Role.Receptionist && task.getStatus() == Status.Inactive);
+        btn_delete.setEnabled(Bapers.getUser().getRole() == Role.Technician && task.getStatus() != Status.InProgress);
+        btn_setTaskStatus.setVisible(Bapers.getUser().getRole() == Role.Technician && task.getStatus() != Status.Completed);
+        dropdown_department.setEnabled(Bapers.getUser().getRole() == Role.Technician&& task.getStatus() == Status.Inactive);
+        field_description.setEnabled(Bapers.getUser().getRole() == Role.Technician && task.getStatus() == Status.Inactive);
+        btn_applyChanges.setVisible(Bapers.getUser().getRole() == Role.Technician && task.getStatus() == Status.Inactive);
+        btn_resetFields.setVisible(Bapers.getUser().getRole() == Role.Technician && task.getStatus() == Status.Inactive);
         
         if (task.getStatus() != Status.Inactive)
         {
@@ -94,16 +90,6 @@ public class TaskProfilePanel extends javax.swing.JPanel {
         task.setDepartment(DepartmentType.values()[dropdown_department.getSelectedIndex()]);
         bapers.Bapers.DB.updateTask(task);
         updateGUI();
-    }
-    
-    private void removeTaskDialog() {
-        
-        int dialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to remove this Task? This cannot be undone!", "Attention!", JOptionPane.YES_OPTION);
-        
-        if (dialogResult == JOptionPane.YES_OPTION)
-        {
-            
-        }
     }
     
     private void beginTask()
@@ -171,7 +157,7 @@ public class TaskProfilePanel extends javax.swing.JPanel {
 
         label_department.setText("Department:");
 
-        dropdown_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unspecified", "Copy Room", "Development", "Finishing", "Packing" }));
+        dropdown_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Copy Room", "Development", "Finishing", "Packing" }));
 
         label_taskPrice.setText("Price: {task-price}");
 
@@ -192,11 +178,6 @@ public class TaskProfilePanel extends javax.swing.JPanel {
         btn_back.setText("Back");
 
         btn_delete.setText("Delete");
-        btn_delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_deleteActionPerformed(evt);
-            }
-        });
 
         btn_setTaskStatus.setText("Begin Task");
         btn_setTaskStatus.addActionListener(new java.awt.event.ActionListener() {
@@ -213,6 +194,13 @@ public class TaskProfilePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_resetFields, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label_description)
@@ -235,15 +223,8 @@ public class TaskProfilePanel extends javax.swing.JPanel {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(label_endTime)
                                             .addComponent(label_startTime))))))
-                        .addGap(0, 250, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_resetFields, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btn_setTaskStatus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_applyChanges, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)))
@@ -278,9 +259,9 @@ public class TaskProfilePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_applyChanges)
                     .addComponent(btn_setTaskStatus))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_resetFields)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_back)
                     .addComponent(btn_delete))
@@ -295,10 +276,6 @@ public class TaskProfilePanel extends javax.swing.JPanel {
     private void btn_applyChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_applyChangesActionPerformed
         submitChanges();
     }//GEN-LAST:event_btn_applyChangesActionPerformed
-
-    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        removeTaskDialog();
-    }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_setTaskStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_setTaskStatusActionPerformed
         if (task.getStatus() == Status.Inactive)
@@ -315,7 +292,7 @@ public class TaskProfilePanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_applyChanges;
     public javax.swing.JButton btn_back;
-    private javax.swing.JButton btn_delete;
+    public javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_resetFields;
     private javax.swing.JButton btn_setTaskStatus;
     private javax.swing.JComboBox<String> dropdown_department;
@@ -331,4 +308,5 @@ public class TaskProfilePanel extends javax.swing.JPanel {
     private javax.swing.JLabel label_taskId;
     private javax.swing.JLabel label_taskPrice;
     // End of variables declaration//GEN-END:variables
+
 }

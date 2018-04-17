@@ -24,7 +24,7 @@ public class DBConnectivity implements DBInterface {
     static final String DB_URL = "jdbc:mysql://localhost:3306/bloomsday?autoReconnect=true&useSSL=false";
 
     static final String USER = "root";
-    static final String PASS = "";
+    static final String PASS = "root";
     
     private Connection connection;
 
@@ -69,15 +69,16 @@ public class DBConnectivity implements DBInterface {
      */
     @Override
     public boolean storeData(String query) {
-
+        
         try {
 
             Statement st = connection.createStatement();
             st.execute(query);
+            System.out.println("QUERY PASSED: " + query);
             return true;
 
         } catch (SQLException ex) {
-
+            System.err.println("QUERY FAILED: " + query);
             Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
             return false;
 
@@ -98,10 +99,11 @@ public class DBConnectivity implements DBInterface {
 
             Statement st = connection.createStatement();
             ResultSet res = st.executeQuery(query);
+            System.out.println("QUERY PASSED: " + query);
             return res;
 
         } catch (SQLException ex) {
-
+            System.err.println("QUERY FAILED: " + query);
             Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
             return null;
 
@@ -209,9 +211,9 @@ public class DBConnectivity implements DBInterface {
     public boolean createStaff(Staff staff, String password)
     {
         String query = String.format("INSERT INTO `staff` "
-                + "(role, firstName, lastName, username, password) VALUES(" 
-                + "'%s', '%s', '%s', '%s', '%s')", 
-                staff.getRole().ordinal(), staff.getFirstName(), staff.getLastName(), staff.getUsername(), password);
+                + "(role, departmentRole, firstName, lastName, username, password) VALUES(" 
+                + "'%s', '%s', '%s', '%s', '%s', '%s')", 
+                staff.getRole().ordinal(), staff.isAssigned() ? staff.getDepartment().ordinal() : "-1", staff.getFirstName(), staff.getLastName(), staff.getUsername(), password);
         
         return storeData(query);
     }
@@ -349,6 +351,12 @@ public class DBConnectivity implements DBInterface {
         return storeData(query);
     }
     
+    public boolean deleteTask(Task task) {
+        String query = String.format("DELETE FROM `tasks` WHERE `taskID` = '%s'", task.getId());
+        
+        return storeData(query);
+    }
+    
     /**
      * Updates a customer
      *
@@ -371,7 +379,7 @@ public class DBConnectivity implements DBInterface {
         
         return storeData(query);
     }
-
+    
     /**
      * Checks whether or not the credentials are valid
      *
@@ -390,6 +398,7 @@ public class DBConnectivity implements DBInterface {
                 Role role = Role.values()[result.getInt("role")];
                 String firstName = result.getString("firstName");
                 String lastName = result.getString("lastName");
+                int departmentIndex = result.getInt("departmentRole");
                 
                 switch (role) {
                     case OfficeManager:
@@ -415,6 +424,17 @@ public class DBConnectivity implements DBInterface {
                     default:
                         break;
                 }
+                
+                if (departmentIndex >= 0)
+                {
+                    DepartmentType department = DepartmentType.values()[departmentIndex];
+                    loggedUser.setDepartment(department);
+                }
+                else
+                {
+                    loggedUser.setDepartment(null);
+                }
+                
                 return loggedUser;
             }
         } catch (SQLException ex) {

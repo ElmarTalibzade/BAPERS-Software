@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Individual Performance Report" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="55fca80d-113f-4331-8d2d-e1c4d92a8464">
 	<property name="ireport.zoom" value="1.7715610000000044"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="5"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="EMPLOYEE_NAME" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -20,7 +20,8 @@ TIMESTAMPDIFF(MINUTE, tasks.startTime, tasks.endTime) AS timeTaken,
 FROM staff 
 INNER JOIN tasks ON staff.staffNo = tasks.assigneeId
 INNER JOIN jobs ON jobs.code = tasks.jobCode
-WHERE tasks.startTime BETWEEN $P{DATE_START} AND $P{DATE_END}]]>
+WHERE tasks.startTime BETWEEN $P{DATE_START} AND $P{DATE_END} AND tasks.status = '3'
+ORDER BY tasks.assigneeId]]>
 	</queryString>
 	<field name="firstName" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>

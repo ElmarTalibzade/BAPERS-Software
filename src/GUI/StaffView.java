@@ -59,6 +59,7 @@ public class StaffView extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(720, 480));
         setName("Staff View"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(720, 480));
         setSize(new java.awt.Dimension(720, 480));
 
         label_loggedUser.setText("Logged in as: staff-name (staff-role)");
@@ -78,13 +79,13 @@ public class StaffView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tabbedContent)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label_loggedUser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 431, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 425, Short.MAX_VALUE)
                         .addComponent(btn_logout)))
                 .addContainerGap())
         );
@@ -96,7 +97,7 @@ public class StaffView extends javax.swing.JFrame {
                     .addComponent(btn_logout)
                     .addComponent(label_loggedUser))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabbedContent, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                .addComponent(tabbedContent, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -116,7 +117,14 @@ public class StaffView extends javax.swing.JFrame {
     
     private void initMenuItems() {
         
-        label_loggedUser.setText(String.format("Logged in as: %s %s (%s)", staff.getFirstName(), staff.getLastName(), Utils.splitCamelCase(staff.getRole().name())));
+        label_loggedUser.setText(
+                String.format("Logged in as: %s %s (%s%s)", 
+                        staff.getFirstName(), 
+                        staff.getLastName(), 
+                        Utils.splitCamelCase(staff.getRole().name()),
+                        staff.isAssigned() ? ", " + Utils.splitCamelCase(staff.getDepartment().toString()) : ""
+                )
+        );
     
         switch (staff.getRole())
         {
