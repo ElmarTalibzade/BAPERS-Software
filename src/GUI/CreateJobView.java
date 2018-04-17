@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import com.github.lgooddatepicker.components.TimePicker;
+
 
 /**
  *
@@ -31,7 +33,7 @@ public class CreateJobView extends javax.swing.JDialog {
         
         tasks = new ArrayList<Task>();
         this.customerNo = customerNo;
-        field_accountNo.setText("" + customerNo);
+        label_accountNo.setText("Customer NO: " + customerNo);
     }
     
     public Job getJob()
@@ -119,7 +121,6 @@ public class CreateJobView extends javax.swing.JDialog {
     private void initComponents() {
 
         label_accountNo = new javax.swing.JLabel();
-        field_accountNo = new javax.swing.JTextField();
         label_jobCode = new javax.swing.JLabel();
         field_jobCode = new javax.swing.JTextField();
         label_instructions = new javax.swing.JLabel();
@@ -130,12 +131,15 @@ public class CreateJobView extends javax.swing.JDialog {
         table_tasks = new javax.swing.JTable();
         btn_addTask = new javax.swing.JButton();
         btn_create = new javax.swing.JButton();
+        label_accountNo1 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Create Job");
+        setPreferredSize(new java.awt.Dimension(537, 328));
         setResizable(false);
 
-        label_accountNo.setText("Customer Account NO");
+        label_accountNo.setText("Customer NO: {acc-no}");
 
         label_jobCode.setText("Job Code");
 
@@ -190,6 +194,10 @@ public class CreateJobView extends javax.swing.JDialog {
 
         btn_create.setText("Create Job");
 
+        label_accountNo1.setText("Est. collection time");
+
+        jSpinner1.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, null, java.util.Calendar.HOUR));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -197,7 +205,7 @@ public class CreateJobView extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pane_tasks, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+                    .addComponent(pane_tasks)
                     .addComponent(pane_instructions)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -210,12 +218,14 @@ public class CreateJobView extends javax.swing.JDialog {
                         .addComponent(label_instructions)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(label_accountNo)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_accountNo)
+                            .addComponent(label_accountNo1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(field_accountNo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)
                         .addComponent(label_jobCode)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(field_jobCode)))
                 .addContainerGap())
         );
@@ -225,10 +235,13 @@ public class CreateJobView extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_accountNo)
-                    .addComponent(field_accountNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label_jobCode)
                     .addComponent(field_jobCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_accountNo1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label_instructions)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pane_instructions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,7 +253,7 @@ public class CreateJobView extends javax.swing.JDialog {
                 .addComponent(pane_tasks, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_create)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -276,10 +289,11 @@ public class CreateJobView extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_addTask;
     public javax.swing.JButton btn_create;
-    private javax.swing.JTextField field_accountNo;
     private javax.swing.JTextArea field_instructions;
     private javax.swing.JTextField field_jobCode;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel label_accountNo;
+    private javax.swing.JLabel label_accountNo1;
     private javax.swing.JLabel label_instructions;
     private javax.swing.JLabel label_jobCode;
     private javax.swing.JLabel label_tasks;
