@@ -82,7 +82,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="53" max="32767" attributes="0"/>
+                      <EmptySpace pref="84" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btn_save" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
                           <Component id="btn_createJob" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
@@ -162,7 +162,7 @@
                   <Component id="label_phone" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-              <Component id="table_jobs" pref="96" max="32767" attributes="0"/>
+              <Component id="table_jobs" pref="95" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="btn_back" min="-2" pref="32" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>

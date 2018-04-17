@@ -126,7 +126,7 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
@@ -228,7 +228,7 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
                                     .addGroup(pane_customerBrowserLayout.createSequentialGroup()
                                         .addGap(8, 8, 8)
                                         .addComponent(box_showDefault)
-                                        .addGap(76, 76, 76)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btn_findCustomer))))
                             .addComponent(label_email))))
                 .addContainerGap())
@@ -365,7 +365,8 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
                 customer.getLastName(), 
                 customer.getEmailAddress(), 
                 customer.getPhoneNumber(),
-                customer.isDefault()});
+                customer.isDefault() ? "Yes" : "No"
+            });
         }
     }
     
