@@ -698,4 +698,39 @@ public class DBConnectivity implements DBInterface {
         
         return jobs;
     }
+
+    public ArrayList<Reminder> getReminders(Staff currentUser) {
+
+        ArrayList<Reminder> reminders = new ArrayList<Reminder>();
+
+        try {
+
+            String query = String.format("SELECT * FROM `reminders` "
+                    + "WHERE 'receiveNo'='%s' AND 'isRead' = '1' ",
+                    currentUser.getAccountNo());
+            
+            ResultSet result = retrieveData(query);
+
+            while (result.next()) {
+                reminders.add(new Reminder(
+                        result.getInt("id"),
+                        result.getString("subject"),
+                        result.getString("message"),
+                        result.getInt("receiveNo"),
+                        result.getTimestamp("receiveTime"),
+                        result.getInt("timesReminded"),
+                        result.getBoolean("isRead")
+                ));
+
+            }
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        return reminders;
     }
+
+}
