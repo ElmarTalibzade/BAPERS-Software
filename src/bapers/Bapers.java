@@ -7,7 +7,8 @@ package bapers;
 
 import GUI.LoginView;
 import Administrator.*;
-import Staff.Staff;
+import Staff.*;
+import java.util.Timer;
 
 /**
  * Main class for running BAPERS software.
@@ -39,6 +40,13 @@ public class Bapers {
         SetWindowsLook();
         
         DB = new DBConnectivity();
+        
+        Timer oneMinTimer = new Timer();
+        RetrieveReminders reminderTask = new RetrieveReminders();
+
+        int oneMinute = 1000 * 60;
+
+        oneMinTimer.scheduleAtFixedRate(reminderTask, 0, oneMinute);
         
         if (DB.connect())
         {

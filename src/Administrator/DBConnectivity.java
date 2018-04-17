@@ -24,7 +24,7 @@ public class DBConnectivity implements DBInterface {
     static final String DB_URL = "jdbc:mysql://localhost:3306/bloomsday?autoReconnect=true&useSSL=false";
 
     static final String USER = "root";
-    static final String PASS = "root";
+    static final String PASS = "";
     
     private Connection connection;
 
@@ -719,16 +719,13 @@ public class DBConnectivity implements DBInterface {
         return jobs;
     }
 
-    public ArrayList<Reminder> getReminders(Staff currentUser) {
-
+    public ArrayList<Reminder> getReminders() {
         ArrayList<Reminder> reminders = new ArrayList<Reminder>();
-
         try {
-
             String query = String.format("SELECT * FROM `reminders` "
-                    + "WHERE 'receiveNo'='%s' AND 'isRead' = '1' ",
-                    currentUser.getAccountNo());
-            
+                    + "WHERE `receiveNo`='%s' AND `isRead` = '0' ",
+                    loggedUser.getAccountNo());
+
             ResultSet result = retrieveData(query);
 
             while (result.next()) {
@@ -741,13 +738,10 @@ public class DBConnectivity implements DBInterface {
                         result.getInt("timesReminded"),
                         result.getBoolean("isRead")
                 ));
-
             }
 
         } catch (SQLException ex) {
-
             Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
-
         }
 
         return reminders;
