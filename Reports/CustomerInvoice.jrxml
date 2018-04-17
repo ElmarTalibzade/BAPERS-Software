@@ -182,7 +182,7 @@ Phone: 0207 235 7534]]></text>
 			<textField>
 				<reportElement x="133" y="20" width="422" height="20" uuid="c12b1f9f-3220-4696-96a8-2b007f58219c"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["ACC" + String.format("%04d", $F{accountNo})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[String.format("ACC%04d", $F{accountNo})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="133" y="40" width="422" height="20" uuid="48064a36-13c9-4b31-9cb3-d0c70de72891"/>
