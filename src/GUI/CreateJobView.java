@@ -135,7 +135,7 @@ public class CreateJobView extends javax.swing.JDialog {
         setTitle("Create Job");
         setResizable(false);
 
-        label_accountNo.setText("Customer Account NO");
+        label_accountNo.setText("Customer NO");
 
         label_jobCode.setText("Job Code");
 

@@ -10,14 +10,10 @@ import bapers.Utils;
 import com.mysql.jdbc.StringUtils;
 import java.awt.Desktop;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -65,8 +61,8 @@ public class ReportWizard
         params.put("DATE_START", period_start);
         params.put("DATE_END", period_end);
         
-        String jasperPath = System.getProperty("user.dir") + "\\Reports\\IndividualPerformanceReport.jasper";
-        String pdfPath = System.getProperty("user.dir") + "\\Generated Reports\\Individual Performance Report " + LocalDate.now().toString() + ".pdf";
+        String jasperPath = System.getProperty("user.dir") + "/Reports/IndividualPerformanceReport.jasper";
+        String pdfPath = System.getProperty("user.dir") + "/Generated Reports/Individual Performance Report " + LocalDate.now().toString() + ".pdf";
         
         try {
             
@@ -91,8 +87,8 @@ public class ReportWizard
         params.put("DATE_START", period_start);
         params.put("DATE_END", period_end);
         
-        String jasperPath = System.getProperty("user.dir") + "\\Reports\\SummaryPerformanceReport.jasper";
-        String pdfPath = System.getProperty("user.dir") + "\\Generated Reports\\Summary Performance Report " + LocalDate.now().toString() + ".pdf";
+        String jasperPath = System.getProperty("user.dir") + "/Reports/SummaryPerformanceReport.jasper";
+        String pdfPath = System.getProperty("user.dir") + "/Generated Reports/Summary Performance Report " + LocalDate.now().toString() + ".pdf";
         
         try {
             
@@ -116,8 +112,8 @@ public class ReportWizard
         params.put("DATE_START", period_start);
         params.put("DATE_END", period_end);
         
-        String jasperPath = System.getProperty("user.dir") + "\\Reports\\CustomerReport.jasper";
-        String pdfPath = System.getProperty("user.dir") + "\\Generated Reports\\Customer Report " + LocalDate.now().toString() + ".pdf";
+        String jasperPath = System.getProperty("user.dir") + "/Reports/CustomerReport.jasper";
+        String pdfPath = System.getProperty("user.dir") + "/Generated Reports/Customer Report " + LocalDate.now().toString() + ".pdf";
         
         try {
             

@@ -1,5 +1,7 @@
 package Staff;
 
+import Customer.DepartmentType;
+
 /**
  * The main class for all types of Staff users
  * @author Mihai
@@ -7,9 +9,16 @@ package Staff;
 public abstract class Staff {
 
     /**
-     *
+     * Role of the staff
      */
     protected Role role;
+    
+    /**
+     * Department this staff member is operating at
+     */
+    protected DepartmentType assignedDepartment;
+    
+    protected boolean isAssigned = false;
     
     /**
      * Account Number of this staff member
@@ -52,6 +61,15 @@ public abstract class Staff {
         this.lastName = lastName;
     }
 
+    public Staff(int accountNo, Role role, DepartmentType assignedDepartment, String username, String firstName, String lastName) {
+        this.accountNo = accountNo;
+        this.role = role;
+        this.assignedDepartment = assignedDepartment;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    
     /**
      * Returns if the staff is logged in or not
      * @return true - if it's logged in | false - otherwise
@@ -76,6 +94,20 @@ public abstract class Staff {
         return accountNo;
     }
 
+    public DepartmentType getDepartment() {
+        return assignedDepartment;
+    }
+    
+    public void setDepartment(DepartmentType newDepartment) {
+        assignedDepartment = newDepartment;
+        isAssigned = (assignedDepartment != null);
+    }
+    
+    public boolean isAssigned()
+    {
+        return isAssigned;
+    }
+    
     /**
      * Gets Staff first name;
      * @return A string that represents account first name
@@ -97,7 +129,7 @@ public abstract class Staff {
     }
     
     /**
-     *
+     * Returns employee's role
      * @return
      */
     public Role getRole(){

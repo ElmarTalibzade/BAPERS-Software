@@ -88,7 +88,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="label_accountNo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Customer Account NO"/>
+        <Property name="text" type="java.lang.String" value="Customer NO"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="field_accountNo">

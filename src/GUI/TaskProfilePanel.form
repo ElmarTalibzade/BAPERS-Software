@@ -21,10 +21,19 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btn_resetFields" linkSize="1" pref="115" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btn_delete" min="-2" pref="93" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btn_back" linkSize="1" min="-2" pref="115" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="label_description" min="-2" max="-2" attributes="0"/>
@@ -55,18 +64,9 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="250" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="btn_delete" min="-2" pref="115" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btn_back" linkSize="1" min="-2" pref="115" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="btn_resetFields" linkSize="1" pref="115" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
                       <Component id="btn_setTaskStatus" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btn_applyChanges" linkSize="1" pref="115" max="32767" attributes="0"/>
@@ -106,9 +106,9 @@
                   <Component id="btn_applyChanges" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_setTaskStatus" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="btn_resetFields" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="33" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btn_back" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_delete" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -177,12 +177,11 @@
     <Component class="javax.swing.JComboBox" name="dropdown_department">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
-            <StringItem index="0" value="Unspecified"/>
-            <StringItem index="1" value="Copy Room"/>
-            <StringItem index="2" value="Development"/>
-            <StringItem index="3" value="Finishing"/>
-            <StringItem index="4" value="Packing"/>
+          <StringArray count="4">
+            <StringItem index="0" value="Copy Room"/>
+            <StringItem index="1" value="Development"/>
+            <StringItem index="2" value="Finishing"/>
+            <StringItem index="3" value="Packing"/>
           </StringArray>
         </Property>
       </Properties>
@@ -223,9 +222,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_deleteActionPerformed"/>
-      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="btn_setTaskStatus">
       <Properties>

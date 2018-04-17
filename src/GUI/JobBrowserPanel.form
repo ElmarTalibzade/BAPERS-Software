@@ -241,22 +241,16 @@
                 <Component class="javax.swing.JTable" name="table_tasks">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="6" rowCount="0">
+                      <Table columnCount="5" rowCount="0">
                         <Column editable="false" title="Job Code" type="java.lang.Object"/>
                         <Column editable="false" title="Task ID" type="java.lang.Object"/>
                         <Column editable="false" title="Department" type="java.lang.Object"/>
                         <Column editable="false" title="Shelf No" type="java.lang.Object"/>
-                        <Column editable="false" title="Date Created" type="java.lang.Object"/>
                         <Column editable="false" title="Status" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>

@@ -17,8 +17,6 @@ public class ReportManager {
     private int reportGenMonth;
     private int reportGenYear;
     
-    private Report[] reports;
-    
     /**
      * Constructor for ReportManager
      */
@@ -33,15 +31,6 @@ public class ReportManager {
     public void generateReports()
     {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
-    /**
-     * Returns all reports
-     * @return List of reports
-     */
-    public Report[] getReports()
-    {
-        return reports;
     }
     
     /**

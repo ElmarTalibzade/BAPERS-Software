@@ -78,7 +78,7 @@ public class CreateTaskView extends javax.swing.JDialog {
 
         label_department.setText("Department");
 
-        dropdown_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unspecified", "Copy Room", "Development", "Finishing", "Packing" }));
+        dropdown_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Copy Room", "Development", "Finishing", "Packing" }));
 
         label_description.setText("Description");
 
