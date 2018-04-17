@@ -43,7 +43,7 @@ public class ReportWizard
             Logger.getLogger(ReportWizard.class.getName()).log(Level.SEVERE, null, ex);
         }
        
-        OpenPDF(GenerateSummaryPerformanceReport(begin, end));
+        OpenPDF(GenerateCustomerReport(7, begin, end));
     }
     
     public static String GenerateIndividualPerformanceReport(Date period_start, Date period_end)
@@ -111,6 +111,7 @@ public class ReportWizard
         HashMap params = new HashMap();
         params.put("DATE_START", period_start);
         params.put("DATE_END", period_end);
+        params.put("CUSTOMER_NO", accountNo);
         
         String jasperPath = System.getProperty("user.dir") + "/Reports/CustomerReport.jasper";
         String pdfPath = System.getProperty("user.dir") + "/Generated Reports/Customer Report " + LocalDate.now().toString() + ".pdf";

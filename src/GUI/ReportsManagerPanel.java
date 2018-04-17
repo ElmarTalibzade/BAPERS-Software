@@ -200,6 +200,7 @@ public class ReportsManagerPanel extends javax.swing.JPanel {
             case 0:
                 
                 // Customer Report
+                reportPath = Report.ReportWizard.GenerateCustomerReport(Integer.parseInt(field_accountNO.getText().trim()), date_reportStart.getDate(), date_reportEnd.getDate());
                 
                 break;
                 
