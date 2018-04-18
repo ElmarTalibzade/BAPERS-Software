@@ -20,6 +20,16 @@ public class Reminder {
     private int timesReminded;
     private boolean isRead;
     
+    /**
+     *
+     * @param id
+     * @param subject
+     * @param message
+     * @param recieveNo
+     * @param recieveTime
+     * @param timesReminded
+     * @param isRead
+     */
     public Reminder(int id, String subject, String message, int recieveNo, Timestamp recieveTime, int timesReminded, boolean isRead){
         this.id = id;
         this.subject = subject;
@@ -30,38 +40,72 @@ public class Reminder {
         this.isRead = isRead;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getID(){
         return id;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getMessage(){
         return message;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getReciever(){
         return recieveNo;
     }
     
+    /**
+     *
+     * @return
+     */
     public Timestamp getTime(){
         return recieveTime;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getTimesReminded(){
         return timesReminded;
     }
     
+    /**
+     *
+     */
     public void incrementTimesReminded(){
         timesReminded++;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getSubject(){
         return subject;
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean isRead(){
         return isRead;
     }
     
+    /**
+     *
+     */
     public void markAsRead(){
         isRead = true;
     }

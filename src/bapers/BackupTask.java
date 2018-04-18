@@ -12,6 +12,11 @@ import java.util.TimerTask;
  * @author Mihai
  */
 public class BackupTask extends TimerTask{    
+
+    /**
+     *
+     * @param saveLocation
+     */
     public BackupTask(String saveLocation){
         try {
             String user = "root";

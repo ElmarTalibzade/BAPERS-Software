@@ -29,6 +29,10 @@ public class ReportWizard
     private final String IndividualPerformanceReport_location_xml = "/Reports/IndividualPerformanceReport.jrxml";
     private final String IndividualPerformanceReport_location_jasper = "/Reports/IndividualPerformanceReport.jasper";
     
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Date begin = null;
         Date end = null;
@@ -46,6 +50,12 @@ public class ReportWizard
         OpenPDF(GenerateCustomerReport(7, begin, end));
     }
     
+    /**
+     *
+     * @param period_start
+     * @param period_end
+     * @return
+     */
     public static String GenerateIndividualPerformanceReport(Date period_start, Date period_end)
     {
         if (!DB.isConnected()) return null;
@@ -79,6 +89,12 @@ public class ReportWizard
         return null;
     }
     
+    /**
+     *
+     * @param period_start
+     * @param period_end
+     * @return
+     */
     public static String GenerateSummaryPerformanceReport(Date period_start, Date period_end)
     {
         if (!DB.isConnected()) return null;
@@ -104,6 +120,13 @@ public class ReportWizard
         return null;
     }
     
+    /**
+     *
+     * @param accountNo
+     * @param period_start
+     * @param period_end
+     * @return
+     */
     public static String GenerateCustomerReport(int accountNo, Date period_start, Date period_end)
     {
         if (!DB.isConnected()) return null;
@@ -136,6 +159,10 @@ public class ReportWizard
         JasperExportManager.exportReportToPdfFile(jprint, pdfPath);
     }
     
+    /**
+     *
+     * @param filePath
+     */
     public static void OpenPDF(String filePath)
     {
         if (StringUtils.isNullOrEmpty(filePath)) return;

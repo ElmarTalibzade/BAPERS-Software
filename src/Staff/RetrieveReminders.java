@@ -17,6 +17,9 @@ import java.util.ArrayList;
 public class RetrieveReminders extends TimerTask {    
     private Staff currentUser;
     
+    /**
+     *
+     */
     public RetrieveReminders() {
         
     }

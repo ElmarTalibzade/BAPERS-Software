@@ -9,6 +9,7 @@ public class OfficeManager extends Staff {
     /**
      * Constructor for OfficeManager
      * @param accountNo Account number
+     * @param username
      * @param firstName Staff's first name
      * @param lastName Staff's last name
      */

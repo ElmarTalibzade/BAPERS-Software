@@ -41,6 +41,7 @@ public class Customer {
      * @param address Customer's address
      * @param phoneNumber Customer's phone number
      * @param agreedDiscount Type of a discount this customer is getting
+     * @param discountRate
      * @param emailAddress Customer's email address
      * @param debtReminded Times the debt has been reminded to this customer
      * @param jobs A list of jobs that are associated with this customer
@@ -78,10 +79,18 @@ public class Customer {
         return address;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getDiscountValue() {
         return discountRate;
     }
     
+    /**
+     *
+     * @param discountRate
+     */
     public void setDiscountValue(int discountRate){
         this.discountRate = discountRate;
     }
@@ -143,6 +152,10 @@ public class Customer {
         this.isDefault = isDefault;
     }
     
+    /**
+     *
+     * @param isSuspended
+     */
     public void setIsSuspended(boolean isSuspended){
         this.isSuspended = isSuspended;
     }
@@ -204,6 +217,10 @@ public class Customer {
         return accountNo;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getLast4Digit() {
         return DB.last4Digit(accountNo);
     }
@@ -242,6 +259,10 @@ public class Customer {
         return isValued;
     }
     
+    /**
+     *
+     * @param isValued
+     */
     public void setValued(boolean isValued){
         this.isValued = isValued;
     }

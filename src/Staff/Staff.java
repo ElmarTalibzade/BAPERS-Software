@@ -18,6 +18,9 @@ public class Staff {
      */
     protected DepartmentType assignedDepartment;
     
+    /**
+     *
+     */
     protected boolean isAssigned = false;
     
     /**
@@ -49,8 +52,8 @@ public class Staff {
      * Constructor for Staff
      * @param accountNo Account number
      * @param role Staff's access level
+     * @param username
      * @param firstName Staff's first name
-     * @param lastName Staff's last name
      * @param phone Staff's phone number
      */
     public Staff(int accountNo, Role role, String username, String firstName, String lastName) {
@@ -62,6 +65,15 @@ public class Staff {
         setDepartment(null);
     }
 
+    /**
+     *
+     * @param accountNo
+     * @param role
+     * @param assignedDepartment
+     * @param username
+     * @param firstName
+     * @param lastName
+     */
     public Staff(int accountNo, Role role, DepartmentType assignedDepartment, String username, String firstName, String lastName) {
         this.accountNo = accountNo;
         this.role = role;
@@ -95,15 +107,27 @@ public class Staff {
         return accountNo;
     }
 
+    /**
+     *
+     * @return
+     */
     public DepartmentType getDepartment() {
         return assignedDepartment;
     }
     
+    /**
+     *
+     * @param newDepartment
+     */
     public void setDepartment(DepartmentType newDepartment) {
         assignedDepartment = newDepartment;
         isAssigned = (assignedDepartment != null);
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean isAssigned()
     {
         return isAssigned;
@@ -125,6 +149,10 @@ public class Staff {
         return lastName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUsername() {
         return username;
     }

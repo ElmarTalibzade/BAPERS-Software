@@ -9,6 +9,7 @@ public class Receptionist extends Staff {
     /**
      * Constructor for Receptionist
      * @param accountNo Account number
+     * @param username
      * @param firstName Staff's first name
      * @param lastName Staff's last name
      */
