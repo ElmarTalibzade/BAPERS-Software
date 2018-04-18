@@ -134,14 +134,6 @@ package Customer;
     }
 
     /**
-     *  Gets a shelf slot this Task is associated with
-     * @return shelf slot id
-     */
-    public String getShelfSlot() {
-        return shelfSlot;
-    }
-
-    /**
      * Gets the price of this task
      * @return price
      */

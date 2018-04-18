@@ -104,8 +104,6 @@ public class JobBrowserPanel extends javax.swing.JPanel {
         field_jobCode = new javax.swing.JTextField();
         label_status = new javax.swing.JLabel();
         dropdown_jobStatus = new javax.swing.JComboBox<>();
-        label_shelfNo = new javax.swing.JLabel();
-        field_shelfNo = new javax.swing.JTextField();
         label_department = new javax.swing.JLabel();
         dropdown_department = new javax.swing.JComboBox<>();
         btn_findJob = new javax.swing.JButton();
@@ -157,14 +155,6 @@ public class JobBrowserPanel extends javax.swing.JPanel {
             }
         });
 
-        label_shelfNo.setText("Shelf No");
-
-        field_shelfNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                field_shelfNoActionPerformed(evt);
-            }
-        });
-
         label_department.setText("Department");
 
         dropdown_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any", "Copy Room", "Development", "Finishing Room", "Packing" }));
@@ -186,11 +176,11 @@ public class JobBrowserPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Job Code", "Task ID", "Department", "Shelf No", "Status"
+                "Job Code", "Task ID", "Department", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -218,19 +208,15 @@ public class JobBrowserPanel extends javax.swing.JPanel {
                         .addGroup(pane_taskBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(field_jobCode)
                             .addComponent(label_jobCode))
-                        .addGap(35, 35, 35)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pane_taskBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dropdown_jobStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(label_status))
-                        .addGap(35, 35, 35)
-                        .addGroup(pane_taskBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(field_shelfNo)
-                            .addComponent(label_shelfNo))
-                        .addGap(35, 35, 35)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pane_taskBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dropdown_department, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(label_department)))
-                    .addComponent(table, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(table, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pane_taskBrowserLayout.setVerticalGroup(
@@ -240,18 +226,16 @@ public class JobBrowserPanel extends javax.swing.JPanel {
                 .addGroup(pane_taskBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_jobCode)
                     .addComponent(label_status)
-                    .addComponent(label_shelfNo)
                     .addComponent(label_department))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pane_taskBrowserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(field_jobCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dropdown_jobStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(field_shelfNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dropdown_department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_findJob)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(table)
+                .addComponent(table, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -290,10 +274,6 @@ public class JobBrowserPanel extends javax.swing.JPanel {
         getTasks();
     }//GEN-LAST:event_dropdown_jobStatusActionPerformed
 
-    private void field_shelfNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_shelfNoActionPerformed
-        getTasks();
-    }//GEN-LAST:event_field_shelfNoActionPerformed
-
     private void dropdown_departmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdown_departmentActionPerformed
         getTasks();
     }//GEN-LAST:event_dropdown_departmentActionPerformed
@@ -313,7 +293,6 @@ public class JobBrowserPanel extends javax.swing.JPanel {
     {
         tasks = DB.searchTasks(
             field_jobCode.getText(),
-            field_shelfNo.getText(),
             dropdown_jobStatus.getSelectedIndex() == 0 ? null : Status.values()[dropdown_jobStatus.getSelectedIndex() - 1],
             dropdown_department.getSelectedIndex() == 0 ? null : DepartmentType.values()[dropdown_department.getSelectedIndex() - 1]
         );
@@ -336,7 +315,6 @@ public class JobBrowserPanel extends javax.swing.JPanel {
                 task.getJobCode(),
                 task.getId(),
                 bapers.Utils.splitCamelCase(task.getDepartment().toString()),
-                task.getShelfSlot(),
                 bapers.Utils.splitCamelCase(task.getStatus().toString())
             });
         }
@@ -357,14 +335,12 @@ public class JobBrowserPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> dropdown_department;
     private javax.swing.JComboBox<String> dropdown_jobStatus;
     private javax.swing.JTextField field_jobCode;
-    private javax.swing.JTextField field_shelfNo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JLabel label_department;
     private javax.swing.JLabel label_jobCode;
-    private javax.swing.JLabel label_shelfNo;
     private javax.swing.JLabel label_status;
     private javax.swing.JPanel pane_taskBrowser;
     private javax.swing.JScrollPane table;

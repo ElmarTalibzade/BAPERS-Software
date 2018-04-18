@@ -41,7 +41,6 @@ public class TaskProfilePanel extends javax.swing.JPanel {
         label_jobCode.setText("Job Code: " + task.getJobCode());
         label_taskId.setText("Task ID: " + task.getId());
         label_taskPrice.setText("Price: " + task.getPrice());
-        label_shelfNo.setText("Shelf NO: " + task.getShelfSlot());
         field_description.setText(task.getDescription());
         dropdown_department.setSelectedIndex(task.getDepartment().ordinal());
         label_status.setText("Status: " + bapers.Utils.splitCamelCase(task.getStatus().toString()));
@@ -120,7 +119,6 @@ public class TaskProfilePanel extends javax.swing.JPanel {
         label_startTime = new javax.swing.JLabel();
         label_endTime = new javax.swing.JLabel();
         label_taskId = new javax.swing.JLabel();
-        label_shelfNo = new javax.swing.JLabel();
         label_description = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         field_description = new javax.swing.JTextArea();
@@ -143,8 +141,6 @@ public class TaskProfilePanel extends javax.swing.JPanel {
         label_endTime.setText("Time Ended: {end-time}");
 
         label_taskId.setText("Task ID: {task-id}");
-
-        label_shelfNo.setText("Shelf NO: {shelf-no}");
 
         label_description.setText("Description");
 
@@ -206,23 +202,20 @@ public class TaskProfilePanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(label_jobCode)
-                                    .addComponent(label_shelfNo)
                                     .addComponent(label_status))
-                                .addGap(34, 34, 34)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(label_department)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(dropdown_department, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(label_taskId)
-                                            .addComponent(label_taskPrice))
-                                        .addGap(40, 40, 40)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(label_endTime)
-                                            .addComponent(label_startTime))))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label_taskId)
+                                    .addComponent(label_taskPrice))
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label_endTime)
+                                    .addComponent(label_startTime)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label_department)
+                                .addGap(18, 18, 18)
+                                .addComponent(dropdown_department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 105, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_setTaskStatus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -242,15 +235,14 @@ public class TaskProfilePanel extends javax.swing.JPanel {
                     .addComponent(label_startTime))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_shelfNo)
                     .addComponent(label_taskPrice)
-                    .addComponent(label_endTime))
+                    .addComponent(label_endTime)
+                    .addComponent(label_status))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_status)
                     .addComponent(label_department)
                     .addComponent(dropdown_department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(36, 36, 36)
                 .addComponent(label_description)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -258,7 +250,7 @@ public class TaskProfilePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_applyChanges)
                     .addComponent(btn_setTaskStatus))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(btn_resetFields)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -301,7 +293,6 @@ public class TaskProfilePanel extends javax.swing.JPanel {
     private javax.swing.JLabel label_description;
     private javax.swing.JLabel label_endTime;
     private javax.swing.JLabel label_jobCode;
-    private javax.swing.JLabel label_shelfNo;
     private javax.swing.JLabel label_startTime;
     private javax.swing.JLabel label_status;
     private javax.swing.JLabel label_taskId;

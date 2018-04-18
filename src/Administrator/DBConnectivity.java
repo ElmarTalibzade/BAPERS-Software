@@ -293,10 +293,10 @@ public class DBConnectivity implements DBInterface {
     
     private boolean addTask(String jobCode, Task task) {
         String query = String.format("INSERT INTO `tasks` "
-                + "(`jobCode`, `status`, `price`, `description`, `shelfSlot`, `department`, `discountRate`) "
-                + "VALUES('%s', '%d', '%,.2f', '%s', '%s', '%d', '%f')",
+                + "(`jobCode`, `status`, `price`, `description`, `department`, `discountRate`) "
+                + "VALUES('%s', '%d', '%,.2f', '%s', '%d', '%f')",
                 jobCode, task.getStatus().ordinal(), task.getPrice(), task.getDescription(), 
-                task.getShelfSlot(), task.getDepartment().ordinal(), task.getDiscountRate());
+                task.getDepartment().ordinal(), task.getDiscountRate());
         
         return storeData(query);
     }
@@ -631,7 +631,7 @@ public class DBConnectivity implements DBInterface {
         return tasks;
     }
     
-    public ArrayList<Task> searchTasks(String jobCode, String shelf, Status status, DepartmentType department) {
+    public ArrayList<Task> searchTasks(String jobCode, Status status, DepartmentType department) {
 
         ArrayList<Task> tasks = new ArrayList<Task>();
 
@@ -640,12 +640,10 @@ public class DBConnectivity implements DBInterface {
             String query = String.format("SELECT * FROM `tasks` INNER JOIN `jobs` ON tasks.jobCode = jobs.code "
                     + "WHERE ('%1$s'='' or tasks.jobCode like '%1$s%%') "
                     + "AND ('%2$s'='' or department='%2$s') "
-                    + "AND ('%3$s'='' or tasks.status='%3$s') "
-                    + "AND ('%4$s'='' or jobs.shelf like '%4$s%%')",
+                    + "AND ('%3$s'='' or tasks.status='%3$s')",
                     jobCode.trim(), 
                     department != null ? department.ordinal() : "",
-                    status != null ? status.ordinal() : "",
-                    shelf.trim()
+                    status != null ? status.ordinal() : ""
             );
             
             ResultSet result = retrieveData(query);

@@ -40,31 +40,26 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="label_jobCode" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label_shelfNo" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="label_status" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="label_department" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="dropdown_department" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="label_taskId" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="label_taskPrice" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="label_endTime" min="-2" max="-2" attributes="0"/>
-                                          <Component id="label_startTime" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="label_taskId" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="label_taskPrice" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="label_endTime" min="-2" max="-2" attributes="0"/>
+                                  <Component id="label_startTime" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="label_department" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="dropdown_department" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="105" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btn_setTaskStatus" min="-2" max="-2" attributes="0"/>
@@ -87,17 +82,16 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="label_shelfNo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="label_taskPrice" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="label_endTime" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="label_status" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="label_status" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="label_department" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="dropdown_department" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Component id="label_description" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="103" max="-2" attributes="0"/>
@@ -106,7 +100,7 @@
                   <Component id="btn_applyChanges" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_setTaskStatus" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
               <Component id="btn_resetFields" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -137,11 +131,6 @@
     <Component class="javax.swing.JLabel" name="label_taskId">
       <Properties>
         <Property name="text" type="java.lang.String" value="Task ID: {task-id}"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="label_shelfNo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Shelf NO: {shelf-no}"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="label_description">
