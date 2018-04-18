@@ -79,7 +79,7 @@ public class JobBrowserPanel extends javax.swing.JPanel {
         
         if (DB.loggedUser.isAssigned())
         {        
-            dropdown_department.setSelectedIndex(DB.loggedUser.getDepartment().ordinal());
+            dropdown_department.setSelectedIndex(DB.loggedUser.getDepartment().ordinal() + 1);
         }
         
         getTasks();
