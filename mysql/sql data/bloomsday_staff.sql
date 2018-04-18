@@ -33,7 +33,7 @@ CREATE TABLE `staff` (
   PRIMARY KEY (`staffNo`),
   UNIQUE KEY `staffNo_UNIQUE` (`staffNo`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
-INSERT INTO `staff` VALUES (13,0,NULL,'Manager','Bret','Bell','Get_it_done'),(14,1,NULL,'Accountant','Bailey','Walker','Count_money'),(15,1,NULL,'Clerk','Kit','Webb','Paperwork'),(16,3,NULL,'Hello','Taylor','Martin','Hello_there'),(17,2,1,'Development','Haiden','Scott','Lot_smell'),(18,2,0,'Copy','Kris','Daniel','Too_dark'),(19,2,3,'Packer','Gale','Norton','Pack_it'),(20,2,2,'Finish','Jody','Valencia','Fine_touch');
+INSERT INTO `staff` VALUES (13,0,-1,'Manager','Bret','Bell','Get_it_done'),(14,1,-1,'Accountant','Bailey','Walker','Count_money'),(15,1,-1,'Clerk','Kit','Webb','Paperwork'),(16,3,-1,'Hello','Taylor','Martin','Hello_there'),(17,2,1,'Development','Haiden','Scott','Lot_smell'),(18,2,0,'Copy','Kris','Daniel','Too_dark'),(19,2,3,'Packer','Gale','Norton','Pack_it'),(20,2,2,'Finish','Jody','Valencia','Fine_touch'),(21,2,2,'elmar1498','Elmar','Talibzade','pass');
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-15 20:51:18
+-- Dump completed on 2018-04-18 13:24:27

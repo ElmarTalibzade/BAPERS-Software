@@ -69,18 +69,6 @@ public class ReceptionistBrowserPanel extends javax.swing.JPanel {
     
     private void addListeners()
     {
-        controlledStaffView.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent event) {
-                disconnectControls();
-            }
-        });
-        
-        controlledStaffView.btn_disconnect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                disconnectControls();
-            }
-        });
-        
         StaffView parent = (StaffView)SwingUtilities.getWindowAncestor(this);
         
         parent.addWindowListener(new WindowAdapter()
@@ -91,10 +79,18 @@ public class ReceptionistBrowserPanel extends javax.swing.JPanel {
             }
         });
         
-        parent.btn_logout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        parent.btn_logout.addActionListener((java.awt.event.ActionEvent evt) -> {
+            disconnectControls();
+        });
+        
+        controlledStaffView.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent event) {
                 disconnectControls();
             }
+        });
+        
+        controlledStaffView.btn_disconnect.addActionListener((java.awt.event.ActionEvent evt) -> {
+            disconnectControls();
         });
     }
     

@@ -28,7 +28,7 @@ CREATE TABLE `invoices` (
   `isPaid` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`invoiceNo`),
   UNIQUE KEY `invoiceNo_UNIQUE` (`invoiceNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,6 +37,7 @@ CREATE TABLE `invoices` (
 
 LOCK TABLES `invoices` WRITE;
 /*!40000 ALTER TABLE `invoices` DISABLE KEYS */;
+INSERT INTO `invoices` VALUES (26,77,0),(27,134.99,0),(28,109.99,0),(29,0,0),(30,59,0),(31,57.89,0),(32,33,0);
 /*!40000 ALTER TABLE `invoices` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-15 20:51:17
+-- Dump completed on 2018-04-18 13:24:27

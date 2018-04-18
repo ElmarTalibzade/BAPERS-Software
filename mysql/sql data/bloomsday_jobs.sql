@@ -33,6 +33,7 @@ CREATE TABLE `jobs` (
   `discountRate` float DEFAULT NULL,
   `price` decimal(10,0) DEFAULT NULL,
   `specialInstructions` text,
+  `dateCreated` datetime DEFAULT NULL,
   PRIMARY KEY (`code`),
   UNIQUE KEY `code_UNIQUE` (`code`),
   KEY `fk_Jobs_Staff_idx` (`staffNo`),
@@ -50,6 +51,7 @@ CREATE TABLE `jobs` (
 
 LOCK TABLES `jobs` WRITE;
 /*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
+INSERT INTO `jobs` VALUES ('BM101',7,13,31,'SHLF01',0,0,0,58,'Do it quick','2018-04-18 02:04:46'),('HG100',8,13,32,'LO202',0,0,0,33,'nothing!','2018-04-18 12:12:30'),('JF123',7,16,30,'shelfNo',0,0,0,59,'test','2018-04-17 19:01:17'),('JG987',8,16,28,'shelfNo',0,0,0,110,'URGENT',NULL),('JH404',7,16,29,'shelfNo',0,0,0,0,'not found','2018-04-17 19:00:59'),('JL900',6,13,27,'shelfNo',0,0,0,135,'Make copy of each',NULL),('JL909',9,16,26,'shelfNo',0,0,0,77,'test',NULL);
 /*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -62,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-15 20:51:16
+-- Dump completed on 2018-04-18 13:24:26
