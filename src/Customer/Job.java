@@ -38,13 +38,13 @@ public class Job {
      * @param invoiceNo Job's invoice number
      * @param code Job's code
      * @param staffCode Code of a staff member who created it
-     * @param task A list of tasks that this job is associated with 
-     * @param price Price of this job
+     * @param task A list of tasks that this job is associated with
      * @param discountRate Discount rate of this job
      * @param customerId Id of a customer who is associated with this job
      * @param specialInstructions Instructions associated with this job
      * @param shelf Shelf slot of this job
      * @param priority Priority for this job
+     * @param dateCreated
      */
     public Job(int invoiceNo, String code, int staffCode, ArrayList<Task> task, float discountRate, int customerId, String specialInstructions, String shelf, int priority, Timestamp dateCreated) {
         this.invoiceNo = invoiceNo;           
@@ -101,6 +101,10 @@ public class Job {
         return staffCode;
     }
     
+    /**
+     *
+     * @return
+     */
     public Timestamp getDateCreated(){
         return dateCreated;
     }

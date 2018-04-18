@@ -28,6 +28,7 @@ package Customer;
      * Constructs a Task
      * @param jobCode Code of a job associated with this task
      * @param id ID of a Task
+     * @param assigneeId
      * @param status Task current status
      * @param price Price of a task
      * @param description Description of a task
@@ -64,6 +65,7 @@ package Customer;
     
     /**
      * Begins this task and assigns a staff user to it
+     * @param assigneeId
      */
     public void beginTask(int assigneeId)
     {
@@ -74,16 +76,28 @@ package Customer;
         startTime = new java.sql.Timestamp(new java.util.Date().getTime());
     }
     
+    /**
+     *
+     * @return
+     */
     public java.sql.Timestamp getStartTime()
     {
         return startTime;
     }
     
+    /**
+     *
+     * @return
+     */
     public java.sql.Timestamp getEndTime()
     {
         return endTime;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getAssigneeId()
     {
         return assigneeId;
@@ -113,6 +127,10 @@ package Customer;
         return status;
     }
 
+    /**
+     *
+     * @param status
+     */
     public void setStatus(Status status) {
         this.status = status;
     }

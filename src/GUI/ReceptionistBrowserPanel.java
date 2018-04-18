@@ -5,19 +5,89 @@
  */
 package GUI;
 
+import Staff.Role;
+import Staff.Staff;
+import static bapers.Bapers.DB;
+import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Elmar Talibzade
  */
 public class ReceptionistBrowserPanel extends javax.swing.JPanel {
 
+    private ArrayList<Staff> receptionists;
+    private ControlledView controlledStaffView;
+    
     /**
      * Creates new form ReceptionistBrowserPanel
      */
     public ReceptionistBrowserPanel() {
         initComponents();
+        getReceptionists();
     }
 
+    private void getReceptionists() 
+    {
+        receptionists = DB.searchStaff(-1, "", "", Role.Receptionist);
+        updateTable();
+    }
+    
+    private void updateTable()
+    {
+       DefaultTableModel model = (DefaultTableModel)table_receptionists.getModel();
+       
+        while (model.getRowCount() > 0)
+        {
+            model.removeRow(0);
+        }
+        
+        for (Staff employee : receptionists)
+        {
+            model.addRow(new Object[] {
+                String.format("ACC%04d", employee.getAccountNo()),
+                employee.getFullName(),
+                ""
+            });
+        }
+    }
+    
+    private void accessControls(Staff target)
+    {
+        System.out.println(((JFrame)SwingUtilities.getWindowAncestor(this)).getTitle());
+        controlledStaffView = new ControlledView(target);
+        addListener();
+        controlledStaffView.setVisible(true);
+    }
+    
+    private void addListener()
+    {
+        controlledStaffView.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent event) {
+                disconnectControls();
+            }
+        });
+        
+        controlledStaffView.btn_disconnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disconnectControls();
+            }
+        });
+    }
+    
+    private void disconnectControls()
+    {
+        controlledStaffView.dispose();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,32 +97,36 @@ public class ReceptionistBrowserPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        label_receptionistId = new javax.swing.JLabel();
-        field_receptionistId = new javax.swing.JTextField();
-        btn_accessControls = new javax.swing.JButton();
-        table_receptionists = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        pane_receptionists = new javax.swing.JScrollPane();
+        table_receptionists = new javax.swing.JTable();
         label_receptionists = new javax.swing.JLabel();
+        btn_refresh = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(706, 398));
+        addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+                formAncestorRemoved(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
-        label_receptionistId.setText("Receptionist ID");
-
-        btn_accessControls.setText("Access Controls");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table_receptionists.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Receptionist Name", "Is Absent"
+                "Staff No", "Receptionist Name", "Is Absent"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -63,10 +137,31 @@ public class ReceptionistBrowserPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        table_receptionists.setViewportView(jTable1);
+        table_receptionists.getTableHeader().setReorderingAllowed(false);
+        table_receptionists.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_receptionistsMouseClicked(evt);
+            }
+        });
+        pane_receptionists.setViewportView(table_receptionists);
+        if (table_receptionists.getColumnModel().getColumnCount() > 0) {
+            table_receptionists.getColumnModel().getColumn(0).setResizable(false);
+            table_receptionists.getColumnModel().getColumn(1).setResizable(false);
+            table_receptionists.getColumnModel().getColumn(2).setResizable(false);
+            table_receptionists.getColumnModel().getColumn(2).setPreferredWidth(5);
+        }
 
         label_receptionists.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         label_receptionists.setText("Receptionists");
+
+        btn_refresh.setText("Refresh");
+        btn_refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_refreshActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Double click on a receptionist to access his/her dashboard");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -75,42 +170,54 @@ public class ReceptionistBrowserPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(table_receptionists)
+                    .addComponent(pane_receptionists, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(label_receptionists)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_refresh))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(label_receptionistId)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(field_receptionistId, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_accessControls))
-                            .addComponent(label_receptionists))
+                        .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_receptionistId)
-                    .addComponent(field_receptionistId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_accessControls))
-                .addGap(27, 27, 27)
-                .addComponent(label_receptionists)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(table_receptionists)
+                    .addComponent(btn_refresh)
+                    .addComponent(label_receptionists))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pane_receptionists, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
+        getReceptionists();
+    }//GEN-LAST:event_btn_refreshActionPerformed
+
+    private void table_receptionistsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_receptionistsMouseClicked
+        if (evt.getClickCount() == 2)
+        {
+            JTable targetTable = (JTable)evt.getSource();
+            Staff staff = receptionists.get(targetTable.getSelectedRow());
+            accessControls(staff);
+        }
+    }//GEN-LAST:event_table_receptionistsMouseClicked
+
+    private void formAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorRemoved
+        disconnectControls();
+    }//GEN-LAST:event_formAncestorRemoved
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_accessControls;
-    private javax.swing.JTextField field_receptionistId;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JLabel label_receptionistId;
+    private javax.swing.JButton btn_refresh;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel label_receptionists;
-    private javax.swing.JScrollPane table_receptionists;
+    private javax.swing.JScrollPane pane_receptionists;
+    private javax.swing.JTable table_receptionists;
     // End of variables declaration//GEN-END:variables
 }

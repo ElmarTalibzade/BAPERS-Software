@@ -6,16 +6,13 @@
 package GUI;
 
 import Staff.*;
-import bapers.Bapers;
 import bapers.Utils; 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 /**
- * Base GUI for all main operations. This is where all menu items are shown based on user's role.
+ * Identical to StaffView but behaves differently as it's used for accessing controls of another staff member
  * @author Elmar Talibzade
  */
-public class StaffView extends javax.swing.JFrame {
+public class ControlledView extends javax.swing.JFrame {
 
     /**
      * Currently logged user
@@ -26,18 +23,14 @@ public class StaffView extends javax.swing.JFrame {
      * Initializes a GUI and loads appropriate menu items based on user's role.
      * @param user Object class representing a logged in user.
      */
-    public StaffView(Staff user){
+    public ControlledView(Staff user){
         this.loggedUser = user;
-        initComponents();
-        initMenuItems();
         
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        this.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent event) {
-                logOut();
-            }
-        });
+        
+        initComponents();
+        initMenuItems();
     }
     
     /**
@@ -50,26 +43,20 @@ public class StaffView extends javax.swing.JFrame {
     private void initComponents() {
 
         label_loggedUser = new javax.swing.JLabel();
-        btn_logout = new javax.swing.JButton();
+        btn_disconnect = new javax.swing.JButton();
         tabbedContent = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("BAPERS");
+        setTitle("Accessing Staff Controls - " + loggedUser.getFullName());
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(720, 480));
         setName("Staff View"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(720, 480));
         setSize(new java.awt.Dimension(720, 480));
 
-        label_loggedUser.setText("Logged in as: staff-name (staff-role)");
+        label_loggedUser.setText("Accessing: staff-name (staff-role)");
 
-        btn_logout.setText("Log Out");
-        btn_logout.setFocusable(false);
-        btn_logout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_logoutActionPerformed(evt);
-            }
-        });
+        btn_disconnect.setText("Disconnect");
+        btn_disconnect.setFocusable(false);
 
         tabbedContent.setAlignmentX(0.0F);
         tabbedContent.setAlignmentY(0.0F);
@@ -84,8 +71,8 @@ public class StaffView extends javax.swing.JFrame {
                     .addComponent(tabbedContent)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label_loggedUser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 425, Short.MAX_VALUE)
-                        .addComponent(btn_logout)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 417, Short.MAX_VALUE)
+                        .addComponent(btn_disconnect)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -93,7 +80,7 @@ public class StaffView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_logout)
+                    .addComponent(btn_disconnect)
                     .addComponent(label_loggedUser))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tabbedContent, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
@@ -103,23 +90,11 @@ public class StaffView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void logOut()
-    {
-        Bapers.loginView.toggleLogin(true);
-        Bapers.loginView.setVisible(true);
-        this.dispose();
-    }
-    
-    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
-        logOut();
-    }//GEN-LAST:event_btn_logoutActionPerformed
-    
     private void initMenuItems() {
         
         label_loggedUser.setText(
-                String.format("Logged in as: %s %s (%s%s)", 
-                        loggedUser.getFirstName(), 
-                        loggedUser.getLastName(), 
+                String.format("Accessing: %s (%s%s)", 
+                        loggedUser.getFullName(), 
                         Utils.splitCamelCase(loggedUser.getRole().name()),
                         loggedUser.isAssigned() ? " - " + Utils.splitCamelCase(loggedUser.getDepartment().toString()) : ""
                 )
@@ -162,12 +137,11 @@ public class StaffView extends javax.swing.JFrame {
                 
                 break;
         }
-        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_logout;
+    public javax.swing.JButton btn_disconnect;
     private javax.swing.JLabel label_loggedUser;
-    public javax.swing.JTabbedPane tabbedContent;
+    private javax.swing.JTabbedPane tabbedContent;
     // End of variables declaration//GEN-END:variables
 }

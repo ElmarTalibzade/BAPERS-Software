@@ -27,6 +27,10 @@ public class Bapers {
      */
     public static LoginView loginView;
     
+    /**
+     *
+     * @return
+     */
     public static Staff getUser()
     {
         return DB.loggedUser;

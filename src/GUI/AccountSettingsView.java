@@ -18,6 +18,13 @@ public class AccountSettingsView extends javax.swing.JDialog {
     private Customer customer;
     private CustomerProfilePanel customerPanel;
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param customerPanel
+     * @param customer
+     */
     public AccountSettingsView(JFrame parent, boolean modal, CustomerProfilePanel customerPanel, Customer customer) {
         super(parent, modal);
         initComponents();
@@ -103,7 +110,7 @@ public class AccountSettingsView extends javax.swing.JDialog {
         customer.setIsSuspended(false);
         customerPanel.setCustomer(customer);
         
-        DB.updateCusotmerAccountType(customer.getAccountNo(), true, false, false);
+        DB.updateCustomerAccountType(customer.getAccountNo(), true, false, false);
         this.dispose();
     }//GEN-LAST:event_btn_valuedCustomerActionPerformed
 
@@ -113,7 +120,7 @@ public class AccountSettingsView extends javax.swing.JDialog {
         customer.setIsSuspended(true);
         customerPanel.setCustomer(customer);
         
-        DB.updateCusotmerAccountType(customer.getAccountNo(), false, false, true);
+        DB.updateCustomerAccountType(customer.getAccountNo(), false, false, true);
         this.dispose();
     }//GEN-LAST:event_btn_suspendCustomerActionPerformed
 
@@ -123,7 +130,7 @@ public class AccountSettingsView extends javax.swing.JDialog {
         customer.setIsSuspended(false);
         customerPanel.setCustomer(customer);
         
-        DB.updateCusotmerAccountType(customer.getAccountNo(), false, true, false);
+        DB.updateCustomerAccountType(customer.getAccountNo(), false, true, false);
         this.dispose();
     }//GEN-LAST:event_btn_inDefaultActionPerformed
 

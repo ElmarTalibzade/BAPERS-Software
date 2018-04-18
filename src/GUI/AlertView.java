@@ -24,6 +24,13 @@ public class AlertView extends javax.swing.JDialog {
     private Reminder reminder;
     private Staff user;
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param reminder
+     * @param user
+     */
     public AlertView(JFrame parent, boolean modal, Reminder reminder, Staff user) {
         super(parent, modal);
         initComponents();

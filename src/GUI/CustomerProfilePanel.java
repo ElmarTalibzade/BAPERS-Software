@@ -22,12 +22,15 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
     
     /**
      * Creates new form CustomerProfilePanel
-     * @param customer Customer whose profile is based on
      */
     public CustomerProfilePanel() {
         initComponents();
     }
     
+    /**
+     *
+     * @param customer
+     */
     public void setCustomer(Customer customer)
     {
         this.customer = customer;

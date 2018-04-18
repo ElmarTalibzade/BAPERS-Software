@@ -133,6 +133,11 @@ public class Staff {
         return isAssigned;
     }
     
+    public String getFullName()
+    {
+        return firstName + " " + lastName;
+    }
+    
     /**
      * Gets Staff first name;
      * @return A string that represents account first name

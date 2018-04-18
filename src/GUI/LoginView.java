@@ -136,6 +136,10 @@ public class LoginView extends javax.swing.JFrame {
         btn_loginActionPerformed(evt);
     }//GEN-LAST:event_field_usernameActionPerformed
     
+    /**
+     *
+     * @param enabled
+     */
     public void toggleLogin(boolean enabled) {
         canLogin = enabled;
         btn_login.setEnabled(enabled);

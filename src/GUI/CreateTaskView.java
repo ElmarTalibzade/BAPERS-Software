@@ -20,6 +20,10 @@ public class CreateTaskView extends javax.swing.JDialog {
     
     /**
      * Creates new form CreateTaskWindow
+     * @param parent
+     * @param modal
+     * @param jobCode
+     * @param taskId
      */
     public CreateTaskView(JFrame parent, boolean modal, String jobCode, int taskId) {
         super(parent, modal);
@@ -33,6 +37,9 @@ public class CreateTaskView extends javax.swing.JDialog {
     
     /**
      * Creates new form CreateTaskWindow and assigns existing task data to fields.
+     * @param parent
+     * @param modal
+     * @param task
      */
     public CreateTaskView(JFrame parent, boolean modal, Task task)
     {
@@ -140,11 +147,19 @@ public class CreateTaskView extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     *
+     * @return
+     */
     public int getId()
     {
         return task.getId();
     }
     
+    /**
+     *
+     * @return
+     */
     public Task getTask()
     {
         return new Task(

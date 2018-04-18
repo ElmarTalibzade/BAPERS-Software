@@ -17,6 +17,12 @@ public class PaymentSettingsView extends javax.swing.JDialog {
     
     private int customerNo;
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param customerNo
+     */
     public PaymentSettingsView(JFrame parent, boolean modal, int customerNo) {
         super(parent, modal);
         initComponents();

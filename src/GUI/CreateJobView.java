@@ -23,6 +23,9 @@ public class CreateJobView extends javax.swing.JDialog {
     
     /**
      * Creates new form CreateJobView
+     * @param parent
+     * @param modal
+     * @param customerNo
      */
     public CreateJobView(JFrame parent, boolean modal, int customerNo) {
         super(parent, modal);
@@ -34,6 +37,10 @@ public class CreateJobView extends javax.swing.JDialog {
         label_accountNo.setText("Customer No: " + String.format("ACC%04d", customerNo));
     }
     
+    /**
+     *
+     * @return
+     */
     public Job getJob()
     {        
         return new Job(1, 
@@ -291,14 +298,14 @@ public class CreateJobView extends javax.swing.JDialog {
 
     private void editTask(int id)
     {
-        CreateTaskView taskView = new CreateTaskView((JFrame)SwingUtilities.getWindowAncestor(this), true, tasks.get(id));
+        CreateTaskView taskView = new CreateTaskView((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, getParent()), true, tasks.get(id));
         listener_editTask(taskView);
         taskView.setVisible(true);
     }
     
     private void createTask()
     {
-        CreateTaskView taskView = new CreateTaskView((JFrame)SwingUtilities.getWindowAncestor(this), true, field_jobCode.getText(), tasks.size());
+        CreateTaskView taskView = new CreateTaskView((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, getParent()), true, field_jobCode.getText(), tasks.size());
         listener_addCreateTask(taskView);
         taskView.setVisible(true);
     }

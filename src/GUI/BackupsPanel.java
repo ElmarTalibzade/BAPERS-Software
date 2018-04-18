@@ -314,6 +314,11 @@ public class BackupsPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btn_browse_backupLocation1ActionPerformed
 
+    /**
+     *
+     * @param str
+     * @return
+     */
     public static boolean isInteger(String str) {
     try {
         Integer.parseInt(str);
