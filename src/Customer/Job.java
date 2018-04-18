@@ -102,8 +102,8 @@ public class Job {
     }
     
     /**
-     *
-     * @return
+     * Gets the date when the job was created
+     * @return A date that represents a date when the job was created
      */
     public Timestamp getDateCreated(){
         return dateCreated;

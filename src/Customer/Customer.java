@@ -80,16 +80,16 @@ public class Customer {
     }
     
     /**
-     *
-     * @return
+     * Gets customer's discount rate
+     * @return discount rate
      */
     public int getDiscountValue() {
         return discountRate;
     }
     
     /**
-     *
-     * @param discountRate
+     * Updates the discount rate
+     * @param discountRate discount rate
      */
     public void setDiscountValue(int discountRate){
         this.discountRate = discountRate;
@@ -153,8 +153,8 @@ public class Customer {
     }
     
     /**
-     *
-     * @param isSuspended
+     * Suspend customer's account
+     * @param isSuspended true - if customer is suspended | false - otherwise
      */
     public void setIsSuspended(boolean isSuspended){
         this.isSuspended = isSuspended;
@@ -218,27 +218,11 @@ public class Customer {
     }
     
     /**
-     *
-     * @return
+     * Gets customer's last 4 digit of the card
+     * @return An integer between 1000 and 9999 that represents customer's last 4 digit of the card
      */
     public int getLast4Digit() {
         return DB.last4Digit(accountNo);
-    }
-    
-    /**
-     * Suspends this Customer's account
-     */
-    public void suspendAccount()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
-    /**
-     * Restores this Customer's account if it's suspended
-     */
-    public void restoreAccount()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     /**
@@ -252,24 +236,24 @@ public class Customer {
     }
 
     /**
-     *
-     * @return
+     * Gets account type of a customer
+     * @return ture - if the customer is valued | false - otherwise
      */
     public boolean isValued() {
         return isValued;
     }
     
     /**
-     *
-     * @param isValued
+     * Sets the cusotmer's account type
+     * @param isValued true - if the customer is valued | false - otherwise
      */
     public void setValued(boolean isValued){
         this.isValued = isValued;
     }
     
     /**
-     *
-     * @return
+     * Gets the customer account type
+     * @return true - if the customer is "in default" state | false - otherwise
      */
     public boolean isDefault() {
         return isDefault;
