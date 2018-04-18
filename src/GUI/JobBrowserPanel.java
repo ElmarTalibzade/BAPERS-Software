@@ -9,10 +9,8 @@ import Customer.*;
 import Staff.Role;
 import static bapers.Bapers.DB;
 import java.awt.CardLayout;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -64,7 +62,7 @@ public class JobBrowserPanel extends javax.swing.JPanel {
         
                 if (dialogResult == JOptionPane.YES_OPTION)
                 {   
-                    if (bapers.Bapers.DB.deleteTask(tasks.get(selectedTaskIndex)))
+                    if (DB.deleteTask(tasks.get(selectedTaskIndex)))
                     {
                         toggleProfile(false);
                         getTasks();
@@ -313,19 +311,12 @@ public class JobBrowserPanel extends javax.swing.JPanel {
 
     private void getTasks()
     {
-        ArrayList<Job> jobs = bapers.Bapers.DB.getJobs(
-                field_jobCode.getText(),
-                (dropdown_jobStatus.getSelectedIndex() == 0) ? 9 : dropdown_jobStatus.getSelectedIndex(),
-                field_shelfNo.getText(),
-                (dropdown_department.getSelectedIndex() == 0) ? 9 : dropdown_department.getSelectedIndex()
+        tasks = DB.searchTasks(
+            field_jobCode.getText(),
+            field_shelfNo.getText(),
+            dropdown_jobStatus.getSelectedIndex() == 0 ? null : Status.values()[dropdown_jobStatus.getSelectedIndex() - 1],
+            dropdown_department.getSelectedIndex() == 0 ? null : DepartmentType.values()[dropdown_department.getSelectedIndex() - 1]
         );
-        
-        tasks = new ArrayList<Task>();
-        
-        for (Job job : jobs)
-        {
-            tasks.addAll(job.getTasks());
-        }
         
         updateTable();
     }

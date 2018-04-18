@@ -6,6 +6,7 @@
 package GUI;
 
 import Staff.*;
+import static bapers.Bapers.DB;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
@@ -121,7 +122,7 @@ public class AlertView extends javax.swing.JDialog {
 
     private void btn_confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_confirmActionPerformed
         reminder.markAsRead();
-        bapers.Bapers.DB.updateReminder(reminder);
+        DB.updateReminder(reminder);
     }//GEN-LAST:event_btn_confirmActionPerformed
 
     private void btn_remindLaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_remindLaterActionPerformed
@@ -130,7 +131,7 @@ public class AlertView extends javax.swing.JDialog {
 
     private void actionOnClose(){
         reminder.incrementTimesReminded();
-        bapers.Bapers.DB.updateReminder(reminder);
+        DB.updateReminder(reminder);
         this.dispose();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

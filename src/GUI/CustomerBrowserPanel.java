@@ -6,7 +6,7 @@
 package GUI;
 
 import Customer.Customer;
-import Customer.Task;
+import static bapers.Bapers.DB;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JTable;
@@ -332,12 +332,12 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_table_customersMouseClicked
 
     private void getAllCustomers() {
-        customers = bapers.Bapers.DB.getCustomers();
+        customers = DB.getCustomers();
         updateTable();
     }
 
     private void getCustomers() {
-        customers = bapers.Bapers.DB.getCustomers(
+        customers = DB.searchCustomers(
                 field_accountNo.getText(), 
                 field_holderName.getText(), 
                 field_firstName.getText(), 

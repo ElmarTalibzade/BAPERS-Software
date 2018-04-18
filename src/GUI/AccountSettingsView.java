@@ -6,8 +6,8 @@
 package GUI;
 
 import Customer.*;
+import static bapers.Bapers.DB;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -103,7 +103,7 @@ public class AccountSettingsView extends javax.swing.JDialog {
         customer.setIsSuspended(false);
         customerPanel.setCustomer(customer);
         
-        bapers.Bapers.DB.updateCusotmerAccountType(customer.getAccountNo(), true, false, false);
+        DB.updateCusotmerAccountType(customer.getAccountNo(), true, false, false);
         this.dispose();
     }//GEN-LAST:event_btn_valuedCustomerActionPerformed
 
@@ -113,7 +113,7 @@ public class AccountSettingsView extends javax.swing.JDialog {
         customer.setIsSuspended(true);
         customerPanel.setCustomer(customer);
         
-        bapers.Bapers.DB.updateCusotmerAccountType(customer.getAccountNo(), false, false, true);
+        DB.updateCusotmerAccountType(customer.getAccountNo(), false, false, true);
         this.dispose();
     }//GEN-LAST:event_btn_suspendCustomerActionPerformed
 
@@ -123,7 +123,7 @@ public class AccountSettingsView extends javax.swing.JDialog {
         customer.setIsSuspended(false);
         customerPanel.setCustomer(customer);
         
-        bapers.Bapers.DB.updateCusotmerAccountType(customer.getAccountNo(), false, true, false);
+        DB.updateCusotmerAccountType(customer.getAccountNo(), false, true, false);
         this.dispose();
     }//GEN-LAST:event_btn_inDefaultActionPerformed
 

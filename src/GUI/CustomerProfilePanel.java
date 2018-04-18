@@ -6,7 +6,7 @@
 package GUI;
 
 import Customer.*;
-import javax.swing.JDialog;
+import static bapers.Bapers.DB;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -43,7 +43,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         label_phone.setText("Phone Number: " + customer.getPhoneNumber());
         
         int cardNumber = customer.getLast4Digit();
-        String cardLabel = bapers.Bapers.DB.isCardInserted(customer.getAccountNo()) ? "Card ending in " + cardNumber : "Cash";
+        String cardLabel = DB.isCardInserted(customer.getAccountNo()) ? "Card ending in " + cardNumber : "Cash";
         label_paymentType.setText("Payment Type: " + cardLabel);
         
         label_stat_inDefault.setVisible(customer.isDefault());
@@ -85,7 +85,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
     private void CreateJob(Job newJob)
     {
         customer.getJobs().add(newJob);
-        bapers.Bapers.DB.createJob(newJob);
+        DB.createJob(newJob);
     }
     
     /**
@@ -374,7 +374,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         customer.setDiscountValue(newDiscountRate);
         
         JOptionPane.showMessageDialog(this, "Discount Updated",  "Customer discount values updated.", JOptionPane.INFORMATION_MESSAGE);
-        bapers.Bapers.DB.updateCustomerDiscount(customer.getAccountNo(), newDiscountType, newDiscountRate);
+        DB.updateCustomerDiscount(customer.getAccountNo(), newDiscountType, newDiscountRate);
         assignValues();
     }//GEN-LAST:event_btn_saveActionPerformed
 

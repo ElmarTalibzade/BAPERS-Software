@@ -8,10 +8,9 @@ package GUI;
 import Customer.*;
 import Staff.Role;
 import bapers.Bapers;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import static bapers.Bapers.DB;
 import java.text.SimpleDateFormat;
-import javax.swing.JOptionPane;
+
 /**
  * Task Profile
  * @author Elmar Talibzade
@@ -88,7 +87,7 @@ public class TaskProfilePanel extends javax.swing.JPanel {
     private void submitChanges() {
         task.setDescription(field_description.getText());
         task.setDepartment(DepartmentType.values()[dropdown_department.getSelectedIndex()]);
-        bapers.Bapers.DB.updateTask(task);
+        DB.updateTask(task);
         updateGUI();
     }
     

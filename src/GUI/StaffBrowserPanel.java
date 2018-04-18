@@ -5,7 +5,6 @@
  */
 package GUI;
 
-import Customer.Task;
 import Staff.Role;
 import Staff.Staff;
 import static bapers.Bapers.DB;
@@ -31,11 +30,11 @@ public class StaffBrowserPanel extends javax.swing.JPanel {
 
     private void getStaff()
     {
-        staff  = DB.getStaff(
-                !field_accountNo.getText().trim().isEmpty() ? Integer.parseInt(field_accountNo.getText().trim()) : -1,
-                field_firstName.getText(), 
-                field_lastName.getText(), 
-                dropdown_role.getSelectedIndex() > 0 ? Role.values()[dropdown_role.getSelectedIndex() - 1] : null
+        staff  = DB.searchStaff(
+            field_accountNo.getText().trim().isEmpty() == false ? Integer.parseInt(field_accountNo.getText().trim()) : -1,
+            field_firstName.getText(), 
+            field_lastName.getText(), 
+            dropdown_role.getSelectedIndex() == 0 ? null : Role.values()[dropdown_role.getSelectedIndex() - 1]
         );
         
         updateTable();
@@ -109,7 +108,7 @@ public class StaffBrowserPanel extends javax.swing.JPanel {
             }
         });
 
-        dropdown_role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any", "OfficeManager", "ShiftManager", "Technician", "Receptionist" }));
+        dropdown_role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any", "Office Manager", "Shift Manager", "Technician", "Receptionist" }));
         dropdown_role.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dropdown_roleActionPerformed(evt);

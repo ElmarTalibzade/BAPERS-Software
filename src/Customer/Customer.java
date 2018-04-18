@@ -5,6 +5,7 @@
  */
 package Customer;
 
+import static bapers.Bapers.DB;
 import java.util.ArrayList;
 
 /**
@@ -204,7 +205,7 @@ public class Customer {
     }
     
     public int getLast4Digit() {
-        return bapers.Bapers.DB.last4Digit(accountNo);
+        return DB.last4Digit(accountNo);
     }
     
     /**

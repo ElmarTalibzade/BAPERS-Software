@@ -73,14 +73,11 @@ public class DBConnectivity implements DBInterface {
 
             Statement st = connection.createStatement();
             st.execute(query);
-            System.out.println("QUERY PASSED: " + query);
             return true;
 
         } catch (SQLException ex) {
-            System.err.println("QUERY FAILED: " + query);
             Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
             return false;
-
         }
     }
 
@@ -98,11 +95,9 @@ public class DBConnectivity implements DBInterface {
 
             Statement st = connection.createStatement();
             ResultSet res = st.executeQuery(query);
-            System.out.println("QUERY PASSED: " + query);
             return res;
 
         } catch (SQLException ex) {
-            System.err.println("QUERY FAILED: " + query);
             Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
             return null;
 
@@ -167,6 +162,7 @@ public class DBConnectivity implements DBInterface {
                 yearExpiry,
                 cardDetailsId,
                 customerID);
+        
         return storeData(query);
     }
     
@@ -501,27 +497,27 @@ public class DBConnectivity implements DBInterface {
      * @param showDefaultOnly Whether or not we want only customers who are in default.
      * @return An array list of customers that match entries. If all values are empty, all entries are returned instead.
      */
-    public ArrayList<Customer> getCustomers(String accountNo, String holderName, String firstName, String lastName, String phoneNumber, String email, boolean showDefaultOnly) {
+    public ArrayList<Customer> searchCustomers(String accountNo, String holderName, String firstName, String lastName, String phoneNumber, String email, boolean showDefaultOnly) {
         
         ArrayList<Customer> customers = new ArrayList<Customer>();
         
         try {
             
             String query = String.format("SELECT * FROM `customers` "
-                    + "WHERE ('%1$s'='' or `accountNo`='%1$s') "
-                    + "AND ('%2$s'='' or `holderName`='%2$s') "
-                    + "AND ('%3$s'='' or `firstName`='%3$s') "
-                    + "AND ('%4$s'='' or `lastName`='%4$s') "
-                    + "AND ('%5$s'='' or `phoneNo`='%5$s') "
-                    + "AND ('%6$s'='' or `emailAddress`='%6$s')"
-                    + "AND ('%7$x'='9' or `isDefault`='%7$x')",
+                    + "WHERE ('%1$s'='' or `accountNo` like '%1$s%%') "
+                    + "AND ('%2$s'='' or `holderName` like '%2$s%%') "
+                    + "AND ('%3$s'='' or `firstName` like '%3$s%%') "
+                    + "AND ('%4$s'='' or `lastName` like '%4$s%%') "
+                    + "AND ('%5$s'='' or `phoneNo` like '%5$s%%') "
+                    + "AND ('%6$s'='' or `emailAddress` like '%6$s%%')"
+                    + "AND ('%7$s'='' or `isDefault`='%7$s')",
                     accountNo.trim(),
                     holderName.trim(),
                     firstName.trim(),
                     lastName.trim(),
                     phoneNumber.trim(),
                     email.trim(),
-                    (showDefaultOnly) ? 1 : 9);
+                    showDefaultOnly ? 1 : "");
             
             ResultSet result = retrieveData(query);
            
@@ -635,22 +631,28 @@ public class DBConnectivity implements DBInterface {
         return tasks;
     }
     
-    private ArrayList<Task> getTasks(String jobCode, int departmentIndex) {
+    public ArrayList<Task> searchTasks(String jobCode, String shelf, Status status, DepartmentType department) {
 
         ArrayList<Task> tasks = new ArrayList<Task>();
 
         try {
 
-            String query = String.format("SELECT * FROM `tasks` "
-                    + "WHERE ('%1$s'='' or `jobCode`='%1$s') "
-                    + "AND ('%2$x'='9' or `department`='%2$x')",
-                    jobCode.trim(), departmentIndex);
+            String query = String.format("SELECT * FROM `tasks` INNER JOIN `jobs` ON tasks.jobCode = jobs.code "
+                    + "WHERE ('%1$s'='' or tasks.jobCode like '%1$s%%') "
+                    + "AND ('%2$s'='' or department='%2$s') "
+                    + "AND ('%3$s'='' or tasks.status='%3$s') "
+                    + "AND ('%4$s'='' or jobs.shelf like '%4$s%%')",
+                    jobCode.trim(), 
+                    department != null ? department.ordinal() : "",
+                    status != null ? status.ordinal() : "",
+                    shelf.trim()
+            );
             
             ResultSet result = retrieveData(query);
 
             while (result.next()) {
                 tasks.add(new Task(
-                        jobCode,
+                        result.getString("jobCode"),
                         result.getInt("taskID"),
                         result.getInt("assigneeId"),
                         Status.values()[result.getInt("status")],
@@ -662,7 +664,6 @@ public class DBConnectivity implements DBInterface {
                         result.getTimestamp("startTime"),
                         result.getTimestamp("endTime")
                 ));
-
             }
 
         } catch (SQLException ex) {
@@ -674,13 +675,14 @@ public class DBConnectivity implements DBInterface {
         return tasks;
     }
     
-    public ArrayList<Staff> getStaff(int accountNo, String firstName, String lastName, Role staffRole)
+    public ArrayList<Staff> searchStaff(int accountNo, String firstName, String lastName, Role staffRole)
     {
         ArrayList<Staff> staff = new ArrayList<Staff>();
         
         String query = String.format("SELECT * FROM `staff` "
-            + "WHERE ('%1$s'='' or `staffNo`='%1$s') "
-            + "AND ('%2$s'='' or `firstName`='%2$s') "
+            + "WHERE ('%1$s'='' or `staffNo` like '%1$s%%') "
+            + "AND ('%2$s'='' or `firstName` like '%2$s%%') "
+            + "AND ('%3$s'='' or `lastName` like '%3$s%%') "
             + "AND ('%4$s'='' or `role`='%4$s') ",
             accountNo != -1 ? accountNo : "", 
             firstName.trim(), 
@@ -707,55 +709,6 @@ public class DBConnectivity implements DBInterface {
         }
         
         return staff;
-    }
-    
-    /**
-     * Gets a list of jobs as well as their tasks
-     * @param jobCode Job's code
-     * @param status Job's current status
-     * @param shelfNo Job's shelf number
-     * @param departmentIndex Index that represents the department of a job
-     * @return An array list of jobs that match entries. If all values are empty, all entries are returned instead.
-     */
-    public ArrayList<Job> getJobs(String jobCode, int status, String shelfNo, int departmentIndex)
-    {
-        ArrayList<Job> jobs = new ArrayList<Job>();
-        
-        try {
-            
-            String query = String.format("SELECT * FROM `jobs` "
-                    + "WHERE ('%1$s'='' or `code`='%1$s') "
-                    + "AND ('%2$x'='9' or `status`='%2$x') "
-                    + "AND ('%3$s'='' or `shelf`='%3$s')",
-                    jobCode.trim(), status, shelfNo.trim()
-                    );
-            
-            ResultSet result = retrieveData(query);
-
-            while (result.next()) {
-
-                jobs.add(new Job(
-                        result.getInt("invoiceNo"),
-                        result.getString("code"),
-                        result.getInt("staffNo"),
-                        getTasks(result.getString("code"), departmentIndex),
-                        result.getFloat("discountRate"),
-                        result.getInt("ownerNo"),
-                        result.getString("specialInstructions"),
-                        result.getString("shelf"),
-                        result.getInt("priority"),
-                        result.getTimestamp("dateCreated")
-                ));
-
-            }
-            
-        } catch (SQLException ex) {
-            
-            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
-            
-        }
-        
-        return jobs;
     }
 
     public ArrayList<Reminder> getReminders() {

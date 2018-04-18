@@ -9,13 +9,7 @@ package Customer;
  * Current status of a task
  * @author Elmar Talibzade
  */
-public enum Status {
-    
-    /**
-     * The status has not been specified
-     */
-    Unspecified,
-    
+public enum Status {    
     /**
      * The task is inactive
      */
@@ -30,5 +24,4 @@ public enum Status {
      * The task has been complete
      */
     Completed
-    
 }

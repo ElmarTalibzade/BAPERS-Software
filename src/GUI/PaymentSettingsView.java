@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import static bapers.Bapers.DB;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -157,8 +158,8 @@ public class PaymentSettingsView extends javax.swing.JDialog {
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
         if(dropbox_paymentMethod.getSelectedIndex() == 1) { 
             JOptionPane.showMessageDialog(this, "Payment method changed",  "Customer is paying now using cash.", JOptionPane.INFORMATION_MESSAGE);
-            if(bapers.Bapers.DB.isCardInserted(customerNo) == true)
-                bapers.Bapers.DB.deleteCard(customerNo);
+            if(DB.isCardInserted(customerNo) == true)
+                DB.deleteCard(customerNo);
         }
         else if(dropbox_paymentMethod.getSelectedIndex() == 0) {
             int last4Digit = Integer.parseInt(field_cardNumber.getText().substring(12, 16));
@@ -168,12 +169,12 @@ public class PaymentSettingsView extends javax.swing.JDialog {
             int monthExpiry = Integer.parseInt(expDate.substring(0, 2));
             int yearExpiry = Integer.parseInt(expDate.substring(3, 5));
             
-            if(bapers.Bapers.DB.isCardInserted(customerNo) == false) {
-                bapers.Bapers.DB.insertCard(customerNo, cardType, last4Digit, monthExpiry, yearExpiry, 0);
+            if(DB.isCardInserted(customerNo) == false) {
+                DB.insertCard(customerNo, cardType, last4Digit, monthExpiry, yearExpiry, 0);
                 JOptionPane.showMessageDialog(this, "Card Inserted",  "Card inserted successfully.", JOptionPane.INFORMATION_MESSAGE);
             }
             else {
-                bapers.Bapers.DB.updateCard(customerNo, cardType, last4Digit, monthExpiry, yearExpiry, 0);
+                DB.updateCard(customerNo, cardType, last4Digit, monthExpiry, yearExpiry, 0);
                 JOptionPane.showMessageDialog(this, "Card Updated",  "Card updated successfully.", JOptionPane.INFORMATION_MESSAGE);
             }
         }

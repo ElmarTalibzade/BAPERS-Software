@@ -5,10 +5,7 @@
  */
 package GUI;
 
-import Administrator.DBConnectivity;
-import Customer.Customer;
 import Customer.DepartmentType;
-import Customer.DiscountType;
 import Staff.Role;
 import Staff.Staff;
 import static bapers.Bapers.DB;
@@ -163,7 +160,7 @@ public class CreateStaffPanel extends javax.swing.JPanel {
             newStaff.setDepartment(DepartmentType.values()[dropdown_department.getSelectedIndex()]);
         }
         
-        if(bapers.Bapers.DB.createStaff(newStaff, password))
+        if(DB.createStaff(newStaff, password))
             JOptionPane.showMessageDialog(this, "Staff member created succesfully!",  "SUCCESS", JOptionPane.WARNING_MESSAGE);
         else
             JOptionPane.showMessageDialog(this, "An error has occurred while creating a new staff member!",  "ERROR", JOptionPane.ERROR_MESSAGE);
