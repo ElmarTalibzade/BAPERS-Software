@@ -166,7 +166,7 @@ public class StaffView extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_logout;
+    public javax.swing.JButton btn_logout;
     private javax.swing.JLabel label_loggedUser;
     public javax.swing.JTabbedPane tabbedContent;
     // End of variables declaration//GEN-END:variables

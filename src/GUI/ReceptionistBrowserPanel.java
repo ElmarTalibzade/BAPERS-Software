@@ -62,13 +62,12 @@ public class ReceptionistBrowserPanel extends javax.swing.JPanel {
     
     private void accessControls(Staff target)
     {
-        System.out.println(((JFrame)SwingUtilities.getWindowAncestor(this)).getTitle());
         controlledStaffView = new ControlledView(target);
-        addListener();
+        addListeners();
         controlledStaffView.setVisible(true);
     }
     
-    private void addListener()
+    private void addListeners()
     {
         controlledStaffView.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent event) {
@@ -81,10 +80,27 @@ public class ReceptionistBrowserPanel extends javax.swing.JPanel {
                 disconnectControls();
             }
         });
+        
+        StaffView parent = (StaffView)SwingUtilities.getWindowAncestor(this);
+        
+        parent.addWindowListener(new WindowAdapter()
+        {
+            public void windowClosing(WindowEvent e)
+            {
+                disconnectControls();
+            }
+        });
+        
+        parent.btn_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disconnectControls();
+            }
+        });
     }
     
     private void disconnectControls()
     {
+        if (controlledStaffView == null) return;
         controlledStaffView.dispose();
     }
     
@@ -104,15 +120,6 @@ public class ReceptionistBrowserPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(706, 398));
-        addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-                formAncestorRemoved(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
 
         table_receptionists.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -207,10 +214,6 @@ public class ReceptionistBrowserPanel extends javax.swing.JPanel {
             accessControls(staff);
         }
     }//GEN-LAST:event_table_receptionistsMouseClicked
-
-    private void formAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorRemoved
-        disconnectControls();
-    }//GEN-LAST:event_formAncestorRemoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
