@@ -9,7 +9,7 @@ public class ShiftManager extends Staff {
     /**
      * Constructor for Shift Manager
      * @param accountNo Account number
-     * @param username
+     * @param username Account username
      * @param firstName Staff's first name
      * @param lastName Staff's last name
      */

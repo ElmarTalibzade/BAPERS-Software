@@ -19,7 +19,7 @@ public class Staff {
     protected DepartmentType assignedDepartment;
     
     /**
-     *
+     * Determines whether or not this staff member is currently assigned with a job
      */
     protected boolean isAssigned = false;
     
@@ -52,7 +52,7 @@ public class Staff {
      * Constructor for Staff
      * @param accountNo Account number
      * @param role Staff's access level
-     * @param username
+     * @param username Staff's username
      * @param firstName Staff's first name
      * @param phone Staff's phone number
      */
@@ -66,13 +66,13 @@ public class Staff {
     }
 
     /**
-     *
-     * @param accountNo
-     * @param role
-     * @param assignedDepartment
-     * @param username
-     * @param firstName
-     * @param lastName
+     * Constructor for Staff
+     * @param accountNo Account number
+     * @param role Staff's access level
+     * @param assignedDepartment Staff's department where its operating
+     * @param username Staff's username
+     * @param firstName Staff's first name
+     * @param lastName Staff's last name
      */
     public Staff(int accountNo, Role role, DepartmentType assignedDepartment, String username, String firstName, String lastName) {
         this.accountNo = accountNo;
@@ -108,16 +108,16 @@ public class Staff {
     }
 
     /**
-     *
-     * @return
+     * Gets Staff operating department
+     * @return An object that represents where the staff is operating
      */
     public DepartmentType getDepartment() {
         return assignedDepartment;
     }
     
     /**
-     *
-     * @param newDepartment
+     * Sets a new operating department to the staff
+     * @param newDepartment An object that represents the new operating department
      */
     public void setDepartment(DepartmentType newDepartment) {
         assignedDepartment = newDepartment;
@@ -125,14 +125,18 @@ public class Staff {
     }
     
     /**
-     *
-     * @return
+     * Determines whether or not the staff is assigned to a department
+     * @return true - if the staff is assigned to a department | false - otherwise
      */
     public boolean isAssigned()
     {
         return isAssigned;
     }
     
+    /**
+     * Returns the staff full name
+     * @return A string that represents the staff full name
+     */
     public String getFullName()
     {
         return firstName + " " + lastName;
@@ -155,8 +159,8 @@ public class Staff {
     }
 
     /**
-     *
-     * @return
+     * Gets Staff username
+     * @return A string that represents account username
      */
     public String getUsername() {
         return username;
@@ -164,7 +168,7 @@ public class Staff {
     
     /**
      * Returns employee's role
-     * @return
+     * @return An object that represents the role of the staff
      */
     public Role getRole(){
         return role;       
@@ -195,8 +199,8 @@ public class Staff {
     }
     
     /**
-     *
-     * @param role
+     * Sets Staff role
+     * @param role Represents the new role that the staff will have
      */
     public void setRole(Role role){
         this.role = role;

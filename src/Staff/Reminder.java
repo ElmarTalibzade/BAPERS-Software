@@ -22,13 +22,13 @@ public class Reminder {
     
     /**
      *
-     * @param id
-     * @param subject
-     * @param message
-     * @param recieveNo
-     * @param recieveTime
-     * @param timesReminded
-     * @param isRead
+     * @param id Reminder's id
+     * @param subject Reminder's subject
+     * @param message Reminder's message
+     * @param recieveNo The staff id who will recieve the reminder
+     * @param recieveTime The time when the reminder was generated
+     * @param timesReminded Number of times when the user pressed "Read Later"
+     * @param isRead ture - if the reminder was read | false - otherwise
      */
     public Reminder(int id, String subject, String message, int recieveNo, Timestamp recieveTime, int timesReminded, boolean isRead){
         this.id = id;
@@ -41,70 +41,70 @@ public class Reminder {
     }
     
     /**
-     *
-     * @return
+     * Returns id of the reminder
+     * @return An integer that represents the reminder's id
      */
     public int getID(){
         return id;
     }
     
     /**
-     *
-     * @return
+     * Returns the main message of the reminder
+     * @return A string that represents the reminder's main message
      */
     public String getMessage(){
         return message;
     }
     
     /**
-     *
-     * @return
+     * Returns the staff id who will receive the reminder
+     * @return An integer that represents  the staff id who will receive the reminder
      */
     public int getReciever(){
         return recieveNo;
     }
     
     /**
-     *
-     * @return
+     * Returns the date when the reminder was generated
+     * @return A date that represents when the reminder was generated
      */
     public Timestamp getTime(){
         return recieveTime;
     }
     
     /**
-     *
-     * @return
+     * Returns the number of times when staff pressed "Read Later"
+     * @return An integer that represents number of times the staff pressed "Read Later"
      */
     public int getTimesReminded(){
         return timesReminded;
     }
     
     /**
-     *
+     * Increments the times reminded by one
      */
     public void incrementTimesReminded(){
         timesReminded++;
     }
     
     /**
-     *
-     * @return
+     * Returns the main subject of the message
+     * @return A string that represents the subject of the reminder
      */
     public String getSubject(){
         return subject;
     }
     
     /**
-     *
-     * @return
+     * Returns the state of the reminder
+     * @return true - if the reminder was read | false - otherwise
      */
     public boolean isRead(){
         return isRead;
     }
     
     /**
-     *
+     * Marks the reminder as read
      */
     public void markAsRead(){
         isRead = true;
