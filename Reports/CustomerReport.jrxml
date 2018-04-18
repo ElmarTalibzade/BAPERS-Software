@@ -7,19 +7,42 @@
 	<parameter name="DATE_END" class="java.util.Date"/>
 	<parameter name="CUSTOMER_NO" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[select tasks.jobCode, tasks.taskID, tasks.price, tasks.description, tasks.startTime, timestampdiff(MINUTE, tasks.startTime, tasks.endTime) as timeTaken,
-(CASE WHEN tasks.status = 0 THEN 'Unspecified'
-	WHEN tasks.status = 1 THEN 'Inactive'
-	WHEN tasks.status = 2 THEN 'In Progress' 
-	WHEN tasks.status = 3 THEN 'Completed' END) as status,
-(SELECT enum_departments.name FROM enum_departments WHERE enum_departments.index = tasks.department) as department,
-customers.accountNo, holderName, firstName, lastName, address, phoneNo, emailAddress
-from tasks 
-inner join jobs on 
-tasks.jobCode = jobs.code 
-inner join customers on 
-customers.accountNo = jobs.ownerNo
-where tasks.startTime BETWEEN $P{DATE_START} AND $P{DATE_END} AND customers.accountNo = $P{CUSTOMER_NO}]]>
+		<![CDATA[SELECT 
+    tasks.jobCode,
+    tasks.taskID,
+    tasks.price,
+    tasks.description,
+    tasks.startTime,
+    TIMESTAMPDIFF(MINUTE,
+        tasks.startTime,
+        tasks.endTime) AS timeTaken,
+    (CASE
+        WHEN tasks.status = 0 THEN 'Inactive'
+        WHEN tasks.status = 1 THEN 'In Progress'
+        WHEN tasks.status = 2 THEN 'Completed'
+    END) AS status,
+    (SELECT 
+            enum_departments.name
+        FROM
+            enum_departments
+        WHERE
+            enum_departments.index = tasks.department) AS department,
+    customers.accountNo,
+    holderName,
+    firstName,
+    lastName,
+    address,
+    phoneNo,
+    emailAddress
+FROM
+    tasks
+        INNER JOIN
+    jobs ON tasks.jobCode = jobs.code
+        INNER JOIN
+    customers ON customers.accountNo = jobs.ownerNo
+WHERE
+    tasks.startTime BETWEEN $P{DATE_START} AND $P{DATE_END}
+        AND customers.accountNo = $P{CUSTOMER_NO}]]>
 	</queryString>
 	<field name="jobCode" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>

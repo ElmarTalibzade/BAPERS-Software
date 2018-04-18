@@ -20,7 +20,7 @@ TIMESTAMPDIFF(MINUTE, tasks.startTime, tasks.endTime) AS timeTaken,
 FROM staff 
 INNER JOIN tasks ON staff.staffNo = tasks.assigneeId
 INNER JOIN jobs ON jobs.code = tasks.jobCode
-WHERE tasks.startTime BETWEEN $P{DATE_START} AND $P{DATE_END} AND tasks.status = '3'
+WHERE tasks.startTime BETWEEN $P{DATE_START} AND $P{DATE_END} AND tasks.status = '2'
 ORDER BY tasks.assigneeId]]>
 	</queryString>
 	<field name="firstName" class="java.lang.String">
@@ -44,6 +44,7 @@ ORDER BY tasks.assigneeId]]>
 	</field>
 	<variable name="totalEffort" class="java.lang.Integer" resetType="Page" calculation="Sum">
 		<variableExpression><![CDATA[$F{timeTaken}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
