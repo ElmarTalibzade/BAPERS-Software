@@ -27,12 +27,24 @@ public class DBConnectivity implements DBInterface {
     
     private Connection connection;
 
+    /**
+     * Stores info about a logged user
+     */
     public Staff loggedUser = null;
     
+    /**
+     * Returns a currently active connection
+     * 
+     * @return Connection object
+     */
     public Connection getConnection() {
         return connection;
     }
     
+    /**
+     * Returns true if there is an active connection
+     * @return true if connection is active
+     */
     public boolean isConnected() {
         return connection != null;
     }
@@ -121,25 +133,56 @@ public class DBConnectivity implements DBInterface {
         }
     }
     
+    /**
+     * Updates customer's discount plan
+     * @param customerID Account number of a customer whose discount plan will be affected
+     * @param discountType new type of discount
+     * @param discountRate new discount rate
+     * @return true if updating customer discount was successful
+     */
     public boolean updateCustomerDiscount(int customerID, int discountType, int discountRate){
         String query = String.format("UPDATE `customers` SET `discountType` = '%d', `discountRate` = '%d' WHERE `accountNo` = '%d'", discountType, discountRate, customerID);
         return storeData(query);
     }
     
+    /**
+     * Updates a reminder
+     * @param reminder reminder object
+     * @return true if reminder was successfully updated
+     */
     public boolean updateReminder(Reminder reminder){
         String query = String.format("UPDATE `reminders` SET `timesReminded` = '%d', `isRead` = '%d' WHERE `id` = '%d'", reminder.getTimesReminded(), reminder.isRead() ? 1 : 0, reminder.getID());
         return storeData(query);
     }
     
-    public boolean updateCusotmerAccountType(int customerID, boolean isValued, boolean isSuspended, boolean isInDefault){
+    /**
+     * Updates customer account type
+     * @param customerID Account number of a customer which will be affected
+     * @param isValued Whether or not the customer is now valued
+     * @param isSuspended Whether or not the customer is suspended
+     * @param isInDefault Whether or not the customer is in default
+     * @return true if updating data was successful
+     */
+    public boolean updateCustomerAccountType(int customerID, boolean isValued, boolean isSuspended, boolean isInDefault){
         String query = String.format("UPDATE `customers` SET `isValued` = '%d', `isSuspended` = '%d', `isDefault` = '%d' WHERE `accountNo` = '%d'", 
                 (isValued) ? 1 : 0, 
                 (isSuspended) ? 1 : 0, 
                 (isInDefault) ? 1 : 0, 
                 customerID);
+        
         return storeData(query);
     }
     
+    /**
+     * Updates card details
+     * @param customerID Account number of a customer which will be affected
+     * @param cardType Card type
+     * @param last4Digit Last 4 digits of a card
+     * @param monthExpiry Month expiry of the card
+     * @param yearExpiry Year expiry of the card
+     * @param cardDetailsId Id of card details
+     * @return true if data was successfully updated
+     */
     public boolean insertCard(int customerID, String cardType, int last4Digit, int monthExpiry, int yearExpiry, int cardDetailsId){
         String query = String.format("INSERT INTO `carddetails` "
                 + "(cardType, last4Digits, monthExpiry, yearExpiry, ownerAccountNo, cardDetailsId) VALUES(" 
@@ -149,6 +192,16 @@ public class DBConnectivity implements DBInterface {
         return storeData(query);
     }
     
+    /**
+     * Updates card type of a customer
+     * @param customerID Account number of a customer which will be updated
+     * @param cardType Card type
+     * @param last4Digit Last 4 digits of a card
+     * @param monthExpiry Month expiry of the card
+     * @param yearExpiry Year expiry of the card
+     * @param cardDetailsId Id of card details
+     * @return true if data was successfully updated
+     */
     public boolean updateCard(int customerID, String cardType, int last4Digit, int monthExpiry, int yearExpiry, int cardDetailsId){
         String query = String.format("UPDATE `carddetails` SET `cardType` = '%s', "
                 + "`last4Digits` = '%d', "
@@ -166,6 +219,11 @@ public class DBConnectivity implements DBInterface {
         return storeData(query);
     }
     
+    /**
+     * Returns last 4 digits of a card of a customer
+     * @param customerID Customer number
+     * @return integer representing last 4 digits of a card
+     */
     public int last4Digit(int customerID){
         try {
             ResultSet result = retrieveData(String.format("SELECT last4Digits FROM `carddetails` WHERE ownerAccountNo = '%d'", customerID));
@@ -179,11 +237,21 @@ public class DBConnectivity implements DBInterface {
         return 0;
     }
     
+    /**
+     * Removes the card from the database
+     * @param customerID account number of a customer whose card details will be removed
+     * @return true if data was successfully updated
+     */
     public boolean deleteCard(int customerID) {
         String query = String.format("DELETE FROM `carddetails` WHERE ownerAccountNo = '%d' ", customerID);
         return storeData(query);
     }
     
+    /**
+     * Checks whether customer's card details are present
+     * @param customerID account number of a customer to check
+     * @return true if card is inserted of a customer
+     */
     public boolean isCardInserted(int customerID) {
         try {
             ResultSet result = retrieveData(String.format("SELECT * FROM `carddetails` WHERE ownerAccountNo = '%d'", customerID));
@@ -196,11 +264,6 @@ public class DBConnectivity implements DBInterface {
         }
         return false;
     }
-    
-    // To-do:
-    // I/O Customers, Job, Tasks, Payment for existing entries
-    // Create Job, Tasks, Customers, Staff
-    // Updates customer. If such customer does not exist, a new one is created
     
     /**
      * Creates a new staff member
@@ -219,7 +282,6 @@ public class DBConnectivity implements DBInterface {
     }
     
     /**
-     * UNDER CONSTRUCTION!
      * Creates a new job
      * 
      * @param job Job object that will be inserted
@@ -300,10 +362,14 @@ public class DBConnectivity implements DBInterface {
         
         return storeData(query);
     }
-    
-    public boolean deleteTask(String jobCode, int taskId) {
         
-        String query = String.format("DELETE FROM `tasks` WHERE jobCode=%s AND taskId=%s", jobCode, taskId );
+    /**
+     * Deletes task from the database
+     * @param task Task object which will be deleted
+     * @return true if task was successfully deleted
+     */
+    public boolean deleteTask(Task task) {
+        String query = String.format("DELETE FROM `tasks` WHERE `taskID` = '%s'", task.getId());
         
         return storeData(query);
     }
@@ -328,6 +394,11 @@ public class DBConnectivity implements DBInterface {
         return storeData(query);
     }
     
+    /**
+     * Updates task
+     * @param task task object
+     * @return true if task was successfully updated
+     */
     public boolean updateTask(Task task) {
         String query = String.format("UPDATE `tasks` SET "
                 + "`description` = '%s', " +
@@ -347,12 +418,6 @@ public class DBConnectivity implements DBInterface {
                 task.getId(),
                 task.getJobCode()
         );
-        
-        return storeData(query);
-    }
-    
-    public boolean deleteTask(Task task) {
-        String query = String.format("DELETE FROM `tasks` WHERE `taskID` = '%s'", task.getId());
         
         return storeData(query);
     }
@@ -383,8 +448,8 @@ public class DBConnectivity implements DBInterface {
     /**
      * Checks whether or not the credentials are valid
      *
-     * @param email Email
-     * @param password Password
+     * @param username Username of the user
+     * @param password User's password
      * @return Returns true if credentials are valid. Returns false if either
      * credentials are invalid or there is an issue with the database.
      */
@@ -631,6 +696,13 @@ public class DBConnectivity implements DBInterface {
         return tasks;
     }
     
+    /**
+     * Searches for tasks that match or begin with supplied parameters. Returns all entries if all parameters are empty/null
+     * @param jobCode Job code that is associated with this task
+     * @param status Current status of a task
+     * @param department Department to which this task belongs to
+     * @return Array List of tasks that match parameters supplied
+     */
     public ArrayList<Task> searchTasks(String jobCode, Status status, DepartmentType department) {
 
         ArrayList<Task> tasks = new ArrayList<Task>();
@@ -673,6 +745,14 @@ public class DBConnectivity implements DBInterface {
         return tasks;
     }
     
+    /**
+     * Searches for staff that match or begin with supplied parameters. Returns all entries if all parameters are empty/null
+     * @param accountNo Staff account number
+     * @param firstName First name of staff
+     * @param lastName Last name of the staff
+     * @param staffRole Staff role
+     * @return Array List of staff that match parameters supplied
+     */
     public ArrayList<Staff> searchStaff(int accountNo, String firstName, String lastName, Role staffRole)
     {
         ArrayList<Staff> staff = new ArrayList<Staff>();
@@ -709,6 +789,10 @@ public class DBConnectivity implements DBInterface {
         return staff;
     }
 
+    /**
+     * Gets all reminders of a currently logged user
+     * @return Array List of reminders
+     */
     public ArrayList<Reminder> getReminders() {
         ArrayList<Reminder> reminders = new ArrayList<Reminder>();
         try {
