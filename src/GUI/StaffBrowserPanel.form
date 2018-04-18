@@ -22,26 +22,26 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="field_accountNo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="field_accountNo" alignment="0" pref="147" max="32767" attributes="0"/>
                           <Component id="label_accountNo" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="label_firstName" min="-2" max="-2" attributes="0"/>
-                          <Component id="field_firstName" max="32767" attributes="0"/>
+                          <Component id="field_firstName" pref="147" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="field_lastName" alignment="0" max="32767" attributes="0"/>
+                          <Component id="field_lastName" alignment="0" pref="147" max="32767" attributes="0"/>
                           <Component id="label_lastName" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="dropdown_role" max="32767" attributes="0"/>
+                          <Component id="dropdown_role" pref="148" max="32767" attributes="0"/>
                           <Component id="label_role" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -51,7 +51,7 @@
                   </Group>
                   <Component id="scrol_staff" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,7 +75,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btn_findMember" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="scrol_staff" max="32767" attributes="0"/>
+              <Component id="scrol_staff" pref="294" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>

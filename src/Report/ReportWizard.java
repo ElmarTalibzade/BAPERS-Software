@@ -30,8 +30,7 @@ public class ReportWizard
     private final String IndividualPerformanceReport_location_jasper = "/Reports/IndividualPerformanceReport.jasper";
     
     /**
-     *
-     * @param args
+     *  For directly testing report generation only. Run Bapers.java file instead to run full software.
      */
     public static void main(String[] args) {
         Date begin = null;

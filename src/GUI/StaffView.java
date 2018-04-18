@@ -84,7 +84,7 @@ public class StaffView extends javax.swing.JFrame {
                     .addComponent(tabbedContent)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label_loggedUser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 425, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 431, Short.MAX_VALUE)
                         .addComponent(btn_logout)))
                 .addContainerGap())
         );

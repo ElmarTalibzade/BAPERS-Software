@@ -41,7 +41,7 @@
                   <Component id="tabbedContent" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="label_loggedUser" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="425" max="32767" attributes="0"/>
+                      <EmptySpace pref="431" max="32767" attributes="0"/>
                       <Component id="btn_logout" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
