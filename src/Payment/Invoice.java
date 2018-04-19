@@ -32,6 +32,11 @@ public class Invoice {
         this.datePaid = datePaid;
     }
 
+    public boolean isPaid()
+    {
+        return datePaid != null;
+    }
+    
     public int getInvoiceNo() {
         return invoiceNo;
     }

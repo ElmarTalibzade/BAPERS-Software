@@ -59,6 +59,9 @@ public class InvoicePanel extends javax.swing.JPanel {
         label_vatRate.setText("VAT: " + new DecimalFormat("%0.00").format(invoice.getVatRate()));
         label_total.setText("Total: " + new DecimalFormat("£0.00").format(invoice.calculateTotal()));
         
+        btn_pay.setEnabled(!invoice.isPaid());
+        btn_pay.setText(invoice.isPaid() ? "Paid" : "Pay");
+        
         updateTable();
     }
     

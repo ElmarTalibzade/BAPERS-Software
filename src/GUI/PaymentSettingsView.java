@@ -84,7 +84,7 @@ public class PaymentSettingsView extends javax.swing.JDialog {
 
         label_expirationDate.setText("Expiration Date");
 
-        btn_save.setText("Pay");
+        btn_save.setText("Confirm Payment");
         btn_save.setAlignmentX(1.0F);
         btn_save.setAlignmentY(1.0F);
         btn_save.addActionListener(new java.awt.event.ActionListener() {
@@ -99,8 +99,7 @@ public class PaymentSettingsView extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_save)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -124,8 +123,11 @@ public class PaymentSettingsView extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(label_csv)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(field_csv, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(field_csv, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_save)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,14 +162,14 @@ public class PaymentSettingsView extends javax.swing.JDialog {
     {
         boolean hasCard = DB.isCardInserted(customerNo);
  
-        label_cardType.setVisible(hasCard); 
-        label_cardNumber.setVisible(hasCard);
-        label_csv.setVisible(hasCard); 
-        label_expirationDate.setVisible(hasCard);
-        field_cardNumber.setVisible(hasCard); 
-        dropdown_cardType.setVisible(hasCard);
-        field_csv.setVisible(hasCard); 
-        field_expirationDate.setVisible(hasCard);
+        label_cardType.setEnabled(hasCard); 
+        label_cardNumber.setEnabled(hasCard);
+        label_csv.setEnabled(hasCard); 
+        label_expirationDate.setEnabled(hasCard);
+        field_cardNumber.setEnabled(hasCard); 
+        dropdown_cardType.setEnabled(hasCard);
+        field_csv.setEnabled(hasCard); 
+        field_expirationDate.setEnabled(hasCard);
         dropbox_paymentMethod.setSelectedIndex(hasCard ? 0 : 1);
         
         if(hasCard){

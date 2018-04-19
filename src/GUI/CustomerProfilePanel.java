@@ -277,6 +277,11 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         pane_buttons.add(btn_editAccount);
 
         btn_setDiscount.setText("Set Discount");
+        btn_setDiscount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_setDiscountActionPerformed(evt);
+            }
+        });
         pane_buttons.add(btn_setDiscount);
 
         btn_setPayment.setText("Invoices");
@@ -381,6 +386,10 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
     private void btn_reactivateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reactivateActionPerformed
         reactivateAccount();
     }//GEN-LAST:event_btn_reactivateActionPerformed
+
+    private void btn_setDiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_setDiscountActionPerformed
+        
+    }//GEN-LAST:event_btn_setDiscountActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
