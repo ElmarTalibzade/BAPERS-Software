@@ -131,7 +131,7 @@ import java.sql.Timestamp;
 
     /**
      * Sets the status of the task
-     * @param task status
+     * @param status The new status
      */
     public void setStatus(Status status) {
         this.status = status;
