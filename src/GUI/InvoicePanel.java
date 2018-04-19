@@ -5,12 +5,18 @@
  */
 package GUI;
 
+import Customer.Customer;
 import Customer.Job;
 import Payment.Invoice;
 import Report.ReportWizard;
 import static bapers.Bapers.DB;
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import bapers.Bapers;
+import java.util.concurrent.TimeUnit;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,13 +25,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class InvoicePanel extends javax.swing.JPanel {
 
+    private Customer customer;
     private Invoice invoice;
     private ArrayList<Job> jobs;
     
     /**
      * Creates new form InvoicePanel
      */
-    public InvoicePanel() {
+    public InvoicePanel(Customer customer) {
+        this.customer = customer;
         initComponents();
     }
 
@@ -132,6 +140,11 @@ public class InvoicePanel extends javax.swing.JPanel {
         label_jobs.setText("Jobs ({jobs-n})");
 
         btn_pay.setText("Pay");
+        btn_pay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_payActionPerformed(evt);
+            }
+        });
 
         btn_printInvoice.setText("Print Invoice");
         btn_printInvoice.addActionListener(new java.awt.event.ActionListener() {
@@ -204,6 +217,18 @@ public class InvoicePanel extends javax.swing.JPanel {
     private void btn_printInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_printInvoiceActionPerformed
         ReportWizard.OpenPDF(ReportWizard.GenerateCustomerInvoice(invoice.getInvoiceNo()));
     }//GEN-LAST:event_btn_printInvoiceActionPerformed
+
+    private void btn_payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_payActionPerformed
+        //long daysLater = invoice.getDateDiff(new Timestamp(System.currentTimeMillis()), TimeUnit.DAYS);
+        //System.out.println(daysLater);
+        //btn_pay.setEnabled(false); - TO DO
+        
+        PaymentSettingsView paymentView = new PaymentSettingsView(null, true, customer, invoice);
+        paymentView.setVisible(true);
+        
+        invoice.markPaid();
+        DB.markInvoicePaid(invoice.getInvoiceNo());
+    }//GEN-LAST:event_btn_payActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

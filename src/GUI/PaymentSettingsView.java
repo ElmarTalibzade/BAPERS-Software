@@ -5,7 +5,11 @@
  */
 package GUI;
 
+import Customer.Customer;
+import Payment.Invoice;
+import Payment.Payment;
 import static bapers.Bapers.DB;
+import java.sql.Timestamp;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -15,6 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class PaymentSettingsView extends javax.swing.JDialog {
     
+    private Customer customer;
+    private Invoice invoice;
     private int customerNo;
     
     /**
@@ -23,12 +29,15 @@ public class PaymentSettingsView extends javax.swing.JDialog {
      * @param modal
      * @param customerNo
      */
-    public PaymentSettingsView(JFrame parent, boolean modal, int customerNo) {
+    public PaymentSettingsView(JFrame parent, boolean modal, Customer customer, Invoice invoice) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         
-        this.customerNo = customerNo;
+        this.customer = customer;
+        this.invoice = invoice;
+        customerNo = customer.getAccountNo();
+        updateBody();
     }
 
     /**
@@ -75,7 +84,7 @@ public class PaymentSettingsView extends javax.swing.JDialog {
 
         label_expirationDate.setText("Expiration Date");
 
-        btn_save.setText("Save");
+        btn_save.setText("Pay");
         btn_save.setAlignmentX(1.0F);
         btn_save.setAlignmentY(1.0F);
         btn_save.addActionListener(new java.awt.event.ActionListener() {
@@ -147,6 +156,27 @@ public class PaymentSettingsView extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void updateBody()
+    {
+        boolean hasCard = DB.isCardInserted(customerNo);
+ 
+        label_cardType.setVisible(hasCard); 
+        label_cardNumber.setVisible(hasCard);
+        label_csv.setVisible(hasCard); 
+        label_expirationDate.setVisible(hasCard);
+        field_cardNumber.setVisible(hasCard); 
+        dropdown_cardType.setVisible(hasCard);
+        field_csv.setVisible(hasCard); 
+        field_expirationDate.setVisible(hasCard);
+        dropbox_paymentMethod.setSelectedIndex(hasCard ? 0 : 1);
+        
+        if(hasCard){
+            field_cardNumber.setText("************" + customer.getLast4Digit());
+            field_expirationDate.setText("" +   String.format("%02d", customer.getMonthExpiry()) + "/" + 
+                                                String.format("%02d", customer.getYearExpiry()));
+        }
+    }
+    
     private void dropbox_paymentMethodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropbox_paymentMethodActionPerformed
         
         boolean showCardSettings = dropbox_paymentMethod.getSelectedIndex() == 0;
@@ -163,25 +193,40 @@ public class PaymentSettingsView extends javax.swing.JDialog {
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
         if(dropbox_paymentMethod.getSelectedIndex() == 1) { 
-            JOptionPane.showMessageDialog(this, "Payment method changed",  "Customer is paying now using cash.", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Payment recorded succesfully",  "Customer paid using cash.", JOptionPane.INFORMATION_MESSAGE);
+            Payment payment = new Payment(invoice.calculateTotal(), 0, new Timestamp(System.currentTimeMillis()), 0, invoice.getInvoiceNo());
+            DB.recordPayment(payment);
+            
             if(DB.isCardInserted(customerNo) == true)
                 DB.deleteCard(customerNo);
         }
         else if(dropbox_paymentMethod.getSelectedIndex() == 0) {
-            int last4Digit = Integer.parseInt(field_cardNumber.getText().substring(12, 16));
-            String cardType = dropdown_cardType.getItemAt(dropdown_cardType.getSelectedIndex());
-            
-            String expDate = field_expirationDate.getText();
-            int monthExpiry = Integer.parseInt(expDate.substring(0, 2));
-            int yearExpiry = Integer.parseInt(expDate.substring(3, 5));
-            
-            if(DB.isCardInserted(customerNo) == false) {
-                DB.insertCard(customerNo, cardType, last4Digit, monthExpiry, yearExpiry, 0);
-                JOptionPane.showMessageDialog(this, "Card Inserted",  "Card inserted successfully.", JOptionPane.INFORMATION_MESSAGE);
+            if(field_csv.getText() == "") {
+                JOptionPane.showMessageDialog(this, "ERROR",  "No CSV was provided.", JOptionPane.WARNING_MESSAGE);
             }
             else {
-                DB.updateCard(customerNo, cardType, last4Digit, monthExpiry, yearExpiry, 0);
-                JOptionPane.showMessageDialog(this, "Card Updated",  "Card updated successfully.", JOptionPane.INFORMATION_MESSAGE);
+                int last4Digit = Integer.parseInt(field_cardNumber.getText().substring(12, 16));
+                String cardType = dropdown_cardType.getItemAt(dropdown_cardType.getSelectedIndex());
+
+                String expDate = field_expirationDate.getText();
+                int monthExpiry = Integer.parseInt(expDate.substring(0, 2));
+                int yearExpiry = Integer.parseInt(expDate.substring(3, 5));
+
+                if(DB.isCardInserted(customerNo) == false) {
+                    DB.insertCard(customerNo, cardType, last4Digit, monthExpiry, yearExpiry, 0);
+                    
+                    Payment payment = new Payment(invoice.calculateTotal(), 0, new Timestamp(System.currentTimeMillis()), 0, invoice.getInvoiceNo());
+                    DB.recordPayment(payment);
+                    
+                    JOptionPane.showMessageDialog(this, "Payment recorded succesfully",  "Customer paid using a card.\nThe card will be saved for future transactions.", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    DB.updateCard(customerNo, cardType, last4Digit, monthExpiry, yearExpiry, 0);
+                    
+                    Payment payment = new Payment(invoice.calculateTotal(), 0, new Timestamp(System.currentTimeMillis()), 0, invoice.getInvoiceNo());
+                    DB.recordPayment(payment);
+                    JOptionPane.showMessageDialog(this, "Payment recorded succesfully",  "Customer paid using a card.\nThe card will be saved for future transactions.", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         }
     }//GEN-LAST:event_btn_saveActionPerformed

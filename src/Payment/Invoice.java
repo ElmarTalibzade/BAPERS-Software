@@ -5,7 +5,9 @@
  */
 package Payment;
 
+import java.sql.Timestamp;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Stores customer's invoice.
@@ -59,4 +61,14 @@ public class Invoice {
     public Date getDatePaid() {
         return datePaid;
     }   
+    
+    public long getDateDiff(Timestamp currentTime, TimeUnit timeUnit)
+    {
+        long diffInMillies = Math.abs(currentTime.getTime() - dateCreated.getTime());
+        return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
+    }
+    
+    public void markPaid(){
+        datePaid = new Timestamp(System.currentTimeMillis());
+    }
 }

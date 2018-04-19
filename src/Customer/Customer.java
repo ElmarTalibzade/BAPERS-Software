@@ -254,6 +254,22 @@ public class Customer {
     }
     
     /**
+     * Gets customer's month expiration date
+     * @return An integer between 00 and 12 that represents the month when customer's card is expired
+     */
+    public int getMonthExpiry(){
+        return DB.getMonthExpiry(accountNo);
+    }
+    
+    /**
+     * Gets customer's year expiration date
+     * @return An integer between 00 and 99 that represents the year when customer's card is expired
+     */
+    public int getYearExpiry(){
+        return DB.getYearExpiry(accountNo);
+    }
+    
+    /**
      * Makes a payment for customer's of specific id
      * @param jobId Id of a job for which customer is paying for
      * @return Returns true if the payment was successful

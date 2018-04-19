@@ -7,6 +7,7 @@ import Customer.Job;
 import Customer.Status;
 import Customer.Task;
 import Payment.Invoice;
+import Payment.Payment;
 import Staff.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class DBConnectivity implements DBInterface {
     static final String DB_URL = "jdbc:mysql://localhost:3306/bloomsday?autoReconnect=true&useSSL=false";
 
     static final String USER = "root";
-    static final String PASS = "root";
+    static final String PASS = "";
     
     private Connection connection;
 
@@ -243,6 +244,41 @@ public class DBConnectivity implements DBInterface {
             Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
+    }
+    
+    public int getMonthExpiry(int customerID){
+        try {
+            ResultSet result = retrieveData(String.format("SELECT monthExpiry FROM `carddetails` WHERE ownerAccountNo = '%d'", customerID));
+            if(result.next())
+                return result.getInt("monthExpiry");
+            else
+                return 0;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    
+    public int getYearExpiry(int customerID){
+        try {
+            ResultSet result = retrieveData(String.format("SELECT yearExpiry FROM `carddetails` WHERE ownerAccountNo = '%d'", customerID));
+            if(result.next())
+                return result.getInt("yearExpiry");
+            else
+                return 0;        
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    
+    public boolean recordPayment(Payment payment) {
+        String query = String.format("INSERT INTO `payment` "
+                + "(`amountPaid`, `method`, `date`, `cardDetailsId`, `invoiceId`) VALUES(" 
+                + "'%s', '%d', '%s', '%d', '%d')", 
+                payment.getAmountPaid(), payment.getMethod(), payment.getDate(), payment.getCardDetailsID(), payment.getInvoiceID());
+        
+        return storeData(query);
     }
     
     /**

@@ -163,7 +163,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btn_save">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Save"/>
+        <Property name="text" type="java.lang.String" value="Pay"/>
         <Property name="alignmentX" type="float" value="1.0"/>
         <Property name="alignmentY" type="float" value="1.0"/>
       </Properties>
