@@ -31,6 +31,7 @@ public class ReportWizard
     
     /**
      *  For directly testing report generation only. Run Bapers.java file instead to run full software.
+     * @param args
      */
     public static void main(String[] args) {
         Date begin = null;
@@ -49,6 +50,11 @@ public class ReportWizard
         OpenPDF(GenerateSummaryPerformanceReport(begin, end));
     }
     
+    /**
+     *
+     * @param invoiceNo
+     * @return
+     */
     public static String GenerateCustomerInvoice(int invoiceNo)
     {
         if (!DB.isConnected()) return null;

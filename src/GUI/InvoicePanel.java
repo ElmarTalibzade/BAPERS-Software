@@ -20,7 +20,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * GUI for display information of an invoice
  * @author Elmar Talibzade
  */
 public class InvoicePanel extends javax.swing.JPanel {
@@ -31,12 +31,17 @@ public class InvoicePanel extends javax.swing.JPanel {
     
     /**
      * Creates new form InvoicePanel
+     * @param customer customer object which is associated with this invoice
      */
     public InvoicePanel(Customer customer) {
         this.customer = customer;
         initComponents();
     }
 
+    /**
+     * Updates the invoice panel and updates the GUI
+     * @param invoice
+     */
     public void setInvoice(Invoice invoice)
     {
         this.invoice = invoice;
@@ -55,8 +60,8 @@ public class InvoicePanel extends javax.swing.JPanel {
         
         label_invoiceNo.setText(String.format("Invoice No: %05d", invoice.getInvoiceNo()));
         label_subTotal.setText("Sub-total: " + new DecimalFormat("£0.00").format(invoice.getSubTotal()));
-        label_discountRate.setText("Discount Rate: " + new DecimalFormat("%0.00").format(invoice.getDiscountRate()));
-        label_vatRate.setText("VAT: " + new DecimalFormat("%0.00").format(invoice.getVatRate()));
+        label_discountRate.setText("Discount Rate: %" + invoice.getDiscountRate());
+        label_vatRate.setText("VAT: %" + invoice.getVatRate());
         label_total.setText("Total: " + new DecimalFormat("£0.00").format(invoice.calculateTotal()));
         
         btn_pay.setEnabled(!invoice.isPaid());

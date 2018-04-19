@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import bapers.Utils;
 import javax.swing.JOptionPane;
 import java.util.Arrays;
 import java.util.Timer;
@@ -14,7 +15,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 /**
- *
+ * Used to manage backups
  * @author Elmar Talibzade
  */
 public class BackupsPanel extends javax.swing.JPanel {
@@ -318,23 +319,9 @@ public class BackupsPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btn_browse_backupLocation1ActionPerformed
-
-    /**
-     *
-     * @param str
-     * @return
-     */
-    public static boolean isInteger(String str) {
-    try {
-        Integer.parseInt(str);
-        return true;
-    } catch (NumberFormatException nfe) {
-        return false;
-    }
-}
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(isInteger(jTextField1.getText())){
+        if(Utils.isInteger(jTextField1.getText())){
             if(backupLocation != null) {
                 int number = Integer.parseInt(jTextField1.getText());
                 int option = jComboBox1.getSelectedIndex();

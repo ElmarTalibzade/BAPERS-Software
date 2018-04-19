@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Renders customer settings and allows user to edit them
  * @author Elmar Talibzade
  */
 public class AccountSettingsView extends javax.swing.JDialog {
@@ -21,11 +21,11 @@ public class AccountSettingsView extends javax.swing.JDialog {
     private CustomerProfilePanel customerPanel;
     
     /**
-     *
-     * @param parent
-     * @param modal
-     * @param customerPanel
-     * @param customer
+     * Constructor
+     * @param parent Parent window
+     * @param modal whether or not this window is modal
+     * @param customerPanel parent customer panel
+     * @param customer customer object which will be edited
      */
     public AccountSettingsView(JFrame parent, boolean modal, CustomerProfilePanel customerPanel, Customer customer) {
         super(parent, modal);
@@ -52,6 +52,10 @@ public class AccountSettingsView extends javax.swing.JDialog {
         btn_toggleAccountStatus.setText(customer.isValued() ? "Downgrade" : "Upgrade");
     }   
     
+    /**
+     * Returns a currently inspected customer
+     * @return Customer object
+     */
     public Customer getCustomer()
     {
         return customer;
@@ -197,11 +201,12 @@ public class AccountSettingsView extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_holderName)
-                    .addComponent(label_phone)
-                    .addComponent(field_holderName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(field_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label_phone, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(label_holderName)
+                        .addComponent(field_holderName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(field_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

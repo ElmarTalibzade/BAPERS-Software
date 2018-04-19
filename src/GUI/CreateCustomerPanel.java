@@ -12,7 +12,7 @@ import static bapers.Bapers.DB;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * GUI for creating a new customer
  * @author Elmar Talibzade
  */
 public class CreateCustomerPanel extends javax.swing.JPanel {

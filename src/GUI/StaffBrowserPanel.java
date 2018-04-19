@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * GUI for browsing through staff
  * @author Elmar Talibzade
  */
 public class StaffBrowserPanel extends javax.swing.JPanel {

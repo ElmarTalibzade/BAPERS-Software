@@ -9,7 +9,7 @@ import Customer.*;
 import javax.swing.JFrame;
 
 /**
- *
+ * GUI for creating a new task
  * @author Elmar Talibzade
  */
 public class CreateTaskView extends javax.swing.JDialog {
@@ -20,10 +20,10 @@ public class CreateTaskView extends javax.swing.JDialog {
     
     /**
      * Creates new form CreateTaskWindow
-     * @param parent
-     * @param modal
-     * @param jobCode
-     * @param taskId
+     * @param parent parent window
+     * @param modal is modal?
+     * @param jobCode job code with whom this task is associated with
+     * @param taskId id of the task
      */
     public CreateTaskView(JFrame parent, boolean modal, String jobCode, int taskId) {
         super(parent, modal);
@@ -37,9 +37,9 @@ public class CreateTaskView extends javax.swing.JDialog {
     
     /**
      * Creates new form CreateTaskWindow and assigns existing task data to fields.
-     * @param parent
-     * @param modal
-     * @param task
+     * @param parent parent window
+     * @param modal is modal?
+     * @param task Task which will be edited
      */
     public CreateTaskView(JFrame parent, boolean modal, Task task)
     {
@@ -148,7 +148,7 @@ public class CreateTaskView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     *
+     * Returns the id of a currently edited task
      * @return
      */
     public int getId()
@@ -157,8 +157,8 @@ public class CreateTaskView extends javax.swing.JDialog {
     }
     
     /**
-     *
-     * @return
+     * Returns the Task
+     * @return Task object
      */
     public Task getTask()
     {

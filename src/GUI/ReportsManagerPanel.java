@@ -6,12 +6,11 @@
 package GUI;
 
 import Report.ReportWizard;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
 /**
- *
+ * GUI for generating reports
  * @author Elmar Talibzade
  */
 public class ReportsManagerPanel extends javax.swing.JPanel {

@@ -8,13 +8,14 @@ package GUI;
 import Customer.*;
 import Staff.Role;
 import static bapers.Bapers.DB;
+import bapers.Utils;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * GUI for displaying Customer's information as well as jobs
  * @author Elmar Talibzade
  */
 public class CustomerProfilePanel extends javax.swing.JPanel {
@@ -25,6 +26,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
     
     /**
      * Creates new form CustomerProfilePanel
+     * @param customerBrowser parent customer browser object
      */
     public CustomerProfilePanel(CustomerBrowserPanel customerBrowser) {
         initComponents();
@@ -32,8 +34,8 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
     }
     
     /**
-     *
-     * @param customer
+     * Changes customer's info to another customer and updates the GUI
+     * @param customer new customer whose data would be displayed
      */
     public void setCustomer(Customer customer)
     {
@@ -49,6 +51,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         label_email.setText("Email: " + customer.getEmailAddress());
         label_phone.setText("Phone Number: " + customer.getPhoneNumber());
         label_address.setText("Address: " + customer.getAddress());
+        label_discountType.setText("Discount Type: " + Utils.splitCamelCase(customer.getAgreedDiscount().toString()));
         
         int cardNumber = customer.getLast4Digit();
         String cardLabel = DB.isCardInserted(customer.getAccountNo()) ? "Card ending in " + cardNumber : "Cash";
@@ -57,8 +60,6 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         label_stat_inDefault.setVisible(customer.isDefault());
         label_stat_suspended.setVisible(customer.isSuspended());
         label_stat_valued.setVisible(customer.isValued());        
-        
-        btn_setDiscount.setVisible(DB.loggedUser.getRole() == Role.OfficeManager);
         
         btn_createJob.setEnabled(!customer.isSuspended());
         
@@ -161,7 +162,6 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         pane_buttons = new javax.swing.JPanel();
         btn_reactivate = new javax.swing.JButton();
         btn_editAccount = new javax.swing.JButton();
-        btn_setDiscount = new javax.swing.JButton();
         btn_setPayment = new javax.swing.JButton();
         btn_createJob = new javax.swing.JButton();
         label_address = new javax.swing.JLabel();
@@ -276,14 +276,6 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         });
         pane_buttons.add(btn_editAccount);
 
-        btn_setDiscount.setText("Set Discount");
-        btn_setDiscount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_setDiscountActionPerformed(evt);
-            }
-        });
-        pane_buttons.add(btn_setDiscount);
-
         btn_setPayment.setText("Invoices");
         btn_setPayment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -387,17 +379,12 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         reactivateAccount();
     }//GEN-LAST:event_btn_reactivateActionPerformed
 
-    private void btn_setDiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_setDiscountActionPerformed
-        
-    }//GEN-LAST:event_btn_setDiscountActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btn_back;
     private javax.swing.JButton btn_createJob;
     private javax.swing.JButton btn_editAccount;
     private javax.swing.JButton btn_reactivate;
-    private javax.swing.JButton btn_setDiscount;
     private javax.swing.JButton btn_setPayment;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

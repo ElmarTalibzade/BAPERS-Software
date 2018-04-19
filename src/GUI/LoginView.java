@@ -10,7 +10,7 @@ import static bapers.Bapers.DB;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * GUI for login view window
  * @author Elmar Talibzade
  */
 public class LoginView extends javax.swing.JFrame {
@@ -136,8 +136,8 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_field_usernameActionPerformed
     
     /**
-     *
-     * @param enabled
+     * Toggles the login state
+     * @param enabled true to enable login button
      */
     public void toggleLogin(boolean enabled) {
         canLogin = enabled;

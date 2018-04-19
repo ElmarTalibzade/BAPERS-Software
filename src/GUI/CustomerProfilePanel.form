@@ -304,14 +304,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_editAccountActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_setDiscount">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Set Discount"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_setDiscountActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="btn_setPayment">
           <Properties>
             <Property name="text" type="java.lang.String" value="Invoices"/>

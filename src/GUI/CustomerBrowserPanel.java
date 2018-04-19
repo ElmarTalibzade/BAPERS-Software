@@ -13,7 +13,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * GUI for looking through the customer fields
  * @author Elmar Talibzade
  */
 public class CustomerBrowserPanel extends javax.swing.JPanel {
@@ -53,9 +53,13 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
         });
     }
     
+    /**
+     * Deletes this customer
+     * @param customer
+     */
     public void deleteCustomer(Customer customer)
     {
-        if (!DB.deleteCustomer(customer)) return;
+        if (!DB.deleteCustomer(customer.getAccountNo())) return;
         toggleProfile(false);
         getCustomers();
     }

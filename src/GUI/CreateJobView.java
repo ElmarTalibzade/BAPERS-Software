@@ -13,7 +13,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * GUI for creating a new job as well as adding new tasks to it
  * @author Elmar Talibzade
  */
 public class CreateJobView extends javax.swing.JDialog {
@@ -23,9 +23,9 @@ public class CreateJobView extends javax.swing.JDialog {
     
     /**
      * Creates new form CreateJobView
-     * @param parent
-     * @param modal
-     * @param customerNo
+     * @param parent parent window
+     * @param modal is modal?
+     * @param customerNo account number of a customer with whom a new job will be associated with
      */
     public CreateJobView(JFrame parent, boolean modal, int customerNo) {
         super(parent, modal);
@@ -38,8 +38,8 @@ public class CreateJobView extends javax.swing.JDialog {
     }
     
     /**
-     *
-     * @return
+     * Creates a Job object based on supplied info
+     * @return Job object
      */
     public Job getJob()
     {        

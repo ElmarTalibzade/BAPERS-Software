@@ -12,7 +12,7 @@ import static bapers.Bapers.DB;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * GUI for creating new staff and assigning roles to them
  * @author Elmar Talibzade
  */
 public class CreateStaffPanel extends javax.swing.JPanel {

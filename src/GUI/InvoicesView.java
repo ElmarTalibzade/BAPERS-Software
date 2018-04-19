@@ -17,7 +17,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * GUI for listing all invoices for a particular customer. Also a place for generating new invoices
  * @author Elmar Talibzade
  */
 public class InvoicesView extends javax.swing.JDialog {
@@ -31,6 +31,9 @@ public class InvoicesView extends javax.swing.JDialog {
     
     /**
      * Creates new form InvoicesView
+     * @param parent parent window
+     * @param modal is modal?
+     * @param customer customer whose invoices will be displayed
      */
     public InvoicesView(java.awt.Frame parent, boolean modal, Customer customer) {
         super(parent, modal);
@@ -241,7 +244,7 @@ public class InvoicesView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_generateInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generateInvoiceActionPerformed
-        DB.generateInvoiceForJobs(customer);
+        DB.generateInvoiceForJobs(customer.getAccountNo(), customer.getDiscountValue());
         getInvoices();
     }//GEN-LAST:event_btn_generateInvoiceActionPerformed
 

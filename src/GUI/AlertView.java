@@ -12,24 +12,20 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
 /**
- *
+ * Used to display alert view
  * @author Elmar Talibzade
  */
 public class AlertView extends javax.swing.JDialog {
-
-    /**
-     * Creates new form AlertWindow
-     */
     
     private Reminder reminder;
     private Staff user;
     
     /**
-     *
-     * @param parent
-     * @param modal
-     * @param reminder
-     * @param user
+     * Constructor for Alert View
+     * @param parent parent window
+     * @param modal is window modal?
+     * @param reminder reminder that will be rendered on GUI
+     * @param user staff to whom this reminder will be addressed
      */
     public AlertView(JFrame parent, boolean modal, Reminder reminder, Staff user) {
         super(parent, modal);

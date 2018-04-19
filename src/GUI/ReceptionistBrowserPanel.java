@@ -8,18 +8,15 @@ package GUI;
 import Staff.Role;
 import Staff.Staff;
 import static bapers.Bapers.DB;
-import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * GUI for browsing through receptionists
  * @author Elmar Talibzade
  */
 public class ReceptionistBrowserPanel extends javax.swing.JPanel {

@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Payment Settings Window
  * @author Elmar Talibzade
  */
 public class PaymentSettingsView extends javax.swing.JDialog {
@@ -24,10 +24,11 @@ public class PaymentSettingsView extends javax.swing.JDialog {
     private int customerNo;
     
     /**
-     *
-     * @param parent
-     * @param modal
-     * @param customerNo
+     * Constructor for payment settings
+     * @param parent parent window
+     * @param modal is modal?
+     * @param customer customer associated with payment settings
+     * @param invoice invoice which will be paid
      */
     public PaymentSettingsView(JFrame parent, boolean modal, Customer customer, Invoice invoice) {
         super(parent, modal);

@@ -175,9 +175,14 @@ public class DBConnectivity implements DBInterface {
         return storeData(query);
     }
     
-    public boolean deleteCustomer(Customer customer)
+    /**
+     * Deletes the customer from the database
+     * @param accountNo account number of the customer which will be deleted
+     * @return true if customer was successfully removed from the database
+     */
+    public boolean deleteCustomer(int accountNo)
     {
-        String query = String.format("DELETE FROM `customers` WHERE `accountNo`='%s'", customer.getAccountNo());
+        String query = String.format("DELETE FROM `customers` WHERE `accountNo`='%s'", accountNo);
         
         return storeData(query);
     }
@@ -246,6 +251,11 @@ public class DBConnectivity implements DBInterface {
         return 0;
     }
     
+    /**
+     * Gets the month of expiry of a card for a particular customer
+     * @param customerID account number of a customer
+     * @return number representing a month of expiry of the card
+     */
     public int getMonthExpiry(int customerID){
         try {
             ResultSet result = retrieveData(String.format("SELECT monthExpiry FROM `carddetails` WHERE ownerAccountNo = '%d'", customerID));
@@ -259,6 +269,11 @@ public class DBConnectivity implements DBInterface {
         return 0;
     }
     
+    /**
+     * Gets the year of expiry of a card for a particular customer
+     * @param customerID account number of a customer
+     * @return number representing a year of expiry of the card
+     */
     public int getYearExpiry(int customerID){
         try {
             ResultSet result = retrieveData(String.format("SELECT yearExpiry FROM `carddetails` WHERE ownerAccountNo = '%d'", customerID));
@@ -272,6 +287,11 @@ public class DBConnectivity implements DBInterface {
         return 0;
     }
     
+    /**
+     * Records a payment
+     * @param payment payment object
+     * @return true if payment has been successfully recorded
+     */
     public boolean recordPayment(Payment payment) {
         String query = String.format("INSERT INTO `payment` "
                 + "(`amountPaid`, `method`, `date`, `cardDetailsId`, `invoiceId`) VALUES(" 
@@ -390,6 +410,11 @@ public class DBConnectivity implements DBInterface {
         }
     }
     
+    /**
+     * Gets a list of all invoices associated with a particular customer
+     * @param customerNo Account number of a customer
+     * @return Array list of invoices
+     */
     public ArrayList<Invoice> getInvoices(int customerNo)
     {
         ArrayList<Invoice> invoices = new ArrayList<>();
@@ -419,6 +444,11 @@ public class DBConnectivity implements DBInterface {
         return invoices;
     }
     
+    /**
+     * Marks a specified invoice as paid. Used after transaction has been done
+     * @param invoiceNo Invoice number to confirm
+     * @return true if invoice has bee successfully marked as paid
+     */
     public boolean markInvoicePaid(int invoiceNo)
     {
         String query = String.format("UPDATE `invoices` "
@@ -430,11 +460,16 @@ public class DBConnectivity implements DBInterface {
         return storeData(query);
     }
     
-    public Invoice generateInvoiceForJobs(Customer customer)
+    /**
+     * Generates an invoice for all unpaid jobs for a particular customer
+     * @param accountNo account number of the customer for whom an invoice will be generated
+     * @param discountRate Discount rate on subtotal of an invoice
+     * @return object representing a new invoice number
+     */
+    public Invoice generateInvoiceForJobs(int accountNo, float discountRate)
     {
-        ArrayList<Job> unpaidJobs = getUnpaidJobs(customer.getAccountNo());
+        ArrayList<Job> unpaidJobs = getUnpaidJobs(accountNo);
         double subTotal = 0.00;
-        float discountRate = customer.getDiscountValue();
         
         if (unpaidJobs.size() == 0) return null;
         
@@ -443,7 +478,7 @@ public class DBConnectivity implements DBInterface {
             subTotal += job.getPrice();
         }
         
-        int invoiceNo = createInvoice(customer.getAccountNo(), subTotal, discountRate);
+        int invoiceNo = createInvoice(accountNo, subTotal, discountRate);
         
         for (Job job : unpaidJobs)
         {
@@ -561,6 +596,11 @@ public class DBConnectivity implements DBInterface {
         return storeData(query);
     }
     
+    /**
+     * Reactivates customer's account, disabling his "in default" status
+     * @param customerNo Account number of the customer
+     * @return true if updating database succeeded
+     */
     public boolean reactivateCustomerAccount(int customerNo)
     {
         String query = String.format("UPDATE `customers` SET `isDefault`='0' WHERE `accountNo`='%s'",
@@ -773,6 +813,11 @@ public class DBConnectivity implements DBInterface {
         return jobs;
     }
     
+    /**
+     * Gets a list of jobs that are tied to a given invoice
+     * @param invoiceNo Invoice Number
+     * @return array list of jobs
+     */
     public ArrayList<Job> getJobsByInvoice(int invoiceNo)
     {
         ArrayList<Job> jobs = new ArrayList<Job>();

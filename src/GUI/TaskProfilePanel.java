@@ -13,7 +13,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 /**
- * Task Profile
+ * GUI for rendering Task info
  * @author Elmar Talibzade
  */
 public class TaskProfilePanel extends javax.swing.JPanel {

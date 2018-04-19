@@ -10,6 +10,20 @@ package bapers;
  * @author Elmar Talibzade
  */
 public class Utils {
+
+    /**
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isInteger(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
     
     /**
      * Generates a unique string of letters
