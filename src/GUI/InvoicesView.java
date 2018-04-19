@@ -43,7 +43,7 @@ public class InvoicesView extends javax.swing.JDialog {
 
     private void initCardLayout()
     {
-        pane_invoicePanel = new InvoicePanel();
+        pane_invoicePanel = new InvoicePanel(customer);
         card.setLayout(new CardLayout());
         cardLayout = (CardLayout)card.getLayout();
         card.add(pane_invoicePanel, "profile");

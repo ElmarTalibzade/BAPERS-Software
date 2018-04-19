@@ -5,12 +5,46 @@
  */
 package Payment;
 
+import java.sql.Timestamp;
+
 /**
  * Represents a payment which was done by a customer, the amount and card details used.
  * @author Elmar Talibzade
  */
 public class Payment {
-    private double amount;
-    private String paymentType;
-    private CardDetails cardDetails;
+    private int recordID;
+    private double amountPaid;
+    private int method;
+    private Timestamp date;
+    private int cardDetailsID;
+    private int invoiceID;
+    
+    public Payment(double amountPaid, int method, Timestamp date, int cardDetailsID, int invoiceID){
+        this.recordID = recordID;
+        this.amountPaid = amountPaid;
+        this.method = method;
+        this.date = date;
+        this.cardDetailsID = cardDetailsID;
+        this.invoiceID = invoiceID;
+    }
+    
+    public double getAmountPaid(){
+        return amountPaid;
+    }
+    
+    public int getMethod(){
+        return method;
+    }
+    
+    public Timestamp getDate(){
+        return date;
+    }
+    
+    public int getCardDetailsID(){
+        return cardDetailsID;
+    }
+    
+    public int getInvoiceID(){
+        return invoiceID;
+    }
 }
