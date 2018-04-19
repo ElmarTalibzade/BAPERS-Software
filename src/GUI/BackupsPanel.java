@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Timer;
 
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 /**
@@ -21,6 +22,8 @@ public class BackupsPanel extends javax.swing.JPanel {
     private String saveLocation;
     private String openLocation;
     private String backupLocation;
+    
+    private String pathToMySQL = "\"D:/MySQL/MySQL Workbench 6.3 CE/";
     
     /**
      * Creates new form BackupsPanel
@@ -222,17 +225,14 @@ public class BackupsPanel extends javax.swing.JPanel {
         try {
             if(saveLocation != null) {
                 String user = "root";
-                String password = "";
+                String password = "root";
                 String database = "bloomsday";
-                String pathToMySQL = "/usr/local/mysql-5.7.21-macos10.13-x86_64/bin/";
                 String CMD = "";
+                
+                CMD = "D: && " + pathToMySQL + "mysqldump.exe\" -u " + user + " -p " + password + "--add-drop-database -B " + database + " -r " + saveLocation;
 
-                if(password.equals(""))
-                    CMD = pathToMySQL + "mysqldump -u " + user + " --add-drop-database -B " + database + " -r " + saveLocation;
-                else
-                    CMD = pathToMySQL + "mysqldump -u " + user + " -p " + password + "--add-drop-database -B " + database + " -r " + saveLocation;
                 System.out.println(CMD);
-
+                
                 Runtime.getRuntime().exec(CMD);
                 JOptionPane.showMessageDialog(this, "Backup File Created.", "Done", 1);
             } else 
@@ -244,11 +244,13 @@ public class BackupsPanel extends javax.swing.JPanel {
  
     private void btn_browse_saveLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_browse_saveLocationActionPerformed
         JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        
         int option = chooser.showSaveDialog(this);
         if (option == JFileChooser.APPROVE_OPTION) {
             if(chooser.getSelectedFile() != null)
             {
-                saveLocation = chooser.getCurrentDirectory() + "/" + chooser.getSelectedFile().getName() + ".blmbackup";
+                saveLocation = chooser.getCurrentDirectory() + "/mybackup.sql";
                 field_saveLocation.setText(saveLocation);
             }
         }
@@ -256,6 +258,10 @@ public class BackupsPanel extends javax.swing.JPanel {
 
     private void btn_browse_backupLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_browse_backupLocationActionPerformed
         JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("SQL File", "sql");
+        chooser.setFileFilter(filter);
+        
         int option = chooser.showOpenDialog(this);
         if (option == JFileChooser.APPROVE_OPTION) {
             if(chooser.getSelectedFile() != null)
@@ -270,9 +276,8 @@ public class BackupsPanel extends javax.swing.JPanel {
         try {
             if(openLocation != null) {
                 String user = "root";
-                String password = "";
+                String password = "root";
                 String database = "bloomsday";
-                String pathToMySQL = "/usr/local/mysql-5.7.21-macos10.13-x86_64/bin/";
 
                 String arrayCommand[] = new String[]{pathToMySQL + "mysql", database, "-u", user, "-e", " source " + openLocation};
                 String arrayCommand2[] = new String[]{pathToMySQL + "mysql", database, "-u", user, "-p" + password, "-e", " source " + openLocation};

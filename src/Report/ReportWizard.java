@@ -46,7 +46,7 @@ public class ReportWizard
             Logger.getLogger(ReportWizard.class.getName()).log(Level.SEVERE, null, ex);
         }
        
-        OpenPDF(GenerateCustomerInvoice(43));
+        OpenPDF(GenerateSummaryPerformanceReport(begin, end));
     }
     
     public static String GenerateCustomerInvoice(int invoiceNo)

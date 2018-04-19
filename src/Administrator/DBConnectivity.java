@@ -31,7 +31,7 @@ public class DBConnectivity implements DBInterface {
 
     /**
      * Stores info about a logged user
-     */
+     */ 
     public Staff loggedUser = null;
     
     /**

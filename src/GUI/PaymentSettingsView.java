@@ -162,15 +162,18 @@ public class PaymentSettingsView extends javax.swing.JDialog {
     {
         boolean hasCard = DB.isCardInserted(customerNo);
  
-        label_cardType.setEnabled(hasCard); 
-        label_cardNumber.setEnabled(hasCard);
-        label_csv.setEnabled(hasCard); 
-        label_expirationDate.setEnabled(hasCard);
-        field_cardNumber.setEnabled(hasCard); 
-        dropdown_cardType.setEnabled(hasCard);
-        field_csv.setEnabled(hasCard); 
-        field_expirationDate.setEnabled(hasCard);
         dropbox_paymentMethod.setSelectedIndex(hasCard ? 0 : 1);
+        
+        boolean showCardSettings = dropbox_paymentMethod.getSelectedIndex() == 0;
+        
+        label_cardType.setEnabled(showCardSettings); 
+        label_cardNumber.setEnabled(showCardSettings);
+        label_csv.setEnabled(showCardSettings); 
+        label_expirationDate.setEnabled(showCardSettings);
+        field_cardNumber.setEnabled(showCardSettings); 
+        dropdown_cardType.setEnabled(showCardSettings);
+        field_csv.setEnabled(showCardSettings); 
+        field_expirationDate.setEnabled(showCardSettings);
         
         if(hasCard){
             field_cardNumber.setText("************" + customer.getLast4Digit());
@@ -183,14 +186,14 @@ public class PaymentSettingsView extends javax.swing.JDialog {
         
         boolean showCardSettings = dropbox_paymentMethod.getSelectedIndex() == 0;
         
-        label_cardType.setVisible(showCardSettings); 
-        label_cardNumber.setVisible(showCardSettings);
-        label_csv.setVisible(showCardSettings); 
-        label_expirationDate.setVisible(showCardSettings);
-        field_cardNumber.setVisible(showCardSettings); 
-        dropdown_cardType.setVisible(showCardSettings);
-        field_csv.setVisible(showCardSettings); 
-        field_expirationDate.setVisible(showCardSettings);
+        label_cardType.setEnabled(showCardSettings); 
+        label_cardNumber.setEnabled(showCardSettings);
+        label_csv.setEnabled(showCardSettings); 
+        label_expirationDate.setEnabled(showCardSettings);
+        field_cardNumber.setEnabled(showCardSettings); 
+        dropdown_cardType.setEnabled(showCardSettings);
+        field_csv.setEnabled(showCardSettings); 
+        field_expirationDate.setEnabled(showCardSettings);
     }//GEN-LAST:event_dropbox_paymentMethodActionPerformed
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
