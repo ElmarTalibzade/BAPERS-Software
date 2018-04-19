@@ -42,8 +42,8 @@ public class Invoice {
     }
 
     /**
-     *
-     * @return
+     * Checks if the invoice is paid
+     * @return true if the invoice is paid | false - otherwise
      */
     public boolean isPaid()
     {
@@ -51,16 +51,16 @@ public class Invoice {
     }
     
     /**
-     *
-     * @return
+     * Returns the invoice number
+     * @return an integer that represents the invoice's number
      */
     public int getInvoiceNo() {
         return invoiceNo;
     }
 
     /**
-     *
-     * @return
+     * Calculate the total amount that needs to be paid
+     * @return an integer that represents the total due amount
      */
     public double calculateTotal()
     {
@@ -69,50 +69,50 @@ public class Invoice {
     }
     
     /**
-     *
-     * @return
+     * Calculate the subtotal
+     * @return an integer that represents the subtotal
      */
     public double getSubTotal() {
         return subTotal;
     }
 
     /**
-     *
-     * @return
+     * Gets the discount rate of the invoice
+     * @return a float number that represents the discount rate
      */
     public float getDiscountRate() {
         return discountRate;
     }
 
     /**
-     *
-     * @return
+     * Gets the VAT rate of the invoice
+     * @return a float number that represents the VAT
      */
     public float getVatRate() {
         return vatRate;
     }
 
     /**
-     *
-     * @return
+     * Gets the date when the invoice was created
+     * @return a date that represents the creation date
      */
     public Date getDateCreated() {
         return dateCreated;
     }
 
     /**
-     *
-     * @return
+     * Gets the date when the invoice was paid
+     * @return a date that represents when the invoice was paid
      */
     public Date getDatePaid() {
         return datePaid;
     }   
     
     /**
-     *
-     * @param currentTime
-     * @param timeUnit
-     * @return
+     * Gets the calendar difference between the current time and the date when the invoice was created
+     * @param currentTime the current time
+     * @param timeUnit It could be MINUTES | DAYS | WEEKS | etc
+     * @return a number in TimeUnit that represents the difference
      */
     public long getDateDiff(Timestamp currentTime, TimeUnit timeUnit)
     {
