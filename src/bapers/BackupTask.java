@@ -14,8 +14,8 @@ import java.util.TimerTask;
 public class BackupTask extends TimerTask{    
 
     /**
-     *
-     * @param saveLocation
+     * Executes the backup procedure
+     * @param saveLocation Where backup data will be stored
      */
     public BackupTask(String saveLocation){
         try {

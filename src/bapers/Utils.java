@@ -12,9 +12,9 @@ package bapers;
 public class Utils {
 
     /**
-     *
-     * @param str
-     * @return
+     * Evaluates whether a supplied string is an integer
+     * @param str String to evaluate
+     * @return true if string is an integer
      */
     public static boolean isInteger(String str) {
         try {

@@ -51,9 +51,9 @@ public class ReportWizard
     }
     
     /**
-     *
-     * @param invoiceNo
-     * @return
+     * Generates a Customer Invoice
+     * @param invoiceNo Invoice id which will be generated
+     * @return PDF file path to a generated document
      */
     public static String GenerateCustomerInvoice(int invoiceNo)
     {
@@ -81,10 +81,10 @@ public class ReportWizard
     }
     
     /**
-     *
-     * @param period_start
-     * @param period_end
-     * @return
+     * Generates an Individual Performance Report
+     * @param period_start Date range of the report (beginning)
+     * @param period_end Date range of the report (end)
+     * @return PDF file path to a generated document
      */
     public static String GenerateIndividualPerformanceReport(Date period_start, Date period_end)
     {
@@ -120,10 +120,10 @@ public class ReportWizard
     }
     
     /**
-     *
-     * @param period_start
-     * @param period_end
-     * @return
+     * Generates a Summary Performance Report
+     * @param period_start Date range of the report (beginning)
+     * @param period_end Date range of the report (end)
+     * @return PDF file path to a generated document
      */
     public static String GenerateSummaryPerformanceReport(Date period_start, Date period_end)
     {
@@ -151,11 +151,11 @@ public class ReportWizard
     }
     
     /**
-     *
-     * @param accountNo
-     * @param period_start
-     * @param period_end
-     * @return
+     * Generates a Customer Sales Report
+     * @param accountNo Account number associated with a customer
+     * @param period_start Date range of the report (beginning)
+     * @param period_end Date range of the report (end)
+     * @return PDF file path to a generated document
      */
     public static String GenerateCustomerReport(int accountNo, Date period_start, Date period_end)
     {
@@ -190,8 +190,8 @@ public class ReportWizard
     }
     
     /**
-     *
-     * @param filePath
+     * Opens a PDF file
+     * @param filePath Path to a PDF file
      */
     public static void OpenPDF(String filePath)
     {

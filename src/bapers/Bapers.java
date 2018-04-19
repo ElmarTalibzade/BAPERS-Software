@@ -28,8 +28,8 @@ public class Bapers {
     public static LoginView loginView;
     
     /**
-     *
-     * @return
+     * Returns a currently logged user
+     * @return Staff
      */
     public static Staff getUser()
     {
