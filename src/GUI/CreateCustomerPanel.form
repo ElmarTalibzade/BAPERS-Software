@@ -36,18 +36,11 @@
                           <Component id="field_firstName" alignment="0" pref="260" max="32767" attributes="0"/>
                           <Component id="field_holderName" alignment="0" pref="260" max="32767" attributes="0"/>
                       </Group>
+                      <EmptySpace pref="41" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace pref="41" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="label_address" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label_phone" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="label_email" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="label_address" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="label_phone" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="label_email" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">

@@ -146,8 +146,6 @@ public class CreateCustomerPanel extends javax.swing.JPanel {
         String phoneNumber = field_phone.getText();
         String address = jTextArea1.getText();
         
-        //TO BE EDITED AFTER ADDING JOBS
-        DB = new DBConnectivity();
         Customer newCustomer = new Customer(accNo, holderName, firstName, lastName, false, false, false, address, phoneNumber, DiscountType.values()[0], 0, email, 0, null);
         if (DB.connect()) {
             if(DB.createCustomer(newCustomer)) 

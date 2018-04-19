@@ -48,7 +48,7 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
         pane_customerProfile.btn_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 toggleProfile(false);
-                getCustomers();
+                getAllCustomers();
             }
         });
     }
@@ -326,6 +326,7 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
         {
             JTable targetTable = (JTable)evt.getSource();
             Customer customer = customers.get(targetTable.getSelectedRow());
+            
             pane_customerProfile.setCustomer(customer);
             toggleProfile(true);
         }
