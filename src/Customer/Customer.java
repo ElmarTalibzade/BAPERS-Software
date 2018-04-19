@@ -104,48 +104,48 @@ public class Customer {
     }
 
     /**
-     *
-     * @param holderName
+     * Gets the former holder name of the account
+     * @param holderName a string that represents the holder name
      */
     public void setHolderName(String holderName) {
         this.holderName = holderName;
     }
 
     /**
-     *
-     * @param firstName
+     * Gets the first name of the customer
+     * @param firstName a string that represents the first name of the customer
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
     /**
-     *
-     * @param lastName
+     * Gets the last name of the customer
+     * @param lastName a string that represents the last name of the customer
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
     /**
-     *
-     * @param address
+     * Gets the address of the customer
+     * @param address a string that represents the customer's address
      */
     public void setAddress(String address) {
         this.address = address;
     }
 
     /**
-     *
-     * @param phoneNumber
+     * Gets the phone number
+     * @param phoneNumber a string that represents the customer's phone
      */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
     /**
-     *
-     * @param emailAddress
+     * Gets the email address of the customer
+     * @param emailAddress a string that represents the customer's email address
      */
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
@@ -241,8 +241,8 @@ public class Customer {
     }
 
     /**
-     *
-     * @return
+     * A function that returns the full name of the customer
+     * @return a string that represents the customer's full name
      */
     public String getFullName() {
         return firstName + " " + lastName;

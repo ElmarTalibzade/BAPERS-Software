@@ -62,8 +62,8 @@ public class Job {
     }
 
     /**
-     *
-     * @param invoiceNo
+     * Sets the invoice number attached to the job
+     * @param invoiceNo a number that represents the invoice number attached to the job
      */
     public void setInvoiceNo(int invoiceNo) {
         this.invoiceNo = invoiceNo;
