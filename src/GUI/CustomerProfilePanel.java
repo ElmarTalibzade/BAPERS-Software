@@ -20,12 +20,15 @@ import javax.swing.table.DefaultTableModel;
 public class CustomerProfilePanel extends javax.swing.JPanel {
 
     private Customer customer;
+    private AccountSettingsView accountSettingsView;
+    private CustomerBrowserPanel customerBrowser;
     
     /**
      * Creates new form CustomerProfilePanel
      */
-    public CustomerProfilePanel() {
+    public CustomerProfilePanel(CustomerBrowserPanel customerBrowser) {
         initComponents();
+        this.customerBrowser = customerBrowser;
     }
     
     /**
@@ -45,6 +48,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         label_holderName.setText("Holder Name: " + customer.getHolderName());
         label_email.setText("Email: " + customer.getEmailAddress());
         label_phone.setText("Phone Number: " + customer.getPhoneNumber());
+        label_address.setText("Address: " + customer.getAddress());
         
         int cardNumber = customer.getLast4Digit();
         String cardLabel = DB.isCardInserted(customer.getAccountNo()) ? "Card ending in " + cardNumber : "Cash";
@@ -54,8 +58,9 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         label_stat_suspended.setVisible(customer.isSuspended());
         label_stat_valued.setVisible(customer.isValued());        
         
-        btn_setAccount.setVisible(DB.loggedUser.getRole() == Role.OfficeManager);
         btn_setDiscount.setVisible(DB.loggedUser.getRole() == Role.OfficeManager);
+        
+        btn_createJob.setEnabled(!customer.isSuspended());
         
         updateTable();   
     }
@@ -80,13 +85,31 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
     
     private void addListener(CreateJobView jobView)
     {
-        jobView.btn_create.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateJob(jobView.getJob());
-                jobView.dispose();
-                updateGUI();
-            }
+        jobView.btn_create.addActionListener((java.awt.event.ActionEvent evt) -> {
+            CreateJob(jobView.getJob());
+            jobView.dispose();
+            updateGUI();
         });
+    }
+    
+    private void addListener(AccountSettingsView accountSettings)
+    {        
+        accountSettings.btn_deleteAccount.addActionListener((java.awt.event.ActionEvent evt) -> {
+            deleteCustomer();
+        });
+    }
+    
+    private void deleteCustomer()
+    {
+        int dialogResult = JOptionPane.showConfirmDialog(null, 
+                String.format("This action cannot be undone! Are you sure you would like to delete the following customer\n%s", customer.getFullName()), 
+                "Attention!", 
+                JOptionPane.YES_OPTION);
+        
+        if (dialogResult != JOptionPane.YES_OPTION) return;
+        
+        accountSettingsView.dispose();
+        customerBrowser.deleteCustomer(customer);
     }
     
     private void CreateJob(Job newJob)
@@ -121,10 +144,11 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         label_stat_valued = new javax.swing.JLabel();
         label_paymentType = new javax.swing.JLabel();
         pane_buttons = new javax.swing.JPanel();
-        btn_setAccount = new javax.swing.JButton();
+        btn_editAccount = new javax.swing.JButton();
         btn_setDiscount = new javax.swing.JButton();
         btn_setPayment = new javax.swing.JButton();
         btn_createJob = new javax.swing.JButton();
+        label_address = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -220,13 +244,13 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
 
         pane_buttons.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        btn_setAccount.setText("Set Account");
-        btn_setAccount.addActionListener(new java.awt.event.ActionListener() {
+        btn_editAccount.setText("Edit Account...");
+        btn_editAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_setAccountActionPerformed(evt);
+                btn_editAccountActionPerformed(evt);
             }
         });
-        pane_buttons.add(btn_setAccount);
+        pane_buttons.add(btn_editAccount);
 
         btn_setDiscount.setText("Set Discount");
         pane_buttons.add(btn_setDiscount);
@@ -247,6 +271,8 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         });
         pane_buttons.add(btn_createJob);
 
+        label_address.setText("Address: {address}");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -257,14 +283,15 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
                     .addComponent(table_jobs)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_email)
                             .addComponent(label_accountNo)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(label_holderName)
-                                    .addComponent(label_phone))
+                                    .addComponent(label_phone)
+                                    .addComponent(label_email))
                                 .addGap(105, 105, 105)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label_address)
                                     .addComponent(label_discountType)
                                     .addComponent(label_paymentType, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 222, Short.MAX_VALUE))
@@ -296,7 +323,9 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
                     .addComponent(label_paymentType)
                     .addComponent(label_phone))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(label_email)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_email)
+                    .addComponent(label_address))
                 .addGap(20, 20, 20)
                 .addComponent(pane_buttons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -318,22 +347,24 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         createJobView.setVisible(true);
     }//GEN-LAST:event_btn_createJobActionPerformed
 
-    private void btn_setAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_setAccountActionPerformed
+    private void btn_editAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editAccountActionPerformed
         //NOT WORKING YET!
-        AccountSettingsView accountSettingsView = new AccountSettingsView((JFrame) SwingUtilities.getWindowAncestor(this), true, this, customer);
+        accountSettingsView = new AccountSettingsView((JFrame) SwingUtilities.getWindowAncestor(this), true, this, customer);
+        addListener(accountSettingsView);
         accountSettingsView.setVisible(true);
-    }//GEN-LAST:event_btn_setAccountActionPerformed
+    }//GEN-LAST:event_btn_editAccountActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btn_back;
     private javax.swing.JButton btn_createJob;
-    private javax.swing.JButton btn_setAccount;
+    private javax.swing.JButton btn_editAccount;
     private javax.swing.JButton btn_setDiscount;
     private javax.swing.JButton btn_setPayment;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel label_accountNo;
+    private javax.swing.JLabel label_address;
     private javax.swing.JLabel label_discountType;
     private javax.swing.JLabel label_email;
     private javax.swing.JLabel label_fullName;

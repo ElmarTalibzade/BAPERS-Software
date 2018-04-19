@@ -174,6 +174,13 @@ public class DBConnectivity implements DBInterface {
         return storeData(query);
     }
     
+    public boolean deleteCustomer(Customer customer)
+    {
+        String query = String.format("DELETE FROM `customers` WHERE `accountNo`='%s'", customer.getAccountNo());
+        
+        return storeData(query);
+    }
+    
     /**
      * Updates card details
      * @param customerID Account number of a customer which will be affected
@@ -493,17 +500,27 @@ public class DBConnectivity implements DBInterface {
      */
     public boolean updateCustomer(Customer customer) {
         String query = String.format("UPDATE `customers` SET " +
-            "`isValued` = '%b', " +
-            "`isSuspended` = '%b', " +
-            "`isDefault` = '%b', " +
-            "`discountType` = '%i', " +
-            "`debtRemindedAmount` = '%i' " +
-            "WHERE `accountNo` = '%i' ", 
+            "`isValued` = '%s', " +
+            "`isSuspended` = '%s', " +
+            "`isDefault` = '%s', " +
+            "`holderName` = '%s', " +
+            "`firstName` = '%s', " +
+            "`lastName` = '%s', " +
+            "`emailAddress` = '%s', " +
+            "`address` = '%s', " +
+            "`phoneNo` = '%s' " +
+            "WHERE `accountNo` = '%s'", 
             customer.isValued() ? 1 : 0,
             customer.isSuspended() ? 1 : 0,
             customer.isDefault() ? 1 : 0,
-            customer.getDebtReminded(),
-            customer.getAccountNo());
+            customer.getHolderName(),
+            customer.getFirstName(),
+            customer.getLastName(),
+            customer.getEmailAddress(),
+            customer.getAddress(),
+            customer.getPhoneNumber(),
+            customer.getAccountNo()
+        );
         
         return storeData(query);
     }

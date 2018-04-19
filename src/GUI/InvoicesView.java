@@ -34,6 +34,8 @@ public class InvoicesView extends javax.swing.JDialog {
      */
     public InvoicesView(java.awt.Frame parent, boolean modal, Customer customer) {
         super(parent, modal);
+        this.setLocationRelativeTo(null);
+        
         this.customer = customer;
         initComponents();
         initCardLayout();

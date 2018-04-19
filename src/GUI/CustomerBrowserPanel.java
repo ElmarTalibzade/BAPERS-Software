@@ -35,7 +35,7 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
 
     private void initCardLayout()
     {
-        pane_customerProfile = new CustomerProfilePanel();
+        pane_customerProfile = new CustomerProfilePanel(this);
         card.setLayout(new CardLayout());
         cardLayout = (CardLayout)card.getLayout();
         card.add(pane_customerProfile, "profile");
@@ -51,6 +51,13 @@ public class CustomerBrowserPanel extends javax.swing.JPanel {
                 getAllCustomers();
             }
         });
+    }
+    
+    public void deleteCustomer(Customer customer)
+    {
+        if (!DB.deleteCustomer(customer)) return;
+        toggleProfile(false);
+        getCustomers();
     }
     
     private void toggleProfile(boolean state)

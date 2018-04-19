@@ -6,8 +6,10 @@
 package GUI;
 
 import Customer.*;
+import Staff.Role;
 import static bapers.Bapers.DB;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,8 +34,53 @@ public class AccountSettingsView extends javax.swing.JDialog {
         
         this.customerPanel = customerPanel;
         this.customer = customer;
+        
+        updateGUI();
     }
-
+    
+    private void updateGUI()
+    {
+        label_isValued.setText("Valued: " + (customer.isValued() ? "Yes" : "No"));
+        field_lastName.setText(customer.getLastName());
+        field_firstName.setText(customer.getFirstName());
+        field_holderName.setText(customer.getHolderName());
+        field_phone.setText(customer.getPhoneNumber());
+        field_email.setText(customer.getEmailAddress());
+        field_address.setText(customer.getAddress());
+        
+        btn_toggleAccountStatus.setVisible(DB.loggedUser.getRole() == Role.OfficeManager);
+        btn_toggleAccountStatus.setText(customer.isValued() ? "Downgrade" : "Upgrade");
+    }   
+    
+    public Customer getCustomer()
+    {
+        return customer;
+    }
+    
+    private void upgradeCustomer()
+    {
+        int dialogResult = JOptionPane.showConfirmDialog(null, 
+                "Confirm Customer Upgrade?", "Confirmation", JOptionPane.YES_OPTION);
+        
+        if (dialogResult != JOptionPane.YES_OPTION) return;
+        
+        customer.setValued(true);
+        DB.updateCustomerAccountType(customer.getAccountNo(), true, customer.isSuspended(), customer.isDefault());
+        updateGUI();
+    }
+    
+    private void downgradeCustomer()
+    {
+        int dialogResult = JOptionPane.showConfirmDialog(null, 
+                "Confirm Customer Downgrade?", "Confirmation", JOptionPane.YES_OPTION);
+        
+        if (dialogResult != JOptionPane.YES_OPTION) return;
+        
+        customer.setValued(false);
+        DB.updateCustomerAccountType(customer.getAccountNo(), false, customer.isSuspended(), customer.isDefault());
+        updateGUI();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,100 +90,191 @@ public class AccountSettingsView extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btn_valuedCustomer = new javax.swing.JButton();
-        btn_suspendCustomer = new javax.swing.JButton();
-        btn_inDefault = new javax.swing.JButton();
+        label_holderName = new javax.swing.JLabel();
+        label_firstName = new javax.swing.JLabel();
+        label_lastName = new javax.swing.JLabel();
+        label_phone = new javax.swing.JLabel();
+        label_email = new javax.swing.JLabel();
+        label_address = new javax.swing.JLabel();
+        label_isValued = new javax.swing.JLabel();
+        field_holderName = new javax.swing.JTextField();
+        field_firstName = new javax.swing.JTextField();
+        field_lastName = new javax.swing.JTextField();
+        field_phone = new javax.swing.JTextField();
+        field_email = new javax.swing.JTextField();
+        pane_address = new javax.swing.JScrollPane();
+        field_address = new javax.swing.JTextArea();
+        btn_toggleAccountStatus = new javax.swing.JButton();
+        btn_save = new javax.swing.JButton();
+        btn_deleteAccount = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Account properties");
         setResizable(false);
+        setSize(new java.awt.Dimension(610, 400));
 
-        btn_valuedCustomer.setText("Valued customer");
-        btn_valuedCustomer.setAlignmentX(1.0F);
-        btn_valuedCustomer.setAlignmentY(1.0F);
-        btn_valuedCustomer.addActionListener(new java.awt.event.ActionListener() {
+        label_holderName.setText("Holder Name");
+
+        label_firstName.setText("First Name");
+
+        label_lastName.setText("Last Name");
+
+        label_phone.setText("Phone");
+
+        label_email.setText("Email");
+
+        label_address.setText("Address");
+
+        label_isValued.setText("Valued: {is-valued}");
+
+        field_address.setColumns(20);
+        field_address.setRows(5);
+        pane_address.setViewportView(field_address);
+
+        btn_toggleAccountStatus.setText("Upgrade");
+        btn_toggleAccountStatus.setAlignmentX(1.0F);
+        btn_toggleAccountStatus.setAlignmentY(1.0F);
+        btn_toggleAccountStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_valuedCustomerActionPerformed(evt);
+                btn_toggleAccountStatusActionPerformed(evt);
             }
         });
 
-        btn_suspendCustomer.setText("Suspend account");
-        btn_suspendCustomer.setAlignmentX(1.0F);
-        btn_suspendCustomer.setAlignmentY(1.0F);
-        btn_suspendCustomer.addActionListener(new java.awt.event.ActionListener() {
+        btn_save.setText("Save Changes");
+        btn_save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_suspendCustomerActionPerformed(evt);
+                btn_saveActionPerformed(evt);
             }
         });
 
-        btn_inDefault.setText("In default account");
-        btn_inDefault.setAlignmentX(1.0F);
-        btn_inDefault.setAlignmentY(1.0F);
-        btn_inDefault.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_inDefaultActionPerformed(evt);
-            }
-        });
+        btn_deleteAccount.setBackground(new java.awt.Color(204, 0, 51));
+        btn_deleteAccount.setText("Delete Account");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_inDefault, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_suspendCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_valuedCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(30, 30, 30))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btn_deleteAccount)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_save))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label_lastName)
+                                .addGap(18, 18, 18)
+                                .addComponent(field_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                                .addComponent(label_address))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label_firstName)
+                                .addGap(18, 18, 18)
+                                .addComponent(field_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(label_email))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label_isValued)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_toggleAccountStatus)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label_holderName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(field_holderName, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(label_phone)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pane_address, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                            .addComponent(field_email, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(field_phone, javax.swing.GroupLayout.Alignment.LEADING))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btn_valuedCustomer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_suspendCustomer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_inDefault))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_holderName)
+                    .addComponent(label_phone)
+                    .addComponent(field_holderName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(field_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(label_firstName)
+                        .addComponent(field_firstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(label_email)
+                        .addComponent(field_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pane_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_save)
+                            .addComponent(btn_deleteAccount))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(label_lastName)
+                            .addComponent(label_address)
+                            .addComponent(field_lastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(label_isValued)
+                            .addComponent(btn_toggleAccountStatus))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_valuedCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_valuedCustomerActionPerformed
-        customer.setValued(true);
-        customer.setIsDefault(false);
-        customer.setIsSuspended(false);
-        customerPanel.setCustomer(customer);
-        
-        DB.updateCustomerAccountType(customer.getAccountNo(), true, false, false);
-        this.dispose();
-    }//GEN-LAST:event_btn_valuedCustomerActionPerformed
+    private void btn_toggleAccountStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_toggleAccountStatusActionPerformed
+        if (customer.isValued())
+        {
+            downgradeCustomer();
+        }
+        else
+        {
+            upgradeCustomer();
+        }
+    }//GEN-LAST:event_btn_toggleAccountStatusActionPerformed
 
-    private void btn_suspendCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suspendCustomerActionPerformed
-        customer.setValued(false);
-        customer.setIsDefault(false);
-        customer.setIsSuspended(true);
-        customerPanel.setCustomer(customer);
+    private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
+        customer.setHolderName(field_holderName.getText().trim());
+        customer.setAddress(field_address.getText().trim());
+        customer.setFirstName(field_firstName.getText().trim());
+        customer.setLastName(field_lastName.getText().trim());
+        customer.setEmailAddress(field_email.getText().trim());
+        customer.setPhoneNumber(field_phone.getText().trim());
         
-        DB.updateCustomerAccountType(customer.getAccountNo(), false, false, true);
-        this.dispose();
-    }//GEN-LAST:event_btn_suspendCustomerActionPerformed
-
-    private void btn_inDefaultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inDefaultActionPerformed
-        customer.setValued(false);
-        customer.setIsDefault(true);
-        customer.setIsSuspended(false);
+        if (!DB.updateCustomer(customer)) return;
         customerPanel.setCustomer(customer);
-        
-        DB.updateCustomerAccountType(customer.getAccountNo(), false, true, false);
         this.dispose();
-    }//GEN-LAST:event_btn_inDefaultActionPerformed
+    }//GEN-LAST:event_btn_saveActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_inDefault;
-    private javax.swing.JButton btn_suspendCustomer;
-    private javax.swing.JButton btn_valuedCustomer;
+    public javax.swing.JButton btn_deleteAccount;
+    public javax.swing.JButton btn_save;
+    private javax.swing.JButton btn_toggleAccountStatus;
+    private javax.swing.JTextArea field_address;
+    private javax.swing.JTextField field_email;
+    private javax.swing.JTextField field_firstName;
+    private javax.swing.JTextField field_holderName;
+    private javax.swing.JTextField field_lastName;
+    private javax.swing.JTextField field_phone;
+    private javax.swing.JLabel label_address;
+    private javax.swing.JLabel label_email;
+    private javax.swing.JLabel label_firstName;
+    private javax.swing.JLabel label_holderName;
+    private javax.swing.JLabel label_isValued;
+    private javax.swing.JLabel label_lastName;
+    private javax.swing.JLabel label_phone;
+    private javax.swing.JScrollPane pane_address;
     // End of variables declaration//GEN-END:variables
 }
