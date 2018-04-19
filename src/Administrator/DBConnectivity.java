@@ -525,6 +525,14 @@ public class DBConnectivity implements DBInterface {
         return storeData(query);
     }
     
+    public boolean reactivateCustomerAccount(int customerNo)
+    {
+        String query = String.format("UPDATE `customers` SET `isDefault`='0' WHERE `accountNo`='%s'",
+                customerNo
+        );
+        return storeData(query);
+    }
+    
     /**
      * Checks whether or not the credentials are valid
      *

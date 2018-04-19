@@ -62,6 +62,8 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         
         btn_createJob.setEnabled(!customer.isSuspended());
         
+        btn_reactivate.setVisible(customer.isDefault() && DB.loggedUser.getRole() == Role.OfficeManager);
+        
         updateTable();   
     }
     
@@ -118,6 +120,19 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         DB.createJob(newJob);
     }
     
+    private void reactivateAccount()
+    {
+        int dialogResult = JOptionPane.showConfirmDialog(null, 
+                String.format("You're about to reactivate customer's account.\n\n%s\n\nProceed?", customer.getFullName()), 
+                "Warning!", 
+                JOptionPane.YES_OPTION);
+        
+        if (dialogResult != JOptionPane.YES_OPTION) return;
+        DB.reactivateCustomerAccount(customer.getAccountNo());
+        customer.setIsDefault(false);
+        updateGUI();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,6 +159,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         label_stat_valued = new javax.swing.JLabel();
         label_paymentType = new javax.swing.JLabel();
         pane_buttons = new javax.swing.JPanel();
+        btn_reactivate = new javax.swing.JButton();
         btn_editAccount = new javax.swing.JButton();
         btn_setDiscount = new javax.swing.JButton();
         btn_setPayment = new javax.swing.JButton();
@@ -243,6 +259,14 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         label_paymentType.setText("Payment Type: {payment-type}");
 
         pane_buttons.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        btn_reactivate.setText("Reactivate");
+        btn_reactivate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_reactivateActionPerformed(evt);
+            }
+        });
+        pane_buttons.add(btn_reactivate);
 
         btn_editAccount.setText("Edit Account...");
         btn_editAccount.addActionListener(new java.awt.event.ActionListener() {
@@ -354,11 +378,16 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         accountSettingsView.setVisible(true);
     }//GEN-LAST:event_btn_editAccountActionPerformed
 
+    private void btn_reactivateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reactivateActionPerformed
+        reactivateAccount();
+    }//GEN-LAST:event_btn_reactivateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btn_back;
     private javax.swing.JButton btn_createJob;
     private javax.swing.JButton btn_editAccount;
+    private javax.swing.JButton btn_reactivate;
     private javax.swing.JButton btn_setDiscount;
     private javax.swing.JButton btn_setPayment;
     private javax.swing.JScrollPane jScrollPane1;
