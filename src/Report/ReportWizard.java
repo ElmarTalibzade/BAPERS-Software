@@ -46,7 +46,32 @@ public class ReportWizard
             Logger.getLogger(ReportWizard.class.getName()).log(Level.SEVERE, null, ex);
         }
        
-        OpenPDF(GenerateCustomerReport(7, begin, end));
+        OpenPDF(GenerateCustomerInvoice(43));
+    }
+    
+    public static String GenerateCustomerInvoice(int invoiceNo)
+    {
+        if (!DB.isConnected()) return null;
+        
+        HashMap params = new HashMap();
+        params.put("INVOICE_NO", invoiceNo);
+        
+        String jasperPath = System.getProperty("user.dir") + "/Reports/CustomerInvoice.jasper";
+        String pdfPath = System.getProperty("user.dir") + "/Generated Invoices/Invoice " + String.format("%05d", invoiceNo) + ".pdf";
+        
+        try {
+            
+            GenerateJasperReport(params, jasperPath, pdfPath);
+            
+            return pdfPath;
+            
+        } catch (JRException ex) {
+            
+            Logger.getLogger(ReportWizard.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        
+        return null;
     }
     
     /**

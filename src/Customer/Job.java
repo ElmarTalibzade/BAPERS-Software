@@ -61,6 +61,10 @@ public class Job {
         this.dateCreated = dateCreated;
     }
 
+    public void setInvoiceNo(int invoiceNo) {
+        this.invoiceNo = invoiceNo;
+    }
+    
     /**
      * Gets the priority of this Job
      * @return job priority

@@ -9,6 +9,7 @@ import Customer.*;
 import Staff.Role;
 import bapers.Bapers;
 import static bapers.Bapers.DB;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 /**
@@ -40,7 +41,7 @@ public class TaskProfilePanel extends javax.swing.JPanel {
     {
         label_jobCode.setText("Job Code: " + task.getJobCode());
         label_taskId.setText("Task ID: " + task.getId());
-        label_taskPrice.setText("Price: " + task.getPrice());
+        label_taskPrice.setText("Price: £" +  new DecimalFormat("0.00").format(task.getPrice()));
         field_description.setText(task.getDescription());
         dropdown_department.setSelectedIndex(task.getDepartment().ordinal());
         label_status.setText("Status: " + bapers.Utils.splitCamelCase(task.getStatus().toString()));

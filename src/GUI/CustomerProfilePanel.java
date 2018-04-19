@@ -6,6 +6,7 @@
 package GUI;
 
 import Customer.*;
+import Staff.Role;
 import static bapers.Bapers.DB;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -34,10 +35,10 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
     public void setCustomer(Customer customer)
     {
         this.customer = customer;
-        assignValues();
+        updateGUI();
     }
     
-    private void assignValues()
+    private void updateGUI()
     {
         label_fullName.setText(String.format("%s %s", customer.getFirstName(), customer.getLastName()));
         label_accountNo.setText(String.format("ACC%03d", customer.getAccountNo()));
@@ -51,12 +52,16 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         
         label_stat_inDefault.setVisible(customer.isDefault());
         label_stat_suspended.setVisible(customer.isSuspended());
-        label_stat_valued.setVisible(customer.isValued());
+        label_stat_valued.setVisible(customer.isValued());        
         
-        dropdown_discountType.setSelectedIndex(customer.getAgreedDiscount().ordinal());
-        field_discountRate.setText("" + customer.getDiscountValue());
+        btn_setAccount.setVisible(DB.loggedUser.getRole() == Role.OfficeManager);
+        btn_setDiscount.setVisible(DB.loggedUser.getRole() == Role.OfficeManager);
         
-        // set discount type
+        updateTable();   
+    }
+    
+    private void updateTable()
+    {
         DefaultTableModel model = (DefaultTableModel)table_tasks.getModel();
         
         while (model.getRowCount() > 0)
@@ -71,7 +76,6 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
                 model.addRow(new Object[] {job.getCode(), task.getId(), task.getDepartment(), task.getStartTime(), task.getDescription()});
             }
         }
-        
     }
     
     private void addListener(CreateJobView jobView)
@@ -80,7 +84,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateJob(jobView.getJob());
                 jobView.dispose();
-                assignValues();
+                updateGUI();
             }
         });
     }
@@ -107,28 +111,20 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         label_holderName = new javax.swing.JLabel();
         label_email = new javax.swing.JLabel();
         label_phone = new javax.swing.JLabel();
-        dropdown_discountType = new javax.swing.JComboBox<>();
         label_discountType = new javax.swing.JLabel();
-        label_discountRate = new javax.swing.JLabel();
-        field_discountRate = new javax.swing.JTextField();
-        btn_print_receipt = new javax.swing.JButton();
-        btn_print_reminder = new javax.swing.JButton();
-        btn_setPayment = new javax.swing.JButton();
-        btn_save = new javax.swing.JButton();
-        btn_createJob = new javax.swing.JButton();
         table_jobs = new javax.swing.JScrollPane();
         table_tasks = new javax.swing.JTable();
-        label_jobCode = new javax.swing.JLabel();
-        field_jobCode = new javax.swing.JTextField();
-        dropdown_department = new javax.swing.JComboBox<>();
-        btn_applyFilters = new javax.swing.JButton();
         btn_back = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        pane_generalStats = new javax.swing.JPanel();
         label_stat_suspended = new javax.swing.JLabel();
         label_stat_inDefault = new javax.swing.JLabel();
         label_stat_valued = new javax.swing.JLabel();
         label_paymentType = new javax.swing.JLabel();
-        btn_accProperties = new javax.swing.JButton();
+        pane_buttons = new javax.swing.JPanel();
+        btn_setAccount = new javax.swing.JButton();
+        btn_setDiscount = new javax.swing.JButton();
+        btn_setPayment = new javax.swing.JButton();
+        btn_createJob = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -156,39 +152,7 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
 
         label_phone.setText("Phone Number: {phone-number}");
 
-        dropdown_discountType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None (Default)", "Flexible", "Fixed", "Variable" }));
-
-        label_discountType.setText("Discount Type");
-
-        label_discountRate.setText("Discount Rate");
-
-        btn_print_receipt.setText("Print Receipt");
-        btn_print_receipt.setMaximumSize(new java.awt.Dimension(115, 32));
-        btn_print_receipt.setMinimumSize(new java.awt.Dimension(115, 32));
-        btn_print_receipt.setPreferredSize(new java.awt.Dimension(115, 32));
-
-        btn_print_reminder.setText("Print Reminder");
-
-        btn_setPayment.setText("Set Payment");
-        btn_setPayment.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_setPaymentActionPerformed(evt);
-            }
-        });
-
-        btn_save.setText("Save Changes");
-        btn_save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_saveActionPerformed(evt);
-            }
-        });
-
-        btn_createJob.setText("Create Job");
-        btn_createJob.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_createJobActionPerformed(evt);
-            }
-        });
+        label_discountType.setText("Discount Type: {discount-type}");
 
         table_tasks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -215,12 +179,6 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         });
         table_jobs.setViewportView(table_tasks);
 
-        label_jobCode.setText("Job Code");
-
-        dropdown_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any", "Copy Room", "Development", "Finishing", "Packing" }));
-
-        btn_applyFilters.setText("Apply Filters");
-
         btn_back.setText("Back");
         btn_back.setMaximumSize(new java.awt.Dimension(92, 32));
         btn_back.setMinimumSize(new java.awt.Dimension(92, 32));
@@ -234,24 +192,24 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         label_stat_valued.setForeground(new java.awt.Color(0, 153, 204));
         label_stat_valued.setText("Valued");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pane_generalStatsLayout = new javax.swing.GroupLayout(pane_generalStats);
+        pane_generalStats.setLayout(pane_generalStatsLayout);
+        pane_generalStatsLayout.setHorizontalGroup(
+            pane_generalStatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pane_generalStatsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(label_stat_valued)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(label_stat_suspended)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(label_stat_inDefault)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pane_generalStatsLayout.setVerticalGroup(
+            pane_generalStatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pane_generalStatsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pane_generalStatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_stat_valued)
                     .addComponent(label_stat_suspended)
                     .addComponent(label_stat_inDefault))
@@ -260,12 +218,34 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
 
         label_paymentType.setText("Payment Type: {payment-type}");
 
-        btn_accProperties.setText("Upgrade account");
-        btn_accProperties.addActionListener(new java.awt.event.ActionListener() {
+        pane_buttons.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        btn_setAccount.setText("Set Account");
+        btn_setAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_accPropertiesActionPerformed(evt);
+                btn_setAccountActionPerformed(evt);
             }
         });
+        pane_buttons.add(btn_setAccount);
+
+        btn_setDiscount.setText("Set Discount");
+        pane_buttons.add(btn_setDiscount);
+
+        btn_setPayment.setText("Invoices");
+        btn_setPayment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_setPaymentActionPerformed(evt);
+            }
+        });
+        pane_buttons.add(btn_setPayment);
+
+        btn_createJob.setText("Create Job");
+        btn_createJob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_createJobActionPerformed(evt);
+            }
+        });
+        pane_buttons.add(btn_createJob);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -275,115 +255,61 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(table_jobs)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_email)
                             .addComponent(label_accountNo)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(label_jobCode)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(field_jobCode, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(dropdown_department, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(btn_applyFilters))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(label_holderName)
-                                    .addComponent(label_email)
                                     .addComponent(label_phone))
-                                .addGap(57, 57, 57)
+                                .addGap(105, 105, 105)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(label_paymentType)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(label_discountRate)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(field_discountRate, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(label_discountType)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(dropdown_discountType, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_save, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_createJob, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_setPayment, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_print_receipt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_print_reminder, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_accProperties, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(label_discountType)
+                                    .addComponent(label_paymentType, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 222, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label_fullName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pane_generalStats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pane_buttons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_fullName)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(label_accountNo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label_holderName, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label_discountType)
-                            .addComponent(dropdown_discountType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(label_discountRate)
-                                .addComponent(field_discountRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btn_accProperties, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(label_email)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_print_receipt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(btn_print_reminder, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pane_generalStats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(label_accountNo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btn_setPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(btn_save, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(label_paymentType))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_createJob, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_applyFilters)
-                            .addComponent(dropdown_department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(field_jobCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label_jobCode)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_holderName, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_discountType))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_paymentType)
                     .addComponent(label_phone))
-                .addGap(8, 8, 8)
-                .addComponent(table_jobs, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(label_email)
+                .addGap(20, 20, 20)
+                .addComponent(pane_buttons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7))
+                .addComponent(table_jobs, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
-        int newDiscountType = dropdown_discountType.getSelectedIndex();
-        int newDiscountRate = Integer.parseInt(field_discountRate.getText());
-        customer.setAgreedDiscount(DiscountType.values()[newDiscountType]);
-        customer.setDiscountValue(newDiscountRate);
-        
-        JOptionPane.showMessageDialog(this, "Discount Updated",  "Customer discount values updated.", JOptionPane.INFORMATION_MESSAGE);
-        DB.updateCustomerDiscount(customer.getAccountNo(), newDiscountType, newDiscountRate);
-        assignValues();
-    }//GEN-LAST:event_btn_saveActionPerformed
-
     private void btn_setPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_setPaymentActionPerformed
-        PaymentSettingsView paymentView = new PaymentSettingsView((JFrame) SwingUtilities.getWindowAncestor(this), true, customer.getAccountNo());
-        paymentView.setVisible(true);
+        InvoicesView invoicesView = new InvoicesView((JFrame) SwingUtilities.getWindowAncestor(this), true, customer);
+        invoicesView.setVisible(true);
     }//GEN-LAST:event_btn_setPaymentActionPerformed
 
     private void btn_createJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createJobActionPerformed
@@ -392,41 +318,33 @@ public class CustomerProfilePanel extends javax.swing.JPanel {
         createJobView.setVisible(true);
     }//GEN-LAST:event_btn_createJobActionPerformed
 
-    private void btn_accPropertiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_accPropertiesActionPerformed
+    private void btn_setAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_setAccountActionPerformed
         //NOT WORKING YET!
         AccountSettingsView accountSettingsView = new AccountSettingsView((JFrame) SwingUtilities.getWindowAncestor(this), true, this, customer);
         accountSettingsView.setVisible(true);
-    }//GEN-LAST:event_btn_accPropertiesActionPerformed
+    }//GEN-LAST:event_btn_setAccountActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_accProperties;
-    private javax.swing.JButton btn_applyFilters;
     public javax.swing.JButton btn_back;
     private javax.swing.JButton btn_createJob;
-    private javax.swing.JButton btn_print_receipt;
-    private javax.swing.JButton btn_print_reminder;
-    private javax.swing.JButton btn_save;
+    private javax.swing.JButton btn_setAccount;
+    private javax.swing.JButton btn_setDiscount;
     private javax.swing.JButton btn_setPayment;
-    private javax.swing.JComboBox<String> dropdown_department;
-    private javax.swing.JComboBox<String> dropdown_discountType;
-    private javax.swing.JTextField field_discountRate;
-    private javax.swing.JTextField field_jobCode;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel label_accountNo;
-    private javax.swing.JLabel label_discountRate;
     private javax.swing.JLabel label_discountType;
     private javax.swing.JLabel label_email;
     private javax.swing.JLabel label_fullName;
     private javax.swing.JLabel label_holderName;
-    private javax.swing.JLabel label_jobCode;
     private javax.swing.JLabel label_paymentType;
     private javax.swing.JLabel label_phone;
     private javax.swing.JLabel label_stat_inDefault;
     private javax.swing.JLabel label_stat_suspended;
     private javax.swing.JLabel label_stat_valued;
+    private javax.swing.JPanel pane_buttons;
+    private javax.swing.JPanel pane_generalStats;
     private javax.swing.JScrollPane table_jobs;
     private javax.swing.JTable table_tasks;
     // End of variables declaration//GEN-END:variables

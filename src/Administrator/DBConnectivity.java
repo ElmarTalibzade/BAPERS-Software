@@ -6,6 +6,7 @@ import Customer.DiscountType;
 import Customer.Job;
 import Customer.Status;
 import Customer.Task;
+import Payment.Invoice;
 import Staff.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -289,44 +290,37 @@ public class DBConnectivity implements DBInterface {
      */
     public boolean createJob(Job job) {
         
-        int newInvoiceNo = createInvoice(job.getPrice());
-        
-        if (newInvoiceNo > -1)
-        {
-            String query = String.format("INSERT INTO `jobs` "
-                    + "(`code`, `ownerNo`, `staffNo`, `invoiceNo`, `shelf`, `status`, "
-                    + "`priority`, `discountRate`, `price`, `specialInstructions`, `dateCreated`) VALUES(" 
-                    + "'%s','%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", 
-                    job.getCode(), job.getCustomerId(), job.getStaffCode(), newInvoiceNo, 
-                    job.getShelf(), job.getStatus(), job.getPriority(), job.getDiscountRate(), 
-                    job.getPrice(), job.getSpecialInstructions(), job.getDateCreated());
+        String query = String.format("INSERT INTO `jobs` "
+                + "(`code`, `ownerNo`, `staffNo`, `invoiceNo`, `shelf`, `status`, "
+                + "`priority`, `discountRate`, `price`, `specialInstructions`, `dateCreated`) VALUES(" 
+                + "'%s','%s', '%s', null, '%s', '%s', '%s', '%s', '%s', '%s', '%s')", 
+                job.getCode(), job.getCustomerId(), job.getStaffCode(), 
+                job.getShelf(), job.getStatus(), job.getPriority(), job.getDiscountRate(), 
+                job.getPrice(), job.getSpecialInstructions(), job.getDateCreated());
 
-            if (storeData(query))
+        if (storeData(query))
+        {
+            for(Task task : job.getTasks())
             {
-                for(Task task : job.getTasks())
+                if (!addTask(job.getCode(), task))
                 {
-                    if (!addTask(job.getCode(), task))
-                    {
-                        return false;
-                    }
+                    return false;
                 }
+            }
 
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return true;
         }
-        else
-        {
-            return false;
-        }
+        
+        return false;
     }
     
-    private int createInvoice(double totalAmount)
+    private int createInvoice(int customerNo, double subTotal, float discountRate)
     {
-        String query = "INSERT INTO `invoices` (`totalAmount`) VALUES('" + totalAmount + "')";
+        String query = String.format("INSERT INTO bloomsday.invoices "
+                + "(`customerNo`, `subTotal`, `discountRate`) "
+                + "VALUES (%s, %s, %s)",
+                customerNo, subTotal, discountRate
+            );
         
         try 
         {
@@ -351,6 +345,75 @@ public class DBConnectivity implements DBInterface {
             Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
             return -1;
         }
+    }
+    
+    public ArrayList<Invoice> getInvoices(int customerNo)
+    {
+        ArrayList<Invoice> invoices = new ArrayList<>();
+        
+        String query = String.format("select * from `invoices` WHERE invoices.`customerNo` = '%s'",
+                customerNo
+                );
+        
+        ResultSet result = retrieveData(query);
+                        
+        try {
+            while (result.next()) {
+                
+                invoices.add(new Invoice(
+                        result.getInt("invoiceNo"),
+                        result.getDouble("subTotal"),
+                        result.getFloat("discountRate"),
+                        result.getFloat("vatRate"),
+                        result.getDate("dateCreated"),
+                        result.getDate("datePaid")
+                ));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return invoices;
+    }
+    
+    public boolean markInvoicePaid(int invoiceNo)
+    {
+        String query = String.format("UPDATE `invoices` "
+                + "SET datePaid = CURRENT_TIMESTAMP(), isPaid = '1' "
+                + "WHERE `invoiceNo`=%s",
+                    invoiceNo
+                );
+        
+        return storeData(query);
+    }
+    
+    public Invoice generateInvoiceForJobs(Customer customer)
+    {
+        ArrayList<Job> unpaidJobs = getUnpaidJobs(customer.getAccountNo());
+        double subTotal = 0.00;
+        float discountRate = customer.getDiscountValue();
+        
+        if (unpaidJobs.size() == 0) return null;
+        
+        for (Job job : unpaidJobs)
+        {
+            subTotal += job.getPrice();
+        }
+        
+        int invoiceNo = createInvoice(customer.getAccountNo(), subTotal, discountRate);
+        
+        for (Job job : unpaidJobs)
+        {
+            job.setInvoiceNo(invoiceNo);
+            
+            String query = String.format("UPDATE `jobs` SET `invoiceNo` = '%s' WHERE `code`='%s'",
+                invoiceNo, job.getCode()
+            );
+            
+            storeData(query);
+        }
+        
+        return new Invoice(invoiceNo, subTotal, discountRate, 20f, new java.util.Date(), null);
     }
     
     private boolean addTask(String jobCode, Task task) {
@@ -615,6 +678,74 @@ public class DBConnectivity implements DBInterface {
         return customers;
     }
     
+    private ArrayList<Job> getUnpaidJobs(int customerNo)
+    {
+       ArrayList<Job> jobs = new ArrayList<Job>();
+
+        try {
+
+            ResultSet result = retrieveData(String.format("SELECT * FROM `jobs` WHERE ownerNo = \"%s\" AND invoiceNo IS NULL", customerNo));
+
+            while (result.next()) {
+
+                jobs.add(new Job(
+                        result.getInt("invoiceNo"),
+                        result.getString("code"),
+                        result.getInt("staffNo"),
+                        getTasks(result.getString("code")),
+                        result.getFloat("discountRate"),
+                        result.getInt("ownerNo"),
+                        result.getString("specialInstructions"),
+                        result.getString("shelf"),
+                        result.getInt("priority"),
+                        result.getTimestamp("dateCreated")
+                ));
+
+            }
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        return jobs;
+    }
+    
+    public ArrayList<Job> getJobsByInvoice(int invoiceNo)
+    {
+        ArrayList<Job> jobs = new ArrayList<Job>();
+        
+        try {
+
+            ResultSet result = retrieveData(String.format("SELECT * FROM `jobs` WHERE `invoiceNo` = \"%s\"", invoiceNo));
+
+            while (result.next()) {
+
+                jobs.add(new Job(
+                        result.getInt("invoiceNo"),
+                        result.getString("code"),
+                        result.getInt("staffNo"),
+                        getTasks(result.getString("code")),
+                        result.getFloat("discountRate"),
+                        result.getInt("ownerNo"),
+                        result.getString("specialInstructions"),
+                        result.getString("shelf"),
+                        result.getInt("priority"),
+                        result.getTimestamp("dateCreated")
+                ));
+
+            }
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(DBConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        
+        return jobs;
+    }
+    
     /**
      * Retrieves jobs of a customer
      *
@@ -820,5 +951,4 @@ public class DBConnectivity implements DBInterface {
 
         return reminders;
     }
-
 }

@@ -5,20 +5,58 @@
  */
 package Payment;
 
+import java.util.Date;
+
 /**
  * Stores customer's invoice.
  * @author Elmar Talibzade
  */
 public class Invoice {
+    
     private int invoiceNo;
-    private String letter;
-    private boolean sent;
+    private double subTotal;
+    private float discountRate;
+    private float vatRate;
+    
+    private Date dateCreated;
+    private Date datePaid;
 
-    /**
-     * Constructor for Invoice
-     * @param letter Letter contents
-     */
-    public Invoice(String letter) {
-        this.letter = letter;
+    public Invoice(int invoiceNo, double subTotal, float discountRate, float vatRate, Date dateCreated, Date datePaid) {
+        this.invoiceNo = invoiceNo;
+        this.subTotal = subTotal;
+        this.discountRate = discountRate;
+        this.vatRate = vatRate;
+        this.dateCreated = dateCreated;
+        this.datePaid = datePaid;
     }
+
+    public int getInvoiceNo() {
+        return invoiceNo;
+    }
+
+    public double calculateTotal()
+    {
+        double discountedTotal = subTotal - (subTotal * (discountRate/100));
+        return discountedTotal + (discountedTotal * (vatRate/100));
+    }
+    
+    public double getSubTotal() {
+        return subTotal;
+    }
+
+    public float getDiscountRate() {
+        return discountRate;
+    }
+
+    public float getVatRate() {
+        return vatRate;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public Date getDatePaid() {
+        return datePaid;
+    }   
 }

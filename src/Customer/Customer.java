@@ -192,6 +192,10 @@ public class Customer {
         return lastName;
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+    
     /**
      * Gets the phone number of the customer
      * @return string

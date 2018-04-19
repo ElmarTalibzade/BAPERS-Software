@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <NonVisualComponents>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -44,63 +44,38 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="table_jobs" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="label_email" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="label_accountNo" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="label_jobCode" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="field_jobCode" min="-2" pref="110" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="dropdown_department" min="-2" pref="138" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="btn_applyFilters" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="label_holderName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label_email" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="label_holderName" min="-2" max="-2" attributes="0"/>
                                   <Component id="label_phone" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="label_paymentType" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="label_discountRate" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="field_discountRate" min="-2" pref="154" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="label_discountType" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="dropdown_discountType" min="-2" pref="154" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="label_discountType" min="-2" max="-2" attributes="0"/>
+                                  <Component id="label_paymentType" min="-2" pref="184" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="84" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btn_save" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
-                          <Component id="btn_createJob" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
-                          <Component id="btn_setPayment" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
-                          <Component id="btn_print_receipt" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
-                          <Component id="btn_print_reminder" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
-                          <Component id="btn_accProperties" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="0" pref="222" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="label_fullName" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="pane_generalStats" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="btn_back" min="-2" pref="110" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="pane_buttons" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -109,63 +84,32 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="label_fullName" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="pane_generalStats" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="label_accountNo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="label_holderName" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
-                          <Component id="label_discountType" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="dropdown_discountType" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="label_discountRate" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="field_discountRate" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btn_accProperties" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="label_email" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btn_print_receipt" min="-2" pref="32" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Component id="btn_print_reminder" min="-2" pref="32" max="-2" attributes="0"/>
-                  </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="label_accountNo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="label_holderName" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
+                  <Component id="label_discountType" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="btn_setPayment" min="-2" pref="32" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                              <Component id="btn_save" min="-2" pref="32" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="label_paymentType" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btn_createJob" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="btn_applyFilters" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="dropdown_department" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="field_jobCode" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="label_jobCode" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Component id="label_phone" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="label_paymentType" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="label_phone" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-              <Component id="table_jobs" pref="95" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="btn_back" min="-2" pref="32" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="label_email" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Component id="pane_buttons" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="table_jobs" pref="130" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btn_back" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -199,75 +143,10 @@
         <Property name="text" type="java.lang.String" value="Phone Number: {phone-number}"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="dropdown_discountType">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="None (Default)"/>
-            <StringItem index="1" value="Flexible"/>
-            <StringItem index="2" value="Fixed"/>
-            <StringItem index="3" value="Variable"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JLabel" name="label_discountType">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Discount Type"/>
+        <Property name="text" type="java.lang.String" value="Discount Type: {discount-type}"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="label_discountRate">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Discount Rate"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="field_discountRate">
-    </Component>
-    <Component class="javax.swing.JButton" name="btn_print_receipt">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Print Receipt"/>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[115, 32]"/>
-        </Property>
-        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[115, 32]"/>
-        </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[115, 32]"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btn_print_reminder">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Print Reminder"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btn_setPayment">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Set Payment"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_setPaymentActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btn_save">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Save Changes"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_saveActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btn_createJob">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Create Job"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_createJobActionPerformed"/>
-      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="table_jobs">
       <AuxValues>
@@ -323,34 +202,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="label_jobCode">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Job Code"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="field_jobCode">
-    </Component>
-    <Component class="javax.swing.JComboBox" name="dropdown_department">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
-            <StringItem index="0" value="Any"/>
-            <StringItem index="1" value="Copy Room"/>
-            <StringItem index="2" value="Development"/>
-            <StringItem index="3" value="Finishing"/>
-            <StringItem index="4" value="Packing"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JButton" name="btn_applyFilters">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Apply Filters"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btn_back">
       <Properties>
         <Property name="text" type="java.lang.String" value="Back"/>
@@ -365,7 +216,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="pane_generalStats">
 
       <Layout>
         <DimensionLayout dim="0">
@@ -377,7 +228,7 @@
                   <Component id="label_stat_suspended" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="label_stat_inDefault" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -427,13 +278,42 @@
         <Property name="text" type="java.lang.String" value="Payment Type: {payment-type}"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btn_accProperties">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Upgrade account"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_accPropertiesActionPerformed"/>
-      </Events>
-    </Component>
+    <Container class="javax.swing.JPanel" name="pane_buttons">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+        <Property name="alignment" type="int" value="2"/>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="btn_setAccount">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Set Account"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_setAccountActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_setDiscount">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Set Discount"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_setPayment">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Invoices"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_setPaymentActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_createJob">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Create Job"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_createJobActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
