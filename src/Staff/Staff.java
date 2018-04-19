@@ -54,7 +54,7 @@ public class Staff {
      * @param role Staff's access level
      * @param username Staff's username
      * @param firstName Staff's first name
-     * @param phone Staff's phone number
+     * @param lastName
      */
     public Staff(int accountNo, Role role, String username, String firstName, String lastName) {
         this.accountNo = accountNo;

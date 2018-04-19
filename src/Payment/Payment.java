@@ -19,6 +19,14 @@ public class Payment {
     private int cardDetailsID;
     private int invoiceID;
     
+    /**
+     *
+     * @param amountPaid
+     * @param method
+     * @param date
+     * @param cardDetailsID
+     * @param invoiceID
+     */
     public Payment(double amountPaid, int method, Timestamp date, int cardDetailsID, int invoiceID){
         this.recordID = recordID;
         this.amountPaid = amountPaid;
@@ -28,22 +36,42 @@ public class Payment {
         this.invoiceID = invoiceID;
     }
     
+    /**
+     *
+     * @return
+     */
     public double getAmountPaid(){
         return amountPaid;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getMethod(){
         return method;
     }
     
+    /**
+     *
+     * @return
+     */
     public Timestamp getDate(){
         return date;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getCardDetailsID(){
         return cardDetailsID;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getInvoiceID(){
         return invoiceID;
     }

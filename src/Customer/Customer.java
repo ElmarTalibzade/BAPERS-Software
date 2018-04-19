@@ -103,26 +103,50 @@ public class Customer {
         return agreedDiscount;
     }
 
+    /**
+     *
+     * @param holderName
+     */
     public void setHolderName(String holderName) {
         this.holderName = holderName;
     }
 
+    /**
+     *
+     * @param firstName
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     *
+     * @param lastName
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     *
+     * @param address
+     */
     public void setAddress(String address) {
         this.address = address;
     }
 
+    /**
+     *
+     * @param phoneNumber
+     */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     *
+     * @param emailAddress
+     */
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
@@ -216,6 +240,10 @@ public class Customer {
         return lastName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFullName() {
         return firstName + " " + lastName;
     }

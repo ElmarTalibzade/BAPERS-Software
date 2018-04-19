@@ -61,6 +61,10 @@ public class Job {
         this.dateCreated = dateCreated;
     }
 
+    /**
+     *
+     * @param invoiceNo
+     */
     public void setInvoiceNo(int invoiceNo) {
         this.invoiceNo = invoiceNo;
     }
