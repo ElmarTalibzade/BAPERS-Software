@@ -24,11 +24,18 @@ DROP TABLE IF EXISTS `invoices`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `invoices` (
   `invoiceNo` int(11) NOT NULL AUTO_INCREMENT,
-  `totalAmount` double DEFAULT NULL,
+  `customerNo` int(11) NOT NULL,
+  `subTotal` double NOT NULL,
+  `discountRate` float DEFAULT '0',
+  `vatRate` float DEFAULT '20',
+  `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `datePaid` datetime DEFAULT NULL,
   `isPaid` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`invoiceNo`),
-  UNIQUE KEY `invoiceNo_UNIQUE` (`invoiceNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+  UNIQUE KEY `invoiceNo_UNIQUE` (`invoiceNo`),
+  KEY `fk_invoices_customers1_idx` (`customerNo`),
+  CONSTRAINT `fk_invoices_customers1` FOREIGN KEY (`customerNo`) REFERENCES `customers` (`accountNo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +44,7 @@ CREATE TABLE `invoices` (
 
 LOCK TABLES `invoices` WRITE;
 /*!40000 ALTER TABLE `invoices` DISABLE KEYS */;
-INSERT INTO `invoices` VALUES (26,77,0),(27,134.99,0),(28,109.99,0),(29,0,0),(30,59,0),(31,57.89,0),(32,33,0);
+INSERT INTO `invoices` VALUES (40,7,117,0,20,'2018-04-18 23:41:33',NULL,0),(41,6,135,1,20,'2018-04-19 01:25:15',NULL,0),(42,8,43,0,20,'2018-04-19 01:28:51',NULL,0),(43,7,117,0,20,'2018-04-19 01:40:06',NULL,0),(44,9,23,3,20,'2018-04-19 02:08:22',NULL,0),(45,10,31,0,20,'2018-04-19 02:25:34',NULL,0),(46,10,450,0,20,'2018-04-19 02:27:34',NULL,0);
 /*!40000 ALTER TABLE `invoices` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-18 13:24:27
+-- Dump completed on 2018-04-19  2:33:09

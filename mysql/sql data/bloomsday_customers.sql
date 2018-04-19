@@ -38,7 +38,7 @@ CREATE TABLE `customers` (
   `debtRemindedAmount` int(2) DEFAULT '0',
   PRIMARY KEY (`accountNo`),
   UNIQUE KEY `accountNo_UNIQUE` (`accountNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (6,'City, University London','David','Rhind',1,0,0,'Northampton Square, London EC1V 0HB','0207 040 8000',2,1,'david.rhind@city.ac.uk',0),(7,'InfoPharma Ltd','Alex','Wright',1,0,0,'25, Bond Street, London WC1V 8LS','0207 321 8001',1,NULL,'alex.wright@infopharma.com',0),(8,'Hello Magazine','Sarah','Brocklehurst',1,0,0,'12 Bond Street, London WC1V 8NS','0203 456 7809',1,NULL,'sarah.brocklehurst@hello.com',0),(9,'Ms Eva Bauyer','Eva','Bauyer',1,0,0,'1, Liverpool street, London EC2V 8NS','0208 555 8989',2,3,'eva.bauyer@gmail.com',0);
+INSERT INTO `customers` VALUES (6,'City, University London','David','Rhind',1,0,0,'Northampton Square, London EC1V 0HB','0207 040 8000',2,1,'david.rhind@city.ac.uk',0),(7,'InfoPharma Ltd','Alex','Wright',1,0,0,'25, Bond Street, London WC1V 8LS','0207 321 8001',1,NULL,'alex.wright@infopharma.com',0),(8,'Hello Magazine','Sarah','Brocklehurst',0,1,0,'12 Bond Street, London WC1V 8NS','0203 456 7809',1,NULL,'sarah.brocklehurst@hello.com',0),(9,'Ms Eva Bauyer','Eva','Bauyer',1,0,0,'1, Liverpool street, London EC2V 8NS','0208 555 8989',2,3,'eva.bauyer@gmail.com',0),(10,'Amazon Ltd','John','Bezos',0,0,0,'Amazon street','7439-52423-22',0,0,'amazon@amazon',0);
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-18 13:24:26
+-- Dump completed on 2018-04-19  2:33:09

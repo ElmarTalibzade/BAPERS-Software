@@ -26,7 +26,7 @@ CREATE TABLE `jobs` (
   `code` varchar(25) NOT NULL,
   `ownerNo` int(11) NOT NULL,
   `staffNo` int(11) NOT NULL,
-  `invoiceNo` int(11) NOT NULL,
+  `invoiceNo` int(11) DEFAULT NULL,
   `shelf` varchar(45) DEFAULT NULL,
   `status` smallint(6) DEFAULT NULL,
   `priority` smallint(6) DEFAULT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE `jobs` (
 
 LOCK TABLES `jobs` WRITE;
 /*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
-INSERT INTO `jobs` VALUES ('BM101',7,13,31,'SHLF01',0,0,0,58,'Do it quick','2018-04-18 02:04:46'),('HG100',8,13,32,'LO202',0,0,0,33,'nothing!','2018-04-18 12:12:30'),('JF123',7,16,30,'shelfNo',0,0,0,59,'test','2018-04-17 19:01:17'),('JG987',8,16,28,'shelfNo',0,0,0,110,'URGENT',NULL),('JH404',7,16,29,'shelfNo',0,0,0,0,'not found','2018-04-17 19:00:59'),('JL900',6,13,27,'shelfNo',0,0,0,135,'Make copy of each',NULL),('JL909',9,16,26,'shelfNo',0,0,0,77,'test',NULL);
+INSERT INTO `jobs` VALUES ('ASL123',10,16,45,'JKJ909',0,0,0,20,'Nothing!','2018-04-19 02:23:47'),('BM101',7,13,43,'SHLF01',0,0,0,58,'Do it quick','2018-04-18 02:04:46'),('FHGH202',10,16,46,'AS010',0,0,0,450,'Take your time','2018-04-19 02:27:30'),('HFHFJ',10,16,45,'123J',0,0,0,11,'n/a','2018-04-19 02:25:25'),('HG100',8,13,42,'LO202',0,0,0,33,'nothing!','2018-04-18 12:12:30'),('JF123',7,16,43,'shelfNo',0,0,0,59,'test','2018-04-17 19:01:17'),('JG987',8,16,42,'shelfNo',0,0,0,110,'URGENT',NULL),('JH404',7,16,43,'shelfNo',0,0,0,0,'not found','2018-04-17 19:00:59'),('JL900',6,13,41,'shelfNo',0,0,0,135,'Make copy of each',NULL),('JL909',9,16,44,'shelfNo',0,0,0,77,'test',NULL);
 /*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -64,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-18 13:24:26
+-- Dump completed on 2018-04-19  2:33:09
