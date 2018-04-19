@@ -11,7 +11,7 @@ import static bapers.Bapers.DB;
 import java.util.ArrayList;
 
 /**
- *
+ * Functions that runs everytime the timer is called
  * @author Mihai
  */
 public class RetrieveReminders extends TimerTask {    
