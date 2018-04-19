@@ -121,7 +121,7 @@ public class Invoice {
     }
     
     /**
-     *
+     * Mark the current invoice as Paid
      */
     public void markPaid(){
         datePaid = new Timestamp(System.currentTimeMillis());
